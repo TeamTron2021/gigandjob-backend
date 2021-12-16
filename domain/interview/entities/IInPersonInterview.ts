@@ -1,6 +1,6 @@
 
 import { InPersonInterviewDirection } from "../value-objects/InPersonInterviewDirection";
-import { IInterview } from "./iinterview";
+import { IInterview } from "./IInterview";
 
 
 export interface IInPersonInterview extends IInterview{
