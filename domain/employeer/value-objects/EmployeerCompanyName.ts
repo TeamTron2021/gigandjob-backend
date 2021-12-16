@@ -1,4 +1,4 @@
-import { IValueObject } from "./IValueObject";
+import { IValueObject } from "../../../shared/domain/IValueObject";
 
 export default class EmployeerCompanyName implements IValueObject {
     constructor(readonly name: string)  {}
