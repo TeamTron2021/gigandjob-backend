@@ -1,4 +1,4 @@
-import UniqueId from '../shared/UniqueUUID';
+import UniqueId from '../shared/domain/UniqueUUID';
 
 describe('test uniqueID', () => {
   it('should return a unique id ', ()=>{
