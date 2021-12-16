@@ -1,5 +1,5 @@
-import { IValueObject } from "../../../shared/domain/IValueObject";
-import JobOfferEmptyTitleException from "../exceptions/JobOfferEmptyTitleException";
+import { IValueObject } from "../../../../shared/domain/IValueObject";
+import JobOfferEmptyTitleException from "../../exceptions/JobOffer/JobOfferEmptyTitleException";
 
 export default class JobOfferTItle implements IValueObject {
     constructor(private readonly jobOfferTittle: string) {}

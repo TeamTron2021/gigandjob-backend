@@ -1,6 +1,6 @@
 
-import { IValueObject } from '../../../shared/domain/IValueObject';
-import EmptyJobOfferIdException from '../exceptions/JobOfferEmptyIdException';
+import { IValueObject } from '../../../../shared/domain/IValueObject';
+import EmptyJobOfferIdException from '../../exceptions/JobOffer/JobOfferEmptyIdException';
 
 export default class JobOfferId implements IValueObject {
     private constructor(readonly id: string) {}

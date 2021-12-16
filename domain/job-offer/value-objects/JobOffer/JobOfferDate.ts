@@ -1,6 +1,6 @@
-import { IValueObject } from "../../../shared/domain/IValueObject";
-import JobOfferInvalidDateException from "../exceptions/JobOfferInvalidDateException";
-import JobOfferMissingDateException from "../exceptions/JobOfferMissingDateException";
+import { IValueObject } from "../../../../shared/domain/IValueObject";
+import JobOfferInvalidDateException from "../../exceptions/JobOffer/JobOfferInvalidDateException";
+import JobOfferMissingDateException from "../../exceptions/JobOffer/JobOfferMissingDateException";
 
 export default class JobOfferDate implements IValueObject {
     private constructor(private readonly startDate: Date,private readonly finalDate: Date) {}
