@@ -1,5 +1,5 @@
-import EmptyEmployeerException from '../exceptions/empty-employeer-id';
-import { IValueObject } from './i-value-object';
+import EmptyEmployeerException from '../exceptions/EmptyIdEmployeerException';
+import { IValueObject } from './IValueObject';
 
 export default class EmployeerId implements IValueObject {
     private constructor(readonly id: string) {}
@@ -8,6 +8,10 @@ export default class EmployeerId implements IValueObject {
         return this.id === valueObject.id;
     }
 
+    public getId() {
+        return this.id;
+    }
+    
     public static create(id: string) {
         if(id === '' || id === ' ' || id == undefined || id == null){
             throw new EmptyEmployeerException(

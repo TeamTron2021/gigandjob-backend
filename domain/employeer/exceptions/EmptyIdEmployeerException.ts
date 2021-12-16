@@ -1,4 +1,4 @@
-import { IException } from "./i-exception";
+import { IException } from "./IException";
 
 export default class EmptyEmployeerException implements IException {
     public constructor(public readonly message: string) {}
