@@ -1,12 +1,14 @@
+import { ID } from "../value-objects/jobOfferLikeID";
+
 export class JobOfferLike{
-    private _id!: string;
+    private _id!: ID;
     private _value: boolean = false;
 
 
-	public get id(): string {
+	public get id(): ID{
 		return this._id;
 	  }
-	public set id(value: string) {
+	public set id(value: ID) {
 		this._id = value;
 	}
 

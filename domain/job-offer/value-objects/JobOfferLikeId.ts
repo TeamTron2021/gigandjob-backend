@@ -1,4 +1,4 @@
-import { ValueObject } from "../../../shared/ValueObject";
+import { ValueObject } from "../../../shared/domain/ValueObject";
 
 interface IDProps {
     value: string;
