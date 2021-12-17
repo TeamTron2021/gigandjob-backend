@@ -12,9 +12,9 @@ import {UserPassword} from "./value_objects/UserPassword.value";
 type UserEvents = UserRegistered | UserConfirmed
 
 export class User<S extends UserStatus>{
-	public ID: UserID = new UserID(randomUUID())
+	private ID: UserID
 	public status: S
-	public eventRecorder: UserEvents[] = []
+	private eventRecorder: UserEvents[] = []
 	
 	private constructor(
 		public firstname: UserFirstName,
@@ -22,10 +22,15 @@ export class User<S extends UserStatus>{
 		public birthday: UserBirthday,
 		public email: UserEmail,
 		public password: UserPassword,
-		status: S
+		status: S,
+		id?: UserID,
 	){
 		this.status = status
+		this.ID = id || new UserID(randomUUID())
 	}
+
+	getID(): UserID{ return this.ID }
+	getEvents(): UserEvents[] { return this.eventRecorder }
 
 	static register(
 		firstname: UserFirstName,
@@ -54,7 +59,8 @@ export class User<S extends UserStatus>{
 			this.birthday,
 			this.email,
 			this.password,
-			UserStatus.Active
+			UserStatus.Active,
+			this.ID
 		)
 		user.eventRecorder.push(new UserConfirmed(
 			user.ID,
