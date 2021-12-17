@@ -7,6 +7,10 @@ describe('Value Object UserBirthday', () =>{
 		const day:any = null
 		expect(() => new UserBirthday(day)).toThrowError(new UserBirthdayEmpty())
 	})
+	test('Should response with error: UserBirthdayEmpty',() =>{
+		const day:any = undefined
+		expect(() => new UserBirthday(day)).toThrowError(new UserBirthdayEmpty())
+	})
 	test('Should response with error: UserBirthdayInvalid',() =>{
 		const today = new Date()
 		var future = new Date()

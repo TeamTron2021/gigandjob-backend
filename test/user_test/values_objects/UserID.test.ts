@@ -7,8 +7,15 @@ describe('Value Object UserID', () =>{
 		const id: any = null
 		expect(() => new UserID(id)).toThrowError(new UserIdEmpty())
 	})
+	test('Should response with error: UserIDEmpty',() =>{
+		const id: any = undefined
+		expect(() => new UserID(id)).toThrowError(new UserIdEmpty())
+	})
 	test('Should response with error: UserIdEmpty',() =>{
 		expect(() => new UserID("")).toThrowError(new UserIdEmpty())
+	})
+	test('Should response with error: UserIdEmpty',() =>{
+		expect(() => new UserID("  ")).toThrowError(new UserIdEmpty())
 	})
 	test('Should response a correct UserID',() =>{
 		expect(new UserID(randomUUID())).toBeInstanceOf(UserID)

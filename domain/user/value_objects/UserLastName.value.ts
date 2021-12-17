@@ -5,7 +5,7 @@ export class UserLastName {
 	public readonly value: string
 
 	constructor(value: string){
-		if (!value) throw new UserLastNameEmpty()
+		if (!value || !value.trim()) throw new UserLastNameEmpty()
 		this.value = value
 	}
 }

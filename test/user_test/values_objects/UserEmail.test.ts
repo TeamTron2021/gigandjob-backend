@@ -8,7 +8,14 @@ describe('Value Object UserEmail', () =>{
 		expect(() => new UserEmail(email)).toThrowError(new UserEmailEmpty())
 	})
 	test('Should response with error: UserEmailEmpty',() =>{
+		const email:any = undefined
+		expect(() => new UserEmail(email)).toThrowError(new UserEmailEmpty())
+	})
+	test('Should response with error: UserEmailEmpty',() =>{
 		expect(() => new UserEmail("")).toThrowError(new UserEmailEmpty())
+	})
+	test('Should response with error: UserEmailEmpty',() =>{
+		expect(() => new UserEmail("  ")).toThrowError(new UserEmailEmpty())
 	})
 	test('Should response with error: UserEmailInvalid, because dont have @',() =>{
 		expect(() => new UserEmail("jotarokujo.com")).toThrowError(new UserEmailInvalid())

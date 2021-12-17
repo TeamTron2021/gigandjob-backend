@@ -8,7 +8,14 @@ describe('Value Object UserPassword', () =>{
 		expect(() => new UserPassword(password)).toThrowError(new UserPasswordEmpty())
 	})
 	test('Should response with error: UserPasswordEmpty',() =>{
+		const password: any = undefined
+		expect(() => new UserPassword(password)).toThrowError(new UserPasswordEmpty())
+	})
+	test('Should response with error: UserPasswordEmpty',() =>{
 		expect(() => new UserPassword("")).toThrowError(new UserPasswordEmpty())
+	})
+	test('Should response with error: UserPasswordEmpty',() =>{
+		expect(() => new UserPassword("  ")).toThrowError(new UserPasswordEmpty())
 	})
 	test('Should response with error: UserPasswordTooShort',() =>{
 		expect(() => new UserPassword("Dio")).toThrowError(new UserPasswordTooShort())

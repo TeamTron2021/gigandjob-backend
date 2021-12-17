@@ -7,7 +7,14 @@ describe('Value Object UserLastName', () =>{
 		expect(() => new UserLastName(lastname)).toThrowError(new UserLastNameEmpty())
 	})
 	test('Should response with error: UserLastNameEmpty',() =>{
+		const lastname: any = undefined
+		expect(() => new UserLastName(lastname)).toThrowError(new UserLastNameEmpty())
+	})
+	test('Should response with error: UserLastNameEmpty',() =>{
 		expect(() => new UserLastName("")).toThrowError(new UserLastNameEmpty())
+	})
+	test('Should response with error: UserLastNameEmpty',() =>{
+		expect(() => new UserLastName("  ")).toThrowError(new UserLastNameEmpty())
 	})
 	test('Should response a correct UserLastName',() =>{
 		expect(new UserLastName("Kujo")).toBeInstanceOf(UserLastName)
