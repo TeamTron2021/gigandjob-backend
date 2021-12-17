@@ -62,11 +62,11 @@ export class User<S extends UserStatus>{
 			UserStatus.Active,
 			this.ID
 		)
+		user.eventRecorder = this.eventRecorder.slice(0)
 		user.eventRecorder.push(new UserConfirmed(
 			user.ID,
 			user.status
 		))
-		user.eventRecorder = this.eventRecorder.slice(0)
 		return user
 	}
 

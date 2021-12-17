@@ -1,3 +1,4 @@
+import {UserStatus} from "../enums/UserStatus.enum";
 import {UserBirthday} from "../value_objects/UserBirthday.value";
 import {UserEmail} from "../value_objects/UserEmail.value";
 import {UserFirstName} from "../value_objects/UserFirstName.value";

@@ -3,24 +3,24 @@ import {UserPasswordTooShort} from "../../../domain/user/errors/UserPasswordTooS
 import {UserPassword} from "../../../domain/user/value_objects/UserPassword.value"
 
 describe('Value Object UserPassword', () =>{
-	test('Should response with error: UserPasswordEmpty',() =>{
+	test('Should return a error: UserPasswordEmpty',() =>{
 		const password: any = null
 		expect(() => new UserPassword(password)).toThrowError(new UserPasswordEmpty())
 	})
-	test('Should response with error: UserPasswordEmpty',() =>{
+	test('Should return a error: UserPasswordEmpty',() =>{
 		const password: any = undefined
 		expect(() => new UserPassword(password)).toThrowError(new UserPasswordEmpty())
 	})
-	test('Should response with error: UserPasswordEmpty',() =>{
+	test('Should return a error: UserPasswordEmpty',() =>{
 		expect(() => new UserPassword("")).toThrowError(new UserPasswordEmpty())
 	})
-	test('Should response with error: UserPasswordEmpty',() =>{
+	test('Should return a error: UserPasswordEmpty',() =>{
 		expect(() => new UserPassword("  ")).toThrowError(new UserPasswordEmpty())
 	})
-	test('Should response with error: UserPasswordTooShort',() =>{
+	test('Should return a error: UserPasswordTooShort',() =>{
 		expect(() => new UserPassword("Dio")).toThrowError(new UserPasswordTooShort())
 	})
-	test('Should response a correct UserFirstName',() =>{
+	test('Should return a correct UserFirstName',() =>{
 		expect(new UserPassword("DioBrando")).toBeInstanceOf(UserPassword)
 	})
 })
