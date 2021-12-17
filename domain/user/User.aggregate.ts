@@ -1,13 +1,13 @@
 import {randomUUID} from "crypto";
-import {UserConfirmed} from "./domain_events/UserConfirmed.Event";
-import {UserRegistered} from "./domain_events/UserRegistered.Event";
-import {UserStatus} from "./enums/UserStatus.Enum";
-import {UserBirthday} from "./value_objects/UserBirthday.ValueObject";
-import {UserEmail} from "./value_objects/UserEmail.ValueObject";
-import {UserFirstName} from "./value_objects/UserFirstName.ValueObject";
-import {UserID} from "./value_objects/UserID.ValueObject";
-import {UserLastName} from "./value_objects/UserLastName.ValueObject";
-import {UserPassword} from "./value_objects/UserPassword.ValueObject";
+import {UserConfirmed} from "./domain_events/UserConfirmed.event";
+import {UserRegistered} from "./domain_events/UserRegistered.event";
+import {UserStatus} from "./enums/UserStatus.enum";
+import {UserBirthday} from "./value_objects/UserBirthday.value";
+import {UserEmail} from "./value_objects/UserEmail.value";
+import {UserFirstName} from "./value_objects/UserFirstName.value";
+import {UserID} from "./value_objects/UserID.value";
+import {UserLastName} from "./value_objects/UserLastName.value";
+import {UserPassword} from "./value_objects/UserPassword.value";
 
 type UserEvents = UserRegistered | UserConfirmed
 
