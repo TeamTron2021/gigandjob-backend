@@ -6,7 +6,7 @@ export default class JobOfferId implements IValueObject {
     private constructor(readonly id: string) {}
 
     public equals(valueObject: JobOfferId): boolean {
-        return this.id === valueObject.id;
+        return this.id === valueObject.getId();
     }
 
     public getId() {

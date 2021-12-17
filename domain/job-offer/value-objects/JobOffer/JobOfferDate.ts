@@ -6,15 +6,15 @@ export default class JobOfferDate implements IValueObject {
     private constructor(private readonly startDate: Date,private readonly finalDate: Date) {}
 
     equals(valueObject: JobOfferDate): boolean {    
-        return this.startDate ===  valueObject.startDate && this.finalDate === valueObject.finalDate;
+        return this.startDate ===  valueObject.getStartDate() && this.finalDate === valueObject.getFinalDate();
     }
 
     public getStartDate(){
-        this.startDate;
+        return this.startDate;
     }
 
     public getFinalDate(){
-        this.finalDate;
+        return this.finalDate;
     }
 
     public static create(startDate: Date, finalDate: Date){

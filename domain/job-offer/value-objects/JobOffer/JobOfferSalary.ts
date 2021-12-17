@@ -3,10 +3,10 @@ import JobOfferInvalidSalaryException from "../../exceptions/JobOffer/JobOfferIn
 import JobOfferLowSalaryException from "../../exceptions/JobOffer/JobOfferLowSalaryException";
 
 export default class JobOfferSalary implements IValueObject{
-    private constructor(readonly salary:number) {}
+    private constructor(private readonly salary:number) {}
 
     public equals(valueObject: JobOfferSalary): boolean {
-        return this.salary === valueObject.salary;
+        return this.salary === valueObject.getSalary();
     }
 
     public static create(salary:number) {
@@ -23,4 +23,7 @@ export default class JobOfferSalary implements IValueObject{
         return new JobOfferSalary(salary);
     }
 
+    public getSalary(){
+        return this.salary;
+    }
 }
