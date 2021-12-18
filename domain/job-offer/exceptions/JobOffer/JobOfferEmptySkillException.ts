@@ -1,7 +1,9 @@
 import { IException } from "../../../../shared/domain/Iexception";
 
-export default class JobOfferEmptySkillException implements IException {
-    constructor(public readonly message: string) {}
+export default class JobOfferEmptySkillException extends Error implements IException {
+    constructor(public readonly message: string) {
+        super(message);
+    }
 
     public showError(): string {
         return this.message;      
