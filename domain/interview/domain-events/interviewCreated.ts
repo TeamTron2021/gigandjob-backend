@@ -1,6 +1,7 @@
 
 import { DomainEvents } from "../../../shared/domain/events/DomainEvents";
-import { IInterview } from "../entities/iinterview";
+import { IInterview } from "../entities/IInterview";
+
 
 export class interviewCreated implements DomainEvents {
   public interview: IInterview;
