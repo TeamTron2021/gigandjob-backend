@@ -1,5 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferCreated from "../domain-events/job-offer/JobOfferCreated.Event";
+import IJobOffer from "../shared/IJobOffer";
+import { OfferStatus } from "../shared/OfferStatus.enum";
 import GigDuration from "../value-objects/Gig/JobOfferGigDuration";
 import JobOfferDate from "../value-objects/JobOffer/JobOfferDate";
 import JobOfferDescription from "../value-objects/JobOffer/JobOfferDescription";
@@ -9,7 +11,8 @@ import JobOfferSkill from "../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../value-objects/JobOffer/JobOfferTitle";
 import JobOfferVacant from "../value-objects/JobOffer/JobOfferVacant";
 
-export default class JobOffer<S extends OfferStatus>  {
+
+export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     private eventRecorder: IDomainEvent[] = [];
     public status: S;
     constructor ( 
@@ -47,6 +50,7 @@ export default class JobOffer<S extends OfferStatus>  {
     ){
         const offer = new JobOffer(description, salary,skills, title, vacant, date, OfferStatus.notPublished, Id, );
         offer.eventRecorder.push(new JobOfferCreated(Id,description,salary,skills,title,vacant,date, OfferStatus.notPublished));
+        return offer;
     }
 
 

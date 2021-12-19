@@ -1,4 +1,5 @@
 import IDomainEvent from "../../../../shared/domain/IDomainEvent";
+import { OfferStatus } from "../../shared/OfferStatus.enum";
 import GigDuration from "../../value-objects/Gig/JobOfferGigDuration";
 import JobOfferDate from "../../value-objects/JobOffer/JobOfferDate";
 import JobOfferDescription from "../../value-objects/JobOffer/JobOfferDescription";

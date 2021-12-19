@@ -1,4 +1,4 @@
-enum OfferStatus {
+export enum OfferStatus {
     published, 
     suspended, 
     notPublished
