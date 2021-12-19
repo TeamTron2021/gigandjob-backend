@@ -1,6 +1,7 @@
-import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.Event"
-import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.Event"
-import {UserStatus} from "../../../domain/user/enums/UserStatus.Enum"
+import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.event"
+import {UserDataUpdated} from "../../../domain/user/domain_events/UserDataUpdated.event"
+import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.event"
+import {UserStatus} from "../../../domain/user/enums/UserStatus.enum"
 import {User} from "../../../domain/user/User.aggregate"
 import {UserBirthday} from "../../../domain/user/value_objects/UserBirthday.value"
 import {UserEmail} from "../../../domain/user/value_objects/UserEmail.value"
@@ -45,5 +46,35 @@ describe('User Aggregate', () =>{
 			userConfirmed.status
 		)
 		expect(userConfirmed.getEvents()).toContainEqual(event)
+	})
+	test('Should update the user data',() =>{
+		const user = User.register(
+			new UserFirstName("Jotaro"), 
+			new UserLastName("Kujo"), 
+			new UserBirthday(new Date(0)), 
+			new UserEmail("jotaro-kujo@joestar.com"), 
+			new UserPassword("star-platinum")
+		)
+		user.updateData(
+			new UserFirstName("Jolyne"), 
+			new UserLastName("Kujo"), 
+			new UserBirthday(new Date(0)), 
+			new UserEmail("jolyne-kujo@joestar.com"), 
+			new UserPassword("stone-free")	
+		)
+		const event = new UserDataUpdated(
+			user.getID(),
+			user.firstname,
+			user.lastname,
+			user.birthday,
+			user.email,
+			user.password
+		)
+		expect(user.firstname).toStrictEqual(new UserFirstName("Jolyne"))
+		expect(user.lastname).toStrictEqual(new UserLastName("Kujo"))
+		expect(user.birthday).toStrictEqual(new UserBirthday(new Date(0)))
+		expect(user.email).toStrictEqual(new UserEmail("jolyne-kujo@joestar.com"))
+		expect(user.password).toStrictEqual(new UserPassword("stone-free"))
+		expect(user.getEvents()).toContainEqual(event)
 	})
 })

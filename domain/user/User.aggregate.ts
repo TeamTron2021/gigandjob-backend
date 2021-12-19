@@ -1,7 +1,8 @@
 import {randomUUID} from "crypto";
-import {UserConfirmed} from "./domain_events/UserConfirmed.Event";
-import {UserRegistered} from "./domain_events/UserRegistered.Event";
-import {UserStatus} from "./enums/UserStatus.Enum";
+import {UserConfirmed} from "./domain_events/UserConfirmed.event";
+import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
+import {UserRegistered} from "./domain_events/UserRegistered.event";
+import {UserStatus} from "./enums/UserStatus.enum";
 import {UserBirthday} from "./value_objects/UserBirthday.value";
 import {UserEmail} from "./value_objects/UserEmail.value";
 import {UserFirstName} from "./value_objects/UserFirstName.value";
@@ -9,7 +10,7 @@ import {UserID} from "./value_objects/UserID.value";
 import {UserLastName} from "./value_objects/UserLastName.value";
 import {UserPassword} from "./value_objects/UserPassword.value";
 
-type UserEvents = UserRegistered | UserConfirmed
+type UserEvents = UserRegistered | UserConfirmed | UserDataUpdated
 
 export class User<S extends UserStatus>{
 	private ID: UserID
@@ -38,7 +39,7 @@ export class User<S extends UserStatus>{
 		birthday: UserBirthday,
 		email: UserEmail,
 		password: UserPassword,
-		): User<UserStatus.Unconfirmed> {
+	): User<UserStatus.Unconfirmed> {
 		const user = new User(firstname,lastname,birthday,email,password,UserStatus.Unconfirmed)
 		user.eventRecorder.push(new UserRegistered(
 			user.ID,
@@ -68,6 +69,28 @@ export class User<S extends UserStatus>{
 			user.status
 		))
 		return user
+	}
+
+	updateData(
+		firstname: UserFirstName,
+		lastname: UserLastName,
+		birthday: UserBirthday,
+		email: UserEmail,
+		password: UserPassword,
+	){
+		this.firstname = firstname
+		this.lastname = lastname
+		this.birthday = birthday
+		this.email = email
+		this.password = password
+		this.eventRecorder.push(new UserDataUpdated(
+			this.ID,
+			this.firstname,
+			this.lastname,
+			this.birthday,
+			this.email,
+			this.password
+		))
 	}
 
 	protected invariants(){}
