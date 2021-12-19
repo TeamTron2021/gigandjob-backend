@@ -1,4 +1,4 @@
-enum Time {
+export enum Time {
     Days, 
     Weeks, 
     Months,

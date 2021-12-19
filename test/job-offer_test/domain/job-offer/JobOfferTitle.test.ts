@@ -1,6 +1,6 @@
 
-import JobOfferEmptyTitleException from "../../../domain/job-offer/exceptions/JobOffer/JobOfferEmptyTitleException";
-import JobOfferTItle from "../../../domain/job-offer/value-objects/JobOffer/JobOfferTitle";
+import JobOfferEmptyTitleException from "../../../../domain/job-offer/exceptions/JobOffer/JobOfferEmptyTitleException";
+import JobOfferTItle from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferTitle";
 
 describe('Value Object JobOfferTitle', () =>{
     it('Should return an error ,  title empty', () =>{

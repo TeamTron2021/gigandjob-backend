@@ -1,4 +1,3 @@
-import { Entity } from "../../../shared/domain/Entity";
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferCreated from "../domain-events/job-offer/JobOfferCreated.Event";
 import GigDuration from "../value-objects/Gig/JobOfferGigDuration";
@@ -10,7 +9,7 @@ import JobOfferSkill from "../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../value-objects/JobOffer/JobOfferTitle";
 import JobOfferVacant from "../value-objects/JobOffer/JobOfferVacant";
 
-export default class JobOffer<S extends OfferStatus> extends Entity {
+export default class JobOffer<S extends OfferStatus>  {
     private eventRecorder: IDomainEvent[] = [];
     public status: S;
     constructor ( 
@@ -21,8 +20,7 @@ export default class JobOffer<S extends OfferStatus> extends Entity {
         public vacant: JobOfferVacant, 
         public date: JobOfferDate,
         status: S,
-        private Id: JobOfferId,){
-        super();    
+        private Id: JobOfferId,){   
         this.status =  status;
 
     }

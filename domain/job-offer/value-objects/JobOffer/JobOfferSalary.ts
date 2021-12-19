@@ -18,7 +18,7 @@ export default class JobOfferSalary implements IValueObject{
         }
         if(salary == null) {
             throw new JobOfferInvalidSalaryException('El salario no puede estar vacio');
-            
+           
         }
         return new JobOfferSalary(salary);
     }
