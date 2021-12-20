@@ -1,4 +1,4 @@
-import { IException } from "../../../shared/domain/Iexception";
+import { IException } from "../../../../shared/domain/Iexception";
 
 export default class EmptyEmployeerIdException implements IException {
     public constructor(public readonly message: string) {}

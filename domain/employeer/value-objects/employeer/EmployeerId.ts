@@ -1,5 +1,5 @@
-import EmptyEmployeerException from '../exceptions/EmptyIdEmployeerException';
-import { IValueObject } from '../../../shared/domain/IValueObject';
+import EmptyEmployeerException from '../../exceptions/employeer/EmptyIdEmployeerException';
+import { IValueObject } from '../../../../shared/domain/IValueObject';
 
 export default class EmployeerId implements IValueObject {
     private constructor(readonly id: string) {}
