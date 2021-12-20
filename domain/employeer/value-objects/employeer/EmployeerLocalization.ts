@@ -21,19 +21,30 @@ export default class EmployeerLocalization implements IValueObject {
     }
 
     public static create(latitude:string, longitude:string){
+        if(latitude == undefined || latitude == null){
+            throw new EmployeerEmptyLocalizationException(
+                'La latitud no debe estar vacia'
+            );
+        }
+        if(longitude == undefined || longitude == null){
+            throw new EmployeerEmptyLocalizationException(
+                'La longitud no debe estar vacia'
+            );
+        }
         if(typeof latitude != "string" || typeof longitude != "string"){
             throw new EmployeerInvalidLocalizationException(
                 'Los campos de la localizacion deben ser string'
             );
         }
-        if(latitude == undefined || latitude == null || !latitude.trim()){
-            throw new EmployeerEmptyLocalizationException(
-                'La latitud no debe estar vacia'
-            );
-        }
-        if(longitude == undefined || longitude == null || !longitude.trim()){
+        if(!longitude.trim()){
             throw new EmployeerEmptyLocalizationException(
                 'La longitud no debe estar vacia'
+            );
+        }
+        
+        if(!latitude.trim()){
+            throw new EmployeerEmptyLocalizationException(
+                'La latitud no debe estar vacia'
             );
         }
 

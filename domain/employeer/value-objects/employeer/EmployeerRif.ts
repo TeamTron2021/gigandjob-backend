@@ -16,7 +16,7 @@ export default class EmployeerRif implements IValueObject {
     }
 
     public static create(rif:string){
-        if(rif == null || rif == undefined || !rif.trim()){
+        if(rif == null || rif == undefined ){
             throw new EmployeerEmptyRifException(
                 'El rif no puede estar vacio'
             ); 
@@ -26,6 +26,8 @@ export default class EmployeerRif implements IValueObject {
                 'El rif introducido no es valido'
             );
         }
+
+        return new EmployeerRif(rif);
     
     }
 }
