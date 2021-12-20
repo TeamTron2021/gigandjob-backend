@@ -1,4 +1,6 @@
 import { IValueObject } from "../../../../shared/domain/IValueObject";
+import EmployeerEmptyRifException from "../../exceptions/employeer/EmployeerEmptyRifException";
+import EmployeerInvalidRifException from "../../exceptions/employeer/EmployeerInvalidRifException";
 
 const REGEX = /[J]-\d{6,9}-\d{1}\d?/ig
 
@@ -14,6 +16,16 @@ export default class EmployeerRif implements IValueObject {
     }
 
     public static create(rif:string){
+        if(rif == null || rif == undefined || !rif.trim()){
+            throw new EmployeerEmptyRifException(
+                'El rif no puede estar vacio'
+            ); 
+        }
+        if(typeof rif != "string" || !rif.match(REGEX)){
+            throw new EmployeerInvalidRifException(
+                'El rif introducido no es valido'
+            );
+        }
     
     }
 }
