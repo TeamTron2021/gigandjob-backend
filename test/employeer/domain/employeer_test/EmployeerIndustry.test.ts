@@ -1,6 +1,6 @@
-import EmployeerEmptyIndustryException from "../../../domain/employeer/exceptions/employeer/EmployeerEmptyIndustryException";
-import EmployeerInvalidIndustryException from "../../../domain/employeer/exceptions/employeer/EmployeerInvalidIndustryException";
-import EmployeerIndustry from "../../../domain/employeer/value-objects/employeer/EmployeerIndustry";
+import EmployeerEmptyIndustryException from "../../../../domain/employeer/exceptions/employeer/EmployeerEmptyIndustryException";
+import EmployeerInvalidIndustryException from "../../../../domain/employeer/exceptions/employeer/EmployeerInvalidIndustryException";
+import EmployeerIndustry from "../../../../domain/employeer/value-objects/employeer/EmployeerIndustry";
 
 describe('Testing employeerIndustry value object',()=>{
     it('Should throw an empty Industry error ', ()=>{

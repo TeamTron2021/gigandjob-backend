@@ -1,12 +1,16 @@
 import  IDomainEvent  from "../../../shared/domain/IDomainEvent";
 import EmployeerCreated from "../domain-events/employeer/EmployeerCreated.Event";
+import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
 import { EmployeerStatus } from "../shared/EmployeerStatus.enum";
+import NotificationContent from "../value-objects/employeer-notification/NotificationContent";
+import NotificationSubject from "../value-objects/employeer-notification/NotificationSubject";
 import EmployeerCompanyMail from "../value-objects/employeer/EmployeerCompanyMail";
 import EmployeerCompanyName from "../value-objects/employeer/EmployeerCompanyName";
 import EmployeerId from "../value-objects/employeer/EmployeerId";
 import EmployeerIndustry from "../value-objects/employeer/EmployeerIndustry";
 import EmployeerLocalization from "../value-objects/employeer/EmployeerLocalization";
 import EmployeerRif from "../value-objects/employeer/EmployeerRif";
+import EmployeerNotification from "./EmployeerNotification";
 
 export default class Employeer<S extends EmployeerStatus> {
     private eventRecorder: IDomainEvent[] = []; 
@@ -59,6 +63,15 @@ export default class Employeer<S extends EmployeerStatus> {
             localization
         ))
 
+        const subject = new NotificationSubject('Felicidades por unirte a gig and job');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const employeerNotification = EmployeerNotification.register(
+            subject,
+            content, 
+            employeer
+        )
+
+        employeer.eventRecorder.push(new EmployeerRegistered(subject, content));
         return employeer;
 
         
