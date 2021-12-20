@@ -1,12 +1,20 @@
 /**
- * Aqui iran los imports
- * import { IDomainEvent } from "./IDomainEvent-InterviewRejected";
+ *  imports
  */
+import { IInterviewChangeStatus } from "../../shared/domain/IInterviewReject";
 
-//Interfaz IinterviewChangeStatus{changeStatus(Interview)}
-//IObservableInterview {notifyAll(), addObserver(notifyList), removeObserver(notifyList)}
+export class InterviewRejected implements  IInterviewChangeStatus{
+    
+    constructor(){ //User : user, Interview: Interview o los UUID
+        
+    }
 
-export class InterviewRejected{
-
+    changeStatus(): void { //por parametro sera Interview
+        /** 
+         *  
+         *     
+         * 
+      */   
+    }
     
 }
