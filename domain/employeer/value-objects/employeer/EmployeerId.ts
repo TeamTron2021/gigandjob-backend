@@ -1,5 +1,5 @@
-import EmptyEmployeerException from '../exceptions/EmptyIdEmployeerException';
-import { IValueObject } from '../../../shared/domain/IValueObject';
+import { IValueObject } from '../../../../shared/domain/IValueObject';
+import EmptyEmployeerIdException from '../../exceptions/employeer/EmptyIdEmployeerException';
 
 export default class EmployeerId implements IValueObject {
     private constructor(readonly id: string) {}
@@ -13,8 +13,8 @@ export default class EmployeerId implements IValueObject {
     }
     
     public static create(id: string) {
-        if(id === '' || id === ' ' || id == undefined || id == null){
-            throw new EmptyEmployeerException(
+        if(id == undefined || id == null || !id.trim()){
+            throw new EmptyEmployeerIdException (
                 'El id del empleador no puede estar vacio'
             );
         }
