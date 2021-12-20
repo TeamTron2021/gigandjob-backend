@@ -10,11 +10,7 @@ export class InterviewRejected implements  IInterviewChangeStatus{
     }
 
     changeStatus(): void { //por parametro sera Interview
-        /** 
-         *  
-         *     
-         * 
-      */   
+   
     }
     
 }
