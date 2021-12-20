@@ -1,16 +1,19 @@
-/**
- *  imports
- */
-import { IInterviewChangeStatus } from "../../shared/domain/IInterviewReject";
 
-export class InterviewRejected implements  IInterviewChangeStatus{
+import { IChangeInterviewStatus } from "../../shared/domain/IInterviewReject";
+
+export class InterviewRejected implements  IChangeInterviewStatus{
+   private interview: Interview; 
     
-    constructor(){ //User : user, Interview: Interview o los UUID
-        
+   constructor(interview: Interview){ 
+        this.interview = interview;
     }
 
-    changeStatus(): void { //por parametro sera Interview
+    changeStatus(interview : Interview): Interview { 
    
+        if(interview.Id === this.interview.Id){
+            return interview.status = 'rejected';
+        }
+         
     }
     
 }
