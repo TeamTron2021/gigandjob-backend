@@ -16,7 +16,7 @@ export default class EmployeerCompanyMail implements IValueObject {
     }
 
     public static create(email:string){
-        if(email == undefined || email == null){
+        if(email == undefined || email == null || !email.trim()){
             throw new EmployeerEmptyCompanyMailException(
                 'El email del empleador no puede estar vacio'
             );
