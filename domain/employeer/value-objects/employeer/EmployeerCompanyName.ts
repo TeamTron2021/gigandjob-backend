@@ -13,7 +13,7 @@ export default class EmployeerCompanyName implements IValueObject {
         return this.name;
     }
     public static create(name: string) {
-        if(name === '' || name === ' ' || name == undefined || name == null ){
+        if( name == undefined || name == null || !name.trim()  ){
             throw new EmployeerEmptyCompanyNameException(
                 'El nombre de la empresa empleadora no puede estar vacio'
             )
@@ -23,6 +23,7 @@ export default class EmployeerCompanyName implements IValueObject {
                 'El nombre de la empresa empleadora tiene que ser string'
             );
         }
+        
         return new EmployeerCompanyName(name);
     }
 }
