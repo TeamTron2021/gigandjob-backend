@@ -1,6 +1,6 @@
-import EmployeerEmptyCompanyMailException from "../../../domain/employeer/exceptions/employeer/EmployeerEmptyCompanyMailException";
-import EmployeerInvalidCompanyMailException from "../../../domain/employeer/exceptions/employeer/EmployeerInvalidCompanyMailException";
-import EmployeerCompanyMail from "../../../domain/employeer/value-objects/employeer/EmployeerCompanyMail";
+import EmployeerEmptyCompanyMailException from "../../../../domain/employeer/exceptions/employeer/EmployeerEmptyCompanyMailException";
+import EmployeerInvalidCompanyMailException from "../../../../domain/employeer/exceptions/employeer/EmployeerInvalidCompanyMailException";
+import EmployeerCompanyMail from "../../../../domain/employeer/value-objects/employeer/EmployeerCompanyMail";
 
 describe('Testing companyMail value object',()=>{
     it('Should throw an empty companymail error', ()=>{

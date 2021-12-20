@@ -1,5 +1,5 @@
-import EmployeerEmptyLocalizationException from '../../../domain/employeer/exceptions/employeer/EmployeerEmptyLocalizationException';
-import EmployeerLocalization from '../../../domain/employeer/value-objects/employeer/EmployeerLocalization';
+import EmployeerEmptyLocalizationException from '../../../../domain/employeer/exceptions/employeer/EmployeerEmptyLocalizationException';
+import EmployeerLocalization from '../../../../domain/employeer/value-objects/employeer/EmployeerLocalization';
 
 describe('Testing EmployeerLocalization value object',()=>{
     it('Should throw an emptyLocalization error', ()=>{

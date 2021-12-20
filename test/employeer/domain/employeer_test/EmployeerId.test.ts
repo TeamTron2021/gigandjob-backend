@@ -1,6 +1,6 @@
-import EmptyEmployeerIdException from "../../../domain/employeer/exceptions/employeer/EmptyIdEmployeerException";
-import EmployeerId from "../../../domain/employeer/value-objects/employeer/EmployeerId";
-import UniqueId from "../../../shared/domain/UniqueUUID";
+import EmptyEmployeerIdException from "../../../../domain/employeer/exceptions/employeer/EmptyIdEmployeerException";
+import EmployeerId from "../../../../domain/employeer/value-objects/employeer/EmployeerId";
+import UniqueId from "../../../../shared/domain/UniqueUUID";
 
 describe('Testing EmployeerId value object',()=>{
     it('Should throw an Empty EmployeerId error', ()=>{

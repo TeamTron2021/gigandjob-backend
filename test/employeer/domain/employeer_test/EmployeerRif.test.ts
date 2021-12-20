@@ -1,6 +1,6 @@
-import EmployeerEmptyRifException from "../../../domain/employeer/exceptions/employeer/EmployeerEmptyRifException";
-import EmployeerInvalidRifException from "../../../domain/employeer/exceptions/employeer/EmployeerInvalidRifException";
-import EmployeerRif from "../../../domain/employeer/value-objects/employeer/EmployeerRif";
+import EmployeerEmptyRifException from "../../../../domain/employeer/exceptions/employeer/EmployeerEmptyRifException";
+import EmployeerInvalidRifException from "../../../../domain/employeer/exceptions/employeer/EmployeerInvalidRifException";
+import EmployeerRif from "../../../../domain/employeer/value-objects/employeer/EmployeerRif";
 
 describe('Testing EmployeerRif value object',()=>{
     it('Should throw an empty rif error',()=>{
