@@ -9,12 +9,4 @@ export default class jobofferlike_event implements IDomainEvent{
         public value: boolean
     ){}
 
-    public setValue(_value: boolean){
-        this.value = _value;
-    }
-
-    public getValue(){
-        return this.value
-    }
-
 }

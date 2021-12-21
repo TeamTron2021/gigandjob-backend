@@ -23,7 +23,7 @@ export class JobOfferLike{
     public getValue(){
         return this.value
     }
-	
+
 	public addEvent(domainEvent: JobOfferLikedId){
 		this.eventRecorder.push(domainEvent);
 	}
@@ -35,12 +35,7 @@ export class JobOfferLike{
 		return like;
 	}
 
-	/*static removelike(id: JobOfferLikedId, object: JobOfferLike){
-		const removelike = new JobOfferLike(id, true);
-		removelike.eventRecorder.push(new jobofferlike_event(id, true))
-		return removelike;
-	}
-	*/
+
 	static removelike(object: JobOfferLike[]){
 		for(let x=0; x<=object.length-1; x++){
 			const compare = object[x].getValue();

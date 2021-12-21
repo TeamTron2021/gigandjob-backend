@@ -45,7 +45,7 @@ describe('Testing JobOffer creation', ()=>{
         const JobOfferLikeNew1 = JobOfferLike.likeOffer() //Se grega like
         likes.push(JobOfferLikeNew1);
 
-        const JobOfferLikeRemove1 = JobOfferLike.removelike(likes)
+        JobOfferLike.removelike(likes) //Se remueve el like
         
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })
