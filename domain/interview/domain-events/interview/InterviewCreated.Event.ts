@@ -1,10 +1,10 @@
 import IDomainEvent from "../../../../shared/domain/IDomainEvent";
 import { InterviewStatus } from "../../shared/InterviewStatus.enum";
-import { InterviewId } from "../../value-objects/interviewId";
-import { InterviewTitle } from "../../value-objects/interviewTitle";
-import { InterviewDescription } from "../../value-objects/interviewDescription";
-import { InterviewDate } from "../../value-objects/interviewDate";
-import { InterviewParticipant } from "../../value-objects/interviewParticipant";
+import InterviewTitle from "../../value-objects/interview/InterviewTitle";
+import InterviewDescription from "../../value-objects/interview/InterviewDescription";
+import InterviewDate from "../../value-objects/interview/InterviewDate";
+import InterviewId from "../../value-objects/interview/InterviewId";
+import InterviewParticipant from "../../value-objects/interview/InterviewParticipant";
 
 export default class InterviewCreated implements IDomainEvent{
     constructor(

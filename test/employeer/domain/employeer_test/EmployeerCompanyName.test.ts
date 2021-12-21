@@ -1,5 +1,5 @@
-import EmployeerEmptyCompanyNameException from "../../../domain/employeer/exceptions/employeer/EmployeerEmptyCompanyNameException";
-import EmployeerCompanyName from "../../../domain/employeer/value-objects/employeer/EmployeerCompanyName";
+import EmployeerEmptyCompanyNameException from "../../../../domain/employeer/exceptions/employeer/EmployeerEmptyCompanyNameException";
+import EmployeerCompanyName from "../../../../domain/employeer/value-objects/employeer/EmployeerCompanyName";
 
 describe('Testing company name value object', ()=>{
     it('Should throw an empty company name error', ()=>{
