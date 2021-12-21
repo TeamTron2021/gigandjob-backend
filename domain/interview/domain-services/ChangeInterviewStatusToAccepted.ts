@@ -1,8 +1,8 @@
 import {IChangeInterviewStatus} from "./IChangeInterviewStatus";
-import Interview from "../entities/Interview";
+import {InterviewStatus} from "../shared/InterviewStatus.enum";
 
 export class ChangeInterviewStatusToAccepted extends IChangeInterviewStatus{
-    public changeStatus(interview: Interview<any>): void {
-    
+    public changeStatus(interviewStatus: InterviewStatus): InterviewStatus {
+        return InterviewStatus.accepted;
     }
 }
