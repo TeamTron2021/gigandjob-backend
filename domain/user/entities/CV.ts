@@ -1,19 +1,18 @@
 import {randomUUID} from "crypto";
-import { CVLoaded } from "../domain_events/CVLoaded.event";
 import { CVStatus } from "../enums/CVStatus.enum";
-import  CVAcademicFormation  from "../value_objects/CVAcademicFormation.value";
-import  CVCourses  from "../value_objects/CVCourses.value";
-import CVID from "../value_objects/CVID.value";
-import NotificationContent from "../value_objects/NotificationContent.value";
-import  CVSkills  from "../value_objects/CVSkills.value";
-import NotificationSubject from "../value_objects/NotificationSubject.value";
+import  CVAcademicFormation  from "../value_objects/CV/CVAcademicFormation.value";
 import CVNotification from "./CVNotification";
-import IDomainEvent from "../../../shared/domain/IDomainEvent";
+import { CVLoaded } from "../domain_events/CV/CVLoaded.event";
+import CVCourses from "../value_objects/CV/CVCourses.value";
+import CVID from "../value_objects/CV/CVID.value";
+import CVSkills from "../value_objects/CV/CVSkills.value";
+import NotificationContent from "../value_objects/CV/NotificationContent.value";
+import NotificationSubject from "../value_objects/CV/NotificationSubject.value";
 
-
+type CVEvents = CVLoaded 
 export class CV<S extends CVStatus>{
 	public status: S
-	private eventRecorder: IDomainEvent[] = []
+	private eventRecorder: CVEvents[] = []
 	
 	constructor(
 		public academicFormation: CVAcademicFormation[],

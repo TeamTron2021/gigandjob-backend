@@ -1,6 +1,6 @@
 import {randomUUID} from "crypto"
-import { CVIdEmpty } from "../../../../domain/user/errors/CVIDEmpty.error"
-import CVID from "../../../../domain/user/value_objects/CVID.value"
+import { CVIdEmpty } from "../../../../domain/user/errors/CV/CVIDEmpty.error"
+import CVID from "../../../../domain/user/value_objects/CV/CVID.value"
 describe('Value Object CVID', () =>{
 	test('Should return a error: CVIDEmpty',() =>{
 		const id: any = null

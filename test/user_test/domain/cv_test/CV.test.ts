@@ -1,9 +1,10 @@
-import { CVLoaded } from "../../../../domain/user/domain_events/CVLoaded.event";
+
+import { CVLoaded } from "../../../../domain/user/domain_events/CV/CVLoaded.event";
 import { CV } from "../../../../domain/user/entities/CV";
-import CVAcademicFormation from "../../../../domain/user/value_objects/CVAcademicFormation.value";
-import CVCourses from "../../../../domain/user/value_objects/CVCourses.value";
-import CVID from "../../../../domain/user/value_objects/CVID.value";
-import CVSkills from "../../../../domain/user/value_objects/CVSkills.value";
+import CVAcademicFormation from "../../../../domain/user/value_objects/CV/CVAcademicFormation.value";
+import CVCourses from "../../../../domain/user/value_objects/CV/CVCourses.value";
+import CVID from "../../../../domain/user/value_objects/CV/CVID.value";
+import CVSkills from "../../../../domain/user/value_objects/CV/CVSkills.value";
 import UniqueId from "../../../../shared/domain/UniqueUUID";
 
 describe('Testing CV entity',()=>{

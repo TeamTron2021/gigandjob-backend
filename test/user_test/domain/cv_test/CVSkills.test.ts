@@ -1,5 +1,6 @@
-import { CVSkillsEmpty } from "../../../../domain/user/errors/CVSkillsEmpty.error";
-import CVSkills from "../../../../domain/user/value_objects/CVSkills.value";
+import { CVSkillsEmpty } from "../../../../domain/user/errors/CV/CVSkillsEmpty.error";
+import CVSkills from "../../../../domain/user/value_objects/CV/CVSkills.value";
+
 
 
 describe('Testing value object JobOfferSkill',()=>{

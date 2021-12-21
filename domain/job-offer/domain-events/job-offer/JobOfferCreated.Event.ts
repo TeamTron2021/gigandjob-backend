@@ -1,4 +1,5 @@
 import IDomainEvent from "../../../../shared/domain/IDomainEvent";
+import { JobOfferLike } from "../../entities/JobOfferLike";
 import { OfferStatus } from "../../shared/OfferStatus.enum";
 import JobOfferDate from "../../value-objects/JobOffer/JobOfferDate";
 import JobOfferDescription from "../../value-objects/JobOffer/JobOfferDescription";
@@ -16,6 +17,7 @@ export default class JobOfferCreated implements IDomainEvent{
         public skills: JobOfferSkill[], 
         public title: JobOfferTItle, 
         public vacant: JobOfferVacant, 
+        public likes: JobOfferLike[],
         public date: JobOfferDate,
         public status: OfferStatus
     ){};

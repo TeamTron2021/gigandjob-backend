@@ -1,12 +1,14 @@
-import IDomainEvent from "../../../shared/domain/IDomainEvent";
-import CVLoadedNotification from "../domain_events/CVLoadedNotification.event";
+
+
+import CVLoadedNotification from "../domain_events/CV/CVLoadedNotification.event";
 import { CVStatus } from "../enums/CVStatus.enum";
-import NotificationContent from "../value_objects/NotificationContent.value";
-import NotificationSubject from "../value_objects/NotificationSubject.value";
+import NotificationContent from "../value_objects/CV/NotificationContent.value";
+import NotificationSubject from "../value_objects/CV/NotificationSubject.value";
 import { CV } from "./CV";
 
+type CVNotificationEvents = CVLoadedNotification
 export default class CVNotification {
-    private eventRecorder: IDomainEvent[] = []; 
+    private eventRecorder: CVNotificationEvents[] = []; 
     constructor(
         private readonly subject: NotificationSubject,
         private readonly content: NotificationContent, 
@@ -14,6 +16,7 @@ export default class CVNotification {
     ) {
 
     }
+    getEvents(): CVNotificationEvents[] {return this.eventRecorder}
 
     public loadedNotification(){
         this.eventRecorder.push(new CVLoadedNotification(this.CV.getID(), this.subject, this.content))
