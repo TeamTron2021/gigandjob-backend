@@ -1,5 +1,6 @@
-import { PostulationDateEmpty } from '../../../domain/job-offer/entities/postulation/exceptions/PostulationDateEmpty'
-import { PostulationDate } from '../../../domain/job-offer/entities/postulation/value-objects/PostulationDate'
+import { PostulationDateEmpty } from "../../../domain/job-offer/exceptions/postulation/PostulationDateEmpty"
+import { PostulationDate } from "../../../domain/job-offer/value-objects/postulation/PostulationDate"
+
 
 describe('Postulation Date test ', () => {
     test('Postulation Date empty', () => {

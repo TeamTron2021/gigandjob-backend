@@ -1,6 +1,7 @@
-import { PostulationUUIDError } from "../../../domain/job-offer/entities/postulation/exceptions/PostulationUUIDError"
-import { PostulationUUID } from "../../../domain/job-offer/entities/postulation/value-objects/PostulationUUID"
+
 import { v4 as uuidv4 } from "uuid";
+import { PostulationUUIDError } from "../../../domain/job-offer/exceptions/postulation/PostulationUUIDError";
+import { PostulationUUID } from "../../../domain/job-offer/value-objects/postulation/PostulationUUID";
 
 describe('Postulation UUID Tests', () => {
     test('Postulation UUDI Error', () => {

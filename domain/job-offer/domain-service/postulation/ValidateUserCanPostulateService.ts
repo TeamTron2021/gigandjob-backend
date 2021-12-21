@@ -1,7 +1,7 @@
-import { UserStatus } from "../../../../user/enums/UserStatus.enum";
-import { User } from "../../../../user/User.aggregate";
-import { Postulation } from "../postulation";
-import { PostulationStatus } from "../value-objects/PostulationStatus";
+import { UserStatus } from "../../../user/enums/UserStatus.enum"
+import { User } from "../../../user/User.aggregate"
+import { Postulation } from "../../entities/postulation"
+import { PostulationStatus } from "../../value-objects/postulation/PostulationStatus"
 
 export const ValidateUserCanPostulate = (user: User<UserStatus>, postulation: Postulation<PostulationStatus>): void =>  {
 

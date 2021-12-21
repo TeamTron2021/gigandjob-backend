@@ -1,11 +1,13 @@
-import { PostulationDate } from "./value-objects/postulationDate";
-import { PostulationStatus } from "./value-objects/PostulationStatus";
-import { PostulationUUID } from "./value-objects/PostulationUUID";
+
 import { v4 as uuidv4 } from "uuid";
-import { PostulationCreated } from "./domain-events/PostulationCreated";
-import { PostulationUpdatedStatus } from "./domain-events/PostulationUpdatedStatus";
-import Interview from "../../../interview/entities/Interview";
-import { InterviewStatus } from "../../../interview/shared/InterviewStatus.enum";
+import Interview from "../../interview/entities/Interview";
+import { InterviewStatus } from "../../interview/shared/InterviewStatus.enum";
+import { PostulationCreated } from "../domain-events/postulation/PostulationCreated";
+import { PostulationUpdatedStatus } from "../domain-events/postulation/PostulationUpdatedStatus";
+import { PostulationDate } from "../value-objects/postulation/PostulationDate";
+import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
+import { PostulationUUID } from "../value-objects/postulation/PostulationUUID";
+
 
 type postulationEvents = PostulationCreated | PostulationUpdatedStatus;
 

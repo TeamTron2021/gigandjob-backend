@@ -1,4 +1,5 @@
-import { PostulationUUIDError } from "../exceptions/PostulationUUIDError"
+import { PostulationUUIDError } from "../../exceptions/postulation/PostulationUUIDError"
+
 
 export class PostulationUUID {
 
