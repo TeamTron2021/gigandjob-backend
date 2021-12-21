@@ -1,4 +1,4 @@
-/*import { CVSkillsEmpty } from "../errors/CVSkillsEmpty.error"
+import { CVSkillsEmpty } from "../errors/CVSkillsEmpty.error"
 
 export class CVSkills {
     
@@ -11,13 +11,4 @@ export class CVSkills {
 }
 
 
-public static create(skill: string) {
-	if(skill === '' || skill === ' ' || skill == undefined || skill == null){
-		throw new JobOfferEmptySkillException(
-			'La habilidad no puede estar vacia'
-		)
-	}
 
-	return new JobOfferSkill(skill);
-}
-}*/

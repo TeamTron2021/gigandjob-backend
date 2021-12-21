@@ -5,7 +5,6 @@ import { CVAcademicFormation } from "../value_objects/CVAcademicFormation.value"
 import { CVCourses } from "../value_objects/CVCourses.value"
 import { CVID } from "../value_objects/CVID.value"
 import { CVSkills } from "../value_objects/CVSkills.value"
-
 type CVEvents = CVLoaded 
 
 export class CV<S extends CVStatus>{
