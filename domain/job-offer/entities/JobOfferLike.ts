@@ -1,6 +1,6 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
-import LikeAdded_book from "../domain-events/LikeAdded_book";
-import JobOfferLikedId from "../value-objects/JobOfferLikeId";
+import jobofferlike_event from "../domain-events/jobOfferLike/JobOfferLike.Event";
+import JobOfferLikedId from "../value-objects/jobOfferLike/JobOfferLikeId";
 
 export class JobOfferLike{
 	private eventRecorder: IDomainEvent[] = [];
@@ -18,7 +18,7 @@ export class JobOfferLike{
 
 	static likeOffer(id: JobOfferLikedId){
 		const like = new JobOfferLike(id, true);
-		like.eventRecorder.push(new LikeAdded_book(id, true))
+		like.eventRecorder.push(new jobofferlike_event(id, true))
 		return like;
 	}
 	

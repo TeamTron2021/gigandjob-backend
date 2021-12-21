@@ -1,5 +1,5 @@
-import { IValueObject } from "../../../shared/domain/IValueObject";
-import EmptyJobOfferIdException from "../exceptions/JobOfferLikedIdExceptions";
+import { IValueObject } from "../../../../shared/domain/IValueObject";
+import EmptyJobOfferIdException from "../../exceptions/jobOfferLike/JobOfferLikedIdExceptions";
 //import { ValueObject } from "../../ValueObjects/ValueObjetcts";
 
 export default class JobOfferLikedId implements IValueObject {

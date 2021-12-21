@@ -1,4 +1,4 @@
-import { IException } from "../../../shared/domain/Iexception";
+import { IException } from "../../../../shared/domain/Iexception";
 
 export default class EmptyJobOfferIdException extends Error implements IException {
     constructor(public readonly message: string) {
