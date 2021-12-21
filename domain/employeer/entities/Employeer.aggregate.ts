@@ -1,5 +1,6 @@
 import  IDomainEvent  from "../../../shared/domain/IDomainEvent";
 import EmployeerCreated from "../domain-events/employeer/EmployeerCreated.Event";
+import EmployeerSuspended from "../domain-events/employeer/EmployeerSuspended.Event";
 import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
 import { EmployeerStatus } from "../shared/EmployeerStatus.enum";
 import NotificationContent from "../value-objects/employeer-notification/NotificationContent";
@@ -76,5 +77,24 @@ export default class Employeer<S extends EmployeerStatus> {
 
         
     }
+
+    public suspendEmployeer(
+        this: Employeer<EmployeerStatus.NOT_SUSPENDED>
+    ):Employeer<EmployeerStatus.SUSPENDED>{
+        const employeer = new Employeer(
+            this.CompanyMail, 
+            this.CompanyName, 
+            this.id, 
+            this.industry, 
+            this.rif, 
+            EmployeerStatus.SUSPENDED, 
+            this.localization
+        );
+        employeer.eventRecorder = this.eventRecorder.slice(0);
+        employeer.eventRecorder.push(new EmployeerSuspended(this.id, EmployeerStatus.SUSPENDED)); 
+        return employeer;
+
+    }
+
     protected invariants(){}
 }
