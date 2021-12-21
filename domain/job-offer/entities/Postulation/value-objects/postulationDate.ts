@@ -7,6 +7,7 @@ export class PostulationDate {
         if (!date) throw new PostulationDateEmpty()
         this.postulationDate = this.date
     }
+    
 
     get date(): Date {
         return this.postulationDate
