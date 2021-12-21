@@ -26,11 +26,12 @@ describe('Testing JobOffer creation', ()=>{
             finalDate
         );
         
+    
+    
         const likes: JobOfferLike[] = [
-        JobOfferLike.likeOffer(),
-        JobOfferLike.likeOffer()
+            //Inicia vacio
         ];
-
+       
         const id = JobOfferId.create(new UniqueId().getId());
         const jobOffer = JobOffer.create(
             JobOfferDescription.create('Descripcion generica de una oferta de trabajo'), 
@@ -42,6 +43,9 @@ describe('Testing JobOffer creation', ()=>{
             date, 
             id
         ); 
+
+        const JobOfferLikeNew1 = JobOfferLike.likeOffer() //Se grega like
+        likes.push(JobOfferLikeNew1)
     
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })

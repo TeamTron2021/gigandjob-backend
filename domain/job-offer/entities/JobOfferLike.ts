@@ -4,6 +4,7 @@ import jobofferlike_event from "../domain-events/jobOfferLike/JobOfferLike.Event
 import JobOfferLikedId from "../value-objects/jobOfferLike/JobOfferLikeId";
 
 export class JobOfferLike{
+
 	private eventRecorder: IDomainEvent[] = [];
 
 	constructor(public id: JobOfferLikedId,
