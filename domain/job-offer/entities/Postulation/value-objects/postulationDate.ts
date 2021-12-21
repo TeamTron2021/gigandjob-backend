@@ -1,6 +1,6 @@
-import { PostulationDateEmpty } from "../../exceptions/Postulation/PostulationDateEmpty"
+import { PostulationDateEmpty } from "../exceptions/PostulationDateEmpty"
 
-export class PotulationDate {
+export class PostulationDate {
 	public readonly postulationDate: Date
 
 	constructor (date: Date) {
