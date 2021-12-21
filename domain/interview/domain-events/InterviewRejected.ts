@@ -1,8 +1,9 @@
 
-import { IChangeInterviewStatus } from "../../shared/domain/IInterviewReject";
+import { IChangeInterviewStatus } from "../../../shared/domain/IRejectInterview";
 
 export class InterviewRejected implements  IChangeInterviewStatus{
-   private interview: Interview; 
+  
+    private interview: Interview; 
     
    constructor(interview: Interview){ 
         this.interview = interview;
