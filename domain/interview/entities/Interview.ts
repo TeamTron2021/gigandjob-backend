@@ -1,6 +1,6 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
-import InterviewCreated from "../domain-events/interview/InterviewCreated.Event";
+import InterviewCreated from "../domain-events/interview/interviewCreated/InterviewCreated.Event";
 import IInterview from "../shared/IInterview";
 import InterviewTitle from "../value-objects/interview/InterviewTitle";
 import InterviewDescription from "../value-objects/interview/InterviewDescription";
@@ -10,6 +10,13 @@ import InterviewInterviewer from "../value-objects/interview/InterviewInterviewe
 import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
 import OnlineInterviewUrlMeeting from "../value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
 import InPersonInterviewDirection from "../value-objects/InPersonInterview/InPersonInterviewDirection";
+import NotificationSubject from "../value-objects/interview/interview-notification/NotificationSubject";
+import NotificationContent from "../value-objects/interview/interview-notification/NotificationContent";
+import InterviewCreatedNotification from "../domain-events/interview/notifications/InterviewCreatedNotification.Event ";
+import InterviewNotification from "./InterviewNotification";
+import InterviewRegistered from "../domain-events/interview/notifications/InterviewRegistered.Event";
+import InterviewRechedule from "../domain-events/interview/interviewReschedule/InterviewRechedule.Event";
+import InterviewRescheduledNotification from "../domain-events/interview/notifications/InterviewRescheduledNotification.Event";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -55,9 +62,60 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         interviewer: InterviewInterviewer,
         Id: InterviewId,
     ){
-        const interview = new Interview(title,description,date,interviewed,interviewer,InterviewStatus.created,Id, );
-        interview.eventRecorder.push(new InterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created));
+
+        const interview = new Interview(
+            title,
+            description,
+            date,
+            interviewed,
+            interviewer,
+            InterviewStatus.created,
+            Id,
+        ); 
+
+        interview.eventRecorder.push(new InterviewCreated(
+            title,
+            description,
+            date,
+            interviewed,
+            interviewer,
+            InterviewStatus.created,
+            Id
+        ))
+
+        const subject = new NotificationSubject('Ha agendado correctamente la Entrevista');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const interviewNotification = InterviewNotification.register(
+            subject,
+            content,
+            interview
+        )
+        
+        interview.eventRecorder.push(new InterviewRegistered(subject, content));
         return interview;
+
+    }
+
+    public rescheduledInterview(
+        this: Interview<InterviewStatus.created>
+    ):Interview<InterviewStatus.rescheduled>{
+        const interview = new Interview(
+            this.title,
+            this.description,
+            this.date,
+            this.interviewed,
+            this.interviewer,
+            InterviewStatus.rescheduled,
+            this.Id
+        );
+        interview.eventRecorder = this.eventRecorder.slice(0);
+        interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled)); 
+        const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        //const   interviewNotification = new InterviewRescheduledNotification(subject,content,interview); 
+       // interviewNotification.sendSuspension();
+        return  interview;
+
     }
 
 }

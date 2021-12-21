@@ -1,4 +1,5 @@
-import { IException } from "../../../interview/exceptions/I-exception";
+import { IException } from "../../../../shared/domain/Iexception";
+
 
 export default class JobOfferWithoutLikeException extends Error implements IException {
     constructor(public readonly message: string) {
