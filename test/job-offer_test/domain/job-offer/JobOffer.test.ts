@@ -26,8 +26,6 @@ describe('Testing JobOffer creation', ()=>{
             finalDate
         );
         
-    
-    
         const likes: JobOfferLike[] = [
             //Inicia vacio
         ];
@@ -45,8 +43,10 @@ describe('Testing JobOffer creation', ()=>{
         ); 
 
         const JobOfferLikeNew1 = JobOfferLike.likeOffer() //Se grega like
-        likes.push(JobOfferLikeNew1)
-    
+        likes.push(JobOfferLikeNew1);
+
+        const JobOfferLikeRemove1 = JobOfferLike.removelike(likes)
+        
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })
 })
