@@ -1,8 +1,8 @@
-import {ChangeInterviewStatus} from "./ChangeInterviewStatus";
-import UniqueId from "../../../shared/domain/UniqueUUID";
+import {IChangeInterviewStatus} from "./IChangeInterviewStatus";
+import Interview from "../entities/Interview";
 
-export class ChangeInterviewStatusToAccepted extends ChangeInterviewStatus{
-    changeStatus(idInterview: UniqueId): void {
-
+export class ChangeInterviewStatusToAccepted extends IChangeInterviewStatus{
+    public changeStatus(interview: Interview<any>): void {
+    
     }
 }
