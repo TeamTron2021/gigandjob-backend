@@ -1,3 +1,5 @@
+import Interview from "../../../domain/interview/entities/Interview"
+import { InterviewStatus } from "../../../domain/interview/shared/InterviewStatus.enum"
 import { PostulationCreated } from "../../../domain/job-offer/entities/postulation/domain-events/PostulationCreated"
 import { Postulation } from "../../../domain/job-offer/entities/postulation/postulation"
 import { PostulationDate } from "../../../domain/job-offer/entities/postulation/value-objects/PostulationDate"
@@ -18,6 +20,7 @@ describe('Postulation Entity test', () => {
         expect(eventCreated).toBeInstanceOf(PostulationCreated)
         expect(postulation.getEvents()).toContainEqual(eventCreated)
         expect(postulation.status).toEqual(PostulationStatus.isSend)
+        expect(postulation.getInterviews()).toBe(undefined)
     })
 
 })
