@@ -10,6 +10,7 @@ import JobOfferSalary from "../value-objects/JobOffer/JobOfferSalary";
 import JobOfferSkill from "../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../value-objects/JobOffer/JobOfferTitle";
 import JobOfferVacant from "../value-objects/JobOffer/JobOfferVacant";
+import { JobOfferLike } from "./JobOfferLike";
 
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
@@ -21,6 +22,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         public skills: JobOfferSkill[], 
         public title: JobOfferTItle, 
         public vacant: JobOfferVacant, 
+        public likes: JobOfferLike[],
         public date: JobOfferDate,
         status: S,
         private Id: JobOfferId,){   
@@ -44,12 +46,13 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         skills: JobOfferSkill[],
         title: JobOfferTItle,
         vacant: JobOfferVacant,
+        likes: JobOfferLike[],
         date: JobOfferDate,
         Id: JobOfferId,
         _gigDuration?: GigDuration,
     ){
-        const offer = new JobOffer(description, salary,skills, title, vacant, date, OfferStatus.notPublished, Id, );
-        offer.eventRecorder.push(new JobOfferCreated(Id,description,salary,skills,title,vacant,date, OfferStatus.notPublished));
+        const offer = new JobOffer(description, salary,skills, title, vacant, likes, date, OfferStatus.notPublished, Id, );
+        offer.eventRecorder.push(new JobOfferCreated(Id,description,salary,skills,title,vacant,likes,date, OfferStatus.notPublished));
         return offer;
     }
 

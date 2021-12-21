@@ -1,6 +1,8 @@
 import  IDomainEvent  from "../../../shared/domain/IDomainEvent";
 import EmployeerCreated from "../domain-events/employeer/EmployeerCreated.Event";
+import EmployeerSuspended from "../domain-events/employeer/EmployeerSuspended.Event";
 import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
+import EmployeerSuspendedNotification from "../domain-events/notifications/EmployeerSuspendedNotification.Event";
 import { EmployeerStatus } from "../shared/EmployeerStatus.enum";
 import NotificationContent from "../value-objects/employeer-notification/NotificationContent";
 import NotificationSubject from "../value-objects/employeer-notification/NotificationSubject";
@@ -76,5 +78,28 @@ export default class Employeer<S extends EmployeerStatus> {
 
         
     }
+
+    public suspendEmployeer(
+        this: Employeer<EmployeerStatus.NOT_SUSPENDED>
+    ):Employeer<EmployeerStatus.SUSPENDED>{
+        const employeer = new Employeer(
+            this.CompanyMail, 
+            this.CompanyName, 
+            this.id, 
+            this.industry, 
+            this.rif, 
+            EmployeerStatus.SUSPENDED, 
+            this.localization
+        );
+        employeer.eventRecorder = this.eventRecorder.slice(0);
+        employeer.eventRecorder.push(new EmployeerSuspended(this.id, EmployeerStatus.SUSPENDED)); 
+        const subject = new NotificationSubject('Tu cuenta ha sido suspendida');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const employeerNotification =new EmployeerNotification(subject,content,employeer); 
+        employeerNotification.sendSuspension();
+        return employeer;
+
+    }
+
     protected invariants(){}
 }
