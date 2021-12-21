@@ -1,8 +1,6 @@
-import Interview from "../../../domain/interview/entities/Interview"
-import { InterviewStatus } from "../../../domain/interview/shared/InterviewStatus.enum"
 import { PostulationCreated } from "../../../domain/job-offer/entities/postulation/domain-events/PostulationCreated"
 import { Postulation } from "../../../domain/job-offer/entities/postulation/postulation"
-import { PostulationDate } from "../../../domain/job-offer/entities/postulation/value-objects/PostulationDate"
+import { PostulationDate } from "../../../domain/job-offer/entities/postulation/value-objects/postulationDate"
 import { PostulationStatus } from "../../../domain/job-offer/entities/postulation/value-objects/PostulationStatus"
 
 describe('Postulation Entity test', () => {

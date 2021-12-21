@@ -1,17 +1,15 @@
 import { PostulationDateEmpty } from "../exceptions/PostulationDateEmpty"
 
-export const CURRENT_DATE_FORMAT = 'DD-MM-YYY'
-export class PostulationDate  {
+export class PostulationDate {
+	public readonly postulationDate: Date
 
-    private readonly postulationDate: Date
-
-    constructor (date: Date) {
+	constructor (date: Date) {
         if (!date) throw new PostulationDateEmpty()
         this.postulationDate = this.date
     }
+    
 
     get date(): Date {
         return this.postulationDate
     }
-
 }

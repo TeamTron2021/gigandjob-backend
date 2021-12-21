@@ -1,4 +1,4 @@
-import { PostulationDate } from "./value-objects/PostulationDate";
+import { PostulationDate } from "./value-objects/postulationDate";
 import { PostulationStatus } from "./value-objects/PostulationStatus";
 import { PostulationUUID } from "./value-objects/PostulationUUID";
 import { v4 as uuidv4 } from "uuid";

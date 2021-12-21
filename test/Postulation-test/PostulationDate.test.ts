@@ -1,5 +1,5 @@
-import { PostulationDateEmpty } from '../../domain/job-offer/entities/Postulation/exceptions/PostulationDateEmpty'
-import { PostulationDate } from '../../domain/job-offer/entities/Postulation/value-objects/postulationDate'
+import { PostulationDateEmpty } from '../../domain/job-offer/entities/postulation/exceptions/PostulationDateEmpty'
+import { PostulationDate } from '../../domain/job-offer/entities/postulation/value-objects/postulationDate'
 
 describe('Postulation Date test ', () => {
     test('Should return a error: PostulationBirthdayEmpty', () => {
