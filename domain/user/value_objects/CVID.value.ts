@@ -1,6 +1,7 @@
 import { CVIdEmpty } from "../errors/CVIDEmpty.error"
 
 
+
 export class CVID {
 
 	public readonly value: string

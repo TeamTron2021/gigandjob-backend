@@ -1,10 +1,10 @@
 import {randomUUID} from "crypto";
 import { CVLoaded } from "../domain_events/CVLoaded.event";
-import { CVStatus } from "../enums/CVStatus.enum"
-import { CVAcademicFormation } from "../value_objects/CVAcademicFormation.value"
-import { CVCourses } from "../value_objects/CVCourses.value"
-import { CVID } from "../value_objects/CVID.value"
-import { CVSkills } from "../value_objects/CVSkills.value"
+import { CVStatus } from "../enums/CVStatus.enum";
+import { CVAcademicFormation } from "../value_objects/CVAcademicFormation.value";
+import { CVCourses } from "../value_objects/CVCourses.value";
+import { CVID } from "../value_objects/CVID.value";
+import { CVSkills } from "../value_objects/CVSkills.value";
 type CVEvents = CVLoaded 
 
 export class CV<S extends CVStatus>{
