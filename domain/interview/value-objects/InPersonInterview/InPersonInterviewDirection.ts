@@ -2,23 +2,23 @@ import { IValueObject } from "../../../../shared/domain/IValueObject";
 import InterviewEmptyDirectionException from "../../exceptions/InPersonInterview/InterviewEmptyDirectionException";
 
 export default class InPersonInterviewDirection implements IValueObject {
-    constructor(private readonly InPersonInterviewDirection: string) {}
+    constructor(private readonly direction: string) {}
 
     public equals(valueObject: InPersonInterviewDirection): boolean {
-        return this.InPersonInterviewDirection == valueObject.InPersonInterviewDirection;
+        return this.direction == valueObject.getDirection();
     }
 
-    public static create(InPersoninterviewDirection: string) {
-        if(InPersoninterviewDirection === '' || InPersoninterviewDirection === ' ' || InPersoninterviewDirection == null || InPersoninterviewDirection == undefined) {
+    public static create(direction: string) {
+        if(direction === '' || direction === ' ' || direction == null || direction == undefined) {
             throw new InterviewEmptyDirectionException(
-                'El titulo de la oferta no puede estar vacio'
+                'La Direccion de la Entrevista no puede estar vacia'
             )
         }
-        return new InPersonInterviewDirection(InPersoninterviewDirection);
+        return new InPersonInterviewDirection(direction);
     }
 
     public getDirection(){
-        return this.InPersonInterviewDirection;
+        return this.direction;
     }
 
 }

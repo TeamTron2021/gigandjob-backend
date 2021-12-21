@@ -16,7 +16,7 @@ export default class InterviewId implements IValueObject {
     public static create(id: string) {
         if(id === '' || id === ' ' || id == undefined || id == null){
             throw new EmptyInterviewIdException(
-                'El id del empleador no puede estar vacio'
+                'El id de la entrevista no puede estar vacio'
             );
         }
 

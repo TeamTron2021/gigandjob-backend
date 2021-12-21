@@ -2,23 +2,23 @@ import { IValueObject } from "../../../../shared/domain/IValueObject";
 import InterviewEmptyDescriptionException from "../../exceptions/Interview/InterviewEmptyDescriptionException";
 
 export default class InterviewDescription implements IValueObject {
-    constructor(private readonly InterviewDescription: string) {}
+    constructor(private readonly description: string) {}
 
     public equals(valueObject: InterviewDescription): boolean {
-        return this.InterviewDescription == valueObject.InterviewDescription;
+        return this.description == valueObject.getDescription();
     }
 
-    public static create(interviewDescription: string) {
-        if(interviewDescription === '' || interviewDescription === ' ' || interviewDescription == null || interviewDescription == undefined) {
+    public static create(description: string) {
+        if(description === '' || description === ' ' || description == null || description == undefined) {
             throw new InterviewEmptyDescriptionException(
-                'El titulo de la oferta no puede estar vacio'
+                'La descripcion de la entrevista no puede estar vacio'
             )
         }
-        return new InterviewDescription(interviewDescription);
+        return new InterviewDescription(description);
     }
 
     public getDescription(){
-        return this.InterviewDescription;
+        return this.description;
     }
 
 }

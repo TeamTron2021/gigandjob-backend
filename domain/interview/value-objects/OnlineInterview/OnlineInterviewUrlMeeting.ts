@@ -2,23 +2,23 @@ import { IValueObject } from "../../../../shared/domain/IValueObject";
 import InterviewEmptyUrlMeetingException from "../../exceptions/OnlineInterview/InterviewEmptyUrlMeetingException";
 
 export default class OnlineInterviewUrlMeeting implements IValueObject {
-    constructor(private readonly onlineInterviewUrlMeeting: string) {}
+    constructor(private readonly urlMeeting: string) {}
 
     public equals(valueObject: OnlineInterviewUrlMeeting): boolean {
-        return this.onlineInterviewUrlMeeting == valueObject.onlineInterviewUrlMeeting;
+        return this.urlMeeting == valueObject.getUrlMeeting();
     }
 
-    public static create(onlineInterviewUrlMeeting: string) {
-        if(onlineInterviewUrlMeeting === '' || onlineInterviewUrlMeeting === ' ' || onlineInterviewUrlMeeting == null || OnlineInterviewUrlMeeting == undefined) {
+    public static create(urlMeeting: string) {
+        if(urlMeeting === '' || urlMeeting === ' ' || urlMeeting == null || urlMeeting == undefined) {
             throw new InterviewEmptyUrlMeetingException(
-                'El titulo de la oferta no puede estar vacio'
+                'La Url de la Entrevista no puede estar vacia'
             )
         }
-        return new OnlineInterviewUrlMeeting(onlineInterviewUrlMeeting);
+        return new OnlineInterviewUrlMeeting(urlMeeting);
     }
 
     public getUrlMeeting(){
-        return this.onlineInterviewUrlMeeting;
+        return this.urlMeeting;
     }
 
 }

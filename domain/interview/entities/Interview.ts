@@ -6,7 +6,10 @@ import InterviewTitle from "../value-objects/interview/InterviewTitle";
 import InterviewDescription from "../value-objects/interview/InterviewDescription";
 import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
-import InterviewParticipant from "../value-objects/interview/InterviewParticipant";
+import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
+import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
+import OnlineInterviewUrlMeeting from "../value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
+import InPersonInterviewDirection from "../value-objects/InPersonInterview/InPersonInterviewDirection";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -17,8 +20,8 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         public title: InterviewTitle,
         public description: InterviewDescription,
         public date: InterviewDate,
-        public interviewed: InterviewParticipant,
-        public interviewer: InterviewParticipant,
+        public interviewed: InterviewInterviewed,
+        public interviewer: InterviewInterviewer,
         status: S,
         public Id: InterviewId,
         ){   
@@ -29,6 +32,14 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
     public getInterviewId(){
         return this.Id;
     }
+    public getInterviewInterviewed(){
+        return this.interviewed;
+    }
+    public getInterviewInterviewer(){
+        return this.interviewer;
+    }
+
+    
     public getEvents(){
         return this.eventRecorder;
     }
@@ -40,11 +51,11 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         title: InterviewTitle,
         description: InterviewDescription,
         date: InterviewDate,
-        interviewed: InterviewParticipant,
-        interviewer: InterviewParticipant,
+        interviewed: InterviewInterviewed,
+        interviewer: InterviewInterviewer,
         Id: InterviewId,
     ){
-        const interview = new Interview(title,description,date,interviewed,interviewer,InterviewStatus.created,Id);
+        const interview = new Interview(title,description,date,interviewed,interviewer,InterviewStatus.created,Id, );
         interview.eventRecorder.push(new InterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created));
         return interview;
     }

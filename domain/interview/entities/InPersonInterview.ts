@@ -6,8 +6,9 @@ import InterviewTitle from "../value-objects/interview/InterviewTitle";
 import InterviewDescription from "../value-objects/interview/InterviewDescription";
 import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
-import InterviewParticipant from "../value-objects/interview/InterviewParticipant";
 import InPersonInterviewDirection from "../value-objects/InPersonInterview/InPersonInterviewDirection";
+import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
+import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
 
 export default class InPersonInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -17,8 +18,8 @@ export default class InPersonInterview <S extends InterviewStatus> implements II
         public title: InterviewTitle,
         public description: InterviewDescription,
         public date: InterviewDate,
-        public interviewed: InterviewParticipant,
-        public interviewer: InterviewParticipant,
+        public interviewed: InterviewInterviewed,
+        public interviewer: InterviewInterviewer,
         status: S,
         public Id: InterviewId,
         public direction: InPersonInterviewDirection,)
@@ -35,8 +36,8 @@ export default class InPersonInterview <S extends InterviewStatus> implements II
         title: InterviewTitle,
         description: InterviewDescription,
         date: InterviewDate,
-        interviewed: InterviewParticipant,
-        interviewer: InterviewParticipant,
+        interviewed: InterviewInterviewed,
+        interviewer: InterviewInterviewer,
         Id: InterviewId,
         direction: InPersonInterviewDirection,
     ){

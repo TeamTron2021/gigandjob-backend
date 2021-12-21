@@ -6,8 +6,9 @@ import InterviewTitle from "../value-objects/interview/InterviewTitle";
 import InterviewDescription from "../value-objects/interview/InterviewDescription";
 import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
-import InterviewParticipant from "../value-objects/interview/InterviewParticipant";
 import OnlineInterviewUrlMeeting from "../value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
+import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
+import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
 
 export default class OnlineInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -17,8 +18,8 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         public title: InterviewTitle,
         public description: InterviewDescription,
         public date: InterviewDate,
-        public interviewed: InterviewParticipant,
-        public interviewer: InterviewParticipant,
+        public interviewed: InterviewInterviewed,
+        public interviewer: InterviewInterviewer,
         status: S,
         public Id: InterviewId,
         public urlMeeting: OnlineInterviewUrlMeeting,)
@@ -35,8 +36,8 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         title: InterviewTitle,
         description: InterviewDescription,
         date: InterviewDate,
-        interviewed: InterviewParticipant,
-        interviewer: InterviewParticipant,
+        interviewed: InterviewInterviewed,
+        interviewer: InterviewInterviewer,
         Id: InterviewId,
         urlMeeting: OnlineInterviewUrlMeeting,
     ){
