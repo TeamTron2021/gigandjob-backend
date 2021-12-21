@@ -1,4 +1,5 @@
 import JobOffer from '../../../../domain/job-offer/entities/JobOffer.aggregate'
+import { JobOfferLike } from '../../../../domain/job-offer/entities/JobOfferLike'
 import JobOfferDate from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDate'
 import JobOfferDescription from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDescription'
 import JobOfferId from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferId'
@@ -6,6 +7,7 @@ import JobOfferSalary from '../../../../domain/job-offer/value-objects/JobOffer/
 import JobOfferSkill from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferSkill'
 import JobOfferTItle from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferTitle'
 import JobOfferVacant from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferVacant'
+import JobOfferLikedId from '../../../../domain/job-offer/value-objects/jobOfferLike/JobOfferLikeId'
 import UniqueId from '../../../../shared/domain/UniqueUUID'
 
 describe('Testing JobOffer creation', ()=>{
@@ -24,16 +26,23 @@ describe('Testing JobOffer creation', ()=>{
             finalDate
         );
         
+        const likes: JobOfferLike[] = [
+        JobOfferLike.likeOffer(),
+        JobOfferLike.likeOffer()
+        ];
+
         const id = JobOfferId.create(new UniqueId().getId());
         const jobOffer = JobOffer.create(
             JobOfferDescription.create('Descripcion generica de una oferta de trabajo'), 
             JobOfferSalary.create(1500),
-            skills, 
+            skills,
             JobOfferTItle.create('Titulo generico de una oferta'),
             JobOfferVacant.create(3),
+            likes,
             date, 
             id
         ); 
+    
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })
 })
