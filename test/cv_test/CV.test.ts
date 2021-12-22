@@ -1,6 +1,7 @@
 import {randomUUID} from "crypto";
 import { CVAproved } from "../../domain/user/domain_events/CVAproved.event";
 import { CVLoaded } from "../../domain/user/domain_events/CVLoaded.event";
+import { CVRejected } from "../../domain/user/domain_events/CVRejected.event";
 import { CVUpdated } from "../../domain/user/domain_events/CVUpdated.event";
 import { CV } from "../../domain/user/entities/CV.entity";
 import CVAcademicFormation from "../../domain/user/value_objects/CVAcademicFormation.value";
@@ -118,6 +119,30 @@ describe('Testing CV entity',()=>{
         const cvAproved = cv.approve()
         const event = new CVAproved(cv.getID(), cvAproved.status)        
         expect(cvAproved.getEvents()).toContainEqual(event)
+    })
+
+    test('Should reject the CV',()=>{
+        const skills: CVSkills[] = [
+            CVSkills.create('SQL'), 
+            CVSkills.create('Mongo'), 
+            CVSkills.create('Inteligencia emocional')
+        ];
+
+        const courses: CVCourses[] = [
+            CVCourses.create('Excel'),
+            CVCourses.create('Word'),
+            CVCourses.create('Powerpoint')
+        ];
+
+        const academics: CVAcademicFormation[] = [
+            CVAcademicFormation.create('Primaria'),
+            CVAcademicFormation.create('Bachiller'),
+            CVAcademicFormation.create('Universitario')
+        ];
+        const cv = CV.load(academics, skills, courses);
+        const cvRejected = cv.reject()
+        const event = new CVRejected(cv.getID(), cvRejected.status)        
+        expect(cvRejected.getEvents()).toContainEqual(event)
     })
 
 })

@@ -10,8 +10,9 @@ import NotificationSubject from "../value_objects/NotificationSubject.value";
 import { CVUpdated } from "../domain_events/CVUpdated.event";
 import CVNotification from "./CVNotification.entity";
 import { CVAproved } from "../domain_events/CVAproved.event";
+import { CVRejected } from "../domain_events/CVRejected.event";
 
-type CVEvents = CVLoaded | CVUpdated | CVAproved
+type CVEvents = CVLoaded | CVUpdated | CVAproved | CVRejected
 export class CV<S extends CVStatus>{
 	private ID: CVID
 	public status: S
@@ -79,6 +80,22 @@ export class CV<S extends CVStatus>{
 		)
 		cv.eventRecorder = this.eventRecorder.slice(0)
 		cv.eventRecorder.push(new CVAproved(
+			cv.ID,
+			cv.status
+		));
+		return cv
+	}
+
+	reject(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Rejected>{
+		const cv = new CV(			
+			this.academicFormation,
+			this.skills,
+			this.courses,
+			CVStatus.Rejected,
+			this.ID,
+		)
+		cv.eventRecorder = this.eventRecorder.slice(0)
+		cv.eventRecorder.push(new CVRejected(
 			cv.ID,
 			cv.status
 		));
