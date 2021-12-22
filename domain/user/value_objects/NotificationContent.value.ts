@@ -1,5 +1,5 @@
-import NotificationEmptyContentException from "../../errors/CV/NotificationEmptyContent.error";
-import NotificationInvalidContentException from "../../errors/CV/NotificationInvalidContent.error";
+import NotificationEmptyContentException from "../errors/NotificationEmptyContent.error";
+import NotificationInvalidContentException from "../errors/NotificationInvalidContent.error";
 
 export default class NotificationContent {
 

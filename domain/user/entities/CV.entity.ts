@@ -1,14 +1,14 @@
 import {randomUUID} from "crypto";
 import { CVStatus } from "../enums/CVStatus.enum";
-import  CVAcademicFormation  from "../value_objects/CV/CVAcademicFormation.value";
-import CVNotification from "./CVNotification";
-import { CVLoaded } from "../domain_events/CV/CVLoaded.event";
-import CVCourses from "../value_objects/CV/CVCourses.value";
-import CVID from "../value_objects/CV/CVID.value";
-import CVSkills from "../value_objects/CV/CVSkills.value";
-import NotificationContent from "../value_objects/CV/NotificationContent.value";
-import NotificationSubject from "../value_objects/CV/NotificationSubject.value";
-import { CVUpdated } from "../domain_events/CV/CVUpdated.event";
+import  CVAcademicFormation  from "../value_objects/CVAcademicFormation.value";
+import { CVLoaded } from "../domain_events/CVLoaded.event";
+import CVCourses from "../value_objects/CVCourses.value";
+import CVID from "../value_objects/CVID.value";
+import CVSkills from "../value_objects/CVSkills.value";
+import NotificationContent from "../value_objects/NotificationContent.value";
+import NotificationSubject from "../value_objects/NotificationSubject.value";
+import { CVUpdated } from "../domain_events/CVUpdated.event";
+import CVNotification from "./CVNotification.entity";
 
 type CVEvents = CVLoaded | CVUpdated
 export class CV<S extends CVStatus>{
