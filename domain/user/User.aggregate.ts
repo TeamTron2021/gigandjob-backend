@@ -2,7 +2,9 @@ import {randomUUID} from "crypto";
 import {UserAccountDeleted} from "./domain_events/UserAccountDeleted.event";
 import {UserConfirmed} from "./domain_events/UserConfirmed.event";
 import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
+import {UserReactivated} from "./domain_events/UserReactivated.event";
 import {UserRegistered} from "./domain_events/UserRegistered.event";
+import {UserSuspended} from "./domain_events/UserSuspended.event";
 import {UserStatus} from "./enums/UserStatus.enum";
 import {UserBirthday} from "./value_objects/UserBirthday.value";
 import {UserEmail} from "./value_objects/UserEmail.value";
@@ -13,6 +15,8 @@ import {UserPassword} from "./value_objects/UserPassword.value";
 
 type UserEvents = UserRegistered 
 	| UserConfirmed 
+	| UserSuspended
+	| UserReactivated
 	| UserDataUpdated 
 	| UserAccountDeleted
 
@@ -34,7 +38,7 @@ export class User<S extends UserStatus>{
 		this.ID = id || new UserID(randomUUID())
 	}
 
-	getID(): UserID{ return this.ID }
+	getID(): UserID { return this.ID }
 	getEvents(): UserEvents[] { return this.eventRecorder }
 
 	static register(
@@ -69,6 +73,42 @@ export class User<S extends UserStatus>{
 		)
 		user.eventRecorder = this.eventRecorder.slice(0)
 		user.eventRecorder.push(new UserConfirmed(
+			user.ID,
+			user.status
+		))
+		return user
+	}
+
+	suspend(this: User<UserStatus.Active>): User<UserStatus.Supended>{
+		const user = new User(
+			this.firstname,
+			this.lastname,
+			this.birthday,
+			this.email,
+			this.password,
+			UserStatus.Supended,
+			this.ID
+		)
+		user.eventRecorder = this.eventRecorder.slice(0)
+		user.eventRecorder.push(new UserSuspended(
+			user.ID,
+			user.status
+		))
+		return user
+	}
+
+	reactive(this: User<UserStatus.Supended>): User<UserStatus.Active>{
+		const user = new User(
+			this.firstname,
+			this.lastname,
+			this.birthday,
+			this.email,
+			this.password,
+			UserStatus.Active,
+			this.ID
+		)
+		user.eventRecorder = this.eventRecorder.slice(0)
+		user.eventRecorder.push(new UserReactivated(
 			user.ID,
 			user.status
 		))
