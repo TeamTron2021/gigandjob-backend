@@ -3,5 +3,6 @@ export enum InterviewStatus {
     accepted,
     scheduled,
     disabled,
-    rejected
+    rejected,
+    enable
 }
