@@ -1,8 +1,5 @@
 import { CVIdEmpty } from "../../errors/CV/CVIDEmpty.error";
 
-
-
-
 export default class CVID  {
 
 	
