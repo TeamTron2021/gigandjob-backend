@@ -8,7 +8,7 @@ export class CVLoaded{
 	constructor(
 		public ID: CVID,
 		public academicFormation: CVAcademicFormation[],
-		public CVSkillsd: CVSkills[],
+		public CVSkills: CVSkills[],
 		public courses: CVCourses[],
 		public status: CVStatus 
 	){}
