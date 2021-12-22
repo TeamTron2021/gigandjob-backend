@@ -9,9 +9,12 @@ import NotificationContent from "../value_objects/NotificationContent.value";
 import NotificationSubject from "../value_objects/NotificationSubject.value";
 import { CVUpdated } from "../domain_events/CVUpdated.event";
 import CVNotification from "./CVNotification.entity";
+import { CVAproved } from "../domain_events/CVAproved.event";
+import { CVRejected } from "../domain_events/CVRejected.event";
 
-type CVEvents = CVLoaded | CVUpdated
+type CVEvents = CVLoaded | CVUpdated | CVAproved | CVRejected
 export class CV<S extends CVStatus>{
+	private ID: CVID
 	public status: S
 	private eventRecorder: CVEvents[] = []
 	
@@ -20,9 +23,10 @@ export class CV<S extends CVStatus>{
 		public skills: CVSkills[],
 		public courses: CVCourses[],
 		status: S,
-		private ID: CVID,
+		id?: CVID,
 	){
-		this.status = status;
+		this.status = status
+		this.ID = id || new CVID(randomUUID())
 	}
 
 	public getID(): CVID{ return this.ID }
@@ -50,9 +54,8 @@ export class CV<S extends CVStatus>{
 		academicFormation: CVAcademicFormation[],
 		skills: CVSkills[],
 		courses: CVCourses[],
-        ID: CVID,
 		): CV<CVStatus.Unconfirmed> {
-		const cv = new CV(academicFormation,skills,courses,CVStatus.Unconfirmed, ID)
+		const cv = new CV(academicFormation,skills,courses,CVStatus.Unconfirmed)
 		cv.eventRecorder.push(new CVLoaded(
 			cv.ID,
 			cv.academicFormation,
@@ -62,6 +65,48 @@ export class CV<S extends CVStatus>{
 		));
 		const subject = new NotificationSubject('CV Cargado');
 		const content = new NotificationContent('El curriculum se ha subido');
+		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
+		
+		return cv
+	}
+
+	approve(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Aproved>{
+		const cv = new CV(			
+			this.academicFormation,
+			this.skills,
+			this.courses,
+			CVStatus.Aproved,
+			this.ID,
+		)
+		cv.eventRecorder = this.eventRecorder.slice(0)
+		cv.eventRecorder.push(new CVAproved(
+			cv.ID,
+			cv.status
+		));
+
+		const subject = new NotificationSubject('CV Aprobado');
+		const content = new NotificationContent('Felicitaciones, su curriculum ha sido aprobado');
+		const cvNotification = new CVNotification(subject, content, cv).approvedNotification();
+		
+		return cv
+	}
+
+	reject(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Rejected>{
+		const cv = new CV(			
+			this.academicFormation,
+			this.skills,
+			this.courses,
+			CVStatus.Rejected,
+			this.ID,
+		)
+		cv.eventRecorder = this.eventRecorder.slice(0)
+		cv.eventRecorder.push(new CVRejected(
+			cv.ID,
+			cv.status
+		));
+
+		const subject = new NotificationSubject('CV Rechazado');
+		const content = new NotificationContent('Lo sentimos, su curriculum ha sido rechazado');
 		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
 		
 		return cv

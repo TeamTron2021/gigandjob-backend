@@ -158,9 +158,7 @@ export class User<S extends UserStatus>{
 		skills: CVSkills[],
 		courses: CVCourses[],
 	){
-		//TODO delete this const
-		const temp_id = new CVID(randomUUID())
-		this.cv = CV.load(academicFormation, skills, courses, temp_id)
+		this.cv = CV.load(academicFormation, skills, courses)
 		this.eventRecorder =[...this.eventRecorder,...this.cv.getEvents()]
 	}
 
