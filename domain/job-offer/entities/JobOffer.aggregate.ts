@@ -9,8 +9,8 @@ import JobOfferId from "../value-objects/JobOffer/JobOfferId";
 import JobOfferSalary from "../value-objects/JobOffer/JobOfferSalary";
 import JobOfferSkill from "../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../value-objects/JobOffer/JobOfferTitle";
-import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
 import JobOfferVacant from "../value-objects/JobOffer/JobOfferVacant";
+import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
 import { JobOfferComplaint } from "./JobOfferComplaint";
 import { JobOfferLike } from "./JobOfferLike";
 

@@ -70,6 +70,7 @@ describe('Testing JobOffer creation', ()=>{
         jobOffer.addPostulation(postulation); 
         expect(jobOffer.getPostulations()).toContainEqual(postulation);
 
+        
         JobOfferLike.removelike(likes) ///Luego de creado se remueve el like
 
         const complaintId = JobOfferComplaintId.create(new UniqueId().getId()); //Luego de creado se agrega una denuncia
