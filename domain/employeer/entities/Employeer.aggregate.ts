@@ -110,5 +110,28 @@ export default class Employeer<S extends EmployeerStatus> {
 
     }
 
+    public reactiveEmployeer(
+        this: Employeer<EmployeerStatus.SUSPENDED>
+    ):Employeer<EmployeerStatus.NOT_SUSPENDED>{
+        const employeer = new Employeer(
+            this.CompanyMail, 
+            this.CompanyName, 
+            this.id, 
+            this.industry, 
+            this.rif, 
+            EmployeerStatus.NOT_SUSPENDED, 
+            this.localization
+        );
+        employeer.eventRecorder = this.eventRecorder.slice(0);
+        employeer.eventRecorder.push(new EmployeerSuspended(this.id, EmployeerStatus.NOT_SUSPENDED)); 
+        const subject = new NotificationSubject('Tu cuenta ha sido activada');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const employeerNotification =new EmployeerNotification(subject,content,employeer); 
+        employeerNotification.sendReactivation();
+        return employeer;
+
+    }
+
+
     protected invariants(){}
 }

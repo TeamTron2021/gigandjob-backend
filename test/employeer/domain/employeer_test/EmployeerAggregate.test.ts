@@ -7,6 +7,7 @@ import EmployeerIndustry from "../../../../domain/employeer/value-objects/employ
 import EmployeerLocalization from "../../../../domain/employeer/value-objects/employeer/EmployeerLocalization"
 import EmployeerRif from "../../../../domain/employeer/value-objects/employeer/EmployeerRif"
 import JobOffer from "../../../../domain/job-offer/entities/JobOffer.aggregate"
+import { JobOfferComplaint } from "../../../../domain/job-offer/entities/JobOfferComplaint"
 import { JobOfferLike } from "../../../../domain/job-offer/entities/JobOfferLike"
 import JobOfferDate from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferDate"
 import JobOfferDescription from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferDescription"
@@ -48,17 +49,22 @@ describe('Testing employeer creation', ()=>{
         const likes: JobOfferLike[] = [
             //Inicia vacio
         ];
+
+        const jobOfferComplaint: JobOfferComplaint[] = [];
        
         const offerid = JobOfferId.create(new UniqueId().getId());
         const jobOffer = JobOffer.create(
-            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'), 
-            JobOfferSalary.create(1500),
-            skills,
-            JobOfferTItle.create('Titulo generico de una oferta'),
-            JobOfferVacant.create(3),
-            likes,
-            date, 
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500), 
+            skills, 
+            JobOfferTItle.create('Titulo generico'), 
+            JobOfferVacant.create(4), 
+            likes, 
+            jobOfferComplaint,
+            JobOfferDate.create(initialDate, finalDate), 
             offerid
+
+            
         ); 
         employeer.addJobOffer(jobOffer); 
         expect(employeer.getOffers()).toContainEqual(jobOffer);
@@ -80,5 +86,6 @@ describe('Testing employeer creation', ()=>{
         expect(employeer.status).toBe(EmployeerStatus.NOT_SUSPENDED);
 
         expect(employeer.suspendEmployeer().status).toBe(EmployeerStatus.SUSPENDED);
-    })
+    });
+   
 })
