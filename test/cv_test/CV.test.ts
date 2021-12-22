@@ -1,11 +1,12 @@
 import {randomUUID} from "crypto";
-import { CVLoaded } from "../../domain/user/domain_events/CV/CVLoaded.event";
-import { CVUpdated } from "../../domain/user/domain_events/CV/CVUpdated.event";
-import { CV } from "../../domain/user/entities/CV";
-import CVAcademicFormation from "../../domain/user/value_objects/CV/CVAcademicFormation.value";
-import CVCourses from "../../domain/user/value_objects/CV/CVCourses.value";
-import CVID from "../../domain/user/value_objects/CV/CVID.value";
-import CVSkills from "../../domain/user/value_objects/CV/CVSkills.value";
+import { CVLoaded } from "../../domain/user/domain_events/CVLoaded.event";
+import { CVUpdated } from "../../domain/user/domain_events/CVUpdated.event";
+import { CV } from "../../domain/user/entities/CV.entity";
+import CVAcademicFormation from "../../domain/user/value_objects/CVAcademicFormation.value";
+import CVCourses from "../../domain/user/value_objects/CVCourses.value";
+import CVID from "../../domain/user/value_objects/CVID.value";
+import CVSkills from "../../domain/user/value_objects/CVSkills.value";
+
 
 describe('Testing CV entity',()=>{
     it('Should return a instance of CV and the CV is Loaded',()=>{

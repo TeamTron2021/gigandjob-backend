@@ -1,5 +1,5 @@
-import NotificationEmptySubjectException from "../../errors/CV/NotificationEmptySubject.error";
-import NotificationInvalidSubjectException from "../../errors/CV/NotificationInvalidSubject.error";
+import NotificationEmptySubjectException from "../errors/NotificationEmptySubject.error";
+import NotificationInvalidSubjectException from "../errors/NotificationInvalidSubject.error";
 
 export default class NotificationSubject{
 

@@ -1,10 +1,8 @@
-
-
-import CVLoadedNotification from "../domain_events/CV/CVLoadedNotification.event";
+import CVLoadedNotification from "../domain_events/CVLoadedNotification.event";
 import { CVStatus } from "../enums/CVStatus.enum";
-import NotificationContent from "../value_objects/CV/NotificationContent.value";
-import NotificationSubject from "../value_objects/CV/NotificationSubject.value";
-import { CV } from "./CV";
+import NotificationContent from "../value_objects/NotificationContent.value";
+import NotificationSubject from "../value_objects/NotificationSubject.value";
+import {CV} from "./CV.entity";
 
 type CVNotificationEvents = CVLoadedNotification
 export default class CVNotification {
