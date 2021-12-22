@@ -1,6 +1,6 @@
-import NotificationEmptySubjectException from "../../../../../domain/interview/exceptions/Interview/interview-notification/NotificationEmptySubjectException";
-import NotificationInvalidSubjectException from "../../../../../domain/interview/exceptions/Interview/interview-notification/NotificationInvalidSubjectException";
-import NotificationSubject from "../../../../../domain/interview/value-objects/interview/interview-notification/NotificationSubject";
+import NotificationEmptySubjectException from "../../../../../domain/job-offer/exceptions/Interview/Interview/interview-notification/NotificationEmptySubjectException";
+import NotificationInvalidSubjectException from "../../../../../domain/job-offer/exceptions/Interview/Interview/interview-notification/NotificationInvalidSubjectException";
+import NotificationSubject from "../../../../../domain/job-offer/value-objects/Interview/interview/interview-notification/NotificationSubject";
 
 describe('Testing notification subject value object', ()=>{
     it('Should throw an empty notification subject error', ()=>{
