@@ -1,6 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import InterviewRegistered from "../domain-events/interview/interview/notifications/InterviewRegistered.Event";
 import InterviewRescheduledNotification from "../domain-events/interview/interview/notifications/InterviewRescheduledNotification.Event";
+import IInterview from "../shared/IInterview";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
 import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
 import NotificationSubject from "../value-objects/Interview/interview/interview-notification/NotificationSubject";
@@ -11,7 +12,7 @@ export default class InterviewNotification {
     constructor(
         private readonly subject: NotificationSubject,
         private readonly content: NotificationContent, 
-        private readonly interview: Interview<InterviewStatus>,
+        private readonly interview: IInterview,
     ) {
 
     }
@@ -19,7 +20,7 @@ export default class InterviewNotification {
     public static register(
         subject: NotificationSubject,
         content: NotificationContent, 
-        interview: Interview<InterviewStatus>
+        interview: IInterview
     ) {
         const interviewNotification = new InterviewNotification(subject, content, interview);
         interviewNotification.eventRecorder.push(new InterviewRegistered(subject, content)); 
