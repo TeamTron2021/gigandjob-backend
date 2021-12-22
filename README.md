@@ -1,15 +1,15 @@
 # Git and Job (Backend Service)
-Backend para git and job
+Backend para git and job, un sistema de busqueda y aplicación de empleos tanto fijos como gits. Este repositorio tiene como objetivo desplegar el servicio backend para la aplicación web y móvil.
 
-## Iniciando
+## 🚀Iniciando 
 Estas instrucciones serviran para obtener una copia del proyecto en funcionamiento en su máquina local con el fin de desarollo y realizar pruebas.
 
-### Pre-requisitos
+### 📋Pre-requisitos 
 * [Node.js](https://nodejs.org/es/) - Entorno de ejecución para javascript.
 * [Typescript](https://www.typescriptlang.org) - Lenguaje de Programación para nuestro modelo de dominio (ddd).
 * [Git](https://git-scm.com) - Manejador de versiones.
  
-## Instalación 
+## 🔧Instalación 
 
 Para instalar [Node.js](https://nodejs.org/es/) es necesaria la version `16.x.x` en adelante. (recomendado). Al finalizar comprobamos si la instalación fue exitosa.
 
@@ -33,14 +33,14 @@ Instalamos los modulos necesarios
 ```
 npm install
 ```
-## Corriendo pruebas
-Para esta primera version del proyecto se utilizaran pruebas unitarias para 
+## ⚙️Corriendo pruebas
+Para esta primera version del proyecto se utilizaran pruebas unitarias para validar el correcto funcionamiento de las clases.
 ```
 npm run test
 ```
 ## Despliegue
 en construccion
-## Construido con 
+## 🛠️Construido con 
 * [Node.js](https://nodejs.org/es/) - Entorno de ejecución para javascript.
 * [Typescript](https://www.typescriptlang.org) - Lenguaje de Programación para nuestro modelo de dominio (ddd).
 * [Git](https://git-scm.com) - Manejador de versiones.
@@ -48,7 +48,8 @@ en construccion
 * [uuid](https://www.npmjs.com/package/uuid) - Soporte para uuid (versiones 1, 2, 3, 4 y 5).
 * [crypto](https://nodejs.org/api/crypto.html) - Soporte para uuid.
 
-## Autores
+## ✒️Autores
+* **Carlos Alonzo** - [cealonzo](https://github.com/cealonzo)
 * **Pablo Perez** - [PabloP16](https://github.com/PabloP16)
 * **Carlos Freitas** - [trekexol](https://github.com/trekexol)
 * **Ruben Gomes** - [RubenDGomesdev](https://github.com/RubenDGomesdev)
@@ -58,11 +59,7 @@ en construccion
 * **Javier Flores** - [javier0997](https://github.com/javier0997)
 * **Valentina Figueroa** - [valenfigue](https://github.com/valenfigue)
 * **Juan Carlos Andrade** - [jotacee98](https://github.com/jotacee98)
-* **Pedro Perez** - [a]()
-* **Pedro Perez** - [a]()
-
+* **Joselyn Gonzalez** - [joselyn1](https://github.com/joselyn1) 
+* **Jose L Chirinos** - [JoseChirinos36](https://github.com/JoseChirinos36) 
 ---
 Hecho con ❤️ por [Team Tron](https://github.com/TeamTron2021) 😊
-
-
-
