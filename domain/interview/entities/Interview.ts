@@ -8,9 +8,7 @@ import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
 import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
-import OnlineInterviewUrlMeeting from "../value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
-import InPersonInterviewDirection from "../value-objects/InPersonInterview/InPersonInterviewDirection";
-
+import InterviewDataUpdated from "../domain-events/interview/InterviewDataUpdated.Event"
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
     private eventRecorder: IDomainEvent[] = [];
@@ -59,5 +57,17 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         interview.eventRecorder.push(new InterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created));
         return interview;
     }
+
+    updateData(
+		Description: InterviewDescription,
+		Title: InterviewTitle,
+	){
+		this.description = Description
+		this.title = Title
+		this.eventRecorder.push(new InterviewDataUpdated(
+			this.title,
+			this.description,
+		))
+	}
 
 }
