@@ -1,15 +1,20 @@
 
 import { v4 as uuidv4 } from "uuid";
+import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import Interview from "../../interview/entities/Interview";
 import { InterviewStatus } from "../../interview/shared/InterviewStatus.enum";
 import { PostulationCreated } from "../domain-events/postulation/PostulationCreated";
+import PostulationRejected from "../domain-events/postulation/PostulationRejected";
+import PostulationRejectedNotification from "../domain-events/postulation/PostulationRejectedNotification";
 import { PostulationUpdatedStatus } from "../domain-events/postulation/PostulationUpdatedStatus";
 import { PostulationDate } from "../value-objects/postulation/PostulationDate";
+import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
+import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
 import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
 import { PostulationUUID } from "../value-objects/postulation/PostulationUUID";
 
 
-type postulationEvents = PostulationCreated | PostulationUpdatedStatus;
+type postulationEvents = PostulationCreated | PostulationUpdatedStatus | IDomainEvent;
 
 export class Postulation<S extends PostulationStatus> {
 
@@ -61,6 +66,16 @@ export class Postulation<S extends PostulationStatus> {
         ))
 
         return postulation
+    }
+
+    public rejectPostulation() {
+        const postulationDate = new PostulationDate(new Date())
+        const postulation = this.postulationUpdateStatus(postulationDate, PostulationStatus.reject);
+        postulation.eventHandle.push(new PostulationRejected(postulation.ID, postulation.status));
+        const subject = new PostulationNotificationSubject('Su postulacion ha sido rechazada'); 
+        const content = new PostulationNotificationContent('Lamentablemente no cumple con los requerimientos necesarios para la oferta'); 
+        postulation.eventHandle.push(new PostulationRejectedNotification(this.ID, subject, content)); 
+        return postulation;
     }
 
 }
