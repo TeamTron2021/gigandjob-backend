@@ -17,6 +17,7 @@ import InterviewNotification from "./InterviewNotification";
 import InterviewRegistered from "../domain-events/interview/notifications/InterviewRegistered.Event";
 import InterviewRechedule from "../domain-events/interview/interviewReschedule/InterviewRechedule.Event";
 import InterviewRescheduledNotification from "../domain-events/interview/notifications/InterviewRescheduledNotification.Event";
+import { InterviewDataUpdated } from "../domain-events/InterviewDataUpdated.Event";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -117,5 +118,17 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         return  interview;
 
     }
+
+    updateData(
+		Description: InterviewDescription,
+		Title: InterviewTitle,
+	){
+		this.description = Description
+		this.title = Title
+		this.eventRecorder.push(new InterviewDataUpdated(
+			this.description,
+            this.title
+		))
+	}
 
 }
