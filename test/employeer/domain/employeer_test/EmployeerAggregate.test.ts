@@ -80,5 +80,6 @@ describe('Testing employeer creation', ()=>{
         expect(employeer.status).toBe(EmployeerStatus.NOT_SUSPENDED);
 
         expect(employeer.suspendEmployeer().status).toBe(EmployeerStatus.SUSPENDED);
-    })
+    });
+   
 })

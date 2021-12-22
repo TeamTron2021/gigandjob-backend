@@ -1,6 +1,6 @@
-import NotificationEmptyContentException from "../../../../../domain/interview/exceptions/Interview/interview-notification/NotificationEmptyContentException";
-import NotificationInvalidContentException from "../../../../../domain/interview/exceptions/Interview/interview-notification/NotificationInvalidContentException";
-import NotificationContent from "../../../../../domain/interview/value-objects/interview/interview-notification/NotificationContent";
+import NotificationEmptyContentException from "../../../../../domain/job-offer/exceptions/Interview/Interview/interview-notification/NotificationEmptyContentException";
+import NotificationInvalidContentException from "../../../../../domain/job-offer/exceptions/Interview/Interview/interview-notification/NotificationInvalidContentException";
+import NotificationContent from "../../../../../domain/job-offer/value-objects/Interview/interview/interview-notification/NotificationContent";
 
 
 describe('Testing notification content value object', ()=>{
