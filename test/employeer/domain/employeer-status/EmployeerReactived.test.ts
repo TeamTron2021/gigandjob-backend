@@ -15,11 +15,11 @@ describe('Testing employeer creation', ()=>{
         const longitude:any = '47.1231231, 179.99999999'; 
         const employeerLocalization = EmployeerLocalization.create(latitude, longitude); 
         const employeer = Employeer.create(
-            new EmployeerCompanyMail('empresasPolar@polar.com'), 
-            new EmployeerCompanyName('Empresas Polar'), 
+            new EmployeerCompanyMail('cafedonapaula@gmail.com'), 
+            new EmployeerCompanyName('Cafe Dona Paula'), 
             id,
-            new EmployeerIndustry('Alimentos'),
-            new EmployeerRif('J-27784169-4'), 
+            new EmployeerIndustry('Cafe'),
+            new EmployeerRif('J-00351458-7'), 
             employeerLocalization
         ); 
         expect(employeer).toBeInstanceOf(Employeer);
@@ -30,16 +30,20 @@ describe('Testing employeer creation', ()=>{
         const longitude:any = '47.1231231, 179.99999999'; 
         const employeerLocalization = EmployeerLocalization.create(latitude, longitude); 
         const employeer = Employeer.create(
-            new EmployeerCompanyMail('empresasPolar@polar.com'), 
-            new EmployeerCompanyName('Empresas Polar'), 
+            new EmployeerCompanyMail('cafedonapaula@gmail.com'), 
+            new EmployeerCompanyName('Cafe Dona Paula'), 
             id,
-            new EmployeerIndustry('Alimentos'),
-            new EmployeerRif('J-27784169-4'), 
+            new EmployeerIndustry('Cafe'),
+            new EmployeerRif('J-00351458-7'), 
             employeerLocalization
         ); 
-        expect(employeer.status).toBe(EmployeerStatus.NOT_SUSPENDED);
+        const employeer_suspended = employeer.suspendEmployeer();
 
-        //expect(employeer.reactiveEmployeer().status).toBe(EmployeerStatus.SUSPENDED);
+        expect(employeer_suspended.status).toBe(EmployeerStatus.SUSPENDED);
+
+        expect(employeer_suspended.reactiveEmployeer().status).toBe(EmployeerStatus.NOT_SUSPENDED);
+
+       
     });
 
 })
