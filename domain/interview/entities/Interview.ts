@@ -8,7 +8,7 @@ import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
 import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
-import InterviewDataUpdated from "../domain-events/interview/InterviewDataUpdated.Event"
+import { InterviewDataUpdated } from "../domain-events/InterviewDataUpdated.Event";
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
     private eventRecorder: IDomainEvent[] = [];
@@ -65,8 +65,8 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
 		this.description = Description
 		this.title = Title
 		this.eventRecorder.push(new InterviewDataUpdated(
-			this.title,
 			this.description,
+            this.title
 		))
 	}
 
