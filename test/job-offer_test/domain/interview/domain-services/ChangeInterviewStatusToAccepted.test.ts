@@ -1,9 +1,9 @@
-import {InterviewStatus} from "../../../../../domain/interview/shared/InterviewStatus.enum";
-import {IChangeInterviewStatus} from "../../../../../domain/interview/domain-services/IChangeInterviewStatus";
+import {InterviewStatus} from "../../../../../domain/job-offer/shared/InterviewStatus.enum";
+import {IChangeInterviewStatus} from "../../../../../domain/job-offer/domain-service/interview/IChangeInterviewStatus";
 import ChangeInterviewStatusToAccepted
-	from "../../../../../domain/interview/domain-services/ChangeInterviewStatusToAccepted";
+	from "../../../../../domain/job-offer/domain-service/interview/ChangeInterviewStatusToAccepted";
 import InterviewCurrentlyDisabledException
-	from "../../../../../domain/interview/exceptions/ChangeInterviewStatus/InterviewCurrentlyDisabledException";
+	from "../../../../../domain/job-offer/exceptions/Interview/ChangeInterviewStatus/InterviewCurrentlyDisabledException";
 
 describe('Domain Service ChangeInterviewStatusToAccepted Unit Tests', () => {
 	const expectedInterviewStatus: InterviewStatus = InterviewStatus.accepted;
