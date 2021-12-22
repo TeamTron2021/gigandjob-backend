@@ -25,6 +25,10 @@ Procedemos a clonar el repositorio
 ```
 git clone https://github.com/TeamTron2021/gigandjob-backend.git
 ```
+Despues
+```
+cd gigandjob-backend
+```
 Instalamos los modulos necesarios 
 ```
 npm install
@@ -41,6 +45,8 @@ en construccion
 * [Typescript](https://www.typescriptlang.org) - Lenguaje de Programación para nuestro modelo de dominio (ddd).
 * [Git](https://git-scm.com) - Manejador de versiones.
 * [Jest](https://jestjs.io) - Framework para pruebas.
+* [uuid](https://www.npmjs.com/package/uuid) - Soporte para uuid (versiones 1, 2, 3, 4 y 5).
+* [crypto](https://nodejs.org/api/crypto.html) - Soporte para uuid.
 
 ## Autores
 * **Pablo Perez** - [PabloP16](https://github.com/PabloP16)
@@ -49,9 +55,14 @@ en construccion
 * **Andrea Mendoza** - [andreaamg22](https://github.com/andreaamg22)
 * **Ruth Rivas** - [RHRivasG](https://github.com/RHRivasG)
 * **Diego Rojas** - [superdie18](https://github.com/superdie18)
+* **Javier Flores** - [javier0997](https://github.com/javier0997)
+* **Valentina Figueroa** - [valenfigue](https://github.com/valenfigue)
+* **Juan Carlos Andrade** - [jotacee98](https://github.com/jotacee98)
 * **Pedro Perez** - [a]()
 * **Pedro Perez** - [a]()
-* **Pedro Perez** - [a]()
-* **Pedro Perez** - [a]()
-* **Pedro Perez** - [a]()
+
+---
+Hecho con ❤️ por [Team Tron](https://github.com/TeamTron2021) 😊
+
+
 
