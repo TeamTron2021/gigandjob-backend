@@ -1,6 +1,7 @@
 import { CVSkillsEmpty } from "../../domain/user/errors/CVSkillsEmpty.error";
 import CVSkills from "../../domain/user/value_objects/CVSkills.value";
 
+
 describe('Testing value object JobOfferSkill',()=>{
     it('Should thrown empty skill error',()=>{
         expect(() => CVSkills.create('')).toThrow(new CVSkillsEmpty());
