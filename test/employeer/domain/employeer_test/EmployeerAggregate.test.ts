@@ -49,21 +49,22 @@ describe('Testing employeer creation', ()=>{
         const likes: JobOfferLike[] = [
             //Inicia vacio
         ];
-        const complaint: JobOfferComplaint[] = [
-            //Inicia vacio
-        ];
+
+        const jobOfferComplaint: JobOfferComplaint[] = [];
        
         const offerid = JobOfferId.create(new UniqueId().getId());
         const jobOffer = JobOffer.create(
-            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'), 
-            JobOfferSalary.create(1500),
-            skills,
-            JobOfferTItle.create('Titulo generico de una oferta'),
-            JobOfferVacant.create(3),
-            likes,
-            complaint,
-            date, 
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500), 
+            skills, 
+            JobOfferTItle.create('Titulo generico'), 
+            JobOfferVacant.create(4), 
+            likes, 
+            jobOfferComplaint,
+            JobOfferDate.create(initialDate, finalDate), 
             offerid
+
+            
         ); 
         employeer.addJobOffer(jobOffer); 
         expect(employeer.getOffers()).toContainEqual(jobOffer);
