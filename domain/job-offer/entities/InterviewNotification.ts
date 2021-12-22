@@ -1,6 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import InterviewRegistered from "../domain-events/interview/interview/notifications/InterviewRegistered.Event";
 import InterviewRescheduledNotification from "../domain-events/interview/interview/notifications/InterviewRescheduledNotification.Event";
+import { InterviewRejectedNotification } from "../domain-events/interview/interview/notifications/InterviewRejectedNotification.Event";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
 import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
 import NotificationSubject from "../value-objects/Interview/interview/interview-notification/NotificationSubject";
@@ -27,6 +28,12 @@ export default class InterviewNotification {
     }
 
     public sendRescheduled() {
-        this.eventRecorder.push(new InterviewRescheduledNotification(this.interview.getInterviewId(), this.subject, this.content))
+        this.eventRecorder.push(
+            new InterviewRescheduledNotification(
+                this.interview.getInterviewId(), this.subject, this.content))
+    }
+
+    public sendRejected(){
+       
     }
 }
