@@ -9,6 +9,8 @@ import InterviewId from "../value-objects/Interview/interview/InterviewId";
 import OnlineInterviewUrlMeeting from "../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting";
 import InterviewInterviewer from "../value-objects/Interview/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/Interview/interview/InterviewInterviewed";
+import {IChangeInterviewStatus} from "../domain-service/interview/IChangeInterviewStatus";
+import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
 
 export default class OnlineInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -45,5 +47,19 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         onlineInterview.addEvent(new OnlineInterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created,urlMeeting));
         return onlineInterview;
     }
-
+    
+    /**
+     * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".
+     *
+     * @throws InterviewCurrentlyDisabledException
+     * */
+    public acceptInterview(): void {
+        try {
+            const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToAccepted();
+            this.status = interviewStatusChanger.changeStatus(this.status);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
 }
