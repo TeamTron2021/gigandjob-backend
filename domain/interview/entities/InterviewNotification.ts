@@ -7,12 +7,13 @@ export default class InterviewNotification{
     private eventRecorder: IDomainEvent[] = [];
 
     constructor(
-        private readonly content: InterviewNotificationContent,
-        private readonly subject: InterviewNotificationSubject
+        private readonly subject: InterviewNotificationSubject,
+        private readonly content: InterviewNotificationContent
+        
         //private readonly receiver: InterviewParticipant
     ){}
 
     public sendNotification() : void{
-        
+        this.eventRecorder.push( this.content,this.subject);
     }
 }
