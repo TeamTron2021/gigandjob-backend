@@ -1,5 +1,7 @@
+import { PostulationCreated } from '../../../../domain/job-offer/domain-events/postulation/PostulationCreated'
 import JobOffer from '../../../../domain/job-offer/entities/JobOffer.aggregate'
 import { JobOfferLike } from '../../../../domain/job-offer/entities/JobOfferLike'
+import { Postulation } from '../../../../domain/job-offer/entities/postulation'
 import JobOfferDate from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDate'
 import JobOfferDescription from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDescription'
 import JobOfferId from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferId'
@@ -8,6 +10,7 @@ import JobOfferSkill from '../../../../domain/job-offer/value-objects/JobOffer/J
 import JobOfferTItle from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferTitle'
 import JobOfferVacant from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferVacant'
 import JobOfferLikedId from '../../../../domain/job-offer/value-objects/jobOfferLike/JobOfferLikeId'
+import { PostulationDate } from '../../../../domain/job-offer/value-objects/postulation/PostulationDate'
 import UniqueId from '../../../../shared/domain/UniqueUUID'
 
 describe('Testing JobOffer creation', ()=>{
@@ -45,8 +48,21 @@ describe('Testing JobOffer creation', ()=>{
         const JobOfferLikeNew1 = JobOfferLike.likeOffer() //Se grega like
         likes.push(JobOfferLikeNew1);
 
+        const postulation = Postulation.create(
+            new PostulationDate(new Date())
+        )
+        expect(postulation).toBeInstanceOf(Postulation)
+        
+        const eventCreated = new PostulationCreated(
+            postulation.getId(),
+            postulation.getDate(),
+            postulation.status
+        )
+
         JobOfferLike.removelike(likes) //Se remueve el like
         
+        jobOffer.addPostulation(postulation); 
+        expect(jobOffer.getPostulations()).toContainEqual(postulation);
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })
 })

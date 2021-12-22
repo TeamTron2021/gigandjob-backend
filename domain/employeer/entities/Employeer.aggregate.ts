@@ -1,4 +1,6 @@
 import  IDomainEvent  from "../../../shared/domain/IDomainEvent";
+import JobOffer from "../../job-offer/entities/JobOffer.aggregate";
+import { OfferStatus } from "../../job-offer/shared/OfferStatus.enum";
 import EmployeerCreated from "../domain-events/employeer/EmployeerCreated.Event";
 import EmployeerSuspended from "../domain-events/employeer/EmployeerSuspended.Event";
 import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
@@ -16,6 +18,7 @@ import EmployeerNotification from "./EmployeerNotification";
 
 export default class Employeer<S extends EmployeerStatus> {
     private eventRecorder: IDomainEvent[] = []; 
+    private jobOffers:JobOffer<OfferStatus>[] = [];
     public status: S ; 
     constructor(
         public CompanyMail: EmployeerCompanyMail, 
@@ -29,6 +32,12 @@ export default class Employeer<S extends EmployeerStatus> {
         this.status = status;
     }
 
+    public addJobOffer(offer: JobOffer<OfferStatus>){
+        this.jobOffers.push(offer);
+    }
+    public getOffers(){
+        return this.jobOffers;
+    }
     public getId(){
         return this.id;
     }

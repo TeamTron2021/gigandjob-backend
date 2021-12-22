@@ -8,8 +8,9 @@ import CVID from "../value_objects/CV/CVID.value";
 import CVSkills from "../value_objects/CV/CVSkills.value";
 import NotificationContent from "../value_objects/CV/NotificationContent.value";
 import NotificationSubject from "../value_objects/CV/NotificationSubject.value";
+import { CVUpdated } from "../domain_events/CV/CVUpdated.event";
 
-type CVEvents = CVLoaded 
+type CVEvents = CVLoaded | CVUpdated
 export class CV<S extends CVStatus>{
 	public status: S
 	private eventRecorder: CVEvents[] = []
@@ -26,6 +27,24 @@ export class CV<S extends CVStatus>{
 
 	public getID(): CVID{ return this.ID }
 	public getEvents(){ return this.eventRecorder }
+
+	update(
+		ID: CVID,
+		skills: CVSkills[],
+		courses: CVCourses[],
+		academicFormation: CVAcademicFormation[],
+	){
+		this.ID = ID
+		this.skills = skills
+		this.courses = courses
+		this.academicFormation = academicFormation
+		this.eventRecorder.push(new CVUpdated(
+			this.ID,
+			this.skills,
+			this.courses,
+			this.academicFormation
+		))
+	}
 
 	static load(
 		academicFormation: CVAcademicFormation[],
@@ -47,6 +66,7 @@ export class CV<S extends CVStatus>{
 		
 		return cv
 	}
+
 
 	protected invariants(){}
 
