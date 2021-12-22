@@ -1,5 +1,5 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
-import { InterviewStatus } from "../shared/InterviewStatus.enum";
+import {InterviewStatus} from "../shared/InterviewStatus.enum";
 import InterviewCreated from "../domain-events/interview/interview/interviewCreated/InterviewCreated.Event";
 import IInterview from "../shared/IInterview";
 import InterviewTitle from "../value-objects/Interview/interview/InterviewTitle";
@@ -8,16 +8,14 @@ import InterviewDate from "../value-objects/Interview/interview/InterviewDate";
 import InterviewId from "../value-objects/Interview/interview/InterviewId";
 import InterviewInterviewer from "../value-objects/Interview/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/Interview/interview/InterviewInterviewed";
-import OnlineInterviewUrlMeeting from "../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting";
-import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
 import NotificationSubject from "../value-objects/Interview/interview/interview-notification/NotificationSubject";
 import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
-import InterviewCreatedNotification from "../../job-offer/domain-events/interview/interview/notifications/InterviewCreatedNotification.Event ";
 import InterviewNotification from "./InterviewNotification";
 import InterviewRegistered from "../domain-events/interview/interview/notifications/InterviewRegistered.Event";
 import InterviewRechedule from "../domain-events/interview/interview/interviewReschedule/InterviewRechedule.Event";
-import InterviewRescheduledNotification from "../domain-events/interview/interview/notifications/InterviewRescheduledNotification.Event";
-import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
+import {InterviewDataUpdated} from "../domain-events/interview/InterviewDataUpdated.Event";
+import {IChangeInterviewStatus} from "../domain-service/interview/IChangeInterviewStatus";
+import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -130,5 +128,23 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
             this.title
 		))
 	}
-
+    
+    /**
+     * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".
+     *
+     * @throws InterviewCurrentlyDisabledException
+     * */
+    public acceptInterview(): void {
+        try {
+            const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToAccepted();
+            this.status = interviewStatusChanger.changeStatus(this.status);
+    
+            /*if (this.status == InterviewStatus.accepted) {
+                return true
+            }*/
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
 }
