@@ -21,9 +21,11 @@ describe('test to changeInterviewStatusToRejected ',()=>{
     test('Return "rejected" interview status',()=>{
     
         const interviewStatus: InterviewStatus = InterviewStatus.rejected;
+        
         let interviewChanger : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
+        const newInterviewStatus: InterviewStatus = interviewChanger.changeStatus(interviewStatus);
 
-        expect(newInteviewStatus).toBe(expectedInterviewStatus);
+        expect(newInterviewStatus).toBe(expectedInterviewStatus);
     });
 
 });

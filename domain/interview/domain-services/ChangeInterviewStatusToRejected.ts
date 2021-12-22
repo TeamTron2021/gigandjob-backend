@@ -8,7 +8,7 @@ export class ChangeInterviewStatusToRejected extends  IChangeInterviewStatus{
     public changeStatus(interviewStatus: InterviewStatus): InterviewStatus {
         
         if(interviewStatus == InterviewStatus.disabled){
-            throw new InterviewCurrentlyDisabledException('Entrevista esta deshabilitada');
+            throw new InterviewCurrentlyDisabledException('Entrevista actualmente deshabilitada');
         }
         return InterviewStatus.rejected;
     }
