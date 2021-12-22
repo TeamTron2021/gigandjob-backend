@@ -1,4 +1,5 @@
 import {randomUUID} from "crypto";
+import {UserAccountDeleted} from "./domain_events/UserAccountDeleted.event";
 import {UserConfirmed} from "./domain_events/UserConfirmed.event";
 import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
 import {UserRegistered} from "./domain_events/UserRegistered.event";
@@ -10,7 +11,10 @@ import {UserID} from "./value_objects/UserID.value";
 import {UserLastName} from "./value_objects/UserLastName.value";
 import {UserPassword} from "./value_objects/UserPassword.value";
 
-type UserEvents = UserRegistered | UserConfirmed | UserDataUpdated
+type UserEvents = UserRegistered 
+	| UserConfirmed 
+	| UserDataUpdated 
+	| UserAccountDeleted
 
 export class User<S extends UserStatus>{
 	private ID: UserID
@@ -91,6 +95,10 @@ export class User<S extends UserStatus>{
 			this.email,
 			this.password
 		))
+	}
+
+	deleteAccount(){
+		this.eventRecorder.push(new UserAccountDeleted(this.ID))
 	}
 
 	protected invariants(){}
