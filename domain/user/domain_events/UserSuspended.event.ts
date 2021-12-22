@@ -1,9 +1,9 @@
 import {UserStatus} from "../enums/UserStatus.enum";
 import {UserID} from "../value_objects/UserID.value";
 
-export class UserConfirmed{
+export class UserSuspended{
 	constructor(
 		public ID: UserID,
-		public status: UserStatus.Active
+		public status: UserStatus.Supended
 	){}
 }
