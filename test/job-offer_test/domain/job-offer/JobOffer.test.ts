@@ -1,6 +1,8 @@
+import { PostulationCreated } from '../../../../domain/job-offer/domain-events/postulation/PostulationCreated'
 import JobOffer from '../../../../domain/job-offer/entities/JobOffer.aggregate'
 import { JobOfferComplaint } from '../../../../domain/job-offer/entities/JobOfferComplaint'
 import { JobOfferLike } from '../../../../domain/job-offer/entities/JobOfferLike'
+import { Postulation } from '../../../../domain/job-offer/entities/postulation'
 import JobOfferDate from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDate'
 import JobOfferDescription from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferDescription'
 import JobOfferId from '../../../../domain/job-offer/value-objects/JobOffer/JobOfferId'
@@ -12,6 +14,7 @@ import JobOfferComplaintId from '../../../../domain/job-offer/value-objects/JobO
 import JobOfferComplaintDate from '../../../../domain/job-offer/value-objects/JobOfferComplaint/JobOfferDateComplaint'
 import JobOfferComplaintIssue from '../../../../domain/job-offer/value-objects/JobOfferComplaint/JobOfferIssueComplaint'
 import JobOfferLikedId from '../../../../domain/job-offer/value-objects/jobOfferLike/JobOfferLikeId'
+import { PostulationDate } from '../../../../domain/job-offer/value-objects/postulation/PostulationDate'
 import UniqueId from '../../../../shared/domain/UniqueUUID'
 
 describe('Testing JobOffer creation', ()=>{
@@ -70,8 +73,6 @@ describe('Testing JobOffer creation', ()=>{
         jobOffer.addPostulation(postulation); 
         expect(jobOffer.getPostulations()).toContainEqual(postulation);
 
-        
-        JobOfferLike.removelike(likes) ///Luego de creado se remueve el like
 
         const complaintId = JobOfferComplaintId.create(new UniqueId().getId()); //Luego de creado se agrega una denuncia
         const issue = JobOfferComplaintIssue.create('Issue');

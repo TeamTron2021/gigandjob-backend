@@ -6,6 +6,15 @@ import EmployeerId from "../../../../domain/employeer/value-objects/employeer/Em
 import EmployeerIndustry from "../../../../domain/employeer/value-objects/employeer/EmployeerIndustry"
 import EmployeerLocalization from "../../../../domain/employeer/value-objects/employeer/EmployeerLocalization"
 import EmployeerRif from "../../../../domain/employeer/value-objects/employeer/EmployeerRif"
+import JobOffer from "../../../../domain/job-offer/entities/JobOffer.aggregate"
+import { JobOfferLike } from "../../../../domain/job-offer/entities/JobOfferLike"
+import JobOfferDate from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferDate"
+import JobOfferDescription from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferDescription"
+import JobOfferId from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferId"
+import JobOfferSalary from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferSalary"
+import JobOfferSkill from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferSkill"
+import JobOfferTItle from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferTitle"
+import JobOfferVacant from "../../../../domain/job-offer/value-objects/JobOffer/JobOfferVacant"
 import UniqueId from "../../../../shared/domain/UniqueUUID"
 
 describe('Testing employeer creation', ()=>{
@@ -22,6 +31,37 @@ describe('Testing employeer creation', ()=>{
             new EmployeerRif('J-27784169-4'), 
             employeerLocalization
         ); 
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'), 
+            JobOfferSkill.create('Mongo'), 
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate, 
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+       
+        const offerid = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'), 
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            date, 
+            offerid
+        ); 
+        employeer.addJobOffer(jobOffer); 
+        expect(employeer.getOffers()).toContainEqual(jobOffer);
         expect(employeer).toBeInstanceOf(Employeer);
     }); 
     it('Should update the employeer status', ()=>{
@@ -40,5 +80,6 @@ describe('Testing employeer creation', ()=>{
         expect(employeer.status).toBe(EmployeerStatus.NOT_SUSPENDED);
 
         expect(employeer.suspendEmployeer().status).toBe(EmployeerStatus.SUSPENDED);
-    })
+    });
+   
 })

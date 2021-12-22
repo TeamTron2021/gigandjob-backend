@@ -11,12 +11,13 @@ import JobOfferSkill from "../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../value-objects/JobOffer/JobOfferTitle";
 import JobOfferVacant from "../value-objects/JobOffer/JobOfferVacant";
 import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
-import { JobOfferComplaint } from "./JobOfferComplaint";
 import { JobOfferLike } from "./JobOfferLike";
-
+import { Postulation } from "./postulation";
+import { JobOfferComplaint } from "./JobOfferComplaint";
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     private eventRecorder: IDomainEvent[] = [];
+    private postulations: Postulation<PostulationStatus>[] = [];
     public status: S;
     constructor ( 
         public description: JobOfferDescription, 
@@ -32,7 +33,13 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         this.status =  status;
 
     }
+    public getPostulations(): Postulation<PostulationStatus>[] {
+        return this.postulations;
+    }
 
+    public addPostulation(postulation: Postulation<PostulationStatus>): void {
+        this.postulations.push(postulation)
+    }
     public getOfferId(){
         return this.Id;
     }
