@@ -2,6 +2,7 @@ import { JobOfferComplaint } from "../../../../domain/job-offer/entities/JobOffe
 import JobOfferComplaintId from "../../../../domain/job-offer/value-objects/JobOfferComplaint/JobOfferComplaitId";
 import JobOfferComplaintDate from "../../../../domain/job-offer/value-objects/JobOfferComplaint/JobOfferDateComplaint";
 import JobOfferComplaintIssue from "../../../../domain/job-offer/value-objects/JobOfferComplaint/JobOfferIssueComplaint";
+
 import UniqueId from "../../../../shared/domain/UniqueUUID";
 
 describe('Testing likeOffer of JobOfferAcepttedComplaint', () =>{

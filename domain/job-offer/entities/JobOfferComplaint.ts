@@ -64,14 +64,19 @@ export class JobOfferComplaint{
 			const compare = object[x].getId();
             
 			if(id.getId() === compare.getId()){
+
+				if (object[x].getAcceptedOrRejected() === null){
 				object[x].setAcceptedOrRejected(true)
 				object[x].eventRecorder.push(new JobOfferAceptedandRejectedComplaint(object[x].id,true))
 				return object[x];
+				} 
+				if (object[x].getAcceptedOrRejected() === true){
+					throw new JobOfferAceptedComplaintIdException(
+						'Ya fue Aceptada la denuncia')
+				}
 			}
 		}
-		throw new JobOfferAceptedComplaintIdException(
-			'Ya fue aceptada la denuncia'
-		);
+		
 	}
 
 	static rejectedComplaint(id: JobOfferComplaintId, object: JobOfferComplaint[]){
@@ -83,9 +88,12 @@ export class JobOfferComplaint{
 				object[x].eventRecorder.push(new JobOfferAceptedandRejectedComplaint(object[x].id, false))
 				return object[x];
 			}
+			if (object[x].getAcceptedOrRejected() === true){
+				throw new JobOfferRejectedComplaintIdException(
+					'Ya fue Rechazada la denuncia'
+				);
+			}
 		}
-		throw new JobOfferRejectedComplaintIdException(
-			'Ya fue Rechazada la denuncia'
-		);
+		
     }
 }
