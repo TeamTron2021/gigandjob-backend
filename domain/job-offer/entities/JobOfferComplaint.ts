@@ -1,8 +1,10 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferAceptedandRejectedComplaint from "../domain-events/JobOfferComplaint/JobOfferAceptedandRemoveComplaint";
 import JobOfferComplaintCreated from "../domain-events/JobOfferComplaint/JobOfferComplaintCreated";
+import JobOfferComplaintNotification from "./JobOfferComplaintNotification";
 import JobOfferAceptedComplaintIdException from "../exceptions/JobOfferComplaint/JobOfferAceptedException";
 import JobOfferRejectedComplaintIdException from "../exceptions/JobOfferComplaint/JobOfferRejectedComplaint";
+import JobOfferComplaintMessage from "../value-objects/JobOfferComplaint/JobOfferComplaintMessage";
 import JobOfferComplaintId from "../value-objects/JobOfferComplaint/JobOfferComplaitId";
 import JobOfferComplaintDate from "../value-objects/JobOfferComplaint/JobOfferDateComplaint";
 import JobOfferComplaintIssue from "../value-objects/JobOfferComplaint/JobOfferIssueComplaint";
@@ -51,6 +53,9 @@ export class JobOfferComplaint{
     ){
         const offer = new JobOfferComplaint(id, issue,dateComplaint,null);
         offer.eventRecorder.push(new JobOfferComplaintCreated(id, issue,dateComplaint,null));
+        const Notificacion = new JobOfferComplaintMessage('Se creo una denuncia') //Revisar que otra cosa puede ir aqui
+        const ComplaintNotification =new JobOfferComplaintNotification(Notificacion); 
+        ComplaintNotification.NotificationComplaint();
         return offer;
     }
 

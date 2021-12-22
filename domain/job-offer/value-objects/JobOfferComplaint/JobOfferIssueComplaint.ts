@@ -16,11 +16,10 @@ export default class JobOfferComplaintIssue implements IValueObject {
   
         if(issue == undefined || issue == null){
             throw new EmptyJobOfferIssueComplaintException(
-                'El Issue de JobOfferComplaint no puede estar vacio'
+                'La Issue de JobOfferComplaint no puede ser undefined o null'
             );
         }
-  
-        if(issue.length < 50 ){
+        if(issue.length > 50 ){
           throw new EmptyJobOfferIssueComplaintException(
               'El Issue de JobOfferComplaint no debe sobrepasar de 50 caracteres'
           );

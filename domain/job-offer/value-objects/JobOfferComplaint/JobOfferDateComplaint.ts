@@ -21,7 +21,7 @@ export default class JobOfferComplaintDate implements IValueObject {
             );
         }
   
-        if(date < new Date()){
+        if(date > new Date()){
           throw new EmptyJobOfferDateComplaintException(
               'La Fecha de JobOfferComplaint no puede ser mayor al dia de hoy'
           );
