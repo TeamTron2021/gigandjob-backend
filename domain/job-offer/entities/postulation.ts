@@ -1,17 +1,17 @@
 
 import { v4 as uuidv4 } from "uuid";
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
-import Interview from "./Interview";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
 import { PostulationCreated } from "../domain-events/postulation/PostulationCreated";
 import PostulationRejected from "../domain-events/postulation/PostulationRejected";
 import PostulationRejectedNotification from "../domain-events/postulation/PostulationRejectedNotification";
 import { PostulationUpdatedStatus } from "../domain-events/postulation/PostulationUpdatedStatus";
 import { PostulationDate } from "../value-objects/postulation/PostulationDate";
-import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
-import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
 import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
 import { PostulationUUID } from "../value-objects/postulation/PostulationUUID";
+import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
+import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
+import Interview from "./Interview";
 
 
 type postulationEvents = PostulationCreated | PostulationUpdatedStatus | IDomainEvent;
