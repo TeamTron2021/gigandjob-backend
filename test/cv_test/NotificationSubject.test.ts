@@ -1,6 +1,6 @@
-import NotificationEmptySubjectException from "../../domain/user/errors/CV/NotificationEmptySubject.error";
-import NotificationInvalidSubjectException from "../../domain/user/errors/CV/NotificationInvalidSubject.error";
-import NotificationSubject from "../../domain/user/value_objects/CV/NotificationSubject.value";
+import NotificationEmptySubjectException from "../../domain/user/errors/NotificationEmptySubject.error";
+import NotificationInvalidSubjectException from "../../domain/user/errors/NotificationInvalidSubject.error";
+import NotificationSubject from "../../domain/user/value_objects/NotificationSubject.value";
 
 describe('Testing notification subject value object', ()=>{
     it('Should throw an empty notification subject error', ()=>{
