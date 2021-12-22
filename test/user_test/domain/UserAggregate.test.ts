@@ -1,6 +1,9 @@
+import {UserAccountDeleted} from "../../../domain/user/domain_events/UserAccountDeleted.event"
 import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.event"
 import {UserDataUpdated} from "../../../domain/user/domain_events/UserDataUpdated.event"
+import {UserReactivated} from "../../../domain/user/domain_events/UserReactivated.event"
 import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.event"
+import {UserSuspended} from "../../../domain/user/domain_events/UserSuspended.event"
 import {UserStatus} from "../../../domain/user/enums/UserStatus.enum"
 import {User} from "../../../domain/user/User.aggregate"
 import {UserBirthday} from "../../../domain/user/value_objects/UserBirthday.value"
@@ -42,7 +45,7 @@ describe('User Aggregate', () =>{
 		expect(userConfirmed).toBeInstanceOf(User)
 		expect(userConfirmed.status).toBe(UserStatus.Active)
 		const event = new UserConfirmed(
-			userConfirmed.getID(),
+			user.getID(),
 			userConfirmed.status
 		)
 		expect(userConfirmed.getEvents()).toContainEqual(event)
@@ -76,5 +79,52 @@ describe('User Aggregate', () =>{
 		expect(user.email).toStrictEqual(new UserEmail("jolyne-kujo@joestar.com"))
 		expect(user.password).toStrictEqual(new UserPassword("stone-free"))
 		expect(user.getEvents()).toContainEqual(event)
+	})
+	test('Should delete user account',() =>{
+		const user = User.register(
+			new UserFirstName("Johnny"), 
+			new UserLastName("Joestar"), 
+			new UserBirthday(new Date(0)), 
+			new UserEmail("johnny-joestar@joestar.com"), 
+			new UserPassword("tusk-act4")
+		)
+		const event = new UserAccountDeleted(
+			user.getID(),
+		)
+		user.deleteAccount()
+		expect(user.getEvents()).toContainEqual(event)
+	})
+	test('Should suspend the user',() =>{
+		const user = User.register(
+			new UserFirstName("Giorno"), 
+			new UserLastName("Giovanna"), 
+			new UserBirthday(new Date(1985,4,16)), 
+			new UserEmail("giorno-giovanna@joestar.com"), 
+			new UserPassword("gold-experience")
+		)
+		const userConfirmed = user.confirm()
+		const userSuspended = userConfirmed.suspend()
+		const event = new UserSuspended(
+			user.getID(),
+			userSuspended.status
+		)
+		expect(userSuspended.getEvents()).toContainEqual(event)
+	})
+	test('Should reactive the user',() =>{
+		const user = User.register(
+			new UserFirstName("Giorno"), 
+			new UserLastName("Giovanna"), 
+			new UserBirthday(new Date(1985,4,16)), 
+			new UserEmail("giorno-giovanna@joestar.com"), 
+			new UserPassword("gold-experience")
+		)
+		const userConfirmed = user.confirm()
+		const userSuspended = userConfirmed.suspend()
+		const userReactived = userSuspended.reactive()
+		const event = new UserReactivated(
+			user.getID(),
+			userReactived.status
+		)
+		expect(userReactived.getEvents()).toContainEqual(event)
 	})
 })
