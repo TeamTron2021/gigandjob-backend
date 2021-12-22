@@ -54,6 +54,22 @@ describe('Testing JobOffer creation', ()=>{
         const JobOfferLikeNew1 = JobOfferLike.likeOffer() ///Luego de creado se grega like
         likes.push(JobOfferLikeNew1);
 
+        const postulation = Postulation.create(
+            new PostulationDate(new Date())
+        )
+        expect(postulation).toBeInstanceOf(Postulation)
+        
+        const eventCreated = new PostulationCreated(
+            postulation.getId(),
+            postulation.getDate(),
+            postulation.status
+        )
+
+        JobOfferLike.removelike(likes) //Se remueve el like
+        
+        jobOffer.addPostulation(postulation); 
+        expect(jobOffer.getPostulations()).toContainEqual(postulation);
+
         JobOfferLike.removelike(likes) ///Luego de creado se remueve el like
 
         const complaintId = JobOfferComplaintId.create(new UniqueId().getId()); //Luego de creado se agrega una denuncia
