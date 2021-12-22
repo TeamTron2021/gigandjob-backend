@@ -43,7 +43,7 @@ en construccion
 * [Jest](https://jestjs.io) - Framework para pruebas.
 
 ## Autores
-* **Pedro Perez** - [PabloP16](https://github.com/PabloP16)
+* **Pablo Perez** - [PabloP16](https://github.com/PabloP16)
 * **Carlos Freitas** - [trekexol](https://github.com/trekexol)
 * **Ruben Gomes** - [RubenDGomesdev](https://github.com/RubenDGomesdev)
 * **Andrea Mendoza** - [andreaamg22](https://github.com/andreaamg22)
