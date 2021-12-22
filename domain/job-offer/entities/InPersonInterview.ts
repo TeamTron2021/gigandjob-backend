@@ -9,6 +9,8 @@ import InterviewId from "../value-objects/Interview/interview/InterviewId";
 import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
 import InterviewInterviewed from "../value-objects/Interview/interview/InterviewInterviewed";
 import InterviewInterviewer from "../value-objects/Interview/interview/InterviewInterviewer";
+import {IChangeInterviewStatus} from "../domain-service/interview/IChangeInterviewStatus";
+import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
 
 export default class InPersonInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -45,5 +47,19 @@ export default class InPersonInterview <S extends InterviewStatus> implements II
         inPersonInterview.addEvent(new InPersonInterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created,direction));
         return inPersonInterview;
     }
-
+    
+    /**
+     * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".
+     *
+     * @throws InterviewCurrentlyDisabledException
+     * */
+    public acceptInterview(): void {
+        try {
+            const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToAccepted();
+            this.status = interviewStatusChanger.changeStatus(this.status);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
 }

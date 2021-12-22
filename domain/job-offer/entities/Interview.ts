@@ -138,10 +138,6 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         try {
             const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToAccepted();
             this.status = interviewStatusChanger.changeStatus(this.status);
-    
-            /*if (this.status == InterviewStatus.accepted) {
-                return true
-            }*/
         } catch (e) {
             console.log(e);
             throw e;
