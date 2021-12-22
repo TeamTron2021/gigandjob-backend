@@ -8,8 +8,6 @@ import InterviewDate from "../value-objects/interview/InterviewDate";
 import InterviewId from "../value-objects/interview/InterviewId";
 import InterviewInterviewer from "../value-objects/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/interview/InterviewInterviewed";
-import OnlineInterviewUrlMeeting from "../value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
-import InPersonInterviewDirection from "../value-objects/InPersonInterview/InPersonInterviewDirection";
 import NotificationSubject from "../value-objects/interview/interview-notification/NotificationSubject";
 import NotificationContent from "../value-objects/interview/interview-notification/NotificationContent";
 import InterviewCreatedNotification from "../domain-events/interview/notifications/InterviewCreatedNotification.Event ";
@@ -112,8 +110,8 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled)); 
         const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
         const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
-        //const   interviewNotification = new InterviewRescheduledNotification(subject,content,interview); 
-       // interviewNotification.sendSuspension();
+        const   interviewNotification = new InterviewNotification(subject,content,interview); 
+        interviewNotification.sendRescheduled();
         return  interview;
 
     }

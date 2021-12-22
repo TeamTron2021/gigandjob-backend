@@ -13,7 +13,7 @@ export default class InterviewNotification {
         private readonly content: NotificationContent, 
         private readonly interview: Interview<InterviewStatus>,
     ) {
-
+        
     }
 
     public static register(
