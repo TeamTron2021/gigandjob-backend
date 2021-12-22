@@ -1,3 +1,4 @@
+import {UserAccountDeleted} from "../../../domain/user/domain_events/UserAccountDeleted.event"
 import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.event"
 import {UserDataUpdated} from "../../../domain/user/domain_events/UserDataUpdated.event"
 import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.event"
@@ -75,6 +76,20 @@ describe('User Aggregate', () =>{
 		expect(user.birthday).toStrictEqual(new UserBirthday(new Date(0)))
 		expect(user.email).toStrictEqual(new UserEmail("jolyne-kujo@joestar.com"))
 		expect(user.password).toStrictEqual(new UserPassword("stone-free"))
+		expect(user.getEvents()).toContainEqual(event)
+	})
+	test('Should delete user account',() =>{
+		const user = User.register(
+			new UserFirstName("Johnny"), 
+			new UserLastName("Joestar"), 
+			new UserBirthday(new Date(0)), 
+			new UserEmail("johnny-joestar@joestar.com"), 
+			new UserPassword("tusk-act4")
+		)
+		const event = new UserAccountDeleted(
+			user.getID(),
+		)
+		user.deleteAccount()
 		expect(user.getEvents()).toContainEqual(event)
 	})
 })
