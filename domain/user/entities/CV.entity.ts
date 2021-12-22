@@ -9,8 +9,9 @@ import NotificationContent from "../value_objects/NotificationContent.value";
 import NotificationSubject from "../value_objects/NotificationSubject.value";
 import { CVUpdated } from "../domain_events/CVUpdated.event";
 import CVNotification from "./CVNotification.entity";
+import { CVAproved } from "../domain_events/CVAproved.event";
 
-type CVEvents = CVLoaded | CVUpdated
+type CVEvents = CVLoaded | CVUpdated | CVAproved
 export class CV<S extends CVStatus>{
 	private ID: CVID
 	public status: S
@@ -21,7 +22,7 @@ export class CV<S extends CVStatus>{
 		public skills: CVSkills[],
 		public courses: CVCourses[],
 		status: S,
-		id: CVID,
+		id?: CVID,
 	){
 		this.status = status
 		this.ID = id || new CVID(randomUUID())
@@ -52,9 +53,8 @@ export class CV<S extends CVStatus>{
 		academicFormation: CVAcademicFormation[],
 		skills: CVSkills[],
 		courses: CVCourses[],
-        ID: CVID,
 		): CV<CVStatus.Unconfirmed> {
-		const cv = new CV(academicFormation,skills,courses,CVStatus.Unconfirmed, ID)
+		const cv = new CV(academicFormation,skills,courses,CVStatus.Unconfirmed)
 		cv.eventRecorder.push(new CVLoaded(
 			cv.ID,
 			cv.academicFormation,
@@ -66,6 +66,22 @@ export class CV<S extends CVStatus>{
 		const content = new NotificationContent('El curriculum se ha subido');
 		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
 		
+		return cv
+	}
+
+	approve(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Aproved>{
+		const cv = new CV(			
+			this.academicFormation,
+			this.skills,
+			this.courses,
+			CVStatus.Aproved,
+			this.ID,
+		)
+		cv.eventRecorder = this.eventRecorder.slice(0)
+		cv.eventRecorder.push(new CVAproved(
+			cv.ID,
+			cv.status
+		));
 		return cv
 	}
 

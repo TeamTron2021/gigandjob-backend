@@ -1,4 +1,5 @@
 import {randomUUID} from "crypto";
+import { CVAproved } from "../../domain/user/domain_events/CVAproved.event";
 import { CVLoaded } from "../../domain/user/domain_events/CVLoaded.event";
 import { CVUpdated } from "../../domain/user/domain_events/CVUpdated.event";
 import { CV } from "../../domain/user/entities/CV.entity";
@@ -9,7 +10,7 @@ import CVSkills from "../../domain/user/value_objects/CVSkills.value";
 
 
 describe('Testing CV entity',()=>{
-    it('Should return a instance of CV and the CV is Loaded',()=>{
+    test('Should return a instance of CV and the CV is Loaded',()=>{
         const skills: CVSkills[] = [
             CVSkills.create('SQL'), 
             CVSkills.create('Mongo'), 
@@ -28,10 +29,9 @@ describe('Testing CV entity',()=>{
             CVAcademicFormation.create('Universitario')
         ];
 
-        const id = CVID.create(randomUUID());
-        const cv = CV.load(academics, skills, courses,id); 
+        const cv = CV.load(academics, skills, courses); 
         expect(cv).toBeInstanceOf(CV)
-        const event = new CVLoaded(id, academics, skills, courses, cv.status)        
+        const event = new CVLoaded(cv.getID(), academics, skills, courses, cv.status)        
         expect(cv.getEvents()).toContainEqual(event)
     })
 
@@ -55,7 +55,7 @@ describe('Testing CV entity',()=>{
         ];
 
         const id = CVID.create(randomUUID());
-        const cv = CV.load(academics, skills, courses,id);
+        const cv = CV.load(academics, skills, courses);
 
         const newAcademics: CVAcademicFormation[] = [
             CVAcademicFormation.create('Primaria'),
@@ -95,4 +95,29 @@ describe('Testing CV entity',()=>{
 		expect(cv.academicFormation).toStrictEqual(newAcademics)
 		expect(cv.getEvents()).toContainEqual(event)
 	})
+
+    test('Should approve the CV',()=>{
+        const skills: CVSkills[] = [
+            CVSkills.create('SQL'), 
+            CVSkills.create('Mongo'), 
+            CVSkills.create('Inteligencia emocional')
+        ];
+
+        const courses: CVCourses[] = [
+            CVCourses.create('Excel'),
+            CVCourses.create('Word'),
+            CVCourses.create('Powerpoint')
+        ];
+
+        const academics: CVAcademicFormation[] = [
+            CVAcademicFormation.create('Primaria'),
+            CVAcademicFormation.create('Bachiller'),
+            CVAcademicFormation.create('Universitario')
+        ];
+        const cv = CV.load(academics, skills, courses);
+        const cvAproved = cv.approve()
+        const event = new CVAproved(cv.getID(), cvAproved.status)        
+        expect(cvAproved.getEvents()).toContainEqual(event)
+    })
+
 })
