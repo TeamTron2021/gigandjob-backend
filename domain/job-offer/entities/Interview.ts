@@ -18,6 +18,9 @@ import InterviewRegistered from "../domain-events/interview/interview/notificati
 import InterviewRechedule from "../domain-events/interview/interview/interviewReschedule/InterviewRechedule.Event";
 import InterviewRescheduledNotification from "../domain-events/interview/interview/notifications/InterviewRescheduledNotification.Event";
 import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
+import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInterviewStatus";
+import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
+import { InterviewRejected } from "../domain-events/interview/InterviewRejected.Event";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -131,4 +134,9 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
 		))
 	}
 
+    public rejectedInterview(): void{
+      
+        let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
+        this.eventRecorder.push(new InterviewRejected(this.Id, interviewStatus.changeStatus(InterviewStatus.rejected),this.interviewed))
+    }
 }
