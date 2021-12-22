@@ -1,5 +1,5 @@
-import InterviewEmptyTitleException from "../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyTitleException";
-import InterviewTitle from "../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle";
+import InterviewEmptyTitleException from "../../../../domain/interview/exceptions/Interview/InterviewEmptyTitleException";
+import InterviewTitle from "../../../../domain/interview/value-objects/interview/InterviewTitle";
 
 describe('Value Object InterviewTitle', () =>{
     it('Should return an error ,  title empty', () =>{

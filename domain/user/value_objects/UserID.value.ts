@@ -1,6 +1,5 @@
 import {UserIdEmpty} from "../errors/UserIdEmpty.error"
 
-
 export class UserID {
 
 	public readonly value: string
@@ -10,5 +9,3 @@ export class UserID {
 		this.value = value
 	}
 }
-
-

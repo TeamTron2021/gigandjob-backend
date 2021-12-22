@@ -2,7 +2,7 @@ import JobOfferLikedId from "../../../../domain/job-offer/value-objects/jobOffer
 import UniqueId from "../../../../shared/domain/UniqueUUID";
 
 
-describe('Value Object JobOfferLikedId', () =>{
+describe('Value Object likeID', () =>{
 	test('Should return a error: likeIDEmpty',() =>{
 		const id: any = null;
 		expect(() => JobOfferLikedId.create(id)).toThrowError('El id de JobOfferLike no puede estar vacio');

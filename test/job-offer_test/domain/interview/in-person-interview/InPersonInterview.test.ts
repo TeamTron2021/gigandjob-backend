@@ -1,11 +1,11 @@
-import InPersonInterview from "../../../../../domain/job-offer/entities/InPersonInterview";
-import InPersonInterviewDirection from "../../../../../domain/job-offer/value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
-import InterviewDate from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate";
-import InterviewDescription from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription";
-import InterviewId from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewId";
-import InterviewInterviewed from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed";
-import InterviewInterviewer from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer";
-import InterviewTitle from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle";
+import InPersonInterview from "../../../../../domain/interview/entities/InPersonInterview";
+import InPersonInterviewDirection from "../../../../../domain/interview/value-objects/InPersonInterview/InPersonInterviewDirection";
+import InterviewDate from "../../../../../domain/interview/value-objects/interview/InterviewDate";
+import InterviewDescription from "../../../../../domain/interview/value-objects/interview/InterviewDescription";
+import InterviewId from "../../../../../domain/interview/value-objects/interview/InterviewId";
+import InterviewInterviewed from "../../../../../domain/interview/value-objects/interview/InterviewInterviewed";
+import InterviewInterviewer from "../../../../../domain/interview/value-objects/interview/InterviewInterviewer";
+import InterviewTitle from "../../../../../domain/interview/value-objects/interview/InterviewTitle";
 import UniqueId from "../../../../../shared/domain/UniqueUUID";
 
 

@@ -1,5 +1,4 @@
 import IDomainEvent from "../../../../shared/domain/IDomainEvent";
-import { JobOfferComplaint } from "../../entities/JobOfferComplaint";
 import { JobOfferLike } from "../../entities/JobOfferLike";
 import { OfferStatus } from "../../shared/OfferStatus.enum";
 import JobOfferDate from "../../value-objects/JobOffer/JobOfferDate";
@@ -19,7 +18,6 @@ export default class JobOfferCreated implements IDomainEvent{
         public title: JobOfferTItle, 
         public vacant: JobOfferVacant, 
         public likes: JobOfferLike[],
-        public complaint: JobOfferComplaint[],
         public date: JobOfferDate,
         public status: OfferStatus
     ){};

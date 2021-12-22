@@ -1,5 +1,5 @@
-import InterviewEmptyDescriptionException from "../../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyDescriptionException";
-import OnlineInterviewUrlMeeting from "../../../../../domain/job-offer/value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting";
+import InterviewEmptyDescriptionException from "../../../../../domain/interview/exceptions/Interview/InterviewEmptyDescriptionException";
+import OnlineInterviewUrlMeeting from "../../../../../domain/interview/value-objects/OnlineInterview/OnlineInterviewUrlMeeting";
 
 
 describe('Testing value object OnlineInterviewUrlMeeting',() =>{

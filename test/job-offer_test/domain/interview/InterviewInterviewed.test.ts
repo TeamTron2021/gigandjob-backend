@@ -1,5 +1,5 @@
-import EmptyInterviewInterviewedException from "../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyIdException";
-import InterviewInterviewed from "../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed";
+import EmptyInterviewInterviewedException from "../../../../domain/interview/exceptions/Interview/InterviewEmptyIdException";
+import InterviewInterviewed from "../../../../domain/interview/value-objects/interview/InterviewInterviewed";
 import UniqueId from "../../../../shared/domain/UniqueUUID";
 
 

@@ -1,6 +1,6 @@
-import InterviewInvalidDateException from "../../../../domain/job-offer/exceptions/Interview/Interview/InterviewInvalidDateException";
-import InterviewMissingDateException from "../../../../domain/job-offer/exceptions/Interview/Interview/InterviewMissingDateException";
-import InterviewDate from "../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate";
+import InterviewInvalidDateException from "../../../../domain/interview/exceptions/Interview/InterviewInvalidDateException";
+import InterviewMissingDateException from "../../../../domain/interview/exceptions/Interview/InterviewMissingDateException";
+import InterviewDate from "../../../../domain/interview/value-objects/interview/InterviewDate";
 
 
 describe('Testing value object InterviewDate',()=>{

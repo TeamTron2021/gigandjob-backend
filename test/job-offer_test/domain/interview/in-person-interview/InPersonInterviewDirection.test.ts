@@ -1,5 +1,5 @@
-import InterviewEmptyDescriptionException from "../../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyDescriptionException";
-import InPersonInterviewDirection from "../../../../../domain/job-offer/value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
+import InterviewEmptyDescriptionException from "../../../../../domain/interview/exceptions/Interview/InterviewEmptyDescriptionException";
+import InPersonInterviewDirection from "../../../../../domain/interview/value-objects/InPersonInterview/InPersonInterviewDirection";
 
 
 describe('Testing value object InPersonInterviewDirection',() =>{
