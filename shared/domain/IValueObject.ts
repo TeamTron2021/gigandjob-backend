@@ -1,3 +1,3 @@
 export interface IValueObject{
-    equals(valueObject: IValueObject): Boolean;
+    equals(valueObject: IValueObject): boolean
 }
