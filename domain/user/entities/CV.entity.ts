@@ -83,6 +83,11 @@ export class CV<S extends CVStatus>{
 			cv.ID,
 			cv.status
 		));
+
+		const subject = new NotificationSubject('CV Aprobado');
+		const content = new NotificationContent('Felicitaciones, su curriculum ha sido aprobado');
+		const cvNotification = new CVNotification(subject, content, cv).approvedNotification();
+		
 		return cv
 	}
 
@@ -99,6 +104,11 @@ export class CV<S extends CVStatus>{
 			cv.ID,
 			cv.status
 		));
+
+		const subject = new NotificationSubject('CV Rechazado');
+		const content = new NotificationContent('Lo sentimos, su curriculum ha sido rechazado');
+		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
+		
 		return cv
 	}
 

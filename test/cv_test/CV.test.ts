@@ -119,6 +119,7 @@ describe('Testing CV entity',()=>{
         const cvAproved = cv.approve()
         const event = new CVAproved(cv.getID(), cvAproved.status)        
         expect(cvAproved.getEvents()).toContainEqual(event)
+        //expect(cvAproved.status).toBe()
     })
 
     test('Should reject the CV',()=>{
