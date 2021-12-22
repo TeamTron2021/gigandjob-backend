@@ -21,7 +21,7 @@ export class CV<S extends CVStatus>{
 		public skills: CVSkills[],
 		public courses: CVCourses[],
 		status: S,
-		private id?: CVID,
+		id: CVID,
 	){
 		this.status = status
 		this.ID = id || new CVID(randomUUID())
