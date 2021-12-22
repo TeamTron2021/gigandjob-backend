@@ -1,6 +1,6 @@
 import { IException } from "../../../../shared/domain/Iexception";
 
-export default class InterviewAlreadyDisabledException extends Error implements IException {
+export default class InterviewCurrentlyDisabledException extends Error implements IException {
 	constructor(public readonly message: string) {
 		super(message);
 	}
