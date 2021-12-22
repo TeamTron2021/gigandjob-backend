@@ -1,7 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import UniqueId from "../../../shared/domain/UniqueUUID";
 import jobofferlike_event from "../domain-events/jobOfferLike/JobOfferLike.Event";
-import JobOfferWithoutLikeException from "../exceptions/JobOffer/JobOfferWithoutLikeException";
+import JobOfferWithoutLikeException from "../exceptions/jobOfferLike/JobOfferWithoutLikeException";
 import JobOfferLikedId from "../value-objects/jobOfferLike/JobOfferLikeId";
 
 export class JobOfferLike{
