@@ -1,7 +1,6 @@
-
 import InterviewCurrentlyDisabledException from "../../exceptions/Interview/ChangeInterviewStatus/InterviewCurrentlyDisabledException";
 import { InterviewStatus } from "../../shared/InterviewStatus.enum";
-import {IChangeInterviewStatus} from "./IChangeInterviewStatus";
+import { IChangeInterviewStatus } from "./IChangeInterviewStatus";
 
 
 export class ChangeInterviewStatusToRejected extends  IChangeInterviewStatus{

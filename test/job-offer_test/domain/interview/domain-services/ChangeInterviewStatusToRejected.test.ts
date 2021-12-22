@@ -1,9 +1,7 @@
+import {InterviewStatus} from "../../../../../domain/job-offer/shared/InterviewStatus.enum";
+import {IChangeInterviewStatus} from "../../../../../domain/job-offer/domain-service/interview/IChangeInterviewStatus";
 import { ChangeInterviewStatusToRejected } from "../../../../../domain/job-offer/domain-service/interview/ChangeInterviewStatusToRejected";
 import InterviewCurrentlyDisabledException from "../../../../../domain/job-offer/exceptions/Interview/ChangeInterviewStatus/InterviewCurrentlyDisabledException";
-import { InterviewStatus } from "../../../../../domain/job-offer/shared/InterviewStatus.enum";
-import { IChangeInterviewStatus } from "../../../../../shared/domain/IRejectInterview";
-
-
 
 describe('test to changeInterviewStatusToRejected ',()=>{
     
