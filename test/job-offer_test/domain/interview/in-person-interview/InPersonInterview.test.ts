@@ -7,32 +7,67 @@ import InterviewInterviewed from "../../../../../domain/job-offer/value-objects/
 import InterviewInterviewer from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer";
 import InterviewTitle from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle";
 import UniqueId from "../../../../../shared/domain/UniqueUUID";
+import {InterviewStatus} from "../../../../../domain/job-offer/shared/InterviewStatus.enum";
 
+const initialDate = new Date();
+const finalDate = new Date();
+initialDate.setDate(finalDate.getDate() -1);
+const date = InterviewDate.create(
+    initialDate,
+    finalDate
+);
+
+const id = InterviewId.create(new UniqueId().getId());
+const interviewed = InterviewInterviewed.create(new UniqueId().getId());
+const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+const interviewTitle = InterviewTitle.create('Titulo genérico de una entrevista');
+const interviewDescription = InterviewDescription.create('Descripción genérica de una entrevista de trabajo');
+const interviewDirection = InPersonInterviewDirection.create('Dirección genérica de una entrevista presencial');
 
 describe('Testing Interview creation', ()=>{
     it('Should return a Interview instance', () =>{
-        
-        const initialDate = new Date(); 
-        const finalDate = new Date(); 
-        initialDate.setDate(finalDate.getDate() -1);
-        const date = InterviewDate.create(
-            initialDate, 
-            finalDate
-        );
-        
-        const id = InterviewId.create(new UniqueId().getId());
-        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
         const interview = InPersonInterview.create(
-            InterviewTitle.create('Titulo generico de una entrevista'),
-            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
+            interviewTitle,
+            interviewDescription,
             date, 
             interviewed,
             interviewer,
             id,
-            InPersonInterviewDirection.create('Direccion generica de una entrevista presencial')
+            interviewDirection
         ); 
         expect(interview).toBeInstanceOf(InPersonInterview);
+    });
+    
+    test('Should throws an interview currently disabled error', () => {
+        const interview = new InPersonInterview(
+            interviewTitle,
+            interviewDescription,
+            date,
+            interviewed,
+            interviewer,
+            InterviewStatus.disabled,
+            id,
+            interviewDirection
+        );
+        
+        expect(() => {interview.acceptInterview()}).toThrow();
+    });
+    
+    test('Should change the interview status from "created" to "accepted', () => {
+        const interview = InPersonInterview.create(
+            interviewTitle,
+            interviewDescription,
+            date,
+            interviewed,
+            interviewer,
+            id,
+            interviewDirection
+        );
+        interview.acceptInterview();
+        const newInterviewStatus = interview.status;
+        const expectedInterviewStatus = InterviewStatus.accepted;
+        
+        expect(newInterviewStatus).toBe(expectedInterviewStatus);
     })
 })
 
