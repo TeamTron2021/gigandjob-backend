@@ -1,4 +1,4 @@
-import { IValueObject } from "../../../shared/domain/IValueObject";
+import { IValueObject } from "../../../../shared/domain/IValueObject";
 
 export class InterviewNotificationContent implements IValueObject{
 
