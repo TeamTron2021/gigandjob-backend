@@ -25,6 +25,8 @@ import OnlineInterviewUrlMeeting from "../value-objects/Interview/OnlineIntervie
 import {InterviewStatus} from "../shared/InterviewStatus.enum";
 import OnlineInterview from "./OnlineInterview";
 import InterviewAccepted from "../domain-events/interview/interview/InterviewAccepted.Event";
+import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
+import InPersonInterview from "./InPersonInterview";
 
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
@@ -103,7 +105,54 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
 	}
 	
 	/**
-	 * Actualiza el estado de una entrevista online a "accepted", generando un evento de dominio si el cambio fue
+	 * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
+	 * exitoso.
+	 *
+	 * @param interviewTitle Título de la entrevista.
+	 * @param interviewDescription Descripción de la entrevista.
+	 * @param interviewDate Fechas de inicio y finalización de la entrevista.
+	 * @param interviewInterviewed Entrevistado.
+	 * @param interviewInterviewer Entrevistador.
+	 * @param interviewStatus Estado actual de la entrevista.
+	 * @param interviewId Identificador de la entrevista.
+	 * @param interviewDirection Lugar en donde se realizará la entrevista.
+	 * */
+	public acceptInPersonInterview(
+		interviewTitle: InterviewTitle,
+		interviewDescription: InterviewDescription,
+		interviewDate: InterviewDate,
+		interviewInterviewed: InterviewInterviewed,
+		interviewInterviewer: InterviewInterviewer,
+		interviewStatus: InterviewStatus,
+		interviewId: InterviewId,
+		interviewDirection: InPersonInterviewDirection
+	): void {
+		try {
+			const interview = new InPersonInterview(
+				interviewTitle,
+				interviewDescription,
+				interviewDate,
+				interviewInterviewed,
+				interviewInterviewer,
+				interviewStatus,
+				interviewId,
+				interviewDirection
+			);
+			
+			interview.acceptInterview(); // Cambiar el estado de la entrevista.
+			
+			// Generación del evento de dominio.
+			const interviewAcceptedEvent: IDomainEvent
+				= new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
+			this.eventRecorder.push(interviewAcceptedEvent);
+		} catch (e) {
+			console.log(e);
+			throw e;
+		}
+	}
+	
+	/**
+	 * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
 	 * exitoso.
 	 *
 	 * @param interviewTitle Título de la entrevista.
