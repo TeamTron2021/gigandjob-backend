@@ -19,6 +19,7 @@ import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInter
 import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
 import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
 import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
+import disabledInterviewE from "../domain-events/interview/interview/disabledInterview/disabledInterview.Event";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -161,5 +162,30 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
             throw e;
         }
            
-        }
+    }
+
+    public disableInterview(
+        this: Interview<InterviewStatus.enable>
+    ): Interview<InterviewStatus.disabled>{
+
+        
+        const interviewDisable = new Interview(
+            this.title,
+            this.description,
+            this.date,
+            this.interviewed,
+            this.interviewer,
+            InterviewStatus.disabled,
+            this.Id
+        );
+
+        interviewDisable.eventRecorder = this.eventRecorder.slice(0);
+        interviewDisable.eventRecorder.push(new disabledInterviewE(this.Id, InterviewStatus.enable));
+        const subject = new NotificationSubject('Interview ha sido deshabilitada');
+        const content = new NotificationContent('');
+        const interviewNotification =new InterviewNotification(subject,content,interviewDisable);
+        interviewNotification.sendDisable();
+        return interviewDisable;
+    }
+
 }
