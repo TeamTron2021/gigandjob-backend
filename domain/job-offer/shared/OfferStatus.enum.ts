@@ -2,5 +2,6 @@ export enum OfferStatus {
     published, 
     suspended, 
     notPublished,
-    disable
+    disable,
+    Removed
 }

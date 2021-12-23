@@ -1,8 +1,16 @@
 import { PostulationCreated } from "../../../domain/job-offer/domain-events/postulation/PostulationCreated"
 import PostulationRejected from "../../../domain/job-offer/domain-events/postulation/PostulationRejected"
+import Interview from "../../../domain/job-offer/entities/Interview"
 import { Postulation } from "../../../domain/job-offer/entities/postulation"
+import InterviewDate from "../../../domain/job-offer/value-objects/Interview/interview/InterviewDate"
+import InterviewDescription from "../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription"
+import InterviewId from "../../../domain/job-offer/value-objects/Interview/interview/InterviewId"
+import InterviewInterviewed from "../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed"
+import InterviewInterviewer from "../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer"
+import InterviewTitle from "../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle"
 import { PostulationDate } from "../../../domain/job-offer/value-objects/postulation/PostulationDate"
 import { PostulationStatus } from "../../../domain/job-offer/value-objects/postulation/PostulationStatus"
+import UniqueId from "../../../shared/domain/UniqueUUID"
 
 
 describe('Postulation Entity test', () => {
@@ -10,7 +18,33 @@ describe('Postulation Entity test', () => {
         const postulation = Postulation.create(
             new PostulationDate(new Date())
         )
+
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = InterviewDate.create(
+            initialDate, 
+            finalDate
+        );
+        
+        const id = InterviewId.create(new UniqueId().getId());
+        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
+        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+        const interview = Interview.create(
+            InterviewTitle.create('Titulo generico de una entrevista'),
+            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
+            date, 
+            interviewed,
+            interviewer,
+            id
+        ); 
+        expect(interview).toBeInstanceOf(Interview);
+
+        postulation.addInterviews(interview)
+
         expect(postulation).toBeInstanceOf(Postulation)
+
+        
         
         const eventCreated = new PostulationCreated(
             postulation.getId(),
@@ -20,7 +54,6 @@ describe('Postulation Entity test', () => {
         expect(eventCreated).toBeInstanceOf(PostulationCreated)
         expect(postulation.getEvents()).toContainEqual(eventCreated)
         expect(postulation.status).toEqual(PostulationStatus.isSend)
-        expect(postulation.getInterviews()).toBe(undefined)
     })
 
     test('Should create a postulation and change its status',()=>{
