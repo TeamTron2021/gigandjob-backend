@@ -42,6 +42,10 @@ export default class InPersonInterview <S extends InterviewStatus> implements II
     public getInterviewId(){
         return this.Id;
     }
+    
+    public getStatus() {
+        return this.status;
+    }
 
     static create( 
         title: InterviewTitle,
