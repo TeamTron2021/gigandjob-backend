@@ -1,7 +1,6 @@
 import {CVAproved} from "../../../domain/user/domain_events/CVAproved.event"
 import {CVRejected} from "../../../domain/user/domain_events/CVRejected.event"
 import {UserAccountDeleted} from "../../../domain/user/domain_events/UserAccountDeleted.event"
-import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.event"
 import {UserDataUpdated} from "../../../domain/user/domain_events/UserDataUpdated.event"
 import {UserReactivated} from "../../../domain/user/domain_events/UserReactivated.event"
 import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.event"
@@ -37,23 +36,6 @@ describe('User Aggregate', () =>{
 			user.status
 		)
 		expect(user.getEvents()).toContainEqual(event)
-	})
-	test('Should return a User and the User is confirmed',() =>{
-		const user = User.register(
-			new UserFirstName("Jotaro"), 
-			new UserLastName("Kujo"), 
-			new UserBirthday(new Date(0)), 
-			new UserEmail("jotaro-kujo@joestar.com"), 
-			new UserPassword("star-platinum")
-		)
-		const userConfirmed = user.confirm()
-		expect(userConfirmed).toBeInstanceOf(User)
-		expect(userConfirmed.status).toBe(UserStatus.Active)
-		const event = new UserConfirmed(
-			user.ID,
-			userConfirmed.status
-		)
-		expect(userConfirmed.getEvents()).toContainEqual(event)
 	})
 	test('Should update the user data',() =>{
 		const user = User.register(
@@ -107,8 +89,7 @@ describe('User Aggregate', () =>{
 			new UserEmail("giorno-giovanna@joestar.com"), 
 			new UserPassword("gold-experience")
 		)
-		const userConfirmed = user.confirm()
-		const userSuspended = userConfirmed.suspend()
+		const userSuspended = user.suspend()
 		const event = new UserSuspended(
 			user.ID,
 			userSuspended.status
@@ -123,8 +104,7 @@ describe('User Aggregate', () =>{
 			new UserEmail("giorno-giovanna@joestar.com"), 
 			new UserPassword("gold-experience")
 		)
-		const userConfirmed = user.confirm()
-		const userSuspended = userConfirmed.suspend()
+		const userSuspended = user.suspend()
 		const userReactived = userSuspended.reactive()
 		const event = new UserReactivated(
 			user.ID,
@@ -148,8 +128,6 @@ describe('User Aggregate', () =>{
 		)
 
 		const userActivated = user.approveCV()
-
-
 		if (userActivated){
 			expect(userActivated.status).toBe(UserStatus.Active)
 
@@ -160,7 +138,6 @@ describe('User Aggregate', () =>{
 		}
 
 	})
-
 	test('Should reject CV to user',() =>{
 		const user = User.register(
 			new UserFirstName("Jonathan"), 
@@ -178,11 +155,9 @@ describe('User Aggregate', () =>{
 
 		user.rejectCV()
 
-
 		if (user.cv && user.cv.isRejected()){
 			const event = new CVRejected(user.cv.getID(), user.cv.status)
 			expect(user.getEvents()).toContainEqual(event)
 		}
-
 	})
 })
