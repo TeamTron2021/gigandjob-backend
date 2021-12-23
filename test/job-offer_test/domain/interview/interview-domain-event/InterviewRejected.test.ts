@@ -35,10 +35,11 @@ describe('Testing Interview reject', ()=>{
             InterviewStatus.rejected,  
               id,
         ); 
-
+            interview.rejectedInterview();
+            
         expect(interview.status).toBe(InterviewStatus.rejected);
 
-        expect(interview.rejectedInterview().status).toBe(InterviewStatus.rejected);
+        //expect(interview.rejectedInterview()).toBe(InterviewStatus.rejected);
 
        
     });

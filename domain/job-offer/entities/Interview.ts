@@ -152,20 +152,14 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         }
     }
 
-    public rejectedInterview(): Interview<InterviewStatus.rejected>{
-        const interview = new Interview(
-            this.title,
-            this.description,
-            this.date,
-            this.interviewed,
-            this.interviewer,
-            InterviewStatus.rejected,
-            this.Id
-        );
-          interview.eventRecorder = this.eventRecorder.slice(0);
-  
-          let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
-          this.eventRecorder.push(new InterviewRejected(this.Id, interviewStatus.changeStatus(InterviewStatus.rejected),this.interviewed))
-          return interview;
+    public rejectedInterview():void{
+        try{
+            let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
+            this.status = interviewStatus.changeStatus(this.status);
+        }catch(e){
+            console.log(e);
+            throw e;
+        }
+           
         }
 }
