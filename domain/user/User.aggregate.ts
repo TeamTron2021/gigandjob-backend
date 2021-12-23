@@ -1,4 +1,6 @@
 import {randomUUID} from "crypto";
+import NotificationContent from "../job-offer/value-objects/Interview/interview/interview-notification/NotificationContent";
+import { NotificationSubject } from "../notification/values_objects/NotificationSubject.value";
 import {UserAccountDeleted} from "./domain_events/UserAccountDeleted.event";
 import {UserConfirmed} from "./domain_events/UserConfirmed.event";
 import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
@@ -6,6 +8,7 @@ import {UserReactivated} from "./domain_events/UserReactivated.event";
 import {UserRegistered} from "./domain_events/UserRegistered.event";
 import {UserSuspended} from "./domain_events/UserSuspended.event";
 import {CV} from "./entities/CV.entity";
+import { UserNotification } from "./entities/UserNotification";
 import {CVStatus} from "./enums/CVStatus.enum";
 import {UserStatus} from "./enums/UserStatus.enum";
 import CVAcademicFormation from "./value_objects/CVAcademicFormation.value";
@@ -103,6 +106,10 @@ export class User<S extends UserStatus>{
 			user.ID,
 			user.status
 		))
+		const subject = new NotificationSubject('Su cuenta ha sido suspendida');
+		const content = new NotificationContent('Contactar a su empleador');
+		const userNotification = new UserNotification(subject,content,user.ID);
+		userNotification.sendSuspend();
 		return user
 	}
 
