@@ -11,7 +11,7 @@ import InterviewInterviewer from "../../../../../domain/job-offer/value-objects/
 import InterviewTitle from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle";
 import UniqueId from "../../../../../shared/domain/UniqueUUID";
 
-describe('Testing Interview creation', ()=>{
+describe('Testing Interview reject', ()=>{
    
     it('Should update the interview status to rejected', ()=>{
         const initialDate = new Date(); 
