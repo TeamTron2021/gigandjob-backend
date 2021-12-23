@@ -105,6 +105,15 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
 	/**
 	 * Actualiza el estado de una entrevista online a "accepted", generando un evento de dominio si el cambio fue
 	 * exitoso.
+	 *
+	 * @param interviewTitle Título de la entrevista.
+	 * @param interviewDescription Descripción de la entrevista.
+	 * @param interviewDate Fechas de inicio y finalización de la entrevista.
+	 * @param interviewInterviewed Entrevistado.
+	 * @param interviewInterviewer Entrevistador.
+	 * @param interviewStatus Estado actual de la entrevista.
+	 * @param interviewId Identificador de la entrevista.
+	 * @param interviewUrlMeeting URL de la entrevista virtual.
 	 * */
 	public acceptOnlineInterview(
 		interviewTitle: InterviewTitle,
@@ -128,7 +137,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
 				interviewUrlMeeting
 			);
 			
-			interview.acceptInterview();
+			interview.acceptInterview(); // Cambiar el estado de la entrevista.
+			
+			// Generación del evento de dominio.
 			const interviewAcceptedEvent: IDomainEvent
 				= new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
 			this.eventRecorder.push(interviewAcceptedEvent);
