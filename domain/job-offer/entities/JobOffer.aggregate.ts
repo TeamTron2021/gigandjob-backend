@@ -34,6 +34,9 @@ import InterviewAccepted from "../domain-events/interview/interview/InterviewAcc
 import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
 import InPersonInterview from "./InPersonInterview";
 import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
+import InterviewAcceptedNotification from "./InterviewAcceptedNotification";
+import {InterviewNotificationSubject} from "../value-objects/Interview/InterviewNotificationSubject";
+import {InterviewNotificationContent} from "../value-objects/Interview/InterviewNotificationContent";
 
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
@@ -189,6 +192,15 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         return OfferRevoked;
     }
     
+    protected createAndSendInterviewAcceptedNotification(interview: InterviewId): void {
+        const interviewAcceptedNotification: InterviewAcceptedNotification = InterviewAcceptedNotification.create(
+            new InterviewNotificationSubject("Entrevista aceptada"),
+            new InterviewNotificationContent("El usuario ha aceptado la entrevista agendada"),
+            interview
+        );
+        interviewAcceptedNotification.sendNotification();
+    }
+    
     /**
      * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
      * exitoso.
@@ -230,6 +242,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
             const interviewAcceptedEvent: IDomainEvent
                 = new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
             this.eventRecorder.push(interviewAcceptedEvent);
+            
+            // Creación de notificación de entrevista aceptada.
+            this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
         } catch (e) {
             console.log(e);
             throw e;
@@ -277,6 +292,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
             const interviewAcceptedEvent: IDomainEvent
                 = new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
             this.eventRecorder.push(interviewAcceptedEvent);
+    
+            // Creación de notificación de entrevista aceptada.
+            this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
         } catch (e) {
             console.log(e);
             throw e;
