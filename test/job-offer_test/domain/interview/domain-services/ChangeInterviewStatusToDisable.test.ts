@@ -15,5 +15,7 @@ describe('ChangeInterviewStatusToDisable Unit Tests', () => {
 			interviewStatusChanger.changeStatus(originalInterviewStatus);
 		}).toThrow(new InterviewCurrentlyDisabledException('La entrevista está actualmente deshabilitada.'));
 	});
+
+	
 	
 })
