@@ -1,4 +1,6 @@
 import  IDomainEvent  from "../../../shared/domain/IDomainEvent";
+import JobOffer from "../../job-offer/entities/JobOffer.aggregate";
+import { OfferStatus } from "../../job-offer/shared/OfferStatus.enum";
 import EmployeerCreated from "../domain-events/employeer/EmployeerCreated.Event";
 import EmployeerSuspended from "../domain-events/employeer/EmployeerSuspended.Event";
 import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
@@ -16,6 +18,7 @@ import EmployeerNotification from "./EmployeerNotification";
 
 export default class Employeer<S extends EmployeerStatus> {
     private eventRecorder: IDomainEvent[] = []; 
+    private jobOffers:JobOffer<OfferStatus>[] = [];
     public status: S ; 
     constructor(
         public CompanyMail: EmployeerCompanyMail, 
@@ -29,6 +32,12 @@ export default class Employeer<S extends EmployeerStatus> {
         this.status = status;
     }
 
+    public addJobOffer(offer: JobOffer<OfferStatus>){
+        this.jobOffers.push(offer);
+    }
+    public getOffers(){
+        return this.jobOffers;
+    }
     public getId(){
         return this.id;
     }
@@ -100,6 +109,29 @@ export default class Employeer<S extends EmployeerStatus> {
         return employeer;
 
     }
+
+    public reactiveEmployeer(
+        this: Employeer<EmployeerStatus.SUSPENDED>
+    ):Employeer<EmployeerStatus.NOT_SUSPENDED>{
+        const employeer = new Employeer(
+            this.CompanyMail, 
+            this.CompanyName, 
+            this.id, 
+            this.industry, 
+            this.rif, 
+            EmployeerStatus.NOT_SUSPENDED, 
+            this.localization
+        );
+        employeer.eventRecorder = this.eventRecorder.slice(0);
+        employeer.eventRecorder.push(new EmployeerSuspended(this.id, EmployeerStatus.NOT_SUSPENDED)); 
+        const subject = new NotificationSubject('Tu cuenta ha sido activada');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const employeerNotification =new EmployeerNotification(subject,content,employeer); 
+        employeerNotification.sendReactivation();
+        return employeer;
+
+    }
+
 
     protected invariants(){}
 }
