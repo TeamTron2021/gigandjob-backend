@@ -102,7 +102,7 @@ export class Postulation<S extends PostulationStatus> {
         const interviewReactivate : IChangeInterviewStatus = new ChangeInterviewStatusToEnable();
 
         this.interviews.forEach((interv)=>{
-             interv.status = interviewReactivate.changeStatus(InterviewStatus.enable);
+             interv.status = interviewReactivate.changeStatus(InterviewStatus.disabled);
         })
         
     }
