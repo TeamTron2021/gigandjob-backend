@@ -21,6 +21,18 @@ import { JobOfferComplaint } from "./JobOfferComplaint";
 import { JobOfferLike } from "./JobOfferLike";
 import JobOfferNotification from "./JobOfferNotification";
 import { Postulation } from "./postulation";
+import InterviewTitle from "../value-objects/Interview/interview/InterviewTitle";
+import InterviewDescription from "../value-objects/Interview/interview/InterviewDescription";
+import InterviewDate from "../value-objects/Interview/interview/InterviewDate";
+import InterviewInterviewed from "../value-objects/Interview/interview/InterviewInterviewed";
+import InterviewInterviewer from "../value-objects/Interview/interview/InterviewInterviewer";
+import InterviewId from "../value-objects/Interview/interview/InterviewId";
+import OnlineInterviewUrlMeeting from "../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting";
+import {InterviewStatus} from "../shared/InterviewStatus.enum";
+import OnlineInterview from "./OnlineInterview";
+import InterviewAccepted from "../domain-events/interview/interview/InterviewAccepted.Event";
+import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
+import InPersonInterview from "./InPersonInterview";
 
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
@@ -98,7 +110,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         this.eventRecorder.push(new JobOfferModified(Id,description,salary,skills,title,vacant,likes,complaint,date, OfferStatus.notPublished))
     }
 
-    public isSuspended( 
+    public isSuspended(
         this: JobOffer<OfferStatus.notPublished | OfferStatus.published>
         ):JobOffer<OfferStatus.suspended>{
             const OfferSuspended = new JobOffer(
@@ -117,12 +129,12 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         this.eventRecorder.push(new JobOfferSuspended(this.Id,OfferStatus.suspended))
         const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido suspendida');
         const content = new JobOfferNotificationContent('Se deben realizar los siguientes pasos');
-        const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferSuspended); 
+        const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferSuspended);
         JobOfferSuspendedNotification.sendSuspensionOffer();
         return OfferSuspended;
     }
    
-    public isPublished( 
+    public isPublished(
         this: JobOffer<OfferStatus.notPublished | OfferStatus.suspended>
         ):JobOffer<OfferStatus.published>{
             const OfferPublished = new JobOffer(
@@ -141,10 +153,105 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         this.eventRecorder.push(new JobOfferPublished(this.Id,OfferStatus.published))
         const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Publicada');
         const content = new JobOfferNotificationContent('Ahora solo queda esperar');
-        const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferPublished); 
+        const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferPublished);
         JobOfferSuspendedNotification.sendPublishedOffer() ;
         return OfferPublished;
     }
+    
+    /**
+     * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
+     * exitoso.
+     *
+     * @param interviewTitle Título de la entrevista.
+     * @param interviewDescription Descripción de la entrevista.
+     * @param interviewDate Fechas de inicio y finalización de la entrevista.
+     * @param interviewInterviewed Entrevistado.
+     * @param interviewInterviewer Entrevistador.
+     * @param interviewStatus Estado actual de la entrevista.
+     * @param interviewId Identificador de la entrevista.
+     * @param interviewDirection Lugar en donde se realizará la entrevista.
+     * */
+    public acceptInPersonInterview(
+        interviewTitle: InterviewTitle,
+        interviewDescription: InterviewDescription,
+        interviewDate: InterviewDate,
+        interviewInterviewed: InterviewInterviewed,
+        interviewInterviewer: InterviewInterviewer,
+        interviewStatus: InterviewStatus,
+        interviewId: InterviewId,
+        interviewDirection: InPersonInterviewDirection
+    ): void {
+        try {
+            const interview = new InPersonInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewInterviewed,
+                interviewInterviewer,
+                interviewStatus,
+                interviewId,
+                interviewDirection
+            );
+            
+            interview.acceptInterview(); // Cambiar el estado de la entrevista.
+            
+            // Generación del evento de dominio.
+            const interviewAcceptedEvent: IDomainEvent
+                = new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
+            this.eventRecorder.push(interviewAcceptedEvent);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+    
+    /**
+     * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
+     * exitoso.
+     *
+     * @param interviewTitle Título de la entrevista.
+     * @param interviewDescription Descripción de la entrevista.
+     * @param interviewDate Fechas de inicio y finalización de la entrevista.
+     * @param interviewInterviewed Entrevistado.
+     * @param interviewInterviewer Entrevistador.
+     * @param interviewStatus Estado actual de la entrevista.
+     * @param interviewId Identificador de la entrevista.
+     * @param interviewUrlMeeting URL de la entrevista virtual.
+     * */
+    public acceptOnlineInterview(
+        interviewTitle: InterviewTitle,
+        interviewDescription: InterviewDescription,
+        interviewDate: InterviewDate,
+        interviewInterviewed: InterviewInterviewed,
+        interviewInterviewer: InterviewInterviewer,
+        interviewStatus: InterviewStatus,
+        interviewId: InterviewId,
+        interviewUrlMeeting: OnlineInterviewUrlMeeting
+    ): void {
+        try {
+            const interview = new OnlineInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewInterviewed,
+                interviewInterviewer,
+                interviewStatus,
+                interviewId,
+                interviewUrlMeeting
+            );
+            
+            interview.acceptInterview(); // Cambiar el estado de la entrevista.
+            
+            // Generación del evento de dominio.
+            const interviewAcceptedEvent: IDomainEvent
+                = new InterviewAccepted(interview.getInterviewId(), interview.getStatus());
+            this.eventRecorder.push(interviewAcceptedEvent);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+
 
     static JobOfferRemove(id: JobOfferId, object: JobOffer<OfferStatus>[]){
         for(let x=0; x<=object.length-1; x++){
