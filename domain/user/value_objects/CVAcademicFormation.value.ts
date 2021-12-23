@@ -1,5 +1,5 @@
 
-import { CVAcademicFormationEmpty } from "../../errors/CV/CVAcademicFormationEmpty.error";
+import { CVAcademicFormationEmpty } from "../errors/CVAcademicFormationEmpty.error";
 
 
 

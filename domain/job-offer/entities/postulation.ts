@@ -12,6 +12,7 @@ import { PostulationUUID } from "../value-objects/postulation/PostulationUUID";
 import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
 import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
 import Interview from "./Interview";
+import PostulationAcceptedNotification from "../domain-events/postulation/PostulationAcceptedNotification";
 
 
 type postulationEvents = PostulationCreated | PostulationUpdatedStatus | IDomainEvent;
@@ -66,6 +67,16 @@ export class Postulation<S extends PostulationStatus> {
         ))
 
         return postulation
+    }
+
+    public acceptPostulation() {
+        const postulationDate = new PostulationDate(new Date())
+        const postulation = this.postulationUpdateStatus(postulationDate, PostulationStatus.passed);
+        postulation.eventHandle.push(new PostulationRejected(postulation.ID, postulation.status));
+        const subject = new PostulationNotificationSubject('Su postulacion ha sido aceptada'); 
+        const content = new PostulationNotificationContent('Felicidades, su postulación ha sido aprobada, en los siguientes días será contactado para su entrevista');
+        postulation.eventHandle.push(new PostulationAcceptedNotification(this.ID, subject, content)); 
+        return postulation;
     }
 
     public rejectPostulation() {

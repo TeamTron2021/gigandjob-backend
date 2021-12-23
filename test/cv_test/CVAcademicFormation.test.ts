@@ -1,5 +1,5 @@
-import { CVAcademicFormationEmpty } from "../../domain/user/errors/CV/CVAcademicFormationEmpty.error";
-import CVAcademicFormation from "../../domain/user/value_objects/CV/CVAcademicFormation.value";
+import { CVAcademicFormationEmpty } from "../../domain/user/errors/CVAcademicFormationEmpty.error";
+import CVAcademicFormation from "../../domain/user/value_objects/CVAcademicFormation.value";
 
 describe('Testing value object AcademicFormation',()=>{
     it('Should thrown empty academic formation error',()=>{
