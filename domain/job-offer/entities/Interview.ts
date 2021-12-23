@@ -15,8 +15,12 @@ import InterviewRegistered from "../domain-events/interview/interview/notificati
 import InterviewRechedule from "../domain-events/interview/interview/interviewReschedule/InterviewRechedule.Event";
 import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
 import ChangeInterviewStatusToRescheduled from "../domain-service/interview/ChangeInterviewStatusToRescheduled";
-import {IChangeInterviewStatus} from "../domain-service/interview/IChangeInterviewStatus";
+import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInterviewStatus";
+import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
+import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
 import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
+import disabledInterviewE from "../domain-events/interview/interview/disabledInterview/disabledInterview.Event";
+import { ChangeInterviewStatusToDisable } from "../domain-service/interview/ChangeInterviewStatusToDisable";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
@@ -99,21 +103,22 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
     public rescheduledInterview(
         this: Interview<S>
     ):Interview<InterviewStatus.rescheduled>{
+
+        const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToRescheduled();
+        const interviewNewStatus = interviewStatusChanger.changeStatus(this.status);
+
         const interview = new Interview(
             this.title,
             this.description,
             this.date,
             this.interviewed,
             this.interviewer,
-            InterviewStatus.rescheduled,
+            interviewNewStatus,
             this.Id
         );
         interview.eventRecorder = this.eventRecorder.slice(0);
 
-        const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToRescheduled();
-        const newInterviewStatus: InterviewStatus = interviewStatusChanger.changeStatus(this.status);
-
-        interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled));
+        interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,interviewNewStatus));
         const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
         const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
         const interviewNotification = new InterviewNotification(subject,content,interview);
@@ -133,6 +138,7 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
             this.title
 		))
 	}
+
     
     /**
      * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".
@@ -148,4 +154,26 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
             throw e;
         }
     }
+
+    public rejectInterview():void{
+        try{
+            let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
+            this.status = interviewStatus.changeStatus(this.status);
+        }catch(e){
+            console.log(e);
+            throw e;
+        }
+           
+        }
+
+    public disableInterview():void{
+        try{
+            const interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
+            this.status = interviewStatus.changeStatus(this.status);
+        }catch(e){
+            console.log(e);
+            throw e;
+        }
+            
+        }
 }

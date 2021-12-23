@@ -64,5 +64,21 @@ describe('Testing Interview creation', ()=>{
 		
 		expect(newInterviewStatus).toBe(expectedInterviewStatus);
 	})
+
+	test('Should change the interview status from "enable" to "disable', () => {
+		const interview = Interview.create(
+			interviewTitle,
+			interviewDescription,
+			date,
+			interviewed,
+			interviewer,
+			id
+		);
+		interview.disableInterview();
+		const newInterviewStatus = interview.status;
+		const expectedInterviewStatus = InterviewStatus.disabled;
+		
+		expect(newInterviewStatus).toBe(expectedInterviewStatus);
+	})
 })
 
