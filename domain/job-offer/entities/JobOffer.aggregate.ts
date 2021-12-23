@@ -97,8 +97,8 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     }
 
     public isSuspended( 
-        this: JobOffer<OfferStatus>
-        ):JobOffer<OfferStatus>{
+        this: JobOffer<OfferStatus.notPublished | OfferStatus.published>
+        ):JobOffer<OfferStatus.suspended>{
             const OfferSuspended = new JobOffer(
                 this.description,
                 this.salary,
