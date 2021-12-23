@@ -70,7 +70,8 @@ export class CV<S extends CVStatus>{
 		return cv
 	}
 
-	approve(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Aproved>{
+	approve(this: CV<CVStatus.Unconfirmed | CVStatus.Rejected>): CV<CVStatus.Aproved>{
+
 		const cv = new CV(			
 			this.academicFormation,
 			this.skills,
@@ -91,7 +92,8 @@ export class CV<S extends CVStatus>{
 		return cv
 	}
 
-	reject(this: CV<CVStatus.Unconfirmed>): CV<CVStatus.Rejected>{
+	reject(this: CV<CVStatus.Unconfirmed | CVStatus.Rejected>): CV<CVStatus.Rejected>{
+
 		const cv = new CV(			
 			this.academicFormation,
 			this.skills,
@@ -112,6 +114,9 @@ export class CV<S extends CVStatus>{
 		return cv
 	}
 
+	isRejected(): this is CV<CVStatus.Rejected> {
+		return this.status == CVStatus.Rejected
+	}
 
 	protected invariants(){}
 

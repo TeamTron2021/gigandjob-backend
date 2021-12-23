@@ -16,6 +16,7 @@ import NotificationSubject from "../value-objects/Interview/interview/interview-
 import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
 import InterviewNotification from "./InterviewNotification";
 import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
+import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
 
 export default class OnlineInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -40,6 +41,10 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
 
     public getInterviewId(){
         return this.Id;
+    }
+    
+    public getStatus() {
+        return this.status;
     }
     
     static create( 
@@ -74,10 +79,10 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToRescheduled();
         const newInterviewStatus: InterviewStatus = interviewStatusChanger.changeStatus(this.status);
 
-        interview.eventRecorder.push(new OnlineInterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled,this.urlMeeting)); 
+        interview.eventRecorder.push(new OnlineInterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled,this.urlMeeting));
         const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
         const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
-        const interviewNotification = new InterviewNotification(subject,content,interview); 
+        const interviewNotification = new InterviewNotification(subject,content,interview);
         interviewNotification.sendRescheduled();
         return  interview;
 
@@ -94,4 +99,19 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
             this.title
 		))
 	}
+    
+    /**
+     * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".
+     *
+     * @throws InterviewCurrentlyDisabledException
+     * */
+    public acceptInterview(): void {
+        try {
+            const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToAccepted();
+            this.status = interviewStatusChanger.changeStatus(this.status);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
 }
