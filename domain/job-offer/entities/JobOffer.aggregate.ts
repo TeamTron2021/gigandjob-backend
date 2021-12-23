@@ -1,6 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferCreated from "../domain-events/job-offer/JobOfferCreated.Event";
 import JobOfferModified from "../domain-events/job-offer/JobOfferModified.Event";
+import JobOfferRemovedEvent from "../domain-events/job-offer/JobOfferRemove.Event";
 import JobOfferPublished from "../domain-events/job-offer/Notification/JobOfferPublished.Event";
 import JobOfferSuspended from "../domain-events/job-offer/Notification/JobOfferSuspended.Event";
 import IJobOffer from "../shared/IJobOffer";
@@ -148,7 +149,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
                 OfferStatus.published,
                 this.Id
             );
-        OfferPublished.eventRecorder = this.eventRecorder.slice(0);
         this.eventRecorder.push(new JobOfferPublished(this.Id,OfferStatus.published))
         const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Publicada');
         const content = new JobOfferNotificationContent('Ahora solo queda esperar');
@@ -252,5 +252,34 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     }
 
 
+    static JobOfferRemove(id: JobOfferId, object: JobOffer<OfferStatus>[]){
+        for(let x=0; x<=object.length-1; x++){
+			const compare = object[x].getOfferId();
+			if(id.getId() === compare.getId()){
+                object[x].eventRecorder.push(
+                    new JobOfferRemovedEvent(object[x].Id,
+                                            object[x].description, 
+                                            object[x].salary,
+                                            object[x].skills, 
+                                            object[x].title, 
+                                            object[x].vacant, 
+                                            object[x].likes,
+                                            object[x].complaint, 
+                                            object[x].date, 
+                                            object[x].status
+                    )
+                );
+                object[x].eventRecorder.push(new JobOfferPublished(id,OfferStatus.Removed))
+                const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Removida');
+                const content = new JobOfferNotificationContent('Escoja entre el resto de las opciones');
+                const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,object[x]);
+                JobOfferSuspendedNotification.sendRemoveOffer() ;
+                object.splice(x,1);
+			    return object;
+			}	
+		}
+	}
+		
     protected invariants() {}
 }
+

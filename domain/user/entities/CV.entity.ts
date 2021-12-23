@@ -5,10 +5,7 @@ import { CVLoaded } from "../domain_events/CVLoaded.event";
 import CVCourses from "../value_objects/CVCourses.value";
 import CVID from "../value_objects/CVID.value";
 import CVSkills from "../value_objects/CVSkills.value";
-import NotificationContent from "../value_objects/NotificationContent.value";
-import NotificationSubject from "../value_objects/NotificationSubject.value";
 import { CVUpdated } from "../domain_events/CVUpdated.event";
-import CVNotification from "./CVNotification.entity";
 import { CVAproved } from "../domain_events/CVAproved.event";
 import { CVRejected } from "../domain_events/CVRejected.event";
 
@@ -63,14 +60,12 @@ export class CV<S extends CVStatus>{
 			cv.courses,
 			cv.status,
 		));
-		const subject = new NotificationSubject('CV Cargado');
-		const content = new NotificationContent('El curriculum se ha subido');
-		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
 		
 		return cv
 	}
 
 	approve(this: CV<CVStatus.Unconfirmed | CVStatus.Rejected>): CV<CVStatus.Aproved>{
+
 		const cv = new CV(			
 			this.academicFormation,
 			this.skills,
@@ -84,14 +79,11 @@ export class CV<S extends CVStatus>{
 			cv.status
 		));
 
-		const subject = new NotificationSubject('CV Aprobado');
-		const content = new NotificationContent('Felicitaciones, su curriculum ha sido aprobado');
-		const cvNotification = new CVNotification(subject, content, cv).approvedNotification();
-		
 		return cv
 	}
 
 	reject(this: CV<CVStatus.Unconfirmed | CVStatus.Rejected>): CV<CVStatus.Rejected>{
+
 		const cv = new CV(			
 			this.academicFormation,
 			this.skills,
@@ -105,10 +97,6 @@ export class CV<S extends CVStatus>{
 			cv.status
 		));
 
-		const subject = new NotificationSubject('CV Rechazado');
-		const content = new NotificationContent('Lo sentimos, su curriculum ha sido rechazado');
-		const cvNotification = new CVNotification(subject, content, cv).loadedNotification();
-		
 		return cv
 	}
 
