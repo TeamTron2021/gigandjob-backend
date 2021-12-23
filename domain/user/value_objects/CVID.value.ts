@@ -1,4 +1,4 @@
-import { CVIdEmpty } from "../../errors/CV/CVIDEmpty.error";
+import { CVIdEmpty } from "../errors/CVIDEmpty.error";
 
 export default class CVID  {
 

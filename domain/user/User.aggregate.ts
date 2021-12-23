@@ -5,7 +5,13 @@ import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
 import {UserReactivated} from "./domain_events/UserReactivated.event";
 import {UserRegistered} from "./domain_events/UserRegistered.event";
 import {UserSuspended} from "./domain_events/UserSuspended.event";
+import {CV} from "./entities/CV.entity";
+import {CVStatus} from "./enums/CVStatus.enum";
 import {UserStatus} from "./enums/UserStatus.enum";
+import CVAcademicFormation from "./value_objects/CVAcademicFormation.value";
+import CVCourses from "./value_objects/CVCourses.value";
+import CVID from "./value_objects/CVID.value";
+import CVSkills from "./value_objects/CVSkills.value";
 import {UserBirthday} from "./value_objects/UserBirthday.value";
 import {UserEmail} from "./value_objects/UserEmail.value";
 import {UserFirstName} from "./value_objects/UserFirstName.value";
@@ -20,9 +26,13 @@ type UserEvents = UserRegistered
 	| UserDataUpdated 
 	| UserAccountDeleted
 
+type CVType<S> = S extends UserStatus.Unconfirmed ? CV<CVStatus.Unconfirmed> | CV<CVStatus.Rejected> : 
+			S extends UserStatus.Active?  CV<CVStatus.Aproved> : CV<CVStatus>
+
 export class User<S extends UserStatus>{
 	private ID: UserID
 	public status: S
+	public cv?: CVType<S> 
 	private eventRecorder: UserEvents[] = []
 	
 	private constructor(
@@ -138,7 +148,30 @@ export class User<S extends UserStatus>{
 	}
 
 	deleteAccount(){
+		if (this.cv) this.cv = undefined
 		this.eventRecorder.push(new UserAccountDeleted(this.ID))
+	}
+
+	uploadCV(
+		this: User<UserStatus.Unconfirmed>,
+		academicFormation: CVAcademicFormation[],
+		skills: CVSkills[],
+		courses: CVCourses[],
+	){
+		this.cv = CV.load(academicFormation, skills, courses)
+		this.eventRecorder =[...this.eventRecorder,...this.cv.getEvents()]
+	}
+
+	updateCV(
+		this: User<UserStatus>,
+		academicFormation: CVAcademicFormation[],
+		skills: CVSkills[],
+		courses: CVCourses[],
+	){
+		if (this.cv) { 
+			this.cv.update(this.cv.getID(), skills, courses, academicFormation)
+			this.eventRecorder =[...this.eventRecorder,...this.cv.getEvents()]
+		}
 	}
 
 	protected invariants(){}

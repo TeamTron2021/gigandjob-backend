@@ -11,5 +11,5 @@ export abstract class IChangeInterviewStatus implements DomainService{
 	 * @param interviewStatus Estado actual de la entrevista.
 	 * @return Nuevo estado a asignar a la entrevista.
 	 * */
-	abstract changeStatus(interviewStatus: InterviewStatus): InterviewStatus;
+	abstract changeStatus(interviewStatus: InterviewStatus): any;
 }
