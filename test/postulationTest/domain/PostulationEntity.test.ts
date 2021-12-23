@@ -127,7 +127,8 @@ describe('Postulation Entity test', () => {
             id
         ); 
 
-        expect([postulation.reactivateInterviewsUser()]).toBe(InterviewStatus.enable);
+
+        expect([postulation.getInterviews()]).toContainEqual(InterviewStatus.enable);
 
     });
 
