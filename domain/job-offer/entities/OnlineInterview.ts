@@ -116,7 +116,7 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         }
     }
 
-    public rejectedInterview():void{
+    public rejectInterview():void{
         try{
             let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
             this.status = interviewStatus.changeStatus(this.status);

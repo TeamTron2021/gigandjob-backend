@@ -36,7 +36,7 @@ describe('Testing Interview reject', ()=>{
             interviewer,
               id,
         ); 
-            interview.rejectedInterview();
+            interview.rejectInterview();
             const interviewStatus = interview.status;
             const statusExpected = InterviewStatus.rejected;
             
@@ -55,6 +55,6 @@ describe('Testing Interview reject', ()=>{
               id,
         ); 
             
-            expect(() => {interview.rejectedInterview()}).toThrow();
+            expect(() => {interview.rejectInterview()}).toThrow();
     });
 })

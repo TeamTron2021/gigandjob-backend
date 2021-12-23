@@ -82,7 +82,7 @@ describe('Testing Interview creation', ()=>{
             interviewDirection
         ); 
             
-            expect(() => {interview.rejectedInterview()}).toThrow();
+            expect(() => {interview.rejectInterview()}).toThrow();
     });
 
     test('Should update the interview status to rejected', ()=>{
@@ -96,7 +96,7 @@ describe('Testing Interview creation', ()=>{
             id,
             interviewDirection
         ); 
-            interview.rejectedInterview();
+            interview.rejectInterview();
             const interviewStatus = interview.status;
             const statusExpected = InterviewStatus.rejected;
             

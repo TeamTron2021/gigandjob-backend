@@ -152,7 +152,7 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
         }
     }
 
-    public rejectedInterview():void{
+    public rejectInterview():void{
         try{
             let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
             this.status = interviewStatus.changeStatus(this.status);

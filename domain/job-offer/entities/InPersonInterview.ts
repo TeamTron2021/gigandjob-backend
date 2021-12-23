@@ -116,7 +116,7 @@ export default class InPersonInterview <S extends InterviewStatus> implements II
         }
     }
 
-    public rejectedInterview():void{
+    public rejectInterview():void{
         try{
             let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
             this.status = interviewStatus.changeStatus(this.status);
