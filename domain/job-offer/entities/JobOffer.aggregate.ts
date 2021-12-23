@@ -157,6 +157,37 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         JobOfferSuspendedNotification.sendPublishedOffer() ;
         return OfferPublished;
     }
+   
+    public JobOfferRevoked( 
+        this: JobOffer<OfferStatus.notPublished | OfferStatus.published>
+        ):JobOffer<OfferStatus.disable>{
+            const OfferRevoked = new JobOffer(
+                this.description,
+                this.salary,
+                this.skills,
+                this.title,
+                this.vacant,
+                this.likes,
+                this.complaint,
+                this.date,
+                OfferStatus.disable,
+                this.Id
+            );
+        OfferRevoked.eventRecorder = this.eventRecorder.slice(0);
+        this.eventRecorder.push(new JobOfferPublished(
+            this.Id,
+            OfferStatus.disable
+            ))
+         const subject = new JobOfferNotificationSubject(
+             'Oferta Revocada'
+             );
+         const content = new JobOfferNotificationContent(
+             'Su oferta ha sido desahbilitada debido a suspensión'
+             );
+         const JobOfferRevokedNotification =new JobOfferNotification(subject,content,OfferRevoked); 
+         JobOfferRevokedNotification.sendPublishedOffer() ;
+        return OfferRevoked;
+    }
     
     /**
      * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
