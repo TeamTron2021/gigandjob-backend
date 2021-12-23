@@ -1,5 +1,7 @@
 import {randomUUID} from "crypto";
+import {UserReactivatedNotificationSent} from "./domain_events/UserReactivatedNotificationSent.event";
 import {UserRegisteredNotificationSent} from "./domain_events/UserRegisteredNotificationSent.event";
+import {UserSuspendedNotificationSent} from "./domain_events/UserSuspendedNotificationSent.event";
 import {NotificationID} from "./values_objects/NotificationID.value";
 import {NotificationSubject} from "./values_objects/NotificationSubject.value";
 
@@ -16,6 +18,22 @@ export class Notification<T>{
 
 	notifyUserRegistered(){
 		this.events.push(new UserRegisteredNotificationSent<T>(
+			this._ID,
+			this.subject,
+			this.content
+		))
+	}
+
+	notifyUserSuspended(){
+		this.events.push(new UserSuspendedNotificationSent<T>(
+			this._ID,
+			this.subject,
+			this.content
+		))
+	}
+
+	notifyUserReactivated(){
+		this.events.push(new UserReactivatedNotificationSent<T>(
 			this._ID,
 			this.subject,
 			this.content
