@@ -526,7 +526,6 @@ describe('Testing JobOffer creation', ()=>{
             JobOfferSkill.create('Mongo'),
             JobOfferSkill.create('Inteligencia emocional')
         ];
-
         const initialDate = new Date();
         const finalDate = new Date();
         initialDate.setDate(finalDate.getDate() -1);
