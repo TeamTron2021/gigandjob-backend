@@ -1,4 +1,5 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
+import EmployeerReactivedNotification from "../domain-events/notifications/EmployeerReactivedNotification.Event";
 import EmployeerRegistered from "../domain-events/notifications/EmployeerRegistered.Event";
 import EmployeerSuspendedNotification from "../domain-events/notifications/EmployeerSuspendedNotification.Event";
 import { EmployeerStatus } from "../shared/EmployeerStatus.enum";
@@ -30,4 +31,8 @@ export default class EmployeerNotification {
         this.eventRecorder.push(new EmployeerSuspendedNotification(this.Employeer.getId(), this.subject, this.content))
     }
 
+    public sendReactivation() {
+        this.eventRecorder.push(new EmployeerReactivedNotification(this.Employeer.getId(), this.subject, this.content))
+    }
+    
 }
