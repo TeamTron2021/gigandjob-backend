@@ -27,21 +27,29 @@ export class Notification<T>{
 		))
 	}
 
+	notifyUserSuspended(){
+			this.events.push(new UserSuspendedNotificationSent<T>(
+				this._ID,
+				this.subject,
+				this.content
+			))
+		}
+		
+	notifyUserReactivated(){
+		this.events.push(new UserReactivatedNotificationSent<T>(
+			this._ID,
+			this.subject,
+			this.content
+		))
+	}
+			
 	notifyCVLoaded(){
 		this.events.push(new CVLoadedNotificationSent<T>(
 			this._ID,
 			this.subject,
 			this.content
 		))
-	}
-
-	notifyUserSuspended(){
-		this.events.push(new UserSuspendedNotificationSent<T>(
-			this._ID,
-			this.subject,
-			this.content
-		))
-	}
+	}	
 
 	notifyCVAproved(){
 		this.events.push(new CVAprovedNotificationSent<T>(
@@ -59,12 +67,4 @@ export class Notification<T>{
 		))
 	}
 
-	notifyUserReactivated(){
-		this.events.push(new UserReactivatedNotificationSent<T>(
-			this._ID,
-			this.subject,
-			this.content
-		))
 	}
-}
-	
