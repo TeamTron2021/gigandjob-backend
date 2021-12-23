@@ -10,7 +10,7 @@ import JobOfferSkill from "../../value-objects/JobOffer/JobOfferSkill";
 import JobOfferTItle from "../../value-objects/JobOffer/JobOfferTitle";
 import JobOfferVacant from "../../value-objects/JobOffer/JobOfferVacant";
 
-export default class JobOfferCreated implements IDomainEvent{
+export default class JobOfferModified implements IDomainEvent{
     constructor(
         public Id: JobOfferId,
         public description: JobOfferDescription, 

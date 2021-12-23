@@ -1,8 +1,4 @@
-import { CVCoursesEmpty } from "../../errors/CV/CVCoursesEmpty.error";
-
-
-
-
+import { CVCoursesEmpty } from "../errors/CVCoursesEmpty.error";
 
 export default class CVCourses {
 

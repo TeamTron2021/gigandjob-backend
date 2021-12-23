@@ -9,7 +9,13 @@ import InterviewId from "../value-objects/Interview/interview/InterviewId";
 import OnlineInterviewUrlMeeting from "../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting";
 import InterviewInterviewer from "../value-objects/Interview/interview/InterviewInterviewer";
 import InterviewInterviewed from "../value-objects/Interview/interview/InterviewInterviewed";
-import {IChangeInterviewStatus} from "../domain-service/interview/IChangeInterviewStatus";
+import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInterviewStatus";
+import ChangeInterviewStatusToRescheduled from "../domain-service/interview/ChangeInterviewStatusToRescheduled";
+import OnlineInterviewRechedule from "../domain-events/interview/online-interview/OnlineInterviewReschedule/OnlineInterviewRechedule.Event";
+import NotificationSubject from "../value-objects/Interview/interview/interview-notification/NotificationSubject";
+import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
+import InterviewNotification from "./InterviewNotification";
+import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
 import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
 
 export default class OnlineInterview <S extends InterviewStatus> implements IInterview{
@@ -33,6 +39,9 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         this.eventRecorder.push(domainEvent);
     }
 
+    public getInterviewId(){
+        return this.Id;
+    }
     
     static create( 
         title: InterviewTitle,
@@ -47,6 +56,45 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         onlineInterview.addEvent(new OnlineInterviewCreated(Id,title,description,date,interviewed,interviewer,InterviewStatus.created,urlMeeting));
         return onlineInterview;
     }
+
+    public rescheduledInterview(
+        this: OnlineInterview<S>
+    ):OnlineInterview<InterviewStatus.rescheduled>{
+        const interview = new OnlineInterview(
+            this.title,
+            this.description,
+            this.date,
+            this.interviewed,
+            this.interviewer,
+            InterviewStatus.rescheduled,
+            this.Id,
+            this.urlMeeting,
+        );
+        interview.eventRecorder = this.eventRecorder.slice(0);
+
+        const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToRescheduled();
+        const newInterviewStatus: InterviewStatus = interviewStatusChanger.changeStatus(this.status);
+
+        interview.eventRecorder.push(new OnlineInterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled,this.urlMeeting));
+        const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
+        const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
+        const interviewNotification = new InterviewNotification(subject,content,interview);
+        interviewNotification.sendRescheduled();
+        return  interview;
+
+    }
+
+    updateData(
+		Description: InterviewDescription,
+		Title: InterviewTitle,
+	){
+		this.description = Description
+		this.title = Title
+		this.eventRecorder.push(new InterviewDataUpdated(
+			this.description,
+            this.title
+		))
+	}
     
     /**
      * Cambia el estado de la entrevista a "accepted", siempre y cuando no esté actualmente en "disabled".

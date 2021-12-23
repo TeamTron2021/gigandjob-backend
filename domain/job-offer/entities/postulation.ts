@@ -1,17 +1,18 @@
 
 import { v4 as uuidv4 } from "uuid";
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
-import Interview from "./Interview";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
 import { PostulationCreated } from "../domain-events/postulation/PostulationCreated";
 import PostulationRejected from "../domain-events/postulation/PostulationRejected";
 import PostulationRejectedNotification from "../domain-events/postulation/PostulationRejectedNotification";
 import { PostulationUpdatedStatus } from "../domain-events/postulation/PostulationUpdatedStatus";
 import { PostulationDate } from "../value-objects/postulation/PostulationDate";
-import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
-import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
 import { PostulationStatus } from "../value-objects/postulation/PostulationStatus";
 import { PostulationUUID } from "../value-objects/postulation/PostulationUUID";
+import PostulationNotificationSubject from "../value-objects/postulation/PostulationRejectedNotificationSubject";
+import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
+import Interview from "./Interview";
+import PostulationAcceptedNotification from "../domain-events/postulation/PostulationAcceptedNotification";
 
 
 type postulationEvents = PostulationCreated | PostulationUpdatedStatus | IDomainEvent;
@@ -66,6 +67,16 @@ export class Postulation<S extends PostulationStatus> {
         ))
 
         return postulation
+    }
+
+    public acceptPostulation() {
+        const postulationDate = new PostulationDate(new Date())
+        const postulation = this.postulationUpdateStatus(postulationDate, PostulationStatus.passed);
+        postulation.eventHandle.push(new PostulationRejected(postulation.ID, postulation.status));
+        const subject = new PostulationNotificationSubject('Su postulacion ha sido aceptada'); 
+        const content = new PostulationNotificationContent('Felicidades, su postulación ha sido aprobada, en los siguientes días será contactado para su entrevista');
+        postulation.eventHandle.push(new PostulationAcceptedNotification(this.ID, subject, content)); 
+        return postulation;
     }
 
     public rejectPostulation() {

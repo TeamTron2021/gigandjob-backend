@@ -1,6 +1,6 @@
-import NotificationEmptyContentException from "../../domain/user/errors/CV/NotificationEmptyContent.error";
-import NotificationInvalidContentException from "../../domain/user/errors/CV/NotificationInvalidContent.error";
-import NotificationContent from "../../domain/user/value_objects/CV/NotificationContent.value";
+import NotificationEmptyContentException from "../../domain/user/errors/NotificationEmptyContent.error";
+import NotificationInvalidContentException from "../../domain/user/errors/NotificationInvalidContent.error";
+import NotificationContent from "../../domain/user/value_objects/NotificationContent.value";
 
 
 describe('Testing notification content value object', ()=>{

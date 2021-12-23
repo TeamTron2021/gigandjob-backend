@@ -43,5 +43,27 @@ describe('Postulation Entity test', () => {
         expect(postulationRejected.status).toBe(PostulationStatus.reject);
         expect(postulationRejected.getEvents()).toContainEqual(postulationEventRejected);
     })
+    
+    //test de servicio de aplicación CU. 14.1 Aceptar Oferta de Trabajo
+
+    test('Should create a postulation and change status to passed',()=>{
+        const postulation = Postulation.create(
+            new PostulationDate(new Date())
+        )
+        expect(postulation).toBeInstanceOf(Postulation)
+        const eventCreated = new PostulationCreated(
+            postulation.getId(),
+            postulation.getDate(),
+            postulation.status
+        )
+        expect(eventCreated).toBeInstanceOf(PostulationCreated)
+        const postulationAccepted = postulation.acceptPostulation(); 
+        const postulationEventAccepted = new PostulationRejected(
+            postulationAccepted.getId(), 
+            postulationAccepted.status
+        )
+        expect(postulationAccepted.status).toBe(PostulationStatus.passed);
+        expect(postulationAccepted.getEvents()).toContainEqual(postulationEventAccepted);
+    })
 
 })
