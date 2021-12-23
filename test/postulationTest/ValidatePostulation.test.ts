@@ -104,73 +104,26 @@ describe('Validate User can Apply to JobOffer', () => {
         expect(ValidateUserCanPostulate(userConfirmed, jobOffer)).toEqual(true)
 
     })
-    test('User cannot apply to the job offer, no more vacants avilable', () => {
+    test('User cannot apply to the job offer, user status are suspended or unconfirmed ', () => {
 
         //Create a valid CV
         const skillsCV: CVSkills[] = [
-            CVSkills.create('Pesteleria'), 
-            CVSkills.create('Panaderia')
+            CVSkills.create('SQL'),  
+            CVSkills.create('Mongo'), 
+            CVSkills.create('Inteligencia emocional')
         ];
 
         const courses: CVCourses[] = [
-            CVCourses.create('Curso de Pasteleria')
+            CVCourses.create('Curso HTML'),
+            CVCourses.create('Curso Platzi Inteligencia Artificial'),
+            CVCourses.create('Manejo de Big Data')
         ];
 
         const academics: CVAcademicFormation[] = [
             CVAcademicFormation.create('Primaria'),
-            CVAcademicFormation.create('Bachiller')
+            CVAcademicFormation.create('Bachiller'),
+            CVAcademicFormation.create('Universitario')
         ];
-
-        //Create a valid user 
-        const user = User.register(
-			new UserFirstName("Miku"), 
-			new UserLastName("Nakano"), 
-			new UserBirthday(new Date(0)), 
-			new UserEmail("nakano-miku02@joestar.com"), 
-			new UserPassword("abc-de12")
-		)
-        
-        user.updateCV(academics, skillsCV, courses)
-        const userConfirmed = user.approveCV()
-		expect(userConfirmed).toBeInstanceOf(User)
-        expect(userConfirmed?.status).toBe(UserStatus.Active)
-        expect(userConfirmed?.cv).not.toBeNull()
-        
-        // Create a valid Job Offer
-        const skills: JobOfferSkill[] = [
-            JobOfferSkill.create('Pasteleria'), 
-            JobOfferSkill.create('Panaderia')
-        ];
-
-        const initialDate = new Date(); 
-        const finalDate = new Date(); 
-        initialDate.setDate(finalDate.getDate() -1);
-        const date = JobOfferDate.create(
-            initialDate, 
-            finalDate
-        );
-        const complaint: JobOfferComplaint[] = [];
-        const likes: JobOfferLike[] = [];
-
-        const id = JobOfferId.create(new UniqueId().getId());
-        const jobOffer = new JobOffer(
-            JobOfferDescription.create('Descripcion'),
-            JobOfferSalary.create(1300),
-            skills,
-            JobOfferTItle.create('Pastelera y Respostera'),
-            JobOfferVacant.create(0),
-            likes,
-            complaint,
-            date,
-            OfferStatus.published,
-            id
-            )
-        
-        
-        expect(ValidateUserCanPostulate(userConfirmed, jobOffer)).toEqual(false)
-
-    })
-    test('User cannot apply to the job offer, user are suspended or not confirmed', () => {
 
         //Create a valid user 
         const user = User.register(
@@ -180,8 +133,14 @@ describe('Validate User can Apply to JobOffer', () => {
 			new UserEmail("jotaro-kujo@joestar.com"), 
 			new UserPassword("star-platinum")
 		)
+
+        user.uploadCV(academics, skillsCV, courses)
         
-        
+		expect(user).toBeInstanceOf(User)
+        expect(user?.status).not.toBe(UserStatus.Active)
+        expect(user).not.toBe(undefined)
+        expect(user?.cv).not.toBeNull()
+
         // Create a valid Job Offer
         const skills: JobOfferSkill[] = [
             JobOfferSkill.create('SQL'), 
@@ -205,7 +164,7 @@ describe('Validate User can Apply to JobOffer', () => {
             JobOfferSalary.create(1300),
             skills,
             JobOfferTItle.create('Programador Backend express.js'),
-            JobOfferVacant.create(5),
+            JobOfferVacant.create(7),
             likes,
             complaint,
             date,
@@ -213,8 +172,89 @@ describe('Validate User can Apply to JobOffer', () => {
             id
             )
         
+        const expectVacant = new JobOfferVacant(0)
+
+        expect(jobOffer).toBeInstanceOf(JobOffer)
+        expect(jobOffer.status).toBe(OfferStatus.published)
+        //const canApply: boolean = ValidateUserCanPostulate(userConfirmed, jobOffer)
         
-       // expect(ValidateUserCanPostulate(user, jobOffer)).toEqual(false)
+        expect(ValidateUserCanPostulate(user, jobOffer)).toEqual(false)
+
+    })
+    test('User cannot apply to the job offer, user cv are not aproved ', () => {
+
+        //Create a valid CV
+        const skillsCV: CVSkills[] = [
+            CVSkills.create('SQL'),  
+            CVSkills.create('Mongo'), 
+            CVSkills.create('Inteligencia emocional')
+        ];
+
+        const courses: CVCourses[] = [
+            CVCourses.create('Curso HTML'),
+            CVCourses.create('Curso Platzi Inteligencia Artificial'),
+            CVCourses.create('Manejo de Big Data')
+        ];
+
+        const academics: CVAcademicFormation[] = [
+            CVAcademicFormation.create('Primaria'),
+            CVAcademicFormation.create('Bachiller'),
+            CVAcademicFormation.create('Universitario')
+        ];
+
+        //Create a valid user 
+        const user = User.register(
+			new UserFirstName("Jotaro"), 
+			new UserLastName("Kujo"), 
+			new UserBirthday(new Date(0)), 
+			new UserEmail("jotaro-kujo@joestar.com"), 
+			new UserPassword("star-platinum")
+		)
+
+        user.uploadCV(academics, skillsCV, courses)
+        
+		expect(user).toBeInstanceOf(User)
+        expect(user?.status).not.toBe(UserStatus.Active)
+        expect(user).not.toBe(undefined)
+        expect(user?.cv).not.toBeNull()
+        expect(user.cv?.status).not.toBe(CVStatus.Aproved)
+
+        // Create a valid Job Offer
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'), 
+            JobOfferSkill.create('Mongo'), 
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate, 
+            finalDate
+        );
+        const complaint: JobOfferComplaint[] = [];
+        const likes: JobOfferLike[] = [];
+
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = new JobOffer(
+            JobOfferDescription.create('Descripcion'),
+            JobOfferSalary.create(1300),
+            skills,
+            JobOfferTItle.create('Programador Backend express.js'),
+            JobOfferVacant.create(7),
+            likes,
+            complaint,
+            date,
+            OfferStatus.published,
+            id
+            )
+
+        expect(jobOffer).toBeInstanceOf(JobOffer)
+        expect(jobOffer.status).toBe(OfferStatus.published)
+        //const canApply: boolean = ValidateUserCanPostulate(userConfirmed, jobOffer)
+        
+        expect(ValidateUserCanPostulate(user, jobOffer)).toEqual(false)
 
     })
 }

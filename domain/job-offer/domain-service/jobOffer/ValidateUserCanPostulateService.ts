@@ -18,10 +18,8 @@ export const ValidateUserCanPostulate = (user: User<UserStatus> | undefined, job
     if (user.status == UserStatus.Active) {
         if(user.cv) {
             if(user.cv.status = CVStatus.Aproved) {
-                if (jobOffer.vacant.getVacants() > 0) {
-                    if (jobOffer.status == OfferStatus.published) {
-                        return true
-                    }
+                if (jobOffer.status == OfferStatus.published) {
+                    return true
                 }
             }
         }
@@ -31,10 +29,4 @@ export const ValidateUserCanPostulate = (user: User<UserStatus> | undefined, job
 
 
 }
-
-
-
-// if (cv.status != CVStatus.Aproved) {
-//     throw new Error ("CV status is invalid, the " + user.firstname + " cannot postulate")
-// }
 
