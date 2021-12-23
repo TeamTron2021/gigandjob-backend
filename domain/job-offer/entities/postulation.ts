@@ -13,6 +13,8 @@ import PostulationNotificationSubject from "../value-objects/postulation/Postula
 import PostulationNotificationContent from "../value-objects/postulation/PostulationRejectedNotificationContent";
 import Interview from "./Interview";
 import PostulationAcceptedNotification from "../domain-events/postulation/PostulationAcceptedNotification";
+import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInterviewStatus";
+import { ChangeInterviewStatusToEnable } from "../domain-service/interview/ChangeInterviewStatusToEnable";
 
 
 type postulationEvents = PostulationCreated | PostulationUpdatedStatus | IDomainEvent;
@@ -92,6 +94,16 @@ export class Postulation<S extends PostulationStatus> {
     }
 
     public suspendInterview(){
+        
+    }
+
+    public reactivateInterviewsUser():void{
+
+        const interviewReactivate : IChangeInterviewStatus = new ChangeInterviewStatusToEnable();
+
+        this.interviews.forEach((interv)=>{
+             interv.status = interviewReactivate.changeStatus(InterviewStatus.disabled);
+        })
         
     }
 

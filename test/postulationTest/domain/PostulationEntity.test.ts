@@ -2,6 +2,7 @@ import { PostulationCreated } from "../../../domain/job-offer/domain-events/post
 import PostulationRejected from "../../../domain/job-offer/domain-events/postulation/PostulationRejected"
 import Interview from "../../../domain/job-offer/entities/Interview"
 import { Postulation } from "../../../domain/job-offer/entities/postulation"
+import { InterviewStatus } from "../../../domain/job-offer/shared/InterviewStatus.enum"
 import InterviewDate from "../../../domain/job-offer/value-objects/Interview/interview/InterviewDate"
 import InterviewDescription from "../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription"
 import InterviewId from "../../../domain/job-offer/value-objects/Interview/interview/InterviewId"
@@ -98,5 +99,42 @@ describe('Postulation Entity test', () => {
         expect(postulationAccepted.status).toBe(PostulationStatus.passed);
         expect(postulationAccepted.getEvents()).toContainEqual(postulationEventAccepted);
     })
+
+    it('Should reactivate the interviews for a user',()=>{
+
+        const postulation = Postulation.create(
+            new PostulationDate(new Date())
+        )
+
+        const id = InterviewId.create(new UniqueId().getId());
+        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
+        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = InterviewDate.create(
+            initialDate, 
+            finalDate
+        );
+
+        const interv = Interview.create(
+            InterviewTitle.create('Titulo generico de una entrevista'),
+            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
+            date, 
+            interviewed,
+            interviewer,
+            id
+        ); 
+
+        postulation.addInterviews(interv);
+        postulation.suspendInterview();
+        postulation.reactivateInterviewsUser();
+
+        postulation.getInterviews().forEach((interview)=>{
+            expect(interview.status).toBe(InterviewStatus.enable);
+        })
+
+    });
 
 })
