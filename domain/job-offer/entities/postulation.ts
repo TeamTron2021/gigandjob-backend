@@ -22,22 +22,24 @@ export class Postulation<S extends PostulationStatus> {
     public status: S
     private readonly ID: PostulationUUID
     private eventHandle: postulationEvents[] = []
-    private interviews?: Interview<InterviewStatus>[] = []
+    private interviews: Interview<InterviewStatus>[] = []
 
     constructor (
         private date: PostulationDate, 
-        status: S,
-        interviews?: Interview<InterviewStatus>[] 
+        status: S
     ) {
         this.ID = new PostulationUUID(uuidv4())
         this.status = status
-        this.interviews = interviews
     }
 
     getId(): PostulationUUID { return this.ID}
     getDate(): PostulationDate { return this.date } 
     getEvents(): postulationEvents[] { return this.eventHandle }
-    getInterviews(): Interview<InterviewStatus>[] | any { return this.interviews }
+    getInterviews(): Interview<InterviewStatus>[] { return this.interviews }
+    
+    addInterviews(interview: Interview<InterviewStatus>):void {
+        this.interviews.push(interview)
+    }
 
     static create(
         date: PostulationDate,

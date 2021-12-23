@@ -18,9 +18,13 @@ export const ValidateUserCanPostulate = (user: User<UserStatus>, jobOffer: JobOf
     }
     
     if (user.status == UserStatus.Active) {
-        if (jobOffer.vacant.getVacants() > 0) {
-            if (jobOffer.status == OfferStatus.published) {
-                return true
+        if(user.cv) {
+            if(user.cv.status = CVStatus.Aproved) {
+                if (jobOffer.vacant.getVacants() > 0) {
+                    if (jobOffer.status == OfferStatus.published) {
+                        return true
+                    }
+                }
             }
         }
     }
