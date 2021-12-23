@@ -105,7 +105,7 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
     ):Interview<InterviewStatus.rescheduled>{
 
         const interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToRescheduled();
-        interviewStatusChanger.changeStatus(this.status);
+        const interviewNewStatus = interviewStatusChanger.changeStatus(this.status);
 
         const interview = new Interview(
             this.title,
@@ -113,12 +113,12 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
             this.date,
             this.interviewed,
             this.interviewer,
-            InterviewStatus.rescheduled,
+            interviewNewStatus,
             this.Id
         );
         interview.eventRecorder = this.eventRecorder.slice(0);
 
-        interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,InterviewStatus.rescheduled));
+        interview.eventRecorder.push(new InterviewRechedule(this.Id, this.date,interviewNewStatus));
         const subject = new NotificationSubject('La Entrevista ha sido reprogramada');
         const content = new NotificationContent('Ahora tienes que seguir los siguientes pasos');
         const interviewNotification = new InterviewNotification(subject,content,interview);
