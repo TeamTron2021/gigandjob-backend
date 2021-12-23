@@ -16,12 +16,4 @@ describe('ChangeInterviewStatusToDisable Unit Tests', () => {
 		}).toThrow(new InterviewCurrentlyDisabledException('La entrevista está actualmente deshabilitada.'));
 	});
 	
-	test('Should return "disable" interview status, from "created"', () => {
-		const originalInterviewStatus: InterviewStatus = InterviewStatus.created;
-		
-		let interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
-		const newInterviewStatus: InterviewStatus = interviewStatusChanger.changeStatus(originalInterviewStatus);
-		
-		expect(newInterviewStatus).toBe(expectedInterviewStatus);
-	})
 })
