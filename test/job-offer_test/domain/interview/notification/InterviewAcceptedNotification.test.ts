@@ -14,15 +14,20 @@ const interviewAcceptedNotificationSubject: InterviewNotificationSubject
 const interviewAcceptedNotificationContent: InterviewNotificationContent
 	= new InterviewNotificationContent("Contenido");
 const interview: InterviewId = InterviewId.create(new UniqueId().getId());
+const interviewAcceptedNotification = InterviewAcceptedNotification.create(
+	interviewAcceptedNotificationSubject,
+	interviewAcceptedNotificationContent,
+	interview
+);
 
 describe('Entity InterviewAcceptedNotification Tests', () => {
 	test('Should create an InterviewAcceptedNotification instance', () => {
-		const interviewAcceptedNotification = InterviewAcceptedNotification.create(
-			interviewAcceptedNotificationSubject,
-			interviewAcceptedNotificationContent,
-			interview
-		);
-		
 		expect(interviewAcceptedNotification).toBeInstanceOf(InterviewAcceptedNotification);
 	});
+	
+	test('Should create a domain event and push it into the event recorder', () => {
+		interviewAcceptedNotification.sendNotification();
+		const event = interviewAcceptedNotification.getEventRecorder();
+		expect(event).toBeTruthy();
+	})
 })
