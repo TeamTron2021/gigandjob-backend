@@ -91,4 +91,8 @@ export class Postulation<S extends PostulationStatus> {
         return postulation;
     }
 
+    public suspendInterview(){
+        
+    }
+
 }

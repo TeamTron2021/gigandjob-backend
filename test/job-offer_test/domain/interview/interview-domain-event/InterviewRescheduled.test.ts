@@ -8,33 +8,51 @@ import InterviewInterviewed from "../../../../../domain/job-offer/value-objects/
 import InterviewInterviewer from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer";
 import InterviewTitle from "../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle";
 import UniqueId from "../../../../../shared/domain/UniqueUUID";
-        
-    const initialDate = new Date(); 
-    const finalDate = new Date(); 
-    initialDate.setDate(finalDate.getDate() -1);
-    const date = InterviewDate.create(
-        initialDate, 
-        finalDate
-    );
-    const id = InterviewId.create(new UniqueId().getId());
-    const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-    const interviewer = InterviewInterviewer.create(new UniqueId().getId());
-    const interview = Interview.create(
-        InterviewTitle.create('Titulo generico de una entrevista'),
-        InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
-        date, 
-        interviewed,
-        interviewer,
-        id
-    ); 
+
 
 describe('Testing Interview creation', ()=>{
     it('Should return a Interview instance', () =>{
         
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = InterviewDate.create(
+            initialDate, 
+            finalDate
+        );
+        const id = InterviewId.create(new UniqueId().getId());
+        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
+        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+        const interview = Interview.create(
+            InterviewTitle.create('Titulo generico de una entrevista'),
+            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
+            date, 
+            interviewed,
+            interviewer,
+            id
+        ); 
         expect(interview).toBeInstanceOf(Interview);
     });
     it('Should update the interview status to rescheduled', ()=>{
-       
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = InterviewDate.create(
+            initialDate, 
+            finalDate
+        );
+        const id = InterviewId.create(new UniqueId().getId());
+        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
+        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+        const interview = Interview.create(
+            InterviewTitle.create('Titulo generico de una entrevista'),
+            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
+            date, 
+            interviewed,
+            interviewer,
+            id
+        ); 
+
         expect(interview.status).toBe(InterviewStatus.created);
 
         expect(interview.rescheduledInterview().status).toBe(InterviewStatus.rescheduled);
@@ -42,14 +60,5 @@ describe('Testing Interview creation', ()=>{
        
     });
   
-    it('When scheduling the interview, an error message is returned since the interview is disabled', ()=>{
-        interview.disableInterview();
-
-        expect(interview.status).toBe(InterviewStatus.disabled);
-
-        expect(()=>interview.rescheduledInterview()).toThrow(new InterviewCurrentlyDisabledException(
-            'La entrevista está actualmente deshabilitada.'
-        ))
-    });
 })
 

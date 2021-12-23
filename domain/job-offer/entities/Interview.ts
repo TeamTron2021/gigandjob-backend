@@ -19,6 +19,7 @@ import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInter
 import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
 import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
 import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
+import disabledInterviewE from "../domain-events/interview/interview/disabledInterview/disabledInterview.Event";
 import { ChangeInterviewStatusToDisable } from "../domain-service/interview/ChangeInterviewStatusToDisable";
 
 
@@ -167,7 +168,7 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
 
     public disableInterview():void{
         try{
-            let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
+            const interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
             this.status = interviewStatus.changeStatus(this.status);
         }catch(e){
             console.log(e);
