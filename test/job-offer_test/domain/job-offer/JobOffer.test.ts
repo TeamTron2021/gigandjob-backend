@@ -316,6 +316,8 @@ describe('Testing JobOffer creation', ()=>{
         expect(jobOffer.status).toBe(OfferStatus.notPublished);
 
         expect(jobOffer.isPublished().status).toBe(OfferStatus.published);
+
+        expect(jobOffer.JobOfferRevoked().status).toBe(OfferStatus.disable);
     });
     
     test('Should throw an interview currently disabled error for an online interview', () => {
@@ -510,6 +512,210 @@ describe('Testing JobOffer creation', ()=>{
         
         expect(() => {
             jobOffer.acceptInPersonInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewed,
+                interviewer,
+                InterviewStatus.created,
+                interviewId,
+                interviewDirection
+            )
+        }).not.toThrow();
+    })
+
+    test('Should throw an interview currently disabled error for an online interview', () => {
+        // Creación de la oferta de trabajo.
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'),
+            JobOfferSkill.create('Mongo'),
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+        
+        const initialDate = new Date();
+        const finalDate = new Date();
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate,
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+        
+        const complaint: JobOfferComplaint[] = [
+            //Inicia vacio
+        ];
+        
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            complaint,
+            date,
+            id
+        );
+        
+        expect(() => {
+            jobOffer.RejectOnlineInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewed,
+                interviewer,
+                InterviewStatus.disabled,
+                interviewId,
+                interviewUrlMeeting
+            )
+        }).toThrow(new InterviewCurrentlyDisabledException('Entrevista actualmente deshabilitada'));
+    });
+
+    test('Should not throw any errors for an online interview in reject interview', () => {
+        // Creación de la oferta de trabajo.
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'),
+            JobOfferSkill.create('Mongo'),
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+        
+        const initialDate = new Date();
+        const finalDate = new Date();
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate,
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+        
+        const complaint: JobOfferComplaint[] = [
+            //Inicia vacio
+        ];
+        
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            complaint,
+            date,
+            id
+        );
+        
+        expect(() => {
+            jobOffer.RejectOnlineInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewed,
+                interviewer,
+                InterviewStatus.created,
+                interviewId,
+                interviewUrlMeeting
+            )
+        }).not.toThrow();
+    });
+
+    test('Should throw an interview currently disabled error for an in person interview', () => {
+        // Creación de la oferta de trabajo.
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'),
+            JobOfferSkill.create('Mongo'),
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+        
+        const initialDate = new Date();
+        const finalDate = new Date();
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate,
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+        
+        const complaint: JobOfferComplaint[] = [
+            //Inicia vacio
+        ];
+        
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            complaint,
+            date,
+            id
+        );
+        
+        expect(() => {
+            jobOffer.rejectInPersonInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewed,
+                interviewer,
+                InterviewStatus.disabled,
+                interviewId,
+                interviewDirection
+            )
+        }).toThrow(new InterviewCurrentlyDisabledException('Entrevista actualmente deshabilitada'));
+    });
+
+    test('Should not throw any errors for an in person interview', () => {
+        // Creación de la oferta de trabajo.
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'),
+            JobOfferSkill.create('Mongo'),
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+        
+        const initialDate = new Date();
+        const finalDate = new Date();
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate,
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+        
+        const complaint: JobOfferComplaint[] = [
+            //Inicia vacio
+        ];
+        
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            complaint,
+            date,
+            id
+        );
+        
+        expect(() => {
+            jobOffer.rejectInPersonInterview(
                 interviewTitle,
                 interviewDescription,
                 interviewDate,

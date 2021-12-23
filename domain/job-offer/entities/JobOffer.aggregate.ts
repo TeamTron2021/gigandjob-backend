@@ -33,6 +33,7 @@ import OnlineInterview from "./OnlineInterview";
 import InterviewAccepted from "../domain-events/interview/interview/InterviewAccepted.Event";
 import InPersonInterviewDirection from "../value-objects/Interview/InPersonInterview/InPersonInterviewDirection";
 import InPersonInterview from "./InPersonInterview";
+import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
 
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
@@ -156,6 +157,37 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         JobOfferSuspendedNotification.sendPublishedOffer() ;
         return OfferPublished;
     }
+   
+    public JobOfferRevoked( 
+        this: JobOffer<OfferStatus.notPublished | OfferStatus.published>
+        ):JobOffer<OfferStatus.disable>{
+            const OfferRevoked = new JobOffer(
+                this.description,
+                this.salary,
+                this.skills,
+                this.title,
+                this.vacant,
+                this.likes,
+                this.complaint,
+                this.date,
+                OfferStatus.disable,
+                this.Id
+            );
+        OfferRevoked.eventRecorder = this.eventRecorder.slice(0);
+        this.eventRecorder.push(new JobOfferPublished(
+            this.Id,
+            OfferStatus.disable
+            ))
+         const subject = new JobOfferNotificationSubject(
+             'Oferta Revocada'
+             );
+         const content = new JobOfferNotificationContent(
+             'Su oferta ha sido desahbilitada debido a suspensión'
+             );
+         const JobOfferRevokedNotification =new JobOfferNotification(subject,content,OfferRevoked); 
+         JobOfferRevokedNotification.sendPublishedOffer() ;
+        return OfferRevoked;
+    }
     
     /**
      * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
@@ -251,6 +283,73 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         }
     }
 
+
+    public rejectInPersonInterview(interviewTitle: InterviewTitle,
+        interviewDescription: InterviewDescription,
+        interviewDate: InterviewDate,
+        interviewInterviewed: InterviewInterviewed,
+        interviewInterviewer: InterviewInterviewer,
+        interviewStatus: InterviewStatus,
+        interviewId: InterviewId,
+        interviewDirection: InPersonInterviewDirection): void
+        {
+            try{
+                const interview = new InPersonInterview(
+                    interviewTitle,
+                    interviewDescription,
+                    interviewDate,
+                    interviewInterviewed,
+                    interviewInterviewer,
+                    interviewStatus,
+                    interviewId,
+                    interviewDirection
+                );
+                interview.rejectInterview();
+                const interviewEventReject : IDomainEvent 
+                = new   InterviewRejected(
+                    interview.getInterviewId(),
+                    interview.getStatus(),
+                    interview.interviewed);
+                    this.eventRecorder.push(interviewEventReject);
+            }catch(e){
+                console.log(e);
+                throw e;
+            }
+
+    }
+
+    public RejectOnlineInterview(
+        interviewTitle: InterviewTitle,
+        interviewDescription: InterviewDescription,
+        interviewDate: InterviewDate,
+        interviewInterviewed: InterviewInterviewed,
+        interviewInterviewer: InterviewInterviewer,
+        interviewStatus: InterviewStatus,
+        interviewId: InterviewId,
+        interviewUrlMeeting: OnlineInterviewUrlMeeting
+        ):void{
+        try{
+            const interview = new OnlineInterview(
+                interviewTitle,
+                interviewDescription,
+                interviewDate,
+                interviewInterviewed,
+                interviewInterviewer,
+                interviewStatus,
+                interviewId,
+                interviewUrlMeeting 
+            );
+            interview.rejectInterview();
+            const interviewEventReject : IDomainEvent 
+                = new   InterviewRejected(
+                    interview.getInterviewId(),
+                    interview.getStatus(),
+                    interview.interviewed);
+                    this.eventRecorder.push(interviewEventReject);
+        }catch(e){
+            console.log(e);
+            throw e;}
+    }
 
     static JobOfferRemove(id: JobOfferId, object: JobOffer<OfferStatus>[]){
         for(let x=0; x<=object.length-1; x++){
