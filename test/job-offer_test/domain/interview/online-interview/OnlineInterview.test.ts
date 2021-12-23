@@ -70,5 +70,39 @@ describe('Testing Interview creation', ()=>{
         
         expect(newInterviewStatus).toBe(expectedInterviewStatus);
     })
+
+    test('Should throws an interview currently disabled error',()=>{
+        const interview = new OnlineInterview(
+            interviewTitle,
+            interviewDescription,
+            date,
+            interviewed,
+            interviewer,
+            InterviewStatus.disabled,
+            id,
+            interviewUrlMeeting
+        ); 
+            
+            expect(() => {interview.rejectedInterview()}).toThrow();
+    });
+
+    test('Should update the interview status to rejected', ()=>{
+       
+        const interview =  OnlineInterview.create(
+            interviewTitle,
+            interviewDescription,
+            date,
+            interviewed,
+            interviewer,
+            id,
+            interviewUrlMeeting
+        ); 
+            interview.rejectedInterview();
+            const interviewStatus = interview.status;
+            const statusExpected = InterviewStatus.rejected;
+            
+        expect(interviewStatus).toBe(statusExpected);
+    
+    });
 })
 
