@@ -287,5 +287,7 @@ describe('Testing JobOffer creation', ()=>{
         expect(jobOffer.status).toBe(OfferStatus.notPublished);
 
         expect(jobOffer.isPublished().status).toBe(OfferStatus.published);
+
+        expect(jobOffer.JobOfferRevoked().status).toBe(OfferStatus.disable);
     });
 })
