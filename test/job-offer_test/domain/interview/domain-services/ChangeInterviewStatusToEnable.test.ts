@@ -4,10 +4,10 @@ import { InterviewStatus } from "../../../../../domain/job-offer/shared/Intervie
 import { IChangeInterviewStatus } from "../../../../../shared/domain/IRejectInterview";
 
 describe('ChangeInterviewStatusToEnable Unit Tests', () => {
-	const expectedInterviewStatus: InterviewStatus = InterviewStatus.disabled;
+	const expectedInterviewStatus: InterviewStatus = InterviewStatus.enable;
 	
 	test('Should throw an interview currently disabled error', () => {
-		const originalInterviewStatus: InterviewStatus = InterviewStatus.disabled;
+		const originalInterviewStatus: InterviewStatus = InterviewStatus.enable;
 		
 		let interviewStatusChanger: IChangeInterviewStatus = new ChangeInterviewStatusToEnable();
 		
