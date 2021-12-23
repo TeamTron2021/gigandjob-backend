@@ -168,7 +168,7 @@ export default class Interview<S extends InterviewStatus> implements IInterview 
 
     public disableInterview():void{
         try{
-            let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
+            const interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToDisable();
             this.status = interviewStatus.changeStatus(this.status);
         }catch(e){
             console.log(e);
