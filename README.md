@@ -1,5 +1,5 @@
 # Git and Job (Backend Service)
-Backend para git and job, un sistema de busqueda y aplicación de empleos tanto fijos como gits. Este repositorio tiene como objetivo desplegar el servicio backend para la aplicación web y móvil.
+Backend para git and job, un sistema de busqueda y aplicación de empleos tanto fijos como gits. Este repositorio tiene como objetivo desplegar el servicio backend para la aplicación web y móvil haciendo uso de Domain Driven Design y Arquitectura Hexagonal.
 
 ## 🚀Iniciando 
 Estas instrucciones serviran para obtener una copia del proyecto en funcionamiento en su máquina local con el fin de desarollo y realizar pruebas.
