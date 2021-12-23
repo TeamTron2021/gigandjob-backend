@@ -1,3 +1,5 @@
+import {CVAproved} from "../../../domain/user/domain_events/CVAproved.event"
+import {CVRejected} from "../../../domain/user/domain_events/CVRejected.event"
 import {UserAccountDeleted} from "../../../domain/user/domain_events/UserAccountDeleted.event"
 import {UserConfirmed} from "../../../domain/user/domain_events/UserConfirmed.event"
 import {UserDataUpdated} from "../../../domain/user/domain_events/UserDataUpdated.event"
@@ -6,6 +8,9 @@ import {UserRegistered} from "../../../domain/user/domain_events/UserRegistered.
 import {UserSuspended} from "../../../domain/user/domain_events/UserSuspended.event"
 import {UserStatus} from "../../../domain/user/enums/UserStatus.enum"
 import {User} from "../../../domain/user/User.aggregate"
+import CVAcademicFormation from "../../../domain/user/value_objects/CVAcademicFormation.value"
+import CVCourses from "../../../domain/user/value_objects/CVCourses.value"
+import CVSkills from "../../../domain/user/value_objects/CVSkills.value"
 import {UserBirthday} from "../../../domain/user/value_objects/UserBirthday.value"
 import {UserEmail} from "../../../domain/user/value_objects/UserEmail.value"
 import {UserFirstName} from "../../../domain/user/value_objects/UserFirstName.value"
@@ -23,7 +28,7 @@ describe('User Aggregate', () =>{
 		)
 		expect(user).toBeInstanceOf(User)
 		const event = new UserRegistered(
-			user.getID(),
+			user.ID,
 			user.firstname,
 			user.lastname,
 			user.birthday,
@@ -45,7 +50,7 @@ describe('User Aggregate', () =>{
 		expect(userConfirmed).toBeInstanceOf(User)
 		expect(userConfirmed.status).toBe(UserStatus.Active)
 		const event = new UserConfirmed(
-			user.getID(),
+			user.ID,
 			userConfirmed.status
 		)
 		expect(userConfirmed.getEvents()).toContainEqual(event)
@@ -66,7 +71,7 @@ describe('User Aggregate', () =>{
 			new UserPassword("stone-free")	
 		)
 		const event = new UserDataUpdated(
-			user.getID(),
+			user.ID,
 			user.firstname,
 			user.lastname,
 			user.birthday,
@@ -89,7 +94,7 @@ describe('User Aggregate', () =>{
 			new UserPassword("tusk-act4")
 		)
 		const event = new UserAccountDeleted(
-			user.getID(),
+			user.ID,
 		)
 		user.deleteAccount()
 		expect(user.getEvents()).toContainEqual(event)
@@ -105,7 +110,7 @@ describe('User Aggregate', () =>{
 		const userConfirmed = user.confirm()
 		const userSuspended = userConfirmed.suspend()
 		const event = new UserSuspended(
-			user.getID(),
+			user.ID,
 			userSuspended.status
 		)
 		expect(userSuspended.getEvents()).toContainEqual(event)
@@ -122,9 +127,62 @@ describe('User Aggregate', () =>{
 		const userSuspended = userConfirmed.suspend()
 		const userReactived = userSuspended.reactive()
 		const event = new UserReactivated(
-			user.getID(),
+			user.ID,
 			userReactived.status
 		)
 		expect(userReactived.getEvents()).toContainEqual(event)
+	})
+	test('Should approve CV to user',() =>{
+		const user = User.register(
+			new UserFirstName("Jonathan"), 
+			new UserLastName("Joestar"), 
+			new UserBirthday(new Date(1869,4,4)), 
+			new UserEmail("jonathan@joestar.com"), 
+			new UserPassword("jonathan-joestar")
+		)
+
+		user.uploadCV(
+			[new CVAcademicFormation("Speedwagon Foundtation")],
+			[new CVSkills("hamon")], 
+			[new CVCourses("Zeppeli Hamon Classes")]
+		)
+
+		const userActivated = user.approveCV()
+
+
+		if (userActivated){
+			expect(userActivated.status).toBe(UserStatus.Active)
+
+			if (user.cv && userActivated.cv){
+				const event = new CVAproved(user.cv.getID(), userActivated.cv.status)
+				expect(userActivated.getEvents()).toContainEqual(event)
+			}
+		}
+
+	})
+
+	test('Should reject CV to user',() =>{
+		const user = User.register(
+			new UserFirstName("Jonathan"), 
+			new UserLastName("Joestar"), 
+			new UserBirthday(new Date(1869,4,4)), 
+			new UserEmail("jonathan@joestar.com"), 
+			new UserPassword("jonathan-joestar")
+		)
+
+		user.uploadCV(
+			[new CVAcademicFormation("Speedwagon Foundtation")],
+			[new CVSkills("hamon")], 
+			[new CVCourses("Zeppeli Hamon Classes")]
+		)
+
+		user.rejectCV()
+
+
+		if (user.cv && user.cv.isRejected()){
+			const event = new CVRejected(user.cv.getID(), user.cv.status)
+			expect(user.getEvents()).toContainEqual(event)
+		}
+
 	})
 })
