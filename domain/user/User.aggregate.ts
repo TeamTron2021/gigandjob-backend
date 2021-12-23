@@ -31,7 +31,6 @@ type CVType<S> = S extends UserStatus.Unconfirmed ? CV<CVStatus.Unconfirmed> | C
 export class User<S extends UserStatus>{
 	private _ID: UserID
 	public status: S
-	 
 	private eventRecorder: UserEvents[] = []
 	
 	private constructor(
