@@ -1,5 +1,5 @@
 import InterviewCreated from "../../../../../domain/job-offer/domain-events/interview/interview/interviewCreated/InterviewCreated.Event";
-import { InterviewRejected } from "../../../../../domain/job-offer/domain-events/interview/InterviewRejected.Event";
+import { InterviewRejected } from "../../../../../domain/job-offer/domain-events/interview/interview/InterviewRejected.Event";
 import Interview from "../../../../../domain/job-offer/entities/Interview";
 import InterviewCurrentlyDisabledException from "../../../../../domain/job-offer/exceptions/Interview/ChangeInterviewStatus/InterviewCurrentlyDisabledException";
 import { InterviewStatus } from "../../../../../domain/job-offer/shared/InterviewStatus.enum";

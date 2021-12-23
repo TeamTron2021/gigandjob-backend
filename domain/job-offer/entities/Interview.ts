@@ -17,7 +17,7 @@ import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUp
 import ChangeInterviewStatusToRescheduled from "../domain-service/interview/ChangeInterviewStatusToRescheduled";
 import { IChangeInterviewStatus } from "../domain-service/interview/IChangeInterviewStatus";
 import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
-import { InterviewRejected } from "../domain-events/interview/InterviewRejected.Event";
+import { InterviewRejected } from "../domain-events/interview/interview/InterviewRejected.Event";
 
 
 export default class Interview<S extends InterviewStatus> implements IInterview {
