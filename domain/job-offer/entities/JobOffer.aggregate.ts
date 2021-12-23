@@ -149,7 +149,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
                 OfferStatus.published,
                 this.Id
             );
-        OfferPublished.eventRecorder = this.eventRecorder.slice(0);
         this.eventRecorder.push(new JobOfferPublished(this.Id,OfferStatus.published))
         const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Publicada');
         const content = new JobOfferNotificationContent('Ahora solo queda esperar');
@@ -270,6 +269,11 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
                                             object[x].status
                     )
                 );
+                object[x].eventRecorder.push(new JobOfferPublished(id,OfferStatus.Removed))
+                const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Removida');
+                const content = new JobOfferNotificationContent('Escoja entre el resto de las opciones');
+                const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,object[x]);
+                JobOfferSuspendedNotification.sendRemoveOffer() ;
                 object.splice(x,1);
 			    return object;
 			}	
@@ -278,3 +282,4 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
 		
     protected invariants() {}
 }
+
