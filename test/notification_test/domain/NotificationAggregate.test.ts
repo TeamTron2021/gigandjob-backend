@@ -1,8 +1,10 @@
-import {randomUUID} from "crypto"
+import { CVAprovedNotificationSent } from "../../../domain/notification/domain_events/CVAprovedNotification.event"
+import { CVLoadedNotificationSent } from "../../../domain/notification/domain_events/CVLoadedNotification.event"
+import { CVRejectedNotificationSent } from "../../../domain/notification/domain_events/CVRejectedNotification.event"
+import {UserReactivatedNotificationSent} from "../../../domain/notification/domain_events/UserReactivatedNotificationSent.event"
 import {UserRegisteredNotificationSent} from "../../../domain/notification/domain_events/UserRegisteredNotificationSent.event"
-import {NotificationIdEmpty} from "../../../domain/notification/errors/NotificationIdEmpty.error"
+import {UserSuspendedNotificationSent} from "../../../domain/notification/domain_events/UserSuspendedNotificationSent.event"
 import {Notification} from "../../../domain/notification/Notification.aggreagate"
-import {NotificationID} from "../../../domain/notification/values_objects/NotificationID.value"
 import {NotificationSubject} from "../../../domain/notification/values_objects/NotificationSubject.value"
 
 class BasicNotificationContent {
@@ -34,8 +36,46 @@ describe('Notification Aggregate', () =>{
 		notification.notifyUserRegistered()
 		expect(notification.getEvents()).toContainEqual(event)
 	})
-
-	test('Should notify about CV Loaded',() =>{
+	test('Should notify about User Suspended',() =>{
+		const content = new BasicNotificationContent(
+			"jotaro@joestar.com",
+			"jolyne@joestar.com",
+			"firebase",
+			"Tu cuenta ha sido suspendida"
+		)
+		const notification = new Notification<BasicNotificationContent>(
+				new NotificationSubject("User suspended"),
+				content
+		)
+		const event = new UserSuspendedNotificationSent<BasicNotificationContent>(
+			notification.ID, 
+			new NotificationSubject("User suspended"),
+			content
+		)
+		notification.notifyUserSuspended()
+		expect(notification.getEvents()).toContainEqual(event)
+	})
+	test('Should notify about User Reactivated',() =>{
+		const content = new BasicNotificationContent(
+			"jotaro@joestar.com",
+			"jolyne@joestar.com",
+			"firebase",
+			"Tu cuenta ha sido reactivada"
+		)
+		const notification = new Notification<BasicNotificationContent>(
+				new NotificationSubject("User reactivated"),
+				content
+		)
+		const event = new UserReactivatedNotificationSent<BasicNotificationContent>(
+			notification.ID, 
+			new NotificationSubject("User reactivated"),
+			content
+		)
+		notification.notifyUserReactivated()
+		expect(notification.getEvents()).toContainEqual(event)
+	})
+})
+test('Should notify about CV Loaded',() =>{
 		const content = new BasicNotificationContent(
 			"jotaro@joestar.com",
 			"jolyne@joestar.com",
@@ -46,7 +86,7 @@ describe('Notification Aggregate', () =>{
 				new NotificationSubject("CV loaded"),
 				content
 		)
-		const event = new UserRegisteredNotificationSent<BasicNotificationContent>(
+		const event = new CVLoadedNotificationSent<BasicNotificationContent>(
 			notification.ID, 
 			new NotificationSubject("CV loaded"),
 			content
@@ -66,7 +106,7 @@ describe('Notification Aggregate', () =>{
 				new NotificationSubject("CV approved"),
 				content
 		)
-		const event = new UserRegisteredNotificationSent<BasicNotificationContent>(
+		const event = new CVAprovedNotificationSent<BasicNotificationContent>(
 			notification.ID, 
 			new NotificationSubject("CV approved"),
 			content
@@ -80,13 +120,13 @@ describe('Notification Aggregate', () =>{
 			"jotaro@joestar.com",
 			"jolyne@joestar.com",
 			"email",
-			"Lo sentimos, su curriculum ha sido rechazado"
+			"Lo sentimos, Su curriculum ha sido rechazado"
 		)
 		const notification = new Notification<BasicNotificationContent>(
 				new NotificationSubject("CV rejected"),
 				content
 		)
-		const event = new UserRegisteredNotificationSent<BasicNotificationContent>(
+		const event = new CVRejectedNotificationSent<BasicNotificationContent>(
 			notification.ID, 
 			new NotificationSubject("CV rejected"),
 			content
@@ -94,4 +134,3 @@ describe('Notification Aggregate', () =>{
 		notification.notifyCVRejected()
 		expect(notification.getEvents()).toContainEqual(event)
 	})
-})

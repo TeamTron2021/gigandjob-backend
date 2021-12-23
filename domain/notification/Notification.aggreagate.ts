@@ -2,7 +2,9 @@ import {randomUUID} from "crypto";
 import { CVAprovedNotificationSent } from "./domain_events/CVAprovedNotification.event";
 import { CVLoadedNotificationSent } from "./domain_events/CVLoadedNotification.event";
 import { CVRejectedNotificationSent } from "./domain_events/CVRejectedNotification.event";
+import {UserReactivatedNotificationSent} from "./domain_events/UserReactivatedNotificationSent.event";
 import {UserRegisteredNotificationSent} from "./domain_events/UserRegisteredNotificationSent.event";
+import {UserSuspendedNotificationSent} from "./domain_events/UserSuspendedNotificationSent.event";
 import {NotificationID} from "./values_objects/NotificationID.value";
 import {NotificationSubject} from "./values_objects/NotificationSubject.value";
 
@@ -33,6 +35,14 @@ export class Notification<T>{
 		))
 	}
 
+	notifyUserSuspended(){
+		this.events.push(new UserSuspendedNotificationSent<T>(
+			this._ID,
+			this.subject,
+			this.content
+		))
+	}
+
 	notifyCVAproved(){
 		this.events.push(new CVAprovedNotificationSent<T>(
 			this._ID,
@@ -48,4 +58,13 @@ export class Notification<T>{
 			this.content
 		))
 	}
+
+	notifyUserReactivated(){
+		this.events.push(new UserReactivatedNotificationSent<T>(
+			this._ID,
+			this.subject,
+			this.content
+		))
+	}
 }
+	
