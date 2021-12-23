@@ -127,8 +127,13 @@ describe('Postulation Entity test', () => {
             id
         ); 
 
+        postulation.addInterviews(interv);
+        postulation.suspendInterview();
+        postulation.reactivateInterviewsUser();
 
-        expect([postulation.getInterviews()]).toContainEqual(InterviewStatus.enable);
+        postulation.getInterviews().forEach((interview)=>{
+            expect(interview.status).toBe(InterviewStatus.enable);
+        })
 
     });
 
