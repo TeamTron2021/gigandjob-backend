@@ -3,12 +3,13 @@ import InterviewRegistered from "../domain-events/interview/interview/notificati
 import { InterviewRejectedNotification } from "../domain-events/interview/interview/notifications/InterviewRejectedNotification.Event";
 import InterviewRescheduledNotification from "../domain-events/interview/interview/notifications/InterviewRescheduledNotification.Event";
 import IInterview from "../shared/IInterview";
+import IInterviewNotification from "../shared/IInterviewNotification";
 import { InterviewStatus } from "../shared/InterviewStatus.enum";
 import NotificationContent from "../value-objects/Interview/interview/interview-notification/NotificationContent";
 import NotificationSubject from "../value-objects/Interview/interview/interview-notification/NotificationSubject";
 import Interview from "./Interview";
 
-export default class InterviewNotification {
+export default class InterviewNotification{
     private eventRecorder: IDomainEvent[] = []; 
     constructor(
         private readonly subject: NotificationSubject,
@@ -34,6 +35,7 @@ export default class InterviewNotification {
                 this.interview.getInterviewId(), this.subject, this.content))
     }
 
+   
     public sendRejected(){
       
        this.eventRecorder.push(
