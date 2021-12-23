@@ -185,7 +185,7 @@ describe('Testing JobOffer creation', ()=>{
         id)
         expect(jobOffer).toBeInstanceOf(JobOffer);
     })
-    it('Should update the JobOffer status', ()=>{
+    it('Should update the JobOffer suspended', ()=>{
         const skills: JobOfferSkill[] = [
             JobOfferSkill.create('SQL'),
             JobOfferSkill.create('Mongo'),
@@ -246,12 +246,11 @@ describe('Testing JobOffer creation', ()=>{
         const complaintDate = JobOfferComplaintDate.create(new Date());
         const createComplaint = JobOfferComplaint.create(complaintId,issue,complaintDate);
         complaint.push(createComplaint)
-
-        expect(jobOffer.status).toBe(OfferStatus.notPublished);
-
-        expect(jobOffer.isSuspended().status).toBe(OfferStatus.suspended);
+        const test = jobOffer.isPublished()
+        expect(test.status).toBe(OfferStatus.published);
+        expect(test.isSuspended().status).toBe(OfferStatus.suspended);
     });
-    it('Should update the JobOffer status', ()=>{
+    it('Should update the JobOffer Published', ()=>{
         const skills: JobOfferSkill[] = [
             JobOfferSkill.create('SQL'),
             JobOfferSkill.create('Mongo'),
@@ -521,4 +520,71 @@ describe('Testing JobOffer creation', ()=>{
             )
         }).not.toThrow();
     })
+    it('Should update the JobOffer Reactivated', ()=>{
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'),
+            JobOfferSkill.create('Mongo'),
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+
+        const initialDate = new Date();
+        const finalDate = new Date();
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate,
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+
+        const complaint: JobOfferComplaint[] = [
+            //Inicia vacio
+        ];
+       
+        const id = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500),
+            skills,
+            JobOfferTItle.create('Titulo generico de una oferta'),
+            JobOfferVacant.create(3),
+            likes,
+            complaint,
+            date,
+            id
+        );
+
+        const JobOfferLikeNew1 = JobOfferLike.likeOffer() ///Luego de creado se grega like
+        likes.push(JobOfferLikeNew1);
+
+        const postulation = Postulation.create(
+            new PostulationDate(new Date())
+        )
+        expect(postulation).toBeInstanceOf(Postulation)
+        
+        const eventCreated = new PostulationCreated(
+            postulation.getId(),
+            postulation.getDate(),
+            postulation.status
+        )
+
+        JobOfferLike.removelike(likes) //Se remueve el like
+        
+        jobOffer.addPostulation(postulation);
+        expect(jobOffer.getPostulations()).toContainEqual(postulation);
+
+
+        const complaintId = JobOfferComplaintId.create(new UniqueId().getId()); //Luego de creado se agrega una denuncia
+        const issue = JobOfferComplaintIssue.create('Issue');
+        const complaintDate = JobOfferComplaintDate.create(new Date());
+        const createComplaint = JobOfferComplaint.create(complaintId,issue,complaintDate);
+        complaint.push(createComplaint)
+        const test = jobOffer.isPublished()
+        expect(test.status).toBe(OfferStatus.published);
+        const test2 = test.isSuspended()
+        expect(test2.status).toBe(OfferStatus.suspended);
+        expect(test2.ReactivatedOffer().status).toBe(OfferStatus.published);
+    });
 })

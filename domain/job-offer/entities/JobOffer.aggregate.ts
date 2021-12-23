@@ -111,7 +111,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     }
 
     public isSuspended(
-        this: JobOffer<OfferStatus.notPublished | OfferStatus.published>
+        this: JobOffer<OfferStatus.published>
         ):JobOffer<OfferStatus.suspended>{
             const OfferSuspended = new JobOffer(
                 this.description,
@@ -135,7 +135,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     }
    
     public isPublished(
-        this: JobOffer<OfferStatus.notPublished | OfferStatus.suspended>
+        this: JobOffer<OfferStatus.notPublished>
         ):JobOffer<OfferStatus.published>{
             const OfferPublished = new JobOffer(
                 this.description,
@@ -279,7 +279,31 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
 			}	
 		}
 	}
-		
+
+    public ReactivatedOffer(
+        this: JobOffer<OfferStatus.suspended>
+        ):JobOffer<OfferStatus.published>{
+            const reactivatedOffer = new JobOffer(
+                this.description,
+                this.salary,
+                this.skills,
+                this.title,
+                this.vacant,
+                this.likes,
+                this.complaint,
+                this.date,
+                OfferStatus.published,
+                this.Id
+            );
+        reactivatedOffer.eventRecorder = this.eventRecorder.slice(0);
+        this.eventRecorder.push(new JobOfferPublished(this.Id,OfferStatus.published))
+        const subject = new JobOfferNotificationSubject('La Oferta de trabajo se ha reactivado');
+        const content = new JobOfferNotificationContent('Esta disponible entre las opciones');
+        const JobOfferReavtivatedNotification =new JobOfferNotification(subject,content,reactivatedOffer);
+        JobOfferReavtivatedNotification.sendReactivatedOffer();
+        return reactivatedOffer;
+    }
+    
     protected invariants() {}
 }
 
