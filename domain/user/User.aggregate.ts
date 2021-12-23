@@ -1,6 +1,5 @@
 import {randomUUID} from "crypto";
 import {UserAccountDeleted} from "./domain_events/UserAccountDeleted.event";
-import {UserConfirmed} from "./domain_events/UserConfirmed.event";
 import {UserDataUpdated} from "./domain_events/UserDataUpdated.event";
 import {UserReactivated} from "./domain_events/UserReactivated.event";
 import {UserRegistered} from "./domain_events/UserRegistered.event";
@@ -19,7 +18,6 @@ import {UserLastName} from "./value_objects/UserLastName.value";
 import {UserPassword} from "./value_objects/UserPassword.value";
 
 type UserEvents = UserRegistered 
-	| UserConfirmed 
 	| UserSuspended
 	| UserReactivated
 	| UserDataUpdated 
@@ -66,24 +64,6 @@ export class User<S extends UserStatus>{
 			user.birthday,
 			user.email,
 			user.password,
-			user.status
-		))
-		return user
-	}
-
-	confirm(this: User<UserStatus.Unconfirmed>): User<UserStatus.Active>{
-		const user = new User(
-			this.firstname,
-			this.lastname,
-			this.birthday,
-			this.email,
-			this.password,
-			UserStatus.Active,
-			this.ID
-		)
-		user.eventRecorder = this.eventRecorder.slice(0)
-		user.eventRecorder.push(new UserConfirmed(
-			user.ID,
 			user.status
 		))
 		return user
