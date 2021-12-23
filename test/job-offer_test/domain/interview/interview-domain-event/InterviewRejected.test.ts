@@ -12,28 +12,7 @@ import InterviewTitle from "../../../../../domain/job-offer/value-objects/Interv
 import UniqueId from "../../../../../shared/domain/UniqueUUID";
 
 describe('Testing Interview creation', ()=>{
-    it('Should return a Interview instance', () =>{
-        
-        const initialDate = new Date(); 
-        const finalDate = new Date(); 
-        initialDate.setDate(finalDate.getDate() -1);
-        const date = InterviewDate.create(
-            initialDate, 
-            finalDate
-        );
-        const id = InterviewId.create(new UniqueId().getId());
-        const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-        const interviewer = InterviewInterviewer.create(new UniqueId().getId());
-        const interview = Interview.create(
-            InterviewTitle.create('Titulo generico de una entrevista'),
-            InterviewDescription.create('Descripcion generica de una entrevista de trabajo'), 
-            date, 
-            interviewed,
-            interviewer,
-            id
-        ); 
-        expect(interview).toBeInstanceOf(Interview);
-    });
+   
     it('Should update the interview status to rejected', ()=>{
         const initialDate = new Date(); 
         const finalDate = new Date(); 
