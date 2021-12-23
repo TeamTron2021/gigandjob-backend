@@ -176,7 +176,7 @@ export class User<S extends UserStatus>{
 
 	approveCV(
 		this: User<UserStatus.Unconfirmed>,
-	) {
+	): User<UserStatus.Active> | undefined {
 		if (this.cv) { 
 			const cvApproved = this.cv.approve()
 			const userActivated = new User(
@@ -193,6 +193,7 @@ export class User<S extends UserStatus>{
 			userActivated.eventRecorder =[...userActivated.eventRecorder,...cvApproved.getEvents()]
 			return userActivated
 		}
+		return undefined
 	}
 
 	rejectCV(
