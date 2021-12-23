@@ -87,5 +87,60 @@ describe('Testing employeer creation', ()=>{
 
         expect(employeer.suspendEmployeer().status).toBe(EmployeerStatus.SUSPENDED);
     });
-   
+
+    it('Should return Remove a JobOffer of Employeer', ()=>{
+        const id = EmployeerId.create(new UniqueId().getId());
+        const latitude:any = '+90.0, -127.554334'; 
+        const longitude:any = '47.1231231, 179.99999999'; 
+        const employeerLocalization = EmployeerLocalization.create(latitude, longitude); 
+        const employeer = Employeer.create(
+            new EmployeerCompanyMail('empresasPolar@polar.com'), 
+            new EmployeerCompanyName('Empresas Polar'), 
+            id,
+            new EmployeerIndustry('Alimentos'),
+            new EmployeerRif('J-27784169-4'), 
+            employeerLocalization
+        ); 
+        const skills: JobOfferSkill[] = [
+            JobOfferSkill.create('SQL'), 
+            JobOfferSkill.create('Mongo'), 
+            JobOfferSkill.create('Inteligencia emocional')
+        ];
+
+        const initialDate = new Date(); 
+        const finalDate = new Date(); 
+        initialDate.setDate(finalDate.getDate() -1);
+        const date = JobOfferDate.create(
+            initialDate, 
+            finalDate
+        );
+        
+        const likes: JobOfferLike[] = [
+            //Inicia vacio
+        ];
+
+        const jobOfferComplaint: JobOfferComplaint[] = [];
+       
+        const offerid = JobOfferId.create(new UniqueId().getId());
+        const jobOffer = JobOffer.create(
+            JobOfferDescription.create('Descripcion generica de una oferta de trabajo'),
+            JobOfferSalary.create(1500), 
+            skills, 
+            JobOfferTItle.create('Titulo generico'), 
+            JobOfferVacant.create(4), 
+            likes, 
+            jobOfferComplaint,
+            JobOfferDate.create(initialDate, finalDate), 
+            offerid            
+        ); 
+  
+        employeer.addJobOffer(jobOffer); 
+
+        const length = employeer.getOffers();
+        expect(length).toHaveLength(1);
+        JobOffer.JobOfferRemove(offerid,employeer.getOffers());
+        const length2 = employeer.getOffers();
+        expect(length2).toHaveLength(0);
+        expect(employeer).toBeInstanceOf(Employeer);
+    });
 })

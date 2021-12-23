@@ -1,3 +1,6 @@
+import { CVAprovedNotificationSent } from "../../../domain/notification/domain_events/CVAprovedNotification.event"
+import { CVLoadedNotificationSent } from "../../../domain/notification/domain_events/CVLoadedNotification.event"
+import { CVRejectedNotificationSent } from "../../../domain/notification/domain_events/CVRejectedNotification.event"
 import {UserReactivatedNotificationSent} from "../../../domain/notification/domain_events/UserReactivatedNotificationSent.event"
 import {UserRegisteredNotificationSent} from "../../../domain/notification/domain_events/UserRegisteredNotificationSent.event"
 import {UserSuspendedNotificationSent} from "../../../domain/notification/domain_events/UserSuspendedNotificationSent.event"
@@ -72,3 +75,62 @@ describe('Notification Aggregate', () =>{
 		expect(notification.getEvents()).toContainEqual(event)
 	})
 })
+test('Should notify about CV Loaded',() =>{
+		const content = new BasicNotificationContent(
+			"jotaro@joestar.com",
+			"jolyne@joestar.com",
+			"email",
+			"Curriculum subido correctamente"
+		)
+		const notification = new Notification<BasicNotificationContent>(
+				new NotificationSubject("CV loaded"),
+				content
+		)
+		const event = new CVLoadedNotificationSent<BasicNotificationContent>(
+			notification.ID, 
+			new NotificationSubject("CV loaded"),
+			content
+		)
+		notification.notifyCVLoaded()
+		expect(notification.getEvents()).toContainEqual(event)
+	})
+
+	test('Should notify about CV Approved',() =>{
+		const content = new BasicNotificationContent(
+			"jotaro@joestar.com",
+			"jolyne@joestar.com",
+			"email",
+			"Felicidades!, Su curriculum ha sido aprobado"
+		)
+		const notification = new Notification<BasicNotificationContent>(
+				new NotificationSubject("CV approved"),
+				content
+		)
+		const event = new CVAprovedNotificationSent<BasicNotificationContent>(
+			notification.ID, 
+			new NotificationSubject("CV approved"),
+			content
+		)
+		notification.notifyCVAproved()
+		expect(notification.getEvents()).toContainEqual(event)
+	})
+
+	test('Should notify about CV Rejected',() =>{
+		const content = new BasicNotificationContent(
+			"jotaro@joestar.com",
+			"jolyne@joestar.com",
+			"email",
+			"Lo sentimos, Su curriculum ha sido rechazado"
+		)
+		const notification = new Notification<BasicNotificationContent>(
+				new NotificationSubject("CV rejected"),
+				content
+		)
+		const event = new CVRejectedNotificationSent<BasicNotificationContent>(
+			notification.ID, 
+			new NotificationSubject("CV rejected"),
+			content
+		)
+		notification.notifyCVRejected()
+		expect(notification.getEvents()).toContainEqual(event)
+	})

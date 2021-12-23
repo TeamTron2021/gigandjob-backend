@@ -17,6 +17,7 @@ import NotificationContent from "../value-objects/Interview/interview/interview-
 import InterviewNotification from "./InterviewNotification";
 import { InterviewDataUpdated } from "../domain-events/interview/InterviewDataUpdated.Event";
 import ChangeInterviewStatusToAccepted from "../domain-service/interview/ChangeInterviewStatusToAccepted";
+import { ChangeInterviewStatusToRejected } from "../domain-service/interview/ChangeInterviewStatusToRejected";
 
 export default class OnlineInterview <S extends InterviewStatus> implements IInterview{
     private eventRecorder: IDomainEvent[] = [];
@@ -114,4 +115,15 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
             throw e;
         }
     }
+
+    public rejectInterview():void{
+        try{
+            let interviewStatus : IChangeInterviewStatus = new ChangeInterviewStatusToRejected();
+            this.status = interviewStatus.changeStatus(this.status);
+        }catch(e){
+            console.log(e);
+            throw e;
+        }
+           
+        }
 }

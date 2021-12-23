@@ -22,4 +22,16 @@ export default class JobOfferNotification {
         this.eventRecorder.push(new JobOfferPublishedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
     }
 
+    public sendRevokedOffer() {
+        this.eventRecorder.push(new JobOfferPublishedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
+    }
+
+    public sendRemoveOffer() {
+        this.eventRecorder.push(new JobOfferPublishedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
+    }
+
+    public sendReactivatedOffer() {
+        this.eventRecorder.push(new JobOfferPublishedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
+    }
+    
 }
