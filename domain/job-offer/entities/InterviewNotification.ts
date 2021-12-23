@@ -34,6 +34,9 @@ export default class InterviewNotification {
     }
 
     public sendRejected(){
-       
+      
+       this.eventRecorder.push(
+           new InterviewRejectedNotification(
+                this.interview.getInterviewId(),this.subject,this.content))
     }
 }
