@@ -1,6 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferCreated from "../domain-events/job-offer/JobOfferCreated.Event";
 import JobOfferModified from "../domain-events/job-offer/JobOfferModified.Event";
+import JobOfferPublished from "../domain-events/job-offer/Notification/JobOfferPublished.Event";
 import JobOfferSuspended from "../domain-events/job-offer/Notification/JobOfferSuspended.Event";
 import IJobOffer from "../shared/IJobOffer";
 import { OfferStatus } from "../shared/OfferStatus.enum";
@@ -118,6 +119,30 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferSuspended); 
         JobOfferSuspendedNotification.sendSuspensionOffer();
         return OfferSuspended;
+    }
+   
+    public isPublished( 
+        this: JobOffer<OfferStatus.notPublished | OfferStatus.suspended>
+        ):JobOffer<OfferStatus.published>{
+            const OfferPublished = new JobOffer(
+                this.description,
+                this.salary,
+                this.skills,
+                this.title,
+                this.vacant,
+                this.likes,
+                this.complaint,
+                this.date,
+                OfferStatus.published,
+                this.Id
+            );
+        OfferPublished.eventRecorder = this.eventRecorder.slice(0);
+        this.eventRecorder.push(new JobOfferPublished(this.Id,OfferStatus.published))
+        const subject = new JobOfferNotificationSubject('La Oferta de trabajo ha sido Publicada');
+        const content = new JobOfferNotificationContent('Ahora solo queda esperar');
+        const JobOfferSuspendedNotification =new JobOfferNotification(subject,content,OfferPublished); 
+        JobOfferSuspendedNotification.sendPublishedOffer() ;
+        return OfferPublished;
     }
    
 

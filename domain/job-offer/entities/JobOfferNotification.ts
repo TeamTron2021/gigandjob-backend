@@ -1,4 +1,5 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
+import JobOfferPublishedNotification from "../domain-events/job-offer/Notification/JobOfferPublisedNotification";
 import JobOfferSuspendedNotification from "../domain-events/job-offer/Notification/JobOfferSuspendedNotification";
 import { OfferStatus } from "../shared/OfferStatus.enum";
 import { JobOfferNotificationContent } from "../value-objects/JobOffer/JobOfferNotificationContent";
@@ -15,6 +16,10 @@ export default class JobOfferNotification {
 
     public sendSuspensionOffer() {
         this.eventRecorder.push(new JobOfferSuspendedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
+    }
+
+    public sendPublishedOffer() {
+        this.eventRecorder.push(new JobOfferPublishedNotification(this.JobOffer.getOfferId(), this.subject, this.content))
     }
 
 }
