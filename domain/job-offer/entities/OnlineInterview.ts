@@ -43,6 +43,10 @@ export default class OnlineInterview <S extends InterviewStatus> implements IInt
         return this.Id;
     }
     
+    public getStatus() {
+        return this.status;
+    }
+    
     static create( 
         title: InterviewTitle,
         description: InterviewDescription,

@@ -10,7 +10,6 @@ import {CVStatus} from "./enums/CVStatus.enum";
 import {UserStatus} from "./enums/UserStatus.enum";
 import CVAcademicFormation from "./value_objects/CVAcademicFormation.value";
 import CVCourses from "./value_objects/CVCourses.value";
-import CVID from "./value_objects/CVID.value";
 import CVSkills from "./value_objects/CVSkills.value";
 import {UserBirthday} from "./value_objects/UserBirthday.value";
 import {UserEmail} from "./value_objects/UserEmail.value";
@@ -30,9 +29,9 @@ type CVType<S> = S extends UserStatus.Unconfirmed ? CV<CVStatus.Unconfirmed> | C
 			S extends UserStatus.Active?  CV<CVStatus.Aproved> : CV<CVStatus>
 
 export class User<S extends UserStatus>{
-	private ID: UserID
+	private _ID: UserID
 	public status: S
-	public cv?: CVType<S> 
+	 
 	private eventRecorder: UserEvents[] = []
 	
 	private constructor(
@@ -43,12 +42,13 @@ export class User<S extends UserStatus>{
 		public password: UserPassword,
 		status: S,
 		id?: UserID,
+		public cv?: CVType<S>
 	){
 		this.status = status
-		this.ID = id || new UserID(randomUUID())
+		this._ID = id || new UserID(randomUUID())
 	}
 
-	getID(): UserID { return this.ID }
+	get ID(): UserID { return this._ID }
 	getEvents(): UserEvents[] { return this.eventRecorder }
 
 	static register(
@@ -89,7 +89,7 @@ export class User<S extends UserStatus>{
 		return user
 	}
 
-	suspend(this: User<UserStatus.Active>): User<UserStatus.Supended>{
+	suspend(this: User<UserStatus.Active | UserStatus.Unconfirmed>): User<UserStatus.Supended>{
 		const user = new User(
 			this.firstname,
 			this.lastname,
@@ -170,6 +170,37 @@ export class User<S extends UserStatus>{
 	){
 		if (this.cv) { 
 			this.cv.update(this.cv.getID(), skills, courses, academicFormation)
+			this.eventRecorder =[...this.eventRecorder,...this.cv.getEvents()]
+		}
+	}
+
+	approveCV(
+		this: User<UserStatus.Unconfirmed>,
+	): User<UserStatus.Active> | undefined {
+		if (this.cv) { 
+			const cvApproved = this.cv.approve()
+			const userActivated = new User(
+				this.firstname,
+				this.lastname,
+				this.birthday,
+				this.email,
+				this.password,
+				UserStatus.Active,
+				this._ID,
+				cvApproved
+			)
+			userActivated.eventRecorder = this.eventRecorder.slice(0)
+			userActivated.eventRecorder =[...userActivated.eventRecorder,...cvApproved.getEvents()]
+			return userActivated
+		}
+		return undefined
+	}
+
+	rejectCV(
+		this: User<UserStatus.Unconfirmed>,
+	){
+		if (this.cv) { 
+			this.cv = this.cv.reject()
 			this.eventRecorder =[...this.eventRecorder,...this.cv.getEvents()]
 		}
 	}
