@@ -1,6 +1,7 @@
 import IDomainEvent from "../../../shared/domain/IDomainEvent";
 import JobOfferCreated from "../domain-events/job-offer/JobOfferCreated.Event";
 import JobOfferModified from "../domain-events/job-offer/JobOfferModified.Event";
+import JobOfferRemovedEvent from "../domain-events/job-offer/JobOfferRemove.Event";
 import JobOfferPublished from "../domain-events/job-offer/Notification/JobOfferPublished.Event";
 import JobOfferSuspended from "../domain-events/job-offer/Notification/JobOfferSuspended.Event";
 import IJobOffer from "../shared/IJobOffer";
@@ -144,9 +145,29 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         JobOfferSuspendedNotification.sendPublishedOffer() ;
         return OfferPublished;
     }
-   
 
-
-
+    static JobOfferRemove(id: JobOfferId, object: JobOffer<OfferStatus>[]){
+        for(let x=0; x<=object.length-1; x++){
+			const compare = object[x].getOfferId();
+			if(id.getId() === compare.getId()){
+                object[x].eventRecorder.push(
+                    new JobOfferRemovedEvent(object[x].Id,
+                                            object[x].description, 
+                                            object[x].salary,
+                                            object[x].skills, 
+                                            object[x].title, 
+                                            object[x].vacant, 
+                                            object[x].likes,
+                                            object[x].complaint, 
+                                            object[x].date, 
+                                            object[x].status
+                    )
+                );
+                object.splice(x,1);
+			    return object;
+			}	
+		}
+	}
+		
     protected invariants() {}
 }
