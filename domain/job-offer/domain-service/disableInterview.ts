@@ -10,7 +10,7 @@ import NotificationSubject from "../value-objects/Interview/interview/interview-
 
 export default class disableInterview{
 
-    public disableInterview(
+    public disableInterviews(
         this: Interview<InterviewStatus.enable>
     ): Interview<InterviewStatus.disabled>{
 
