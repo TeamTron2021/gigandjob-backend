@@ -18,6 +18,12 @@ services:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
+    db:
+      image: postgres
+      environment:
+       - POSTGRES_DATABASE: "${DB_DATABASE}"
+       - POSTGRES_USER: "${DB_USER}"
+       - POSTGRES_PASSWORD: "${DB_PASSWORD}"
     prod:
         container_name: git_and_job_backend_prod
         image: git-and-job-backend-prod:1.0.0
