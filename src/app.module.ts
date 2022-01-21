@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { configValidationSchema } from './infraestructure/config/config.schema';
+import { configValidationSchema } from './config/config.schema';
+import { EmployeerModule } from './employeer/employeer.module';
+import { EmployeerRepository } from './employeer/infrastructure/repositories/EntityRepository.repository';
 
 @Module({
   imports: [
@@ -11,6 +12,8 @@ import { configValidationSchema } from './infraestructure/config/config.schema';
       envFilePath: [`.env`],
       validationSchema: configValidationSchema,
     }),
+    CqrsModule,
+    TypeOrmModule.forFeature([EmployeerRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -32,8 +35,9 @@ import { configValidationSchema } from './infraestructure/config/config.schema';
         };
       },
     }),
+    EmployeerModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
