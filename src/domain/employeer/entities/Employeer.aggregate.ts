@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import IAggregateRoot from 'src/shared/domain/IAggregateRoot';
+import IAggregateRoot from '../../../shared/domain/IAggregateRoot';
 import IDomainEvent from '../../../shared/domain/IDomainEvent';
 import JobOffer from '../../job-offer/entities/JobOffer.aggregate';
 import { OfferStatus } from '../../job-offer/shared/OfferStatus.enum';
