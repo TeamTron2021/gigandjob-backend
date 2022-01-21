@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
+import { RegisterEmployeerCommand } from 'src/employeer/application/commands/registerEmployeer.command';
 import UniqueId from 'src/shared/domain/UniqueUUID';
 import RegisterEmployeerMapper from '../mappers/registerEmployeer.mapper';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
@@ -15,7 +16,7 @@ export class EmployeerService {
       RegisterEmployeerMapper.convertRegisterEmployeerRequestToDTO(
         employeerId,
         employeer,
-      );
-    console.log(employeerDto.industry);
+      ); // extrae los datos del request y los transporta a un DTO
+    this.commandBus.execute(new RegisterEmployeerCommand(employeerDto));
   }
 }

@@ -1,3 +1,5 @@
+import EmployeerDto from '../ports/employeer.dto';
+
 export class RegisterEmployeerCommand {
-  constructor(public readonly id: string, public readonly name: string) {}
+  constructor(public readonly employeer: EmployeerDto) {}
 }
