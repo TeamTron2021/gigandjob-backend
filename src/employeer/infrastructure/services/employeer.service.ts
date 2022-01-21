@@ -17,6 +17,6 @@ export class EmployeerService {
         employeerId,
         employeer,
       ); // extrae los datos del request y los transporta a un DTO
-    this.commandBus.execute(new RegisterEmployeerCommand(employeerDto));
+    return this.commandBus.execute(new RegisterEmployeerCommand(employeerDto));
   }
 }

@@ -11,7 +11,7 @@ export class EmployeerORM {
   @Column()
   companyMail: string;
 
-  @Column()
+  @Column({ unique: true })
   rif: string;
 
   @Column()

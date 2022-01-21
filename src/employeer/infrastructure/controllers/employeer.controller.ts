@@ -11,8 +11,12 @@ export class EmployeerController {
 
   //endpoint para registrar un empleador
   @ApiResponse({ status: 201, description: ResponseDescription.CREATED })
+  @ApiResponse({
+    status: 409,
+    description: 'Parece que ese rif esta en uso',
+  })
   @Post()
   async createEmployeer(@Body() employeer: RegisterEmployeerRequest) {
-    return this.employeerService.createEmployeerService(employeer);
+    return await this.employeerService.createEmployeerService(employeer);
   }
 }

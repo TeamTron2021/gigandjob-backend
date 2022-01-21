@@ -1,3 +1,4 @@
+import { ConflictException } from '@nestjs/common';
 import Employeer from 'src/domain/employeer/entities/Employeer.aggregate';
 import { EmployeerStatus } from 'src/domain/employeer/shared/EmployeerStatus.enum';
 import EmployeerDto from 'src/employeer/application/ports/employeer.dto';
@@ -26,7 +27,13 @@ export class EmployeerRepository
       industry,
       status: EmployeerStatus.NOT_SUSPENDED,
     });
-    console.log(await this.save(employeerORM));
+    try {
+      await this.save(employeerORM);
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new ConflictException('Parece que ese rif esta en uso');
+      }
+    }
     const employeer =
       RegisterEmployeerMapper.convertEmployeerORMtoDomain(employeerORM);
 

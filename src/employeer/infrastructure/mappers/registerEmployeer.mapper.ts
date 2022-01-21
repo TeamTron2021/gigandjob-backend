@@ -1,3 +1,4 @@
+import { BadRequestException } from '@nestjs/common';
 import Employeer from 'src/domain/employeer/entities/Employeer.aggregate';
 import { EmployeerStatus } from 'src/domain/employeer/shared/EmployeerStatus.enum';
 import EmployeerCompanyMail from 'src/domain/employeer/value-objects/employeer/EmployeerCompanyMail';
@@ -35,14 +36,18 @@ export default class RegisterEmployeerMapper {
       industry,
       status,
     } = employeerORM;
-    return Employeer.create(
-      this.convertToCompanyMail(companyMail),
-      this.convertToCompanyName(companyName),
-      this.convertToEmployeerId(id),
-      this.convertToEmployeerIndustry(industry),
-      this.convertToEmployeerRif(rif),
-      this.convertToEmployeerLocalization(latitude, longitude),
-    );
+    try {
+      return Employeer.create(
+        this.convertToCompanyMail(companyMail),
+        this.convertToCompanyName(companyName),
+        this.convertToEmployeerId(id),
+        this.convertToEmployeerIndustry(industry),
+        this.convertToEmployeerRif(rif),
+        this.convertToEmployeerLocalization(latitude, longitude),
+      );
+    } catch (error) {
+      throw new BadRequestException(error);
+    }
   }
 
   public static convertToCompanyMail(

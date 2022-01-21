@@ -21,7 +21,7 @@ export default class RegisterEmployeerRequest {
 
   @IsNotEmpty()
   @IsString()
-  @Matches(/[J]-\d{6,9}-\d{1}\d?/gi, { message: 'El rif no es valido' })
+  @Matches(/^J-\d\d\d\d\d\d\d\d-\d$/i, { message: 'El rif no es valido' })
   @ApiProperty({ example: 'J-27784169-4' })
   readonly rif: string;
 
