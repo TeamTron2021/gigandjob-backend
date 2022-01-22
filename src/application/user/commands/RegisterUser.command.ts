@@ -1,10 +1,10 @@
-import { UserRegistered } from 'src/domain/user/domain_events/UserRegistered.event';
-import { User } from 'src/domain/user/User.aggregate';
-import { UserBirthday } from 'src/domain/user/value_objects/UserBirthday.value';
-import { UserEmail } from 'src/domain/user/value_objects/UserEmail.value';
-import { UserFirstName } from 'src/domain/user/value_objects/UserFirstName.value';
-import { UserLastName } from 'src/domain/user/value_objects/UserLastName.value';
-import { UserPassword } from 'src/domain/user/value_objects/UserPassword.value';
+import { UserRegistered } from '../../../domain/user/domain_events/UserRegistered.event';
+import { User } from '../../../domain/user/User.aggregate';
+import { UserBirthday } from '../../../domain/user/value_objects/UserBirthday.value';
+import { UserEmail } from '../../../domain/user/value_objects/UserEmail.value';
+import { UserFirstName } from '../../../domain/user/value_objects/UserFirstName.value';
+import { UserLastName } from '../../../domain/user/value_objects/UserLastName.value';
+import { UserPassword } from '../../../domain/user/value_objects/UserPassword.value';
 import { UserCommand } from '../User.command';
 import { UserService } from '../User.service';
 
