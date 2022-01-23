@@ -1,4 +1,11 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
 import { SkillsORM } from './skills.orm';
 
 @Entity('joboffers')
@@ -13,8 +20,7 @@ export class JobOfferORM {
   title: string;
   @Column()
   vacants: number;
-  @ManyToMany(() => SkillsORM)
-  @JoinTable()
+  @OneToMany(() => SkillsORM, (SkillsORM) => SkillsORM.jobOffer)
   skills: SkillsORM[];
   @Column()
   startDate: Date;
