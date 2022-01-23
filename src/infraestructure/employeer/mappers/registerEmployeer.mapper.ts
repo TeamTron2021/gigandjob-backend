@@ -7,7 +7,7 @@ import EmployeerId from 'src/domain/employeer/value-objects/employeer/EmployeerI
 import EmployeerIndustry from 'src/domain/employeer/value-objects/employeer/EmployeerIndustry';
 import EmployeerLocalization from 'src/domain/employeer/value-objects/employeer/EmployeerLocalization';
 import EmployeerRif from 'src/domain/employeer/value-objects/employeer/EmployeerRif';
-import EmployeerDto from '../../application/ports/employeer.dto';
+import EmployeerDto from '../../../application/employeer/ports/employeer.dto';
 import { EmployeerORM } from '../orm/employeer.orm';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 

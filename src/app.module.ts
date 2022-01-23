@@ -3,8 +3,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configValidationSchema } from './config/config.schema';
-import { EmployeerModule } from './employeer/employeer.module';
-import { EmployeerRepository } from './employeer/infrastructure/repositories/EntityRepository.repository';
+import { EmployeerModule } from './infraestructure/employeer/employeer.module';
+import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
 
 @Module({
   imports: [

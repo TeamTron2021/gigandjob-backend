@@ -1,6 +1,6 @@
 import { EventPublisher, IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import EmployeerFound from 'src/employeer/application/ports/findEmployeerResult.dto';
-import FindEmployeerById from 'src/employeer/application/queries/findEmployeerById.query';
+import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
+import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
 import { EmployeerRepository } from '../repositories/EntityRepository.repository';
 
 @QueryHandler(FindEmployeerById)

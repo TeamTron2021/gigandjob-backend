@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { RegisterEmployeerCommand } from 'src/employeer/application/commands/registerEmployeer.command';
-import FindEmployeerById from 'src/employeer/application/queries/findEmployeerById.query';
+import { RegisterEmployeerCommand } from 'src/application/employeer/commands/registerEmployeer.command';
+import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
 import UniqueId from 'src/shared/domain/UniqueUUID';
 import RegisterEmployeerMapper from '../mappers/registerEmployeer.mapper';
 import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';

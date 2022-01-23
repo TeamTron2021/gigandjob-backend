@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
-import EmployeerDto from 'src/employeer/application/ports/employeer.dto';
+import EmployeerDto from 'src/application/employeer/ports/employeer.dto';
 import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 import { EmployeerService } from '../services/employeer.service';
