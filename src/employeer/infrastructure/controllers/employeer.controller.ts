@@ -1,5 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
+import EmployeerDto from 'src/employeer/application/ports/employeer.dto';
+import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 import { EmployeerService } from '../services/employeer.service';
 import { ResponseDescription } from '../shared/enums/response-description.enum';
@@ -18,5 +20,16 @@ export class EmployeerController {
   @Post()
   async createEmployeer(@Body() employeer: RegisterEmployeerRequest) {
     return await this.employeerService.createEmployeerService(employeer);
+  }
+
+  //endpoint para buscar un empleador por su id
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ningun empleador con ese id',
+  })
+  @Get('/:id')
+  async findEmployeer(@Param() employeerId: FindEmployeerByIdRequest) {
+    return await this.employeerService.findEmployeerById(employeerId);
   }
 }

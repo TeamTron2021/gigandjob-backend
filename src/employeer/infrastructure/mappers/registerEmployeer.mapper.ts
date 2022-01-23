@@ -37,7 +37,7 @@ export default class RegisterEmployeerMapper {
       status,
     } = employeerORM;
     try {
-      return Employeer.create(
+      let employeer: any = Employeer.create(
         this.convertToCompanyMail(companyMail),
         this.convertToCompanyName(companyName),
         this.convertToEmployeerId(id),
@@ -45,6 +45,10 @@ export default class RegisterEmployeerMapper {
         this.convertToEmployeerRif(rif),
         this.convertToEmployeerLocalization(latitude, longitude),
       );
+      if (status == EmployeerStatus.SUSPENDED) {
+        employeer = employeer.suspendEmployeer();
+      }
+      return employeer;
     } catch (error) {
       throw new BadRequestException(error);
     }

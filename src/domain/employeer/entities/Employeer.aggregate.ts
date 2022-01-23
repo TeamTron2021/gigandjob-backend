@@ -37,6 +37,10 @@ export default class Employeer<
     this.status = status;
   }
 
+  public setStatus(status: S) {
+    this.status = status;
+  }
+
   public addJobOffer(offer: JobOffer<OfferStatus>) {
     this.jobOffers.push(offer);
   }
