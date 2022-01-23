@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { configValidationSchema } from './config/config.schema';
 import { EmployeerModule } from './infraestructure/employeer/employeer.module';
 import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
+import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { EmployeerRepository } from './infraestructure/employeer/repositories/En
       },
     }),
     EmployeerModule,
+    JobOfferModule,
   ],
   controllers: [],
   providers: [],

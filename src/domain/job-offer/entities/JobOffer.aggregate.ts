@@ -508,5 +508,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     return reactivatedOffer;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected invariants() {}
 }
