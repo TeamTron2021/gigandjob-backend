@@ -26,4 +26,6 @@ export class JobOfferORM {
   startDate: Date;
   @Column()
   finalDate: Date;
+  @Column()
+  status: string;
 }

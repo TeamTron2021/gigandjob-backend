@@ -6,6 +6,7 @@ import { configValidationSchema } from './config/config.schema';
 import { EmployeerModule } from './infraestructure/employeer/employeer.module';
 import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
 import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
+import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
     }),
     CqrsModule,
     TypeOrmModule.forFeature([EmployeerRepository]),
+    TypeOrmModule.forFeature([JobOfferRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
