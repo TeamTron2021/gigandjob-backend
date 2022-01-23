@@ -1,8 +1,10 @@
+import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
 import {
   Column,
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
@@ -28,4 +30,6 @@ export class JobOfferORM {
   finalDate: Date;
   @Column()
   status: string;
+  @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
+  employeer: EmployeerORM;
 }
