@@ -4,9 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { configValidationSchema } from './infraestructure/config/config.schema';
+import { createjobofferComplaintModule } from './infraestructure/jobOfferComplaint/jobOfferComplaint.module';
 
 @Module({
-  imports: [
+  imports: [createjobofferComplaintModule,
     ConfigModule.forRoot({
       envFilePath: [`.env`],
       validationSchema: configValidationSchema,

@@ -13,10 +13,10 @@ export class JobOfferComplaint {
   private eventRecorder: IDomainEvent[] = [];
 
   constructor(
-    private id: JobOfferComplaintId,
-    private issue: JobOfferComplaintIssue,
-    private dateComplaint: JobOfferComplaintDate,
-    private acceptedOrRejected: boolean | null,
+    public id: JobOfferComplaintId,
+    public issue: JobOfferComplaintIssue,
+    public dateComplaint: JobOfferComplaintDate,
+    public acceptedOrRejected: boolean | null,
   ) {}
 
   public getEvents() {
