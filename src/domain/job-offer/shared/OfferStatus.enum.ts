@@ -1,7 +1,7 @@
 export enum OfferStatus {
-  published,
-  suspended,
-  notPublished,
-  disable,
-  Removed,
+  published = 'PUBLISHED',
+  suspended = 'SUSPENDED',
+  notPublished = 'NOT_PUBLISHED',
+  disable = 'DISABLED',
+  Removed = 'REMOVED',
 }

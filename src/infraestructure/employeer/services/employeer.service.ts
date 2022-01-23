@@ -15,18 +15,20 @@ export class EmployeerService {
     private readonly queryBus: QueryBus,
   ) {}
 
-  createEmployeerService(employeer: RegisterEmployeerRequest) {
+  async createEmployeerService(employeer: RegisterEmployeerRequest) {
     const employeerId: string = new UniqueId().getId(); //Genera el uuid necesario para registrar al empleador en la base de datos
     const employeerDto =
       RegisterEmployeerMapper.convertRegisterEmployeerRequestToDTO(
         employeerId,
         employeer,
       ); // extrae los datos del request y los transporta a un DTO
-    return this.commandBus.execute(new RegisterEmployeerCommand(employeerDto));
+    return await this.commandBus.execute(
+      new RegisterEmployeerCommand(employeerDto),
+    );
   }
 
   async findEmployeerById(employeerId: FindEmployeerByIdRequest) {
-    const employeer = this.queryBus.execute(
+    const employeer = await this.queryBus.execute(
       new FindEmployeerById(employeerId.id),
     );
     return employeer;

@@ -1,9 +1,10 @@
-import JobOffer from 'src/domain/job-offer/entities/JobOffer.aggregate';
-import { OfferStatus } from 'src/domain/job-offer/shared/OfferStatus.enum';
+import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateJobOfferDto from '../ports/createJobOffer.dto';
+import JobOfferFound from '../ports/jobOfferFound.dto';
 
 export default interface IJobOfferRepository {
   createJobOffer(
     jobOfferDto: CreateJobOfferDto,
-  ): Promise<JobOffer<OfferStatus>>;
+    employeer: EmployeerFound,
+  ): Promise<JobOfferFound>;
 }
