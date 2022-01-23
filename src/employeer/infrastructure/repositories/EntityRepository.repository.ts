@@ -46,17 +46,13 @@ export class EmployeerRepository
   }
 
   async findById(id: string): Promise<EmployeerFound> {
-    try {
-      const employeer: EmployeerORM = await this.findOneOrFail(id);
-      if (employeer != null) {
-        const result: EmployeerFound = {
-          ...employeer,
-        };
-        return result;
-      }
-      throw new NotFoundException('No encontramos ningun empleador con ese id');
-    } catch (error) {
-      throw new InternalServerErrorException('Oops parece que algo salio mal');
+    const employeer: EmployeerORM = await this.findOne(id);
+    if (employeer != null) {
+      const result: EmployeerFound = {
+        ...employeer,
+      };
+      return result;
     }
+    throw new NotFoundException('No encontramos ningun empleador con ese id');
   }
 }
