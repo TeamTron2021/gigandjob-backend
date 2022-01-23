@@ -1,5 +1,7 @@
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
+import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
+import IJobOfferRepository from 'src/application/job-offer/repositories/job-offer.repository';
 import { OfferStatus } from 'src/domain/job-offer/shared/OfferStatus.enum';
 import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
@@ -8,11 +10,14 @@ import { JobOfferORM } from '../orm/job-offer.orm';
 import { SkillsORM } from '../orm/skills.orm';
 
 @EntityRepository(JobOfferORM)
-export class JobOfferRepository extends Repository<JobOfferORM> {
+export class JobOfferRepository
+  extends Repository<JobOfferORM>
+  implements IJobOfferRepository
+{
   async createJobOffer(
     jobOfferDto: CreateJobOfferDto,
     employeer: EmployeerFound,
-  ): Promise<void> {
+  ): Promise<JobOfferFound> {
     const jobOfferSave = new JobOfferORM();
     const employeerToAdd: EmployeerORM = {
       ...employeer,
@@ -35,5 +40,6 @@ export class JobOfferRepository extends Repository<JobOfferORM> {
       element.jobOffer = jobOfferSave;
       await skillsORM.save(element);
     });
+    return JobOfferMapper.convertToJobOfferFound(jobOfferSave);
   }
 }
