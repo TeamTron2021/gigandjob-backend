@@ -7,7 +7,7 @@ import EmployeerId from 'src/domain/employeer/value-objects/employeer/EmployeerI
 import EmployeerIndustry from 'src/domain/employeer/value-objects/employeer/EmployeerIndustry';
 import EmployeerLocalization from 'src/domain/employeer/value-objects/employeer/EmployeerLocalization';
 import EmployeerRif from 'src/domain/employeer/value-objects/employeer/EmployeerRif';
-import EmployeerDto from '../../application/ports/employeer.dto';
+import EmployeerDto from '../../../application/employeer/ports/employeer.dto';
 import { EmployeerORM } from '../orm/employeer.orm';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 
@@ -37,7 +37,7 @@ export default class RegisterEmployeerMapper {
       status,
     } = employeerORM;
     try {
-      return Employeer.create(
+      let employeer: any = Employeer.create(
         this.convertToCompanyMail(companyMail),
         this.convertToCompanyName(companyName),
         this.convertToEmployeerId(id),
@@ -45,6 +45,10 @@ export default class RegisterEmployeerMapper {
         this.convertToEmployeerRif(rif),
         this.convertToEmployeerLocalization(latitude, longitude),
       );
+      if (status == EmployeerStatus.SUSPENDED) {
+        employeer = employeer.suspendEmployeer();
+      }
+      return employeer;
     } catch (error) {
       throw new BadRequestException(error);
     }

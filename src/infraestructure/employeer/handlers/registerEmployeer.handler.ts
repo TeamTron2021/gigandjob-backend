@@ -1,5 +1,5 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { RegisterEmployeerCommand } from '../../application/commands/registerEmployeer.command';
+import { RegisterEmployeerCommand } from '../../../application/employeer/commands/registerEmployeer.command';
 import { EmployeerRepository } from '../repositories/EntityRepository.repository';
 
 @CommandHandler(RegisterEmployeerCommand)

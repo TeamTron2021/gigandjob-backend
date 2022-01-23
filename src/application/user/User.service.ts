@@ -1,4 +1,4 @@
-import { UserRegistered } from 'src/domain/user/domain_events/UserRegistered.event';
+import { UserRegistered } from '../../domain/user/domain_events/UserRegistered.event';
 import { UserPublisher } from './User.publisher';
 import { UserRepository } from './User.repository';
 
