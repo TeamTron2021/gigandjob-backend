@@ -8,8 +8,11 @@ import { JobOfferRepository } from './repositories/JobOfferRepository.repository
 import { JobOfferService } from './services/job-offer.service';
 
 @Module({
-    imports: [CqrsModule, TypeOrmModule.forFeature([JobOfferRepository, SkillsORM])],
-    controllers: [JobOfferController],
-    providers:[JobOfferService, CreateJobOfferHandler]
+  imports: [
+    CqrsModule,
+    TypeOrmModule.forFeature([JobOfferRepository, SkillsORM]),
+  ],
+  controllers: [JobOfferController],
+  providers: [JobOfferService, CreateJobOfferHandler],
 })
 export class JobOfferModule {}
