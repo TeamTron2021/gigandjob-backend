@@ -31,7 +31,7 @@ export default class CreateInterviewRequest {
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
-  interviewer: string;
+  jobOffer: string;
   @IsNotEmpty()
   @IsString()
   @MinLength(1)

@@ -6,7 +6,9 @@ import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
 import IInterviewRepository from 'src/application/job-offer/repositories/interview.repository';
 import { InterviewStatus } from 'src/domain/job-offer/shared/InterviewStatus.enum';
 import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
+import { UserORM } from 'src/infraestructure/user/orm/user.orm';
 import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { InterviewMapper } from '../mappers/interview.mapper';
 import { JobOfferMapper } from '../mappers/jobOffer.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import { JobOfferORM } from '../orm/job-offer.orm';
@@ -18,20 +20,24 @@ export class InterviewRepository
 {
   async createInterview(
     interviewDto: CreateInterviewDto,
-    employeer: EmployeerFound,
+    jobOffer: JobOfferFound,
   ): Promise<InterviewFound> {
     const interviewSave = new InterviewORM();
-    const employeerToAdd: EmployeerORM = {
-      ...employeer,
-      jobOffers: [],
+    /*const jobOfferToAdd: JobOfferORM = {
+      ...jobOffer,
+      interviews: [],
     };
-    
+    const userToAdd: UserORM = {
+      ...jobOffer,
+      interviews: [],
+    };
+*/
     interviewSave.id = interviewDto.id;
     interviewSave.title = interviewDto.title;
     interviewSave.description = interviewDto.description;
     interviewSave.date = interviewDto.date;
-    interviewSave.interviewed = employeerToAdd;
-    interviewSave.interviewer = employeerToAdd;
+   /* interviewSave.interviewed = userToAdd;
+    interviewSave.jobOffer = jobOfferToAdd;*/
     interviewSave.status = InterviewStatus.created;
 
     await this.save(interviewSave);

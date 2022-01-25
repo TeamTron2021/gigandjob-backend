@@ -1,15 +1,17 @@
-import { CreateSkillsDto } from 'src/application/job-offer/ports/createSkills.dto';
+
+import InterviewFound from 'src/application/job-offer/ports/interviewFound.dto';
 import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
 import UniqueId from 'src/shared/domain/UniqueUUID';
-import { JobOfferORM } from '../orm/job-offer.orm';
-import { SkillsORM } from '../orm/skills.orm';
+import { InterviewORM } from '../orm/interview.orm';
 
 export class InterviewMapper {
+
+
   public static convertToInterviewFound(interview: InterviewORM): InterviewFound {
-    const newJobOffer: JobOfferFound = {
-      ...jobOffer,
-      vacant: jobOffer.vacants,
+    const newInterview: InterviewFound = {
+      ...interview,
+      title: interview.title,
     };
-    return newJobOffer;
+    return newInterview;
   }
 }

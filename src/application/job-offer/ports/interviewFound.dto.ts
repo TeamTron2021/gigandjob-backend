@@ -5,6 +5,6 @@ export default class InterviewFound {
   description: string;
   date: Date;
   interviewed: string;
-  interviewer: string;
+  jobOffer: string;
   status: string;
 }

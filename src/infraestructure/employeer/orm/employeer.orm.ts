@@ -31,6 +31,5 @@ export class EmployeerORM {
   @OneToMany(() => JobOfferORM, (JobOfferORM) => JobOfferORM.employeer)
   jobOffers: JobOfferORM[];
 
-  @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.interviewer)
-  interviews: InterviewORM[];
+
 }

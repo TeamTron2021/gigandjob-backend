@@ -5,6 +5,6 @@ export default class CreateInterviewDto {
   description: string;
   date: Date;
   interviewed: string;
-  interviewer: string;
+  jobOffer: string;
   status: string;
 }

@@ -1,4 +1,4 @@
-import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
+
 import {
   Column,
   Entity,
@@ -8,6 +8,8 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
+import { JobOfferORM } from './job-offer.orm';
+import { UserORM } from 'src/infraestructure/user/orm/user.orm';
 
 
 @Entity('interviews')
@@ -20,10 +22,10 @@ export class InterviewORM {
   description: string;
   @Column()
   date: Date;
-  @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.interviews)
-  interviewed: EmployeerORM;
-  @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.interviews)
-  interviewer: EmployeerORM;
+  @ManyToOne(() => UserORM, (UserORM) => UserORM.interviews)
+  interviewed: UserORM;
+  @ManyToOne(() => JobOfferORM, (JobOfferORM) => JobOfferORM.interviews)
+  jobOffer: JobOfferORM;
   @Column()
   status: string;
 }

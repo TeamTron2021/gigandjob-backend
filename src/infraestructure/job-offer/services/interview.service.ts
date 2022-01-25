@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
 import { CreateInterviewCommand } from 'src/application/job-offer/commands/createInterview.command';
-import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
-import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
+import CreateInterviewDto from 'src/application/job-offer/ports/createInterview.dto';
+import FindJobOfferById from 'src/application/job-offer/queries/findJobOfferById.query';
 import UniqueId from 'src/shared/domain/UniqueUUID';
-import createJobOfferRequestRequest from '../request/createJobOfferRequest.request';
+import CreateInterviewRequest from '../request/createInterviewRequest.request';
+import { FindJobOfferByIdRequest } from '../request/findJobOfferById.request';
 
 @Injectable()
 export class InterviewService {
@@ -14,7 +14,7 @@ export class InterviewService {
     private readonly queryBus: QueryBus,
   ) {}
   async createInterview(
-    interview: createInterviewRequest,
+    interview: CreateInterviewRequest,
     jobOffer: FindJobOfferByIdRequest,
   ) {
     const JobOffer = await this.queryBus.execute(
