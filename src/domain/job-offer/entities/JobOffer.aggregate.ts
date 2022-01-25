@@ -25,7 +25,7 @@ import InterviewTitle from '../value-objects/Interview/interview/InterviewTitle'
 import InterviewDescription from '../value-objects/Interview/interview/InterviewDescription';
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
-import InterviewInterviewer from '../value-objects/Interview/interview/InterviewInterviewer';
+import InterviewJobOffer from '../value-objects/Interview/interview/InterviewJobOffer';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
 import OnlineInterviewUrlMeeting from '../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
 import { InterviewStatus } from '../shared/InterviewStatus.enum';
@@ -267,7 +267,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
    * @param interviewDescription Descripción de la entrevista.
    * @param interviewDate Fechas de inicio y finalización de la entrevista.
    * @param interviewInterviewed Entrevistado.
-   * @param interviewInterviewer Entrevistador.
+   * @param interviewJobOffer Entrevistador.
    * @param interviewStatus Estado actual de la entrevista.
    * @param interviewId Identificador de la entrevista.
    * @param interviewDirection Lugar en donde se realizará la entrevista.
@@ -277,7 +277,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
     interviewInterviewed: InterviewInterviewed,
-    interviewInterviewer: InterviewInterviewer,
+    interviewJobOffer: InterviewJobOffer,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewDirection: InPersonInterviewDirection,
@@ -288,7 +288,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewDescription,
         interviewDate,
         interviewInterviewed,
-        interviewInterviewer,
+        interviewJobOffer,
         interviewStatus,
         interviewId,
         interviewDirection,
@@ -321,7 +321,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
    * @param interviewDescription Descripción de la entrevista.
    * @param interviewDate Fechas de inicio y finalización de la entrevista.
    * @param interviewInterviewed Entrevistado.
-   * @param interviewInterviewer Entrevistador.
+   * @param interviewJobOffer Entrevistador.
    * @param interviewStatus Estado actual de la entrevista.
    * @param interviewId Identificador de la entrevista.
    * @param interviewUrlMeeting URL de la entrevista virtual.
@@ -331,7 +331,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
     interviewInterviewed: InterviewInterviewed,
-    interviewInterviewer: InterviewInterviewer,
+    interviewJobOffer: InterviewJobOffer,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewUrlMeeting: OnlineInterviewUrlMeeting,
@@ -342,7 +342,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewDescription,
         interviewDate,
         interviewInterviewed,
-        interviewInterviewer,
+        interviewJobOffer,
         interviewStatus,
         interviewId,
         interviewUrlMeeting,
@@ -372,7 +372,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
     interviewInterviewed: InterviewInterviewed,
-    interviewInterviewer: InterviewInterviewer,
+    interviewJobOffer: InterviewJobOffer,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewDirection: InPersonInterviewDirection,
@@ -383,7 +383,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewDescription,
         interviewDate,
         interviewInterviewed,
-        interviewInterviewer,
+        interviewJobOffer,
         interviewStatus,
         interviewId,
         interviewDirection,
@@ -406,7 +406,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
     interviewInterviewed: InterviewInterviewed,
-    interviewInterviewer: InterviewInterviewer,
+    interviewJobOffer: InterviewJobOffer,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewUrlMeeting: OnlineInterviewUrlMeeting,
@@ -417,7 +417,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewDescription,
         interviewDate,
         interviewInterviewed,
-        interviewInterviewer,
+        interviewJobOffer,
         interviewStatus,
         interviewId,
         interviewUrlMeeting,

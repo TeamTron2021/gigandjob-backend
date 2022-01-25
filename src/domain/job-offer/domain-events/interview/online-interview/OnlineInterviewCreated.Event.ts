@@ -6,7 +6,7 @@ import InterviewDate from '../../../value-objects/Interview/interview/InterviewD
 import InterviewId from '../../../value-objects/Interview/interview/InterviewId';
 import OnlineInterviewUrlMeeting from '../../../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
 import InterviewInterviewed from '../../../value-objects/Interview/interview/InterviewInterviewed';
-import InterviewInterviewer from '../../../value-objects/Interview/interview/InterviewInterviewer';
+import InterviewJobOffer from '../../../value-objects/Interview/interview/InterviewJobOffer';
 
 export default class OnlineInterviewCreated implements IDomainEvent {
   constructor(
@@ -15,7 +15,7 @@ export default class OnlineInterviewCreated implements IDomainEvent {
     public description: InterviewDescription,
     public date: InterviewDate,
     public interviewed: InterviewInterviewed,
-    public interviewer: InterviewInterviewer,
+    public jobOffer: InterviewJobOffer,
     public status: InterviewStatus,
     public urlMeeting: OnlineInterviewUrlMeeting,
   ) {}

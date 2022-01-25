@@ -7,7 +7,7 @@ import InterviewDate from '../../../../../domain/job-offer/value-objects/Intervi
 import InterviewDescription from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import InterviewId from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
 import InterviewInterviewed from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed';
-import InterviewInterviewer from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer';
+import InterviewJobOffer from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewJobOffer';
 import InterviewTitle from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import UniqueId from '../../../../../shared/domain/UniqueUUID';
 
@@ -17,7 +17,7 @@ initialDate.setDate(finalDate.getDate() - 1);
 const date = InterviewDate.create(initialDate, finalDate);
 const id = InterviewId.create(new UniqueId().getId());
 const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-const interviewer = InterviewInterviewer.create(new UniqueId().getId());
+const jobOffer = InterviewJobOffer.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(
   'Titulo generico de una entrevista',
 );
@@ -32,7 +32,7 @@ describe('Testing Interview reject', () => {
       interviewDescription,
       date,
       interviewed,
-      interviewer,
+      jobOffer,
       id,
     );
     interview.rejectInterview();
@@ -48,7 +48,7 @@ describe('Testing Interview reject', () => {
       interviewDescription,
       date,
       interviewed,
-      interviewer,
+      jobOffer,
       InterviewStatus.disabled,
       id,
     );
