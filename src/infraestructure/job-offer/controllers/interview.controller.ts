@@ -1,7 +1,7 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
-import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
-import CreateJobOfferRequest from '../request/createJobOfferRequest.request';
-import { JobOfferService } from '../services/interview.service';
+import CreateInterviewRequest from '../request/createInterviewRequest.request';
+import { FindJobOfferByIdRequest } from '../request/findJobOfferById.request';
+import { InterviewService } from '../services/interview.service';
 
 @Controller('interview')
 export class InterviewController {

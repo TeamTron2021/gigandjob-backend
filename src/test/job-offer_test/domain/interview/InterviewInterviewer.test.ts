@@ -1,29 +1,29 @@
-import EmptyInterviewInterviewerException from '../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyIdException';
-import InterviewInterviewer from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer';
+import EmptyInterviewJobOfferException from '../../../../domain/job-offer/exceptions/Interview/Interview/InterviewEmptyIdException';
+import InterviewJobOffer from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewJobOffer';
 import UniqueId from '../../../../shared/domain/UniqueUUID';
 
-describe('Testing value object InterviewInterviewer', () => {
+describe('Testing value object InterviewJobOffer', () => {
   it('should throw empty id error', () => {
     const id = ' ';
-    expect(() => InterviewInterviewer.create(id)).toThrowError(
-      new EmptyInterviewInterviewerException(
+    expect(() => InterviewJobOffer.create(id)).toThrowError(
+      new EmptyInterviewJobOfferException(
         'El Id del entrevistador no puede estar vacio',
       ),
     );
   });
   it('should throw empty id error', () => {
     const id: any = null;
-    expect(() => InterviewInterviewer.create(id)).toThrowError(
-      new EmptyInterviewInterviewerException(
+    expect(() => InterviewJobOffer.create(id)).toThrowError(
+      new EmptyInterviewJobOfferException(
         'El Id del entrevistador no puede estar vacio',
       ),
     );
   });
-  it('should return a InterviewInterviewer instance', () => {
+  it('should return a InterviewJobOffer instance', () => {
     const id = new UniqueId().getId();
-    const interviewInterviewer = InterviewInterviewer.create(id);
-    const isInterviewInterviewer =
-      interviewInterviewer instanceof InterviewInterviewer;
-    expect(isInterviewInterviewer).toBe(true);
+    const interviewJobOffer = InterviewJobOffer.create(id);
+    const isInterviewJobOffer =
+      interviewJobOffer instanceof InterviewJobOffer;
+    expect(isInterviewJobOffer).toBe(true);
   });
 });

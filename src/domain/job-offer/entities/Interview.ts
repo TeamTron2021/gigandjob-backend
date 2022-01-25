@@ -6,7 +6,7 @@ import InterviewTitle from '../value-objects/Interview/interview/InterviewTitle'
 import InterviewDescription from '../value-objects/Interview/interview/InterviewDescription';
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
-import InterviewInterviewer from '../value-objects/Interview/interview/InterviewInterviewer';
+import InterviewJobOffer from '../value-objects/Interview/interview/InterviewJobOffer';
 import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
 import NotificationSubject from '../value-objects/Interview/interview/interview-notification/NotificationSubject';
 import NotificationContent from '../value-objects/Interview/interview/interview-notification/NotificationContent';
@@ -32,7 +32,7 @@ export default class Interview<S extends InterviewStatus>
     public description: InterviewDescription,
     public date: InterviewDate,
     public interviewed: InterviewInterviewed,
-    public interviewer: InterviewInterviewer,
+    public jobOffer: InterviewJobOffer,
     status: S,
     public Id: InterviewId,
   ) {
@@ -45,8 +45,8 @@ export default class Interview<S extends InterviewStatus>
   public getInterviewInterviewed() {
     return this.interviewed;
   }
-  public getInterviewInterviewer() {
-    return this.interviewer;
+  public getInterviewJobOffer() {
+    return this.jobOffer;
   }
 
   public getEvents() {
@@ -61,7 +61,7 @@ export default class Interview<S extends InterviewStatus>
     description: InterviewDescription,
     date: InterviewDate,
     interviewed: InterviewInterviewed,
-    interviewer: InterviewInterviewer,
+    jobOffer: InterviewJobOffer,
     Id: InterviewId,
   ) {
     const interview = new Interview(
@@ -69,7 +69,7 @@ export default class Interview<S extends InterviewStatus>
       description,
       date,
       interviewed,
-      interviewer,
+      jobOffer,
       InterviewStatus.created,
       Id,
     );
@@ -80,7 +80,7 @@ export default class Interview<S extends InterviewStatus>
         description,
         date,
         interviewed,
-        interviewer,
+        jobOffer,
         InterviewStatus.created,
         Id,
       ),
@@ -114,7 +114,7 @@ export default class Interview<S extends InterviewStatus>
       this.description,
       this.date,
       this.interviewed,
-      this.interviewer,
+      this.jobOffer,
       interviewNewStatus,
       this.Id,
     );
