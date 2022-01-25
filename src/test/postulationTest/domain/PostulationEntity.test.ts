@@ -7,7 +7,7 @@ import InterviewDate from '../../../domain/job-offer/value-objects/Interview/int
 import InterviewDescription from '../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import InterviewId from '../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
 import InterviewInterviewed from '../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed';
-import InterviewJobOffer from '../../../domain/job-offer/value-objects/Interview/interview/InterviewJobOffer';
+import InterviewInterviewer from '../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer';
 import InterviewTitle from '../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import { PostulationDate } from '../../../domain/job-offer/value-objects/postulation/PostulationDate';
 import { PostulationStatus } from '../../../domain/job-offer/value-objects/postulation/PostulationStatus';
@@ -24,7 +24,7 @@ describe('Postulation Entity test', () => {
 
     const id = InterviewId.create(new UniqueId().getId());
     const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-    const jobOffer = InterviewJobOffer.create(new UniqueId().getId());
+    const interviewer = InterviewInterviewer.create(new UniqueId().getId());
     const interview = Interview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
       InterviewDescription.create(
@@ -32,7 +32,7 @@ describe('Postulation Entity test', () => {
       ),
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       id,
     );
     expect(interview).toBeInstanceOf(Interview);
@@ -99,7 +99,7 @@ describe('Postulation Entity test', () => {
 
     const id = InterviewId.create(new UniqueId().getId());
     const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-    const jobOffer = InterviewJobOffer.create(new UniqueId().getId());
+    const interviewer = InterviewInterviewer.create(new UniqueId().getId());
 
     const initialDate = new Date();
     const finalDate = new Date();
@@ -113,7 +113,7 @@ describe('Postulation Entity test', () => {
       ),
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       id,
     );
 

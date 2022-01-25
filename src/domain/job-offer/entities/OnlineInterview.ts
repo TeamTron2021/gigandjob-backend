@@ -7,7 +7,7 @@ import InterviewDescription from '../value-objects/Interview/interview/Interview
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
 import OnlineInterviewUrlMeeting from '../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
-import InterviewJobOffer from '../value-objects/Interview/interview/InterviewJobOffer';
+import InterviewInterviewer from '../value-objects/Interview/interview/InterviewInterviewer';
 import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
 import { IChangeInterviewStatus } from '../domain-service/interview/IChangeInterviewStatus';
 import ChangeInterviewStatusToRescheduled from '../domain-service/interview/ChangeInterviewStatusToRescheduled';
@@ -29,7 +29,7 @@ export default class OnlineInterview<S extends InterviewStatus>
     public description: InterviewDescription,
     public date: InterviewDate,
     public interviewed: InterviewInterviewed,
-    public jobOffer: InterviewJobOffer,
+    public interviewer: InterviewInterviewer,
     status: S,
     public Id: InterviewId,
     public urlMeeting: OnlineInterviewUrlMeeting,
@@ -54,7 +54,7 @@ export default class OnlineInterview<S extends InterviewStatus>
     description: InterviewDescription,
     date: InterviewDate,
     interviewed: InterviewInterviewed,
-    jobOffer: InterviewJobOffer,
+    interviewer: InterviewInterviewer,
     Id: InterviewId,
     urlMeeting: OnlineInterviewUrlMeeting,
   ) {
@@ -63,7 +63,7 @@ export default class OnlineInterview<S extends InterviewStatus>
       description,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       InterviewStatus.created,
       Id,
       urlMeeting,
@@ -75,7 +75,7 @@ export default class OnlineInterview<S extends InterviewStatus>
         description,
         date,
         interviewed,
-        jobOffer,
+        interviewer,
         InterviewStatus.created,
         urlMeeting,
       ),
@@ -91,7 +91,7 @@ export default class OnlineInterview<S extends InterviewStatus>
       this.description,
       this.date,
       this.interviewed,
-      this.jobOffer,
+      this.interviewer,
       InterviewStatus.rescheduled,
       this.Id,
       this.urlMeeting,

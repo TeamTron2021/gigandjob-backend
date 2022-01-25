@@ -4,7 +4,7 @@ import InterviewDate from '../../../../../domain/job-offer/value-objects/Intervi
 import InterviewDescription from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import InterviewId from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
 import InterviewInterviewed from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewed';
-import InterviewJobOffer from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewJobOffer';
+import InterviewInterviewer from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewInterviewer';
 import InterviewTitle from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import UniqueId from '../../../../../shared/domain/UniqueUUID';
 import { InterviewStatus } from '../../../../../domain/job-offer/shared/InterviewStatus.enum';
@@ -16,7 +16,7 @@ const date = InterviewDate.create(initialDate, finalDate);
 
 const id = InterviewId.create(new UniqueId().getId());
 const interviewed = InterviewInterviewed.create(new UniqueId().getId());
-const jobOffer = InterviewJobOffer.create(new UniqueId().getId());
+const interviewer = InterviewInterviewer.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(
   'Titulo genérico de una entrevista',
 );
@@ -34,7 +34,7 @@ describe('Testing Interview creation', () => {
       interviewDescription,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       id,
       interviewDirection,
     );
@@ -47,7 +47,7 @@ describe('Testing Interview creation', () => {
       interviewDescription,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       InterviewStatus.disabled,
       id,
       interviewDirection,
@@ -64,7 +64,7 @@ describe('Testing Interview creation', () => {
       interviewDescription,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       id,
       interviewDirection,
     );
@@ -81,7 +81,7 @@ describe('Testing Interview creation', () => {
       interviewDescription,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       InterviewStatus.disabled,
       id,
       interviewDirection,
@@ -98,7 +98,7 @@ describe('Testing Interview creation', () => {
       interviewDescription,
       date,
       interviewed,
-      jobOffer,
+      interviewer,
       id,
       interviewDirection,
     );

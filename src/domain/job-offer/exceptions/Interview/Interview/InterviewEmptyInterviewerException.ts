@@ -1,6 +1,6 @@
 import { IException } from '../../../../../shared/domain/Iexception';
 
-export default class EmptyInterviewJobOfferException
+export default class EmptyInterviewInterviewerException
   extends Error
   implements IException
 {
