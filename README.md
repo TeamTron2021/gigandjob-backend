@@ -66,7 +66,7 @@ Modo Produccion
 ```
 docker compose up
 docker compose up prod 
-docker comp
+docker compose up postgres
 ```
 ### Via Internet 
 
