@@ -21,23 +21,20 @@ export class InterviewRepository
   async createInterview(
     interviewDto: CreateInterviewDto,
     jobOffer: JobOfferFound,
+    
   ): Promise<InterviewFound> {
     const interviewSave = new InterviewORM();
     /*const jobOfferToAdd: JobOfferORM = {
       ...jobOffer,
       interviews: [],
-    };
-    const userToAdd: UserORM = {
-      ...jobOffer,
-      interviews: [],
-    };
-*/
+    };*/
+    
     interviewSave.id = interviewDto.id;
     interviewSave.title = interviewDto.title;
     interviewSave.description = interviewDto.description;
     interviewSave.date = interviewDto.date;
-   /* interviewSave.interviewed = userToAdd;
-    interviewSave.jobOffer = jobOfferToAdd;*/
+    /*interviewSave.interviewed = userToAdd;*/
+    /*interviewSave.jobOffer = jobOfferToAdd;*/
     interviewSave.status = InterviewStatus.created;
 
     await this.save(interviewSave);
