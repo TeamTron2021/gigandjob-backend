@@ -5,7 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { configValidationSchema } from './config/config.schema';
 import { EmployeerModule } from './infraestructure/employeer/employeer.module';
 import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
+import { InterviewModule } from './infraestructure/job-offer/interview.module';
 import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
+import { InterviewRepository } from './infraestructure/job-offer/repositories/InterviewRepository.repository';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 
 @Module({
@@ -17,6 +19,7 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
     CqrsModule,
     TypeOrmModule.forFeature([EmployeerRepository]),
     TypeOrmModule.forFeature([JobOfferRepository]),
+    TypeOrmModule.forFeature([InterviewRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -40,6 +43,7 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
     }),
     EmployeerModule,
     JobOfferModule,
+    InterviewModule,
   ],
   controllers: [],
   providers: [],

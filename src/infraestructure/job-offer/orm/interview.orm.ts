@@ -22,8 +22,7 @@ export class InterviewORM {
   description: string;
   @Column()
   date: Date;
-  @ManyToOne(() => UserORM, (UserORM) => UserORM.interviews)
-  interviewed: UserORM;
+  
   @ManyToOne(() => JobOfferORM, (JobOfferORM) => JobOfferORM.interviews)
   jobOffer: JobOfferORM;
   @Column()

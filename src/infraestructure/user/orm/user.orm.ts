@@ -30,6 +30,5 @@ export class UserORM {
   status: string;
   @Column()
   cv: string;
-  @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.interviewed)
-  interviews: InterviewORM[];
+  
 }

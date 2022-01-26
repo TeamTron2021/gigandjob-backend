@@ -4,7 +4,5 @@ export default class CreateInterviewDto {
   title: string;
   description: string;
   date: Date;
-  interviewed: string;
-  jobOffer: string;
   status: string;
 }
