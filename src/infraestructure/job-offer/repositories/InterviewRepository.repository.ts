@@ -27,9 +27,12 @@ export class InterviewRepository
 
     const jobOfferToAdd: JobOfferORM = {
       ...jobOffer,
-      vacants: jobOffer.vacant,
+      skills: [],
+      interviews: [],
+      vacants: 0,
+      employeer: new EmployeerORM
     };
-  
+    
     interviewSave.id = interviewDto.id;
     interviewSave.title = interviewDto.title;
     interviewSave.description = interviewDto.description;

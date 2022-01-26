@@ -23,17 +23,18 @@ export class JobOfferORM {
   title: string;
   @Column()
   vacants: number;
-  @OneToMany(() => SkillsORM, (SkillsORM) => SkillsORM.jobOffer)
-  skills: SkillsORM[];
   @Column()
   startDate: Date;
   @Column()
   finalDate: Date;
   @Column()
   status: string;
+  @OneToMany(() => SkillsORM, (SkillsORM) => SkillsORM.jobOffer)
+  skills: SkillsORM[];
+  @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.jobOffer)
+  interviews: InterviewORM[];
   @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
   employeer: EmployeerORM;
   
-  @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.jobOffer)
-  interviews: InterviewORM[];
+  
 }

@@ -18,7 +18,7 @@ export class CreateInterviewHandler
       return;
     }
     throw new ConflictException(
-      'La oferta de trabajo no esta activa, por lo tanto no puede registrar entrevistas',
+      'La oferta esta suspendida, por lo tanto no puede registrar entrevistas',
     );
   }
 }
