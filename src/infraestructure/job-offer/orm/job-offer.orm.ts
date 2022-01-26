@@ -33,6 +33,7 @@ export class JobOfferORM {
   status: string;
   @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
   employeer: EmployeerORM;
+  
   @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.jobOffer)
   interviews: InterviewORM[];
 }

@@ -24,17 +24,18 @@ export class InterviewRepository
     
   ): Promise<InterviewFound> {
     const interviewSave = new InterviewORM();
-    /*const jobOfferToAdd: JobOfferORM = {
+
+    const jobOfferToAdd: JobOfferORM = {
       ...jobOffer,
-      interviews: [],
-    };*/
-    
+      vacants: jobOffer.vacant,
+    };
+  
     interviewSave.id = interviewDto.id;
     interviewSave.title = interviewDto.title;
     interviewSave.description = interviewDto.description;
     interviewSave.date = interviewDto.date;
     /*interviewSave.interviewed = userToAdd;*/
-    /*interviewSave.jobOffer = jobOfferToAdd;*/
+    interviewSave.jobOffer = jobOfferToAdd;
     interviewSave.status = InterviewStatus.created;
 
     await this.save(interviewSave);

@@ -13,4 +13,5 @@ export class InterviewMapper {
     };
     return newInterview;
   }
+ 
 }
