@@ -1,3 +1,4 @@
+import { GigORM } from 'src/infraestructure/job-offer/orm/gig.orm';
 import { JobOfferORM } from 'src/infraestructure/job-offer/orm/job-offer.orm';
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 
@@ -28,4 +29,6 @@ export class EmployeerORM {
   status: string;
   @OneToMany(() => JobOfferORM, (JobOfferORM) => JobOfferORM.employeer)
   jobOffers: JobOfferORM[];
+  @OneToMany(() => GigORM, (GigORM) => GigORM.employeer)
+  gigs: JobOfferORM[];
 }
