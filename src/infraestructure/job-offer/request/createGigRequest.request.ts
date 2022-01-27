@@ -4,15 +4,15 @@ import {
   IsDate,
   IsInt,
   IsNotEmpty,
-  IsNumber,
   IsString,
   Min,
   MinLength,
   ValidateNested,
 } from 'class-validator';
+import { Time } from 'src/domain/job-offer/shared/Time.enum';
 import { SkillRequest } from './createSkills.request';
 
-export default class CreateJobOfferRequest {
+export default class CreateGigRequest {
   @IsNotEmpty()
   @IsString()
   @MinLength(5)
@@ -59,4 +59,13 @@ export default class CreateJobOfferRequest {
   @Type(() => Date)
   @ApiProperty({ example: '2022-12-17T03:24:00' })
   finalDate: Date;
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'MONTHS' })
+  time: Time;
+  @IsInt()
+  @IsNotEmpty()
+  @Min(1)
+  @ApiProperty({ example: 1 })
+  amount: number;
 }

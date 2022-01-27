@@ -1,3 +1,4 @@
+import { Time } from 'src/domain/job-offer/shared/Time.enum';
 import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
 import {
   Column,
@@ -10,8 +11,8 @@ import {
 } from 'typeorm';
 import { SkillsORM } from './skills.orm';
 
-@Entity('joboffers')
-export class JobOfferORM {
+@Entity('gigs')
+export class GigORM {
   @PrimaryColumn({ type: 'uuid' })
   id: string;
   @Column()
@@ -22,7 +23,7 @@ export class JobOfferORM {
   title: string;
   @Column()
   vacants: number;
-  @OneToMany(() => SkillsORM, (SkillsORM) => SkillsORM.jobOffer)
+  @OneToMany(() => SkillsORM, (SkillsORM) => SkillsORM.gig)
   skills: SkillsORM[];
   @Column()
   startDate: Date;
@@ -30,6 +31,10 @@ export class JobOfferORM {
   finalDate: Date;
   @Column()
   status: string;
-  @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
+  @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.gigs)
   employeer: EmployeerORM;
+  @Column()
+  time: Time;
+  @Column()
+  amount: number;
 }

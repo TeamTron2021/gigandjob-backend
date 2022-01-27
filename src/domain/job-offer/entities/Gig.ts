@@ -80,5 +80,6 @@ export default class Gig<S extends OfferStatus> implements IJobOffer {
     return gig;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected invariants() {}
 }
