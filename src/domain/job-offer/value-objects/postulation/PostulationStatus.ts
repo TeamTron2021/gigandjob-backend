@@ -5,9 +5,9 @@
 // Reject = rechazado
 
 export enum PostulationStatus {
-  isSend,
-  onReview,
-  inProcess,
-  passed,
-  reject,
+  isSend = 'IS_SEND',
+  onReview = 'ON_REVIEW',
+  inProcess = 'IN_PROCESS',
+  passed = 'PASSED',
+  reject = 'REJECT',
 }

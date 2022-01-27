@@ -6,7 +6,9 @@ import { configValidationSchema } from './config/config.schema';
 import { EmployeerModule } from './infraestructure/employeer/employeer.module';
 import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
 import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
+import { PostulationModule } from './infraestructure/job-offer/postulation.module';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
+import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
     CqrsModule,
     TypeOrmModule.forFeature([EmployeerRepository]),
     TypeOrmModule.forFeature([JobOfferRepository]),
+    TypeOrmModule.forFeature([PostulationRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -40,6 +43,7 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
     }),
     EmployeerModule,
     JobOfferModule,
+    PostulationModule,
   ],
   controllers: [],
   providers: [],
