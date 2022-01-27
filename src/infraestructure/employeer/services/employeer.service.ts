@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { RegisterEmployeerCommand } from 'src/application/employeer/commands/registerEmployeer.command';
 import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
+import FindEmployeersQuery from 'src/application/employeer/queries/findEmployeers.query';
 import UniqueId from 'src/shared/domain/UniqueUUID';
 import RegisterEmployeerMapper from '../mappers/registerEmployeer.mapper';
 import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';
@@ -30,5 +31,8 @@ export class EmployeerService {
       new FindEmployeerById(employeerId.id),
     );
     return employeer;
+  }
+  async findEmployeers() {
+    return await this.queryBus.execute(new FindEmployeersQuery());
   }
 }

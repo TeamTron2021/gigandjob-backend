@@ -32,4 +32,8 @@ export class EmployeerController {
   async findEmployeer(@Param() employeerId: FindEmployeerByIdRequest) {
     return await this.employeerService.findEmployeerById(employeerId);
   }
+  @Get()
+  async findEmployeers() {
+    return await this.employeerService.findEmployeers();
+  }
 }
