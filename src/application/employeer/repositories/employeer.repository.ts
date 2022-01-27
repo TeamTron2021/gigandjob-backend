@@ -9,4 +9,6 @@ export default interface IEmployeerRepository {
   ): Promise<Employeer<EmployeerStatus>>;
 
   findById(id: string): Promise<EmployeerFound>;
+
+  findEmployeers(): Promise<EmployeerFound[]>;
 }
