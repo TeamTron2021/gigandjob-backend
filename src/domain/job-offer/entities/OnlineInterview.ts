@@ -7,8 +7,7 @@ import InterviewDescription from '../value-objects/Interview/interview/Interview
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
 import OnlineInterviewUrlMeeting from '../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
-import InterviewJobOffer from '../value-objects/Interview/interview/InterviewJobOffer';
-import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
+import InterviewPostulation from '../value-objects/Interview/interview/InterviewPostulation';
 import { IChangeInterviewStatus } from '../domain-service/interview/IChangeInterviewStatus';
 import ChangeInterviewStatusToRescheduled from '../domain-service/interview/ChangeInterviewStatusToRescheduled';
 import OnlineInterviewRechedule from '../domain-events/interview/online-interview/OnlineInterviewReschedule/OnlineInterviewRechedule.Event';
@@ -28,8 +27,7 @@ export default class OnlineInterview<S extends InterviewStatus>
     public title: InterviewTitle,
     public description: InterviewDescription,
     public date: InterviewDate,
-    public interviewed: InterviewInterviewed,
-    public jobOffer: InterviewJobOffer,
+    public postulation: InterviewPostulation,
     status: S,
     public Id: InterviewId,
     public urlMeeting: OnlineInterviewUrlMeeting,
@@ -53,8 +51,7 @@ export default class OnlineInterview<S extends InterviewStatus>
     title: InterviewTitle,
     description: InterviewDescription,
     date: InterviewDate,
-    interviewed: InterviewInterviewed,
-    jobOffer: InterviewJobOffer,
+    postulation: InterviewPostulation,
     Id: InterviewId,
     urlMeeting: OnlineInterviewUrlMeeting,
   ) {
@@ -62,8 +59,7 @@ export default class OnlineInterview<S extends InterviewStatus>
       title,
       description,
       date,
-      interviewed,
-      jobOffer,
+      postulation,
       InterviewStatus.created,
       Id,
       urlMeeting,
@@ -74,8 +70,7 @@ export default class OnlineInterview<S extends InterviewStatus>
         title,
         description,
         date,
-        interviewed,
-        jobOffer,
+        postulation,
         InterviewStatus.created,
         urlMeeting,
       ),
@@ -90,8 +85,7 @@ export default class OnlineInterview<S extends InterviewStatus>
       this.title,
       this.description,
       this.date,
-      this.interviewed,
-      this.jobOffer,
+      this.postulation,
       InterviewStatus.rescheduled,
       this.Id,
       this.urlMeeting,

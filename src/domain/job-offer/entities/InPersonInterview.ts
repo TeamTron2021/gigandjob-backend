@@ -7,8 +7,7 @@ import InterviewDescription from '../value-objects/Interview/interview/Interview
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
 import InPersonInterviewDirection from '../value-objects/Interview/InPersonInterview/InPersonInterviewDirection';
-import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
-import InterviewJobOffer from '../value-objects/Interview/interview/InterviewJobOffer';
+import InterviewPostulation from '../value-objects/Interview/interview/InterviewPostulation';
 import { IChangeInterviewStatus } from '../domain-service/interview/IChangeInterviewStatus';
 import ChangeInterviewStatusToRescheduled from '../domain-service/interview/ChangeInterviewStatusToRescheduled';
 import InPersonInterviewRechedule from '../domain-events/interview/in-person-interview/inPersonInterviewReschedule/InPersonInterviewRechedule.Event';
@@ -28,8 +27,7 @@ export default class InPersonInterview<S extends InterviewStatus>
     public title: InterviewTitle,
     public description: InterviewDescription,
     public date: InterviewDate,
-    public interviewed: InterviewInterviewed,
-    public jobOffer: InterviewJobOffer,
+    public postulation: InterviewPostulation,
     status: S,
     public Id: InterviewId,
     public direction: InPersonInterviewDirection,
@@ -53,8 +51,7 @@ export default class InPersonInterview<S extends InterviewStatus>
     title: InterviewTitle,
     description: InterviewDescription,
     date: InterviewDate,
-    interviewed: InterviewInterviewed,
-    jobOffer: InterviewJobOffer,
+    postulation: InterviewPostulation,
     Id: InterviewId,
     direction: InPersonInterviewDirection,
   ) {
@@ -62,8 +59,7 @@ export default class InPersonInterview<S extends InterviewStatus>
       title,
       description,
       date,
-      interviewed,
-      jobOffer,
+      postulation,
       InterviewStatus.created,
       Id,
       direction,
@@ -74,8 +70,7 @@ export default class InPersonInterview<S extends InterviewStatus>
         title,
         description,
         date,
-        interviewed,
-        jobOffer,
+        postulation,
         InterviewStatus.created,
         direction,
       ),
@@ -90,8 +85,7 @@ export default class InPersonInterview<S extends InterviewStatus>
       this.title,
       this.description,
       this.date,
-      this.interviewed,
-      this.jobOffer,
+      this.postulation,
       InterviewStatus.rescheduled,
       this.Id,
       this.direction,
