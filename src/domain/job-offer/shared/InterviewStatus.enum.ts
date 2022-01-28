@@ -1,8 +1,8 @@
 export enum InterviewStatus {
-  created,
-  accepted,
-  rescheduled,
-  disabled,
-  rejected,
-  enable,
+  created = "CREATED",
+  accepted = "ACCEPTED",
+  rescheduled = "RESCHEDULED",
+  disabled = "DISABLED",
+  rejected = "REJECTED",
+  enable = "ENABLE",
 }

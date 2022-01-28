@@ -18,7 +18,7 @@ import { UserID } from './value_objects/UserID.value';
 import { UserLastName } from './value_objects/UserLastName.value';
 import { UserPassword } from './value_objects/UserPassword.value';
 
-type UserEvents =
+export type UserEvent =
   | UserRegistered
   | UserConfirmed
   | UserSuspended
@@ -35,7 +35,7 @@ type CVType<S> = S extends UserStatus.Unconfirmed
 export class User<S extends UserStatus> {
   private _ID: UserID;
   public status: S;
-  private eventRecorder: UserEvents[] = [];
+  private eventRecorder: UserEvent[] = [];
 
   private constructor(
     public firstname: UserFirstName,
@@ -54,7 +54,7 @@ export class User<S extends UserStatus> {
   get ID(): UserID {
     return this._ID;
   }
-  getEvents(): UserEvents[] {
+  getEvents(): UserEvent[] {
     return this.eventRecorder;
   }
 
