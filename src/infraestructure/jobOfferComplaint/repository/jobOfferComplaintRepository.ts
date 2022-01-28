@@ -1,19 +1,21 @@
-import { IjobOfferComplaintRepository } from "src/aplication/JobOfferComplaint/out/IjobOfferComplaintRepository";
-import { JobOfferComplaint } from "src/domain/job-offer/entities/JobOfferComplaint";
+import { Injectable } from "@nestjs/common";
+import { CreateJobOfferComplaintDtoOut } from "src/application/JobOfferComplaint/dto/createJonOfferComplaintWriteDto";
+import { IjobOfferComplaintRepository } from "src/application/JobOfferComplaint/out/IcomplaintRepository";
 import { EntityRepository, Repository } from "typeorm";
 import { joboffercomplaintSchema } from "../schema/jobOfferComplaintShema";
 
 
 @EntityRepository(joboffercomplaintSchema)
+@Injectable()
 export class createjobOfferComplaintRepository extends Repository<joboffercomplaintSchema> implements IjobOfferComplaintRepository{
 
-     async createjobOfferComplaint(complaint: JobOfferComplaint): Promise<any>{
+     async createjobOfferComplaint(complaint: CreateJobOfferComplaintDtoOut): Promise<any>{
         
-        const testSaved = new joboffercomplaintSchema()
-        testSaved.idjoboffercomplaint = complaint.getId().getId();
-        testSaved.issue = complaint.getissue().getId();
-        testSaved.date = complaint.getdateComplaint().getDate();
-        testSaved.acceptedorrejected = complaint.getAcceptedOrRejected()
-        return await this.save(testSaved);
+        const complaintSaved = new joboffercomplaintSchema()
+        complaintSaved.idjoboffercomplaint = complaint.Idcomplaint
+        complaintSaved.issue = complaint.issue
+        complaintSaved.date = complaint.dateComplaint
+        complaintSaved.acceptedorrejected = complaint.acceptedOrRejected
+        return await this.save(complaintSaved);
     }  
 }

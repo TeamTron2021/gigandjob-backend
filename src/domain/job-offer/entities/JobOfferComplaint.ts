@@ -56,7 +56,7 @@ export class JobOfferComplaint {
     offer.eventRecorder.push(
       new JobOfferComplaintCreated(id, issue, dateComplaint, null),
     );
-    const Notificacion = new JobOfferComplaintMessage('Se creo una denuncia'); //Revisar que otra cosa puede ir aqui
+    const Notificacion = new JobOfferComplaintMessage('Se creo una denuncia'); 
     const ComplaintNotification = new JobOfferComplaintNotification(
       Notificacion,
     );
