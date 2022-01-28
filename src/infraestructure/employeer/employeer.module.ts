@@ -3,6 +3,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EmployeerController } from './controllers/employeer.controller';
 import { findEmployeerByIdHandler } from './handlers/findEmployeerById.handler';
+import { FindEmployeersHandler } from './handlers/findEmployeers.handler';
 import { RegisterEmployeerHandler } from './handlers/registerEmployeer.handler';
 import { EmployeerRepository } from './repositories/EntityRepository.repository';
 import { EmployeerService } from './services/employeer.service';
@@ -14,6 +15,7 @@ import { EmployeerService } from './services/employeer.service';
     EmployeerService,
     RegisterEmployeerHandler,
     findEmployeerByIdHandler,
+    FindEmployeersHandler,
   ],
 })
 export class EmployeerModule {}

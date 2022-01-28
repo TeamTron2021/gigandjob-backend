@@ -16,7 +16,7 @@ export class JobOfferORM {
   id: string;
   @Column()
   description: string;
-  @Column()
+  @Column({})
   salary: number;
   @Column()
   title: string;

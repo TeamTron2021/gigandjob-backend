@@ -1,5 +1,5 @@
-import JobOffer from 'src/domain/job-offer/entities/JobOffer.aggregate';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { GigORM } from './gig.orm';
 import { JobOfferORM } from './job-offer.orm';
 
 @Entity('skills')
@@ -8,6 +8,10 @@ export class SkillsORM {
   id: string;
   @Column()
   skill: string;
-  @ManyToOne(() => JobOfferORM, (JobOfferORM) => JobOfferORM.skills)
+  @ManyToOne(() => JobOfferORM, (JobOfferORM) => JobOfferORM.skills, {
+    nullable: true,
+  })
   jobOffer: JobOfferORM;
+  @ManyToOne(() => GigORM, (GigORM) => GigORM.skills, { nullable: true })
+  gig: GigORM;
 }

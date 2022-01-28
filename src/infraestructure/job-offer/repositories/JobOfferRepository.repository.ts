@@ -22,6 +22,7 @@ export class JobOfferRepository
     const employeerToAdd: EmployeerORM = {
       ...employeer,
       jobOffers: [],
+      gigs: [],
     };
     const skillsToSave = JobOfferMapper.convertToSkillsORM(jobOfferDto.skills);
     jobOfferSave.description = jobOfferDto.description;

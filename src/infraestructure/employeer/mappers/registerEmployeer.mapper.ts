@@ -1,4 +1,5 @@
 import { BadRequestException } from '@nestjs/common';
+import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import Employeer from 'src/domain/employeer/entities/Employeer.aggregate';
 import { EmployeerStatus } from 'src/domain/employeer/shared/EmployeerStatus.enum';
 import EmployeerCompanyMail from 'src/domain/employeer/value-objects/employeer/EmployeerCompanyMail';
@@ -12,6 +13,18 @@ import { EmployeerORM } from '../orm/employeer.orm';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 
 export default class RegisterEmployeerMapper {
+  static convertManyEmployeersToFound(
+    employeers: EmployeerORM[],
+  ): EmployeerFound[] {
+    const employeersToReturn: EmployeerFound[] = employeers.map((employeer) => {
+      const employeerFound: EmployeerFound = {
+        ...employeer,
+      };
+      return employeerFound;
+    });
+
+    return employeersToReturn;
+  }
   public static convertRegisterEmployeerRequestToDTO(
     id: string,
     employeer: RegisterEmployeerRequest,

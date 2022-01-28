@@ -12,18 +12,31 @@ services:
         ports:
             - 3000:3000
             - 9229:9229
+        environment:
+        - POSTGRES_DB = ${DB_DATABASE}
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_PORT=${DB_PORT}
         networks:
             - nesjs-network
         volumes:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
-    db:
-      image: postgres
+    postgres:
+      container_name: postgres
+      image: postgres:latest
       environment:
-       - POSTGRES_DATABASE: "${DB_DATABASE}"
-       - POSTGRES_USER: "${DB_USER}"
-       - POSTGRES_PASSWORD: "${DB_PASSWORD}"
+       - POSTGRES_DB=${DB_DATABASE}
+       - POSTGRES_USER=${DB_USER}
+       - POSTGRES_PASSWORD=${DB_PASSWORD}
+      ports:
+      - "5432:5432"
+      restart: always
+      env_file:
+      - .env
+      networks:
+            - nesjs-network
     prod:
         container_name: git_and_job_backend_prod
         image: git-and-job-backend-prod:1.0.0
@@ -41,6 +54,7 @@ services:
             - .:/usr/src/app
             - /usr/src/app/node_modules
         restart: unless-stopped
+    
 
 networks:
     nesjs-network:

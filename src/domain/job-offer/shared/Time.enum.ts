@@ -1,5 +1,5 @@
 export enum Time {
-  Days,
-  Weeks,
-  Months,
+  Days = 'DAYS',
+  Weeks = 'WEEKS',
+  Months = 'MONTHS',
 }

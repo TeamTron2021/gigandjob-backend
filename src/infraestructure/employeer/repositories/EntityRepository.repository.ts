@@ -17,6 +17,16 @@ export class EmployeerRepository
   extends Repository<EmployeerORM>
   implements IEmployeerRepository
 {
+  async findEmployeers(): Promise<EmployeerFound[]> {
+    try {
+      const employeers = await this.find();
+      const result: EmployeerFound[] =
+        RegisterEmployeerMapper.convertManyEmployeersToFound(employeers);
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
   async createEmployeer(
     employeerDto: EmployeerDto,
   ): Promise<Employeer<EmployeerStatus>> {
