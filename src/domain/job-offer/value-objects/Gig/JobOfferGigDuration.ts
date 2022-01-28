@@ -27,7 +27,7 @@ export default class GigDuration implements IValueObject {
         'La unidad de tiempo de la duracion del gig no puede estar vacia',
       );
     }
-    if (!(time in Time)) {
+    if (time != Time.Days && time != Time.Months && time != Time.Weeks) {
       throw new GigTimeInvalidException('El tiempo no es valido');
     }
     if (amount <= 0 || amount == undefined || amount == null) {
