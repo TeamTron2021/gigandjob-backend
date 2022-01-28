@@ -1,4 +1,3 @@
-import { UserRegistered } from '../../../domain/user/domain_events/UserRegistered.event';
 import { User } from '../../../domain/user/User.aggregate';
 import { UserBirthday } from '../../../domain/user/value_objects/UserBirthday.value';
 import { UserEmail } from '../../../domain/user/value_objects/UserEmail.value';
@@ -26,10 +25,6 @@ export class RegisterUser implements UserCommand {
       new UserPassword(this.password),
     );
 
-    user
-      .getEvents()
-      .forEach((event) =>
-        service.publishUserRegistered(event as UserRegistered),
-      );
+    service.publish(user.getEvents());
   }
 }
