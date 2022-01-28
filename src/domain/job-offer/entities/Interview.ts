@@ -6,7 +6,6 @@ import InterviewTitle from '../value-objects/Interview/interview/InterviewTitle'
 import InterviewDescription from '../value-objects/Interview/interview/InterviewDescription';
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
-import InterviewPostulation from '../value-objects/Interview/interview/InterviewPostulation';
 import NotificationSubject from '../value-objects/Interview/interview/interview-notification/NotificationSubject';
 import NotificationContent from '../value-objects/Interview/interview/interview-notification/NotificationContent';
 import InterviewNotification from './InterviewNotification';
@@ -30,7 +29,6 @@ export default class Interview<S extends InterviewStatus>
     public title: InterviewTitle,
     public description: InterviewDescription,
     public date: InterviewDate,
-    public postulation: InterviewPostulation,
     status: S,
     public Id: InterviewId,
   ) {
@@ -40,9 +38,7 @@ export default class Interview<S extends InterviewStatus>
   public getInterviewId() {
     return this.Id;
   }
-  public getInterviewPostulation() {
-    return this.postulation;
-  }
+  
   
 
   public getEvents() {
@@ -56,14 +52,12 @@ export default class Interview<S extends InterviewStatus>
     title: InterviewTitle,
     description: InterviewDescription,
     date: InterviewDate,
-    postulation: InterviewPostulation,
     Id: InterviewId,
   ) {
     const interview = new Interview(
       title,
       description,
       date,
-      postulation,
       InterviewStatus.created,
       Id,
     );
@@ -73,7 +67,6 @@ export default class Interview<S extends InterviewStatus>
         title,
         description,
         date,
-        postulation,
         InterviewStatus.created,
         Id,
       ),
@@ -106,7 +99,6 @@ export default class Interview<S extends InterviewStatus>
       this.title,
       this.description,
       this.date,
-      this.postulation,
       interviewNewStatus,
       this.Id,
     );
