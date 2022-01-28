@@ -1,4 +1,4 @@
-import { UserRegistered } from '../../domain/user/domain_events/UserRegistered.event';
+import { UserEvent } from 'src/domain/user/User.aggregate';
 import { UserPublisher } from './User.publisher';
 import { UserRepository } from './User.repository';
 
@@ -8,11 +8,11 @@ export class UserService {
     private publisher: UserPublisher,
   ) {}
 
-  find(uuid: string) {
-    this.repository.find(uuid);
+  get(uuid: string) {
+    this.repository.get(uuid);
   }
 
-  publishUserRegistered(event: UserRegistered) {
-    this.publisher.publishUserRegistered(event);
+  publish(events: UserEvent[]) {
+    this.publisher.publish(events);
   }
 }
