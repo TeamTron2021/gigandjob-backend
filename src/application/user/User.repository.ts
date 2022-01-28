@@ -1,5 +1,5 @@
 import { UserDto } from './User.dto';
 
 export interface UserRepository {
-  find(uuid: string): UserDto;
+  get(uuid: string): Promise<UserDto>;
 }

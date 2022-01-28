@@ -1,5 +1,5 @@
-import { UserRegistered } from '../../domain/user/domain_events/UserRegistered.event';
+import { UserEvent } from 'src/domain/user/User.aggregate';
 
 export interface UserPublisher {
-  publishUserRegistered(event: UserRegistered): void;
+  publish(events: UserEvent[]): void;
 }
