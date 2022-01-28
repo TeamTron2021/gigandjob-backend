@@ -11,9 +11,9 @@ import { PostulationService } from './services/postulation.service';
   imports: [CqrsModule, TypeOrmModule.forFeature([PostulationRepository])],
   controllers: [PostulationController],
   providers: [
-    PostulationService, 
+    PostulationService,
     CreatePostulationHandler,
-    findPostulationByIdHandler
+    findPostulationByIdHandler,
   ],
 })
 export class PostulationModule {}

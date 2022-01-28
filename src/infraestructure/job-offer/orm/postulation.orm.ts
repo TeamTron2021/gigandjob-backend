@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn , OneToMany} from 'typeorm';
+import { Column, Entity, PrimaryColumn, OneToMany } from 'typeorm';
 import { InterviewORM } from './interview.orm';
 
 @Entity('postulation')
