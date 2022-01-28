@@ -9,7 +9,7 @@ import { CVUpdated } from '../domain_events/CVUpdated.event';
 import { CVAproved } from '../domain_events/CVAproved.event';
 import { CVRejected } from '../domain_events/CVRejected.event';
 
-type CVEvents = CVLoaded | CVUpdated | CVAproved | CVRejected;
+export type CVEvents = CVLoaded | CVUpdated | CVAproved | CVRejected;
 export class CV<S extends CVStatus> {
   private ID: CVID;
   public status: S;
@@ -103,5 +103,6 @@ export class CV<S extends CVStatus> {
     return this.status == CVStatus.Rejected;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   protected invariants() {}
 }
