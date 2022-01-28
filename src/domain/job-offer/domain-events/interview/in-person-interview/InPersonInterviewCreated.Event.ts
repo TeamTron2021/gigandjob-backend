@@ -5,8 +5,7 @@ import InterviewDescription from '../../../value-objects/Interview/interview/Int
 import InterviewDate from '../../../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../../../value-objects/Interview/interview/InterviewId';
 import InPersonInterviewDirection from '../../../value-objects/Interview/InPersonInterview/InPersonInterviewDirection';
-import InterviewInterviewer from '../../../value-objects/Interview/interview/InterviewInterviewer';
-import InterviewInterviewed from '../../../value-objects/Interview/interview/InterviewInterviewed';
+import InterviewInterviewed from '../../../value-objects/Interview/interview/InterviewPostulation';
 
 export default class InPersonInterviewCreated implements IDomainEvent {
   constructor(
@@ -15,7 +14,6 @@ export default class InPersonInterviewCreated implements IDomainEvent {
     public description: InterviewDescription,
     public date: InterviewDate,
     public interviewed: InterviewInterviewed,
-    public interviewer: InterviewInterviewer,
     public status: InterviewStatus,
     public urlMeeting: InPersonInterviewDirection,
   ) {}
