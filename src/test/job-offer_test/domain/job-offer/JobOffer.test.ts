@@ -18,7 +18,6 @@ import { PostulationDate } from '../../../../domain/job-offer/value-objects/post
 import UniqueId from '../../../../shared/domain/UniqueUUID';
 import InterviewDate from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
-import InterviewPostulation from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewPostulation';
 import InterviewTitle from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import InterviewDescription from '../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import OnlineInterviewUrlMeeting from '../../../../domain/job-offer/value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
@@ -35,7 +34,6 @@ const interviewDate = InterviewDate.create(
   interviewFinalDate,
 );
 const interviewId = InterviewId.create(new UniqueId().getId());
-const postulation = InterviewPostulation.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(
   'Titulo genérico de una entrevista',
 );
@@ -367,7 +365,6 @@ describe('Testing JobOffer creation', () => {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        postulation,
         InterviewStatus.disabled,
         interviewId,
         interviewUrlMeeting,
@@ -420,7 +417,6 @@ describe('Testing JobOffer creation', () => {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        postulation,
         InterviewStatus.created,
         interviewId,
         interviewUrlMeeting,
@@ -469,7 +465,6 @@ describe('Testing JobOffer creation', () => {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        postulation,
         InterviewStatus.disabled,
         interviewId,
         interviewDirection,
@@ -522,7 +517,6 @@ describe('Testing JobOffer creation', () => {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        postulation,
         InterviewStatus.created,
         interviewId,
         interviewDirection,
