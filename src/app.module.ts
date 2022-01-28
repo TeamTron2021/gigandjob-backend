@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { configValidationSchema } from './infraestructure/config/config.schema';
+//import { AppController } from './app.controller';
+//import { AppService } from './app.service';
+//import { configValidationSchema } from './infraestructure/config/config.schema';
 import { createjobofferComplaintModule } from './infraestructure/jobOfferComplaint/jobOfferComplaint.module';
+
+import { configValidationSchema } from './config/config.schema';
+import { EmployeerModule } from './infraestructure/employeer/employeer.module';
+import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
+import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
+import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
+
 
 @Module({
   imports: [createjobofferComplaintModule,
@@ -12,6 +20,9 @@ import { createjobofferComplaintModule } from './infraestructure/jobOfferComplai
       envFilePath: [`.env`],
       validationSchema: configValidationSchema,
     }),
+    CqrsModule,
+    TypeOrmModule.forFeature([EmployeerRepository]),
+    TypeOrmModule.forFeature([JobOfferRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -33,8 +44,10 @@ import { createjobofferComplaintModule } from './infraestructure/jobOfferComplai
         };
       },
     }),
+    EmployeerModule,
+    JobOfferModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

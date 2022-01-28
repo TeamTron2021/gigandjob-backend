@@ -6,8 +6,6 @@ import InterviewTitle from '../value-objects/Interview/interview/InterviewTitle'
 import InterviewDescription from '../value-objects/Interview/interview/InterviewDescription';
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
-import InterviewInterviewer from '../value-objects/Interview/interview/InterviewInterviewer';
-import InterviewInterviewed from '../value-objects/Interview/interview/InterviewInterviewed';
 import NotificationSubject from '../value-objects/Interview/interview/interview-notification/NotificationSubject';
 import NotificationContent from '../value-objects/Interview/interview/interview-notification/NotificationContent';
 import InterviewNotification from './InterviewNotification';
@@ -31,8 +29,6 @@ export default class Interview<S extends InterviewStatus>
     public title: InterviewTitle,
     public description: InterviewDescription,
     public date: InterviewDate,
-    public interviewed: InterviewInterviewed,
-    public interviewer: InterviewInterviewer,
     status: S,
     public Id: InterviewId,
   ) {
@@ -42,12 +38,8 @@ export default class Interview<S extends InterviewStatus>
   public getInterviewId() {
     return this.Id;
   }
-  public getInterviewInterviewed() {
-    return this.interviewed;
-  }
-  public getInterviewInterviewer() {
-    return this.interviewer;
-  }
+  
+  
 
   public getEvents() {
     return this.eventRecorder;
@@ -60,16 +52,12 @@ export default class Interview<S extends InterviewStatus>
     title: InterviewTitle,
     description: InterviewDescription,
     date: InterviewDate,
-    interviewed: InterviewInterviewed,
-    interviewer: InterviewInterviewer,
     Id: InterviewId,
   ) {
     const interview = new Interview(
       title,
       description,
       date,
-      interviewed,
-      interviewer,
       InterviewStatus.created,
       Id,
     );
@@ -79,8 +67,6 @@ export default class Interview<S extends InterviewStatus>
         title,
         description,
         date,
-        interviewed,
-        interviewer,
         InterviewStatus.created,
         Id,
       ),
@@ -113,8 +99,6 @@ export default class Interview<S extends InterviewStatus>
       this.title,
       this.description,
       this.date,
-      this.interviewed,
-      this.interviewer,
       interviewNewStatus,
       this.Id,
     );

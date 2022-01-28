@@ -2,7 +2,7 @@ import { IValueObject } from '../../../../shared/domain/IValueObject';
 import EmployeerEmptyRifException from '../../exceptions/employeer/EmployeerEmptyRifException';
 import EmployeerInvalidRifException from '../../exceptions/employeer/EmployeerInvalidRifException';
 
-const REGEX = /[J]-\d{6,9}-\d{1}\d?/gi;
+const REGEX = /^J-\d\d\d\d\d\d\d\d-\d$/i;
 
 export default class EmployeerRif implements IValueObject {
   constructor(private readonly rif: string) {}

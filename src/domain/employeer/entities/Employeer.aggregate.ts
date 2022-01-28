@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import IAggregateRoot from '../../../shared/domain/IAggregateRoot';
 import IDomainEvent from '../../../shared/domain/IDomainEvent';
 import JobOffer from '../../job-offer/entities/JobOffer.aggregate';
 import { OfferStatus } from '../../job-offer/shared/OfferStatus.enum';
@@ -17,7 +18,9 @@ import EmployeerLocalization from '../value-objects/employeer/EmployeerLocalizat
 import EmployeerRif from '../value-objects/employeer/EmployeerRif';
 import EmployeerNotification from './EmployeerNotification';
 
-export default class Employeer<S extends EmployeerStatus> {
+export default class Employeer<
+  S extends EmployeerStatus,
+> extends IAggregateRoot {
   private eventRecorder: IDomainEvent[] = [];
   private jobOffers: JobOffer<OfferStatus>[] = [];
   public status: S;
@@ -30,6 +33,11 @@ export default class Employeer<S extends EmployeerStatus> {
     status: S,
     public localization: EmployeerLocalization,
   ) {
+    super();
+    this.status = status;
+  }
+
+  public setStatus(status: S) {
     this.status = status;
   }
 

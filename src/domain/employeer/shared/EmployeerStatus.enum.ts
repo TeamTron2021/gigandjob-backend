@@ -1,4 +1,4 @@
 export enum EmployeerStatus {
-  SUSPENDED,
-  NOT_SUSPENDED,
+  SUSPENDED = 'SUSPENDED',
+  NOT_SUSPENDED = 'NOT_SUSPENDED',
 }
