@@ -1,7 +1,7 @@
-import { CV } from 'src/domain/user/entities/CV.entity';
-import CVAcademicFormation from 'src/domain/user/value_objects/CVAcademicFormation.value';
-import CVCourses from 'src/domain/user/value_objects/CVCourses.value';
-import CVSkills from 'src/domain/user/value_objects/CVSkills.value';
+import { CV } from '../../../domain/user/entities/CV.entity';
+import CVAcademicFormation from '../../../domain/user/value_objects/CVAcademicFormation.value';
+import CVCourses from '../../../domain/user/value_objects/CVCourses.value';
+import CVSkills from '../../../domain/user/value_objects/CVSkills.value';
 import { CVCommand } from '../CV.command';
 import { CVService } from '../CV.service';
 

@@ -1,8 +1,8 @@
-import { LoadCV } from 'src/application/user/commands/LoadCV.command';
-import { CVLoaded } from 'src/domain/user/domain_events/CVLoaded.event';
-import { CVPublisher } from 'src/application/user/CV.publisher';
-import { CVRepository } from 'src/application/user/CV.reporsitory';
-import { CVService } from 'src/application/user/CV.service';
+import { LoadCV } from '../../../application/user/commands/LoadCV.command';
+import { CVLoaded } from '../../../domain/user/domain_events/CVLoaded.event';
+import { CVPublisher } from '../../../application/user/CV.publisher';
+import { CVRepository } from '../../../application/user/CV.reporsitory';
+import { CVService } from '../../../application/user/CV.service';
 
 describe('Load User', () => {
   const mockPublishFn = jest.fn();
