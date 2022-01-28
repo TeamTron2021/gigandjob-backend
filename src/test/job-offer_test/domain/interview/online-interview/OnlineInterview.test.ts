@@ -2,7 +2,6 @@ import OnlineInterview from '../../../../../domain/job-offer/entities/OnlineInte
 import InterviewDate from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate';
 import InterviewDescription from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import InterviewId from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
-import InterviewPostulation from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewPostulation';
 import InterviewTitle from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import OnlineInterviewUrlMeeting from '../../../../../domain/job-offer/value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
 import UniqueId from '../../../../../shared/domain/UniqueUUID';
@@ -14,7 +13,6 @@ initialDate.setDate(finalDate.getDate() - 1);
 const date = InterviewDate.create(initialDate, finalDate);
 
 const id = InterviewId.create(new UniqueId().getId());
-const postulation = InterviewPostulation.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(
   'Titulo genérico de una entrevista',
 );
@@ -31,7 +29,6 @@ describe('Testing Interview creation', () => {
       interviewTitle,
       interviewDescription,
       date,
-      postulation,
       id,
       interviewUrlMeeting,
     );
@@ -43,7 +40,6 @@ describe('Testing Interview creation', () => {
       interviewTitle,
       interviewDescription,
       date,
-      postulation,
       InterviewStatus.disabled,
       id,
       interviewUrlMeeting,
@@ -59,7 +55,6 @@ describe('Testing Interview creation', () => {
       interviewTitle,
       interviewDescription,
       date,
-      postulation,
       id,
       interviewUrlMeeting,
     );
@@ -75,7 +70,6 @@ describe('Testing Interview creation', () => {
       interviewTitle,
       interviewDescription,
       date,
-      postulation,
       InterviewStatus.disabled,
       id,
       interviewUrlMeeting,
@@ -91,7 +85,6 @@ describe('Testing Interview creation', () => {
       interviewTitle,
       interviewDescription,
       date,
-      postulation,
       id,
       interviewUrlMeeting,
     );

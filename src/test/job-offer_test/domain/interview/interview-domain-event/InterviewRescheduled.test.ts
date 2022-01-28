@@ -4,7 +4,6 @@ import { InterviewStatus } from '../../../../../domain/job-offer/shared/Intervie
 import InterviewDate from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate';
 import InterviewDescription from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
 import InterviewId from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewId';
-import InterviewPostulation from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewPostulation';
 import InterviewTitle from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewTitle';
 import UniqueId from '../../../../../shared/domain/UniqueUUID';
 
@@ -15,14 +14,12 @@ describe('Testing Interview creation', () => {
     initialDate.setDate(finalDate.getDate() - 1);
     const date = InterviewDate.create(initialDate, finalDate);
     const id = InterviewId.create(new UniqueId().getId());
-    const postulation = InterviewPostulation.create(new UniqueId().getId());
     const interview = Interview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
       InterviewDescription.create(
         'Descripcion generica de una entrevista de trabajo',
       ),
       date,
-      postulation,
       id,
     );
     expect(interview).toBeInstanceOf(Interview);
@@ -33,14 +30,12 @@ describe('Testing Interview creation', () => {
     initialDate.setDate(finalDate.getDate() - 1);
     const date = InterviewDate.create(initialDate, finalDate);
     const id = InterviewId.create(new UniqueId().getId());
-    const postulation = InterviewPostulation.create(new UniqueId().getId());
     const interview = Interview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
       InterviewDescription.create(
         'Descripcion generica de una entrevista de trabajo',
       ),
       date,
-      postulation,
       id,
     );
 

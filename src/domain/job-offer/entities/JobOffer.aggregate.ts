@@ -24,7 +24,6 @@ import { Postulation } from './postulation';
 import InterviewTitle from '../value-objects/Interview/interview/InterviewTitle';
 import InterviewDescription from '../value-objects/Interview/interview/InterviewDescription';
 import InterviewDate from '../value-objects/Interview/interview/InterviewDate';
-import InterviewPostulation from '../value-objects/Interview/interview/InterviewPostulation';
 import InterviewId from '../value-objects/Interview/interview/InterviewId';
 import OnlineInterviewUrlMeeting from '../value-objects/Interview/OnlineInterview/OnlineInterviewUrlMeeting';
 import { InterviewStatus } from '../shared/InterviewStatus.enum';
@@ -274,7 +273,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewTitle: InterviewTitle,
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
-    interviewPostulation: InterviewPostulation,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewDirection: InPersonInterviewDirection,
@@ -284,7 +282,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        interviewPostulation,
         interviewStatus,
         interviewId,
         interviewDirection,
@@ -316,7 +313,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
    * @param interviewTitle Título de la entrevista.
    * @param interviewDescription Descripción de la entrevista.
    * @param interviewDate Fechas de inicio y finalización de la entrevista.
-   * @param interviewPostulation Postulacion.
    * @param interviewStatus Estado actual de la entrevista.
    * @param interviewId Identificador de la entrevista.
    * @param interviewUrlMeeting URL de la entrevista virtual.
@@ -325,7 +321,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewTitle: InterviewTitle,
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
-    interviewPostulation: InterviewPostulation,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewUrlMeeting: OnlineInterviewUrlMeeting,
@@ -335,7 +330,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        interviewPostulation,
         interviewStatus,
         interviewId,
         interviewUrlMeeting,
@@ -364,7 +358,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewTitle: InterviewTitle,
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
-    interviewPostulation: InterviewPostulation,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewDirection: InPersonInterviewDirection,
@@ -374,7 +367,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        interviewPostulation,
         interviewStatus,
         interviewId,
         interviewDirection,
@@ -383,7 +375,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       const interviewEventReject: IDomainEvent = new InterviewRejected(
         interview.getInterviewId(),
         interview.getStatus(),
-        interview.postulation,
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
@@ -396,7 +387,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     interviewTitle: InterviewTitle,
     interviewDescription: InterviewDescription,
     interviewDate: InterviewDate,
-    interviewPostulation: InterviewPostulation,
     interviewStatus: InterviewStatus,
     interviewId: InterviewId,
     interviewUrlMeeting: OnlineInterviewUrlMeeting,
@@ -406,7 +396,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interviewTitle,
         interviewDescription,
         interviewDate,
-        interviewPostulation,
         interviewStatus,
         interviewId,
         interviewUrlMeeting,
@@ -415,7 +404,6 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       const interviewEventReject: IDomainEvent = new InterviewRejected(
         interview.getInterviewId(),
         interview.getStatus(),
-        interview.postulation,
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
