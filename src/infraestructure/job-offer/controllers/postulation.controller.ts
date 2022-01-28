@@ -1,5 +1,5 @@
 import { ApiResponse } from '@nestjs/swagger';
-import { Body, Controller, Param, Get,Post } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post } from '@nestjs/common';
 import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import CreatePostulationRequest from '../request/createPostulationRequies.request';
 import { PostulationService } from '../services/postulation.service';
