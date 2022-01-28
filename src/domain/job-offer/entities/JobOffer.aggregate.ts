@@ -264,7 +264,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
    * @param interviewTitle Título de la entrevista.
    * @param interviewDescription Descripción de la entrevista.
    * @param interviewDate Fechas de inicio y finalización de la entrevista.
-   * @param interviewPostulation Postulacion.
+
    * @param interviewStatus Estado actual de la entrevista.
    * @param interviewId Identificador de la entrevista.
    * @param interviewDirection Lugar en donde se realizará la entrevista.
