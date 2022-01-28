@@ -1,4 +1,4 @@
-import { UserRegisteredNotificationSent } from '../../../domain/notification/domain_events/UserRegisteredNotificationSent.event';
+import { CVLoadedNotificationSent } from '../../../domain/notification/domain_events/CVLoadedNotification.event';
 import { Notification } from '../../../domain/notification/Notification.aggreagate';
 import { NotificationSubject } from '../../../domain/notification/values_objects/NotificationSubject.value';
 import { NotificationCommand } from '../Notification.command';
@@ -17,8 +17,8 @@ export class SendCVLoadedNotification<T> implements NotificationCommand<T> {
     notification
       .getEvents()
       .forEach((event) =>
-        service.publishUserRegisteredNotificationSent(
-          event as UserRegisteredNotificationSent<T>,
+        service.publishCVLoadedNotificationSent(
+          event as CVLoadedNotificationSent<T>,
         ),
       );
   }
