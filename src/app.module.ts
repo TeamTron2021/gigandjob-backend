@@ -7,6 +7,10 @@ import { EmployeerModule } from './infraestructure/employeer/employeer.module';
 import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
 import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
+import { UserModule } from './modules/user/user.module';
+import { NotificationModule } from './modules/notification/notification.module';
+import { UserQuery } from './modules/user/user-query.entity';
+import { UserCommand } from './modules/user/user-command.entity';
 
 @Module({
   imports: [
@@ -28,7 +32,6 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
             ssl: isProduction ? { rejectUnauthorized: false } : null,
           },
           type: 'postgres',
-          autoLoadEntities: true,
           synchronize: true,
           host: configService.get('DB_HOST'),
           port: configService.get('DB_PORT'),
@@ -38,8 +41,26 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
         };
       },
     }),
+
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('DB_USER_HOST'),
+        port: configService.get('DB_USER_PORT'),
+        username: configService.get('DB_USER_USER'),
+        password: configService.get('DB_USER_PASSWORD'),
+        database: configService.get('DB_USER_DATABASE'),
+        entities: [UserQuery, UserCommand],
+        synchronize: true,
+      }),
+    }),
+
     EmployeerModule,
     JobOfferModule,
+    UserModule,
+    NotificationModule,
   ],
   controllers: [],
   providers: [],

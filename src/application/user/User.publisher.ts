@@ -1,4 +1,4 @@
-import { UserEvent } from 'src/domain/user/User.aggregate';
+import { UserEvent } from '../../domain/user/User.aggregate';
 
 export interface UserPublisher {
   publish(events: UserEvent[]): void;
