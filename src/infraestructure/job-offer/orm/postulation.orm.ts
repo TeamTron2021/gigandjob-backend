@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn , OneToMany} from 'typeorm';
+import { InterviewORM } from './interview.orm';
 
 @Entity('postulation')
 export default class PostulationOrm {
@@ -8,4 +9,6 @@ export default class PostulationOrm {
   date: Date;
   @Column()
   status: string;
+  @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.postulation)
+  interviews: InterviewORM[];
 }

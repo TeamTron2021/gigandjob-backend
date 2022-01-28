@@ -1,4 +1,4 @@
-import PostulationFound from 'src/application/job-offer/ports/postulationFound.dto';
+import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
 import PostulationOrm from '../orm/postulation.orm';
 
 export default class PostulationMapper {
