@@ -1,3 +1,4 @@
+import { CVLoadedNotificationSent } from 'src/domain/notification/domain_events/CVLoadedNotification.event';
 import { UserRegisteredNotificationSent } from '../../domain/notification/domain_events/UserRegisteredNotificationSent.event';
 import { NotificationPublisher } from './Notification.publisher';
 import { NotificationRepository } from './Notification.repository';
@@ -15,6 +16,10 @@ export class NotificationService<T> {
   publishUserRegisteredNotificationSent(
     event: UserRegisteredNotificationSent<T>,
   ) {
+    this.publisher.publishUserRegisteredNotificationSent(event);
+  }
+
+  publishCVLoadedNotificationSent(event: CVLoadedNotificationSent<T>) {
     this.publisher.publishUserRegisteredNotificationSent(event);
   }
 }

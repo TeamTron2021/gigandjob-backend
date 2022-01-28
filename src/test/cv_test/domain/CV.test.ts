@@ -1,13 +1,13 @@
 import { randomUUID } from 'crypto';
-import { CVAproved } from '../../domain/user/domain_events/CVAproved.event';
-import { CVLoaded } from '../../domain/user/domain_events/CVLoaded.event';
-import { CVRejected } from '../../domain/user/domain_events/CVRejected.event';
-import { CVUpdated } from '../../domain/user/domain_events/CVUpdated.event';
-import { CV } from '../../domain/user/entities/CV.entity';
-import CVAcademicFormation from '../../domain/user/value_objects/CVAcademicFormation.value';
-import CVCourses from '../../domain/user/value_objects/CVCourses.value';
-import CVID from '../../domain/user/value_objects/CVID.value';
-import CVSkills from '../../domain/user/value_objects/CVSkills.value';
+import { CVAproved } from 'src/domain/user/domain_events/CVAproved.event';
+import { CVLoaded } from 'src/domain/user/domain_events/CVLoaded.event';
+import { CVRejected } from 'src/domain/user/domain_events/CVRejected.event';
+import { CVUpdated } from 'src/domain/user/domain_events/CVUpdated.event';
+import { CV } from 'src/domain/user/entities/CV.entity';
+import CVAcademicFormation from 'src/domain/user/value_objects/CVAcademicFormation.value';
+import CVCourses from 'src/domain/user/value_objects/CVCourses.value';
+import CVID from 'src/domain/user/value_objects/CVID.value';
+import CVSkills from 'src/domain/user/value_objects/CVSkills.value';
 
 describe('Testing CV entity', () => {
   test('Should return a instance of CV and the CV is Loaded', () => {
