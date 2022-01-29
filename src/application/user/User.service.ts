@@ -1,4 +1,5 @@
-import { UserEvent } from 'src/domain/user/User.aggregate';
+import { UserEvent } from '../../domain/user/User.aggregate';
+import { UserDto } from './User.dto';
 import { UserPublisher } from './User.publisher';
 import { UserRepository } from './User.repository';
 
@@ -8,8 +9,8 @@ export class UserService {
     private publisher: UserPublisher,
   ) {}
 
-  get(uuid: string) {
-    this.repository.get(uuid);
+  async get(uuid: string): Promise<UserDto> {
+    return await this.repository.get(uuid);
   }
 
   publish(events: UserEvent[]) {

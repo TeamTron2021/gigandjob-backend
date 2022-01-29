@@ -11,6 +11,9 @@ import { PostulationModule } from './infraestructure/job-offer/postulation.modul
 import { InterviewRepository } from './infraestructure/job-offer/repositories/InterviewRepository.repository';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
+import { UserCommandEntity } from './modules/user/user-command.entity';
+import { UserQueryEntity } from './modules/user/user-query.entity';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -34,8 +37,8 @@ import PostulationRepository from './infraestructure/job-offer/repositories/post
             ssl: isProduction ? { rejectUnauthorized: false } : null,
           },
           type: 'postgres',
-          autoLoadEntities: true,
           synchronize: true,
+          autoLoadEntities: true,
           host: configService.get('DB_HOST'),
           port: configService.get('DB_PORT'),
           username: configService.get('DB_USER'),
@@ -48,6 +51,7 @@ import PostulationRepository from './infraestructure/job-offer/repositories/post
     JobOfferModule,
     PostulationModule,
     InterviewModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
