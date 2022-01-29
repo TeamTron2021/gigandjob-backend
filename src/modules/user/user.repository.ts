@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { UserStatus } from 'src/domain/user/enums/UserStatus.enum';
 import { EntityRepository, Repository } from 'typeorm';
 import { UserDto as UserDto } from '../../application/user/User.dto';
 import { UserRepository as IUserRepository } from '../../application/user/User.repository';
-import { UserQuery as UserQuery } from './user-query.entity';
+import { UserQueryEntity as UserQuery } from './user-query.entity';
 
 @Injectable()
 @EntityRepository(UserQuery)
@@ -14,12 +15,11 @@ export class UserRepository
     const user: UserQuery = await this.findOne(uuid);
     const userDto: UserDto = {
       ID: user.id,
-      firstname: user.firstname,
-      lastname: user.lastname,
-      birthday: user.birthday,
-      email: user.email,
-      password: user.password,
-      status: user.status,
+      firstname: user.data.firstname,
+      lastname: user.data.lastname,
+      birthday: user.data.birthday,
+      email: user.data.email,
+      status: UserStatus[user.data.status],
     };
     return userDto;
   }

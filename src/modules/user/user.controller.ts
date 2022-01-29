@@ -3,7 +3,15 @@ import { RegisterUser } from 'src/application/user/commands/RegisterUser.command
 import { UserDto } from 'src/application/user/User.dto';
 import { UserService } from 'src/application/user/User.service';
 
-@Controller('user')
+type UserRegistrationForm = {
+  firstname: string;
+  lastname: string;
+  birthday: string;
+  email: string;
+  password: string;
+};
+
+@Controller('users')
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
@@ -13,11 +21,11 @@ export class UserController {
   }
 
   @Post()
-  async register(@Body() user: UserDto): Promise<void> {
+  async register(@Body() user: UserRegistrationForm): Promise<void> {
     const command: RegisterUser = new RegisterUser(
       user.firstname,
       user.lastname,
-      user.birthday,
+      new Date(user.birthday),
       user.email,
       user.password,
     );

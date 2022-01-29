@@ -11,10 +11,9 @@ import { PostulationModule } from './infraestructure/job-offer/postulation.modul
 import { InterviewRepository } from './infraestructure/job-offer/repositories/InterviewRepository.repository';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
+import { UserCommandEntity } from './modules/user/user-command.entity';
+import { UserQueryEntity } from './modules/user/user-query.entity';
 import { UserModule } from './modules/user/user.module';
-import { NotificationModule } from './modules/notification/notification.module';
-import { UserQuery } from './modules/user/user-query.entity';
-import { UserCommand } from './modules/user/user-command.entity';
 
 @Module({
   imports: [
@@ -39,6 +38,7 @@ import { UserCommand } from './modules/user/user-command.entity';
           },
           type: 'postgres',
           synchronize: true,
+          autoLoadEntities: true,
           host: configService.get('DB_HOST'),
           port: configService.get('DB_PORT'),
           username: configService.get('DB_USER'),
@@ -47,28 +47,11 @@ import { UserCommand } from './modules/user/user-command.entity';
         };
       },
     }),
-
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_USER_HOST'),
-        port: configService.get('DB_USER_PORT'),
-        username: configService.get('DB_USER_USER'),
-        password: configService.get('DB_USER_PASSWORD'),
-        database: configService.get('DB_USER_DATABASE'),
-        entities: [UserQuery, UserCommand],
-        synchronize: true,
-      }),
-    }),
-
     EmployeerModule,
     JobOfferModule,
     PostulationModule,
     InterviewModule,
     UserModule,
-    NotificationModule,
   ],
   controllers: [],
   providers: [],

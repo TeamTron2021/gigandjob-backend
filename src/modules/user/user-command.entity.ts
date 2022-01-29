@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('users_command')
-export class UserCommand extends BaseEntity {
+export class UserCommandEntity extends BaseEntity {
   @PrimaryColumn()
   id: string;
   @Column()
@@ -15,5 +15,5 @@ export class UserCommand extends BaseEntity {
   @Column()
   password: string;
   @Column()
-  status: string;
+  status: number;
 }

@@ -1,19 +1,18 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { UserCommandEntity } from './user-command.entity';
+
+type UserQueryData = {
+  firstname: string;
+  lastname: string;
+  birthday: Date;
+  email: string;
+  status: number;
+};
 
 @Entity('users_query')
-export class UserQuery extends BaseEntity {
+export class UserQueryEntity extends BaseEntity {
   @PrimaryColumn()
   id: string;
-  @Column()
-  firstname: string;
-  @Column()
-  lastname: string;
-  @Column()
-  birthday: Date;
-  @Column()
-  email: string;
-  @Column()
-  password: string;
-  @Column()
-  status: string;
+  @Column({ type: 'json' })
+  data: UserQueryData;
 }
