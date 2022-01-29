@@ -4,6 +4,12 @@ Backend para git and job, un sistema de busqueda y aplicación de empleos tanto 
 ## 🚀Iniciando 
 Estas instrucciones serviran para obtener una copia del proyecto en funcionamiento en su máquina local con el fin de desarollo y realizar pruebas.
 
+## Diagrama de Arquitectura hexagonal 
+<img src="./extra/Hexagonal.png"/>
+
+## Diagrama de estereotipos de domino
+<img src="./extra/Dominio.png"/>
+
 ### 📋Pre-requisitos 
 * [Node.js](https://nodejs.org/es/) - Entorno de ejecución para javascript.
 * [Typescript](https://www.typescriptlang.org) - Lenguaje de Programación para nuestro modelo de dominio (ddd).
