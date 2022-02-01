@@ -4,7 +4,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configValidationSchema } from './config/config.schema';
 import { EmployeerModule } from './infraestructure/employeer/employeer.module';
-import { EmployeerRepository } from './infraestructure/employeer/repositories/EntityRepository.repository';
+import { EmployeerRepository } from './infraestructure/employeer/repositories/Employeer.repository';
 import { InterviewModule } from './infraestructure/job-offer/interview.module';
 import { JobOfferModule } from './infraestructure/job-offer/job-offer.module';
 import { PostulationModule } from './infraestructure/job-offer/postulation.module';
