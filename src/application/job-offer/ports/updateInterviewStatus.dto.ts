@@ -1,4 +1,4 @@
 export default class UpdateInteviewStatus {
-    id: string;
-    status: string;
-  }
+  id: string;
+  status: string;
+}

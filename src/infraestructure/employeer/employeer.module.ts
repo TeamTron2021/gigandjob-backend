@@ -10,11 +10,7 @@ import { EmployeerRepository } from './repositories/Employeer.repository';
 import { EmployeerService } from './services/employeer.service';
 
 @Module({
-  imports: [
-    CqrsModule,
-    TypeOrmModule.forFeature([EmployeerRepository]),
-    RegisterEmployeerService,
-  ],
+  imports: [CqrsModule, TypeOrmModule.forFeature([EmployeerRepository])],
   controllers: [EmployeerController],
   providers: [
     EmployeerService,
