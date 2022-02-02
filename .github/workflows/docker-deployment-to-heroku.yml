@@ -1,0 +1,20 @@
+name: Deploy Docker to Heroku
+
+
+on:
+  pull_request:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "gigandjob-backend"
+          heroku_email: "vafigueroa.15@est.ucab.edu.ve"
+          usedocker: true
