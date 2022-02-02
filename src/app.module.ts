@@ -30,9 +30,9 @@ import { UserModule } from './modules/user/user.module';
       useFactory: async (configService: ConfigService) => {
         const isProduction = configService.get('STAGE') === 'prod';
         return {
-          ssl: true,
+          ssl: isProduction,
           extra: {
-            ssl: { rejectUnauthorized: false },
+            ssl: { rejectUnauthorized: isProduction ? false : null },
           },
           type: 'postgres',
           synchronize: true,

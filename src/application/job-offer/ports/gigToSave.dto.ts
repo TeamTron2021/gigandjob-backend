@@ -1,8 +1,9 @@
 import IDto from 'src/application/shared/interfaces/IDto';
+import { OfferStatus } from 'src/domain/job-offer/shared/OfferStatus.enum';
 import { Time } from 'src/domain/job-offer/shared/Time.enum';
 import { CreateSkillsDto } from './createSkills.dto';
 
-export default class CreateGigDto extends IDto {
+export default class GigToSave extends IDto {
   id: string;
   description: string;
   salary: number;
@@ -13,4 +14,5 @@ export default class CreateGigDto extends IDto {
   finalDate: Date;
   time: Time;
   amount: number;
+  status: OfferStatus;
 }
