@@ -36,6 +36,7 @@ lerna-debug.log*
 
 #eviroment
 .env
-
+.env.prod
+.env.dev
 #postgres 
 /pgdata

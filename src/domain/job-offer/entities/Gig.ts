@@ -25,7 +25,7 @@ export default class Gig<S extends OfferStatus> implements IJobOffer {
     public vacant: JobOfferVacant,
     public date: JobOfferDate,
     status: S,
-    Id: JobOfferId,
+    public Id: JobOfferId,
     public gigDuration: GigDuration,
   ) {
     this.status = status;
