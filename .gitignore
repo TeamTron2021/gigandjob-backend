@@ -35,7 +35,6 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 #eviroment
-.env
 .env.prod
 .env.dev
 #postgres 
