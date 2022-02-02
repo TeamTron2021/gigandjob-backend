@@ -1,4 +1,3 @@
-
 import CreatePostulationDTO from '../ports/createPostulation.dto';
 import PostulationFound from '../ports/findPostulationResult.dto';
 
@@ -8,5 +7,4 @@ export default interface IPostulationRepository {
   ): Promise<PostulationFound>;
 
   findById(id: string): Promise<PostulationFound>;
-
 }
