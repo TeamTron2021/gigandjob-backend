@@ -36,7 +36,7 @@ export default class JobOfferDate implements IValueObject {
       );
     }
 
-    if (!(startDate instanceof Date)) {
+    if (!(startDate.constructor == Date)) {
       throw new JobOfferInvalidDateException('La fecha de inicio es invalida');
     }
 
