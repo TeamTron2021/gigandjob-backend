@@ -11,7 +11,6 @@ import RegisterEmployeerMapper from '../mappers/registerEmployeer.mapper';
 import { EmployeerORM } from '../orm/employeer.orm';
 import IEmployeerRepository from 'src/application/employeer/repositories/employeer.repository';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
-import EmployeerToSaveDto from 'src/application/employeer/ports/employeerToSave.dto';
 
 @EntityRepository(EmployeerORM)
 export class EmployeerRepository
@@ -28,17 +27,11 @@ export class EmployeerRepository
       throw new InternalServerErrorException();
     }
   }
-  async createEmployeer(employeerDto: EmployeerToSaveDto): Promise<void> {
-    const {
-      id,
-      companyName,
-      companyMail,
-      rif,
-      latitude,
-      longitude,
-      industry,
-      status,
-    } = employeerDto;
+  async createEmployeer(
+    employeerDto: EmployeerDto,
+  ): Promise<Employeer<EmployeerStatus>> {
+    const { id, companyName, companyMail, rif, latitude, longitude, industry } =
+      employeerDto;
     const employeerORM: EmployeerORM = this.create({
       id,
       companyName,
@@ -47,7 +40,7 @@ export class EmployeerRepository
       latitude,
       longitude,
       industry,
-      status,
+      status: EmployeerStatus.NOT_SUSPENDED,
     });
     try {
       await this.save(employeerORM);
@@ -56,7 +49,10 @@ export class EmployeerRepository
         throw new ConflictException('Parece que ese rif esta en uso');
       }
     }
-    return;
+    const employeer =
+      RegisterEmployeerMapper.convertEmployeerORMtoDomain(employeerORM);
+
+    return employeer;
   }
 
   async findById(id: string): Promise<EmployeerFound> {

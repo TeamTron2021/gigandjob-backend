@@ -3,7 +3,7 @@ import IFindEmployeers from 'src/application/employeer/handlers/findEmployeers.h
 import FindEmployeers from 'src/application/employeer/handlers/findEmployeers.handler';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import FindEmployeersQuery from 'src/application/employeer/queries/findEmployeers.query';
-import { EmployeerRepository } from '../repositories/Employeer.repository';
+import { EmployeerRepository } from '../repositories/EntityRepository.repository';
 
 @QueryHandler(FindEmployeersQuery)
 export class FindEmployeersHandler

@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import CreateJobOfferService from 'src/application/job-offer/services/createJobOffer.service';
 import { JobOfferController } from './controllers/job-offer.controller';
 import CreateGigHandler from './handlers/createGig.handler';
 import { CreateJobOfferHandler } from './handlers/createJobOffer.handler';
@@ -22,11 +21,6 @@ import { JobOfferService } from './services/job-offer.service';
     ]),
   ],
   controllers: [JobOfferController],
-  providers: [
-    JobOfferService,
-    CreateJobOfferHandler,
-    CreateGigHandler,
-    CreateJobOfferService,
-  ],
+  providers: [JobOfferService, CreateJobOfferHandler, CreateGigHandler],
 })
 export class JobOfferModule {}
