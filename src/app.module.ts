@@ -32,7 +32,7 @@ import { UserModule } from './modules/user/user.module';
         return {
           ssl: isProduction,
           extra: {
-            ssl: { rejectUnauthorized: isProduction ? false : null },
+            ssl: isProduction ? { rejectUnauthorized: false } : null,
           },
           type: 'postgres',
           synchronize: true,
