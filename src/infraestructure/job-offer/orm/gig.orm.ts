@@ -13,7 +13,7 @@ import { SkillsORM } from './skills.orm';
 
 @Entity('gigs')
 export class GigORM {
-  @PrimaryColumn({ type: 'uuid'})
+  @PrimaryColumn({ type: 'uuid' })
   id: string;
   @Column()
   description: string;
