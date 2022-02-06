@@ -1,11 +1,11 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
-import { UserCommandEntity } from './user-command.entity';
 
 type UserQueryData = {
   firstname: string;
   lastname: string;
   birthday: Date;
   email: string;
+  password: string;
   status: number;
 };
 
