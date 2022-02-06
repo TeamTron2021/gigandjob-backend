@@ -12,6 +12,7 @@ import { InterviewRepository } from './infraestructure/job-offer/repositories/In
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './infraestructure/auth/auth.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { UserModule } from './modules/user/user.module';
     PostulationModule,
     InterviewModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
