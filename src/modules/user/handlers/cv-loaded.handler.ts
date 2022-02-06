@@ -4,7 +4,7 @@ import { CVCommandDao } from '../cv-command.dao';
 import { CVIntegrationEvent } from './events/cv-integration.event';
 
 @EventsHandler(CVLoaded)
-export class UserRegisteredHandler implements IEventHandler<CVLoaded> {
+export class CVLoadedHandler implements IEventHandler<CVLoaded> {
   constructor(
     private dao: CVCommandDao,
     private bus: EventBus<CVIntegrationEvent>,
