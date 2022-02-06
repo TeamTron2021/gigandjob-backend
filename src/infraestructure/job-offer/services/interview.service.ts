@@ -26,8 +26,7 @@ export class InterviewService {
       ...interview,
       id: interviewId,
     };
-    
-   
+
     return await this.commandBus.execute(
       new CreateInterviewCommand(newInterview, Postulation),
     );
