@@ -12,6 +12,7 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
         lastname: event.lastname.value,
         birthday: event.birthday.value,
         email: event.email.value,
+        password: event.password.value,
         status: event.status,
       },
     });
