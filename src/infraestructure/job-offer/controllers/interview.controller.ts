@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Get } from '@nestjs/common';
+import {Body, Controller, Param, Post, Get, Put} from '@nestjs/common';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { InterviewService } from '../services/interview.service';
 import { ApiResponse } from '@nestjs/swagger';
@@ -34,5 +34,24 @@ export class InterviewController {
   @Get('/:id')
   async findInterview(@Param() interviewId: FindInterviewByIdRequest) {
     return await this.interviewService.findInterviewById(interviewId);
+  }
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No hemos encontrado ninguna entrevista con ese ID.',
+  })
+  @Put('/:id')
+  /**
+   * Endpoint que permite aceptar una entrevista.
+   *
+   * Obtiene, de la solicitud, la entrevista a aceptar y le pide, al servicio de entrevista, actualizarla.
+   *
+   * @
+   * */
+  async acceptInterview(
+      @Param() interviewId: FindInterviewByIdRequest
+  ) {
+    return await this.interviewService.acceptInterview(interviewId);
   }
 }

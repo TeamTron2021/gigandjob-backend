@@ -9,6 +9,8 @@ import UniqueId from 'src/shared/domain/UniqueUUID';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
+import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
+import AcceptOnlineInterviewDto from "../../../application/job-offer/ports/acceptOnlineInterview.dto";
 
 @Injectable()
 export class InterviewService {
@@ -41,5 +43,17 @@ export class InterviewService {
       new FindInterviewById(interviewId.id),
     );
     return interview;
+  }
+	
+  async acceptInterview(interviewId: FindInterviewByIdRequest) {
+    const interviewToAccept: AcceptInterviewDto = new AcceptOnlineInterviewDto();
+	/*await this.findInterviewById(interviewId).then(() => {
+		interviewToAccept.status = this.
+	})*/
+	
+	const interviewDto: AcceptInterviewDto = new AcceptOnlineInterviewDto();
+	interviewDto.id = interviewToAccept.id;
+    
+    return Promise.resolve(undefined);
   }
 }

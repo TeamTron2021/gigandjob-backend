@@ -141,7 +141,7 @@ export default class Interview<S extends InterviewStatus>
         new ChangeInterviewStatusToAccepted();
       this.status = interviewStatusChanger.changeStatus(this.status);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
