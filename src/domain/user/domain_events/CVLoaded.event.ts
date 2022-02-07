@@ -7,9 +7,9 @@ import CVSkills from '../value_objects/CVSkills.value';
 export class CVLoaded {
   constructor(
     public ID: CVID,
-    public academicFormation: CVAcademicFormation[],
-    public CVSkills: CVSkills[],
-    public courses: CVCourses[],
+    public academicFormation: CVAcademicFormation,
+    public skills: CVSkills,
+    public courses: CVCourses,
     public status: CVStatus,
   ) {}
 }

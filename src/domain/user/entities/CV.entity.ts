@@ -16,9 +16,9 @@ export class CV<S extends CVStatus> {
   private eventRecorder: CVEvents[] = [];
 
   constructor(
-    public academicFormation: CVAcademicFormation[],
-    public skills: CVSkills[],
-    public courses: CVCourses[],
+    public academicFormation: CVAcademicFormation,
+    public skills: CVSkills,
+    public courses: CVCourses,
     status: S,
     id?: CVID,
   ) {
@@ -35,9 +35,9 @@ export class CV<S extends CVStatus> {
 
   update(
     ID: CVID,
-    skills: CVSkills[],
-    courses: CVCourses[],
-    academicFormation: CVAcademicFormation[],
+    skills: CVSkills,
+    courses: CVCourses,
+    academicFormation: CVAcademicFormation,
   ) {
     this.ID = ID;
     this.skills = skills;
@@ -49,9 +49,9 @@ export class CV<S extends CVStatus> {
   }
 
   static load(
-    academicFormation: CVAcademicFormation[],
-    skills: CVSkills[],
-    courses: CVCourses[],
+    academicFormation: CVAcademicFormation,
+    skills: CVSkills,
+    courses: CVCourses,
   ): CV<CVStatus.Unconfirmed> {
     const cv = new CV(academicFormation, skills, courses, CVStatus.Unconfirmed);
     cv.eventRecorder.push(
