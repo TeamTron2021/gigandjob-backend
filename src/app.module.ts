@@ -14,6 +14,7 @@ import PostulationRepository from './infraestructure/job-offer/repositories/post
 import { CVModule } from './modules/user/cv.module';
 import { CVRepository } from './modules/user/cv.repository';
 import { UserModule } from './modules/user/user.module';
+import { AuthModule } from './infraestructure/auth/auth.module';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { UserModule } from './modules/user/user.module';
     InterviewModule,
     UserModule,
     CVModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
