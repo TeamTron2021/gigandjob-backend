@@ -13,6 +13,10 @@ export class UserService {
     return await this.repository.get(uuid);
   }
 
+  async getAll(): Promise<UserDto[]> {
+    return await this.repository.getAll();
+  }
+
   publish(events: UserEvent[]) {
     this.publisher.publish(events);
   }
