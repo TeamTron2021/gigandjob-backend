@@ -20,4 +20,17 @@ export class JobOfferMapper {
     };
     return newJobOffer;
   }
+
+  public static convertManyJobOffers(
+    jobOffers: JobOfferORM[],
+  ): JobOfferFound[] {
+    const JobOffersToReturn: JobOfferFound[] = jobOffers.map((jobOffer) => {
+      const jobOfferFound: JobOfferFound = {
+        ...jobOffer,
+        vacant: jobOffer.vacants,
+      };
+      return jobOfferFound;
+    });
+    return JobOffersToReturn;
+  }
 }

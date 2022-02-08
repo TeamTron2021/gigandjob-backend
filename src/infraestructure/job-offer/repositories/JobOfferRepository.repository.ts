@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from '@nestjs/common';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
 import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
@@ -5,7 +6,12 @@ import JobOfferToSave from 'src/application/job-offer/ports/jobOfferToSave.dto';
 import IJobOfferRepository from 'src/application/job-offer/repositories/job-offer.repository';
 import { OfferStatus } from 'src/domain/job-offer/shared/OfferStatus.enum';
 import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import {
+  createQueryBuilder,
+  EntityRepository,
+  getRepository,
+  Repository,
+} from 'typeorm';
 import { JobOfferMapper } from '../mappers/jobOffer.mapper';
 import { JobOfferORM } from '../orm/job-offer.orm';
 import { SkillsORM } from '../orm/skills.orm';
@@ -15,6 +21,20 @@ export class JobOfferRepository
   extends Repository<JobOfferORM>
   implements IJobOfferRepository
 {
+  async findJobOffers(): Promise<JobOfferFound[]> {
+    try {
+      const query = this.createQueryBuilder('joboffers');
+      const resultFromQuery = await query
+        .innerJoinAndSelect('joboffers.skills', 's')
+        .getMany();
+      const result: JobOfferFound[] =
+        JobOfferMapper.convertManyJobOffers(resultFromQuery);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException();
+    }
+  }
   async createJobOffer(
     jobOfferDto: JobOfferToSave,
     employeer: EmployeerFound,
