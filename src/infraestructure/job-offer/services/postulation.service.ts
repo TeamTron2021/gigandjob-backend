@@ -17,22 +17,15 @@ export class PostulationService {
     private readonly queryBus: QueryBus,
   ) {}
 
-  async createPostulation(
-    postulation: CreatePostulationRequest,
-    offer: FindJobOfferByIdRequest,
-  ) {
+  async createPostulation(postulation: CreatePostulationRequest) {
     const postulationId: string = new UniqueId().getId();
-    const newPostulation: CreatePostulationDTO = {
+    const newPostulation = {
       ...postulation,
       id: postulationId,
     };
 
-    const jobOffer = await this.queryBus.execute(
-      new FindJobOfferById(offer.id),
-    );
-
     return await this.commandBus.execute(
-      new CreatePostulationCommand(newPostulation, jobOffer),
+      new CreatePostulationCommand(newPostulation),
     );
   }
   async findPostulationById(postulationId: FindPostulationByIdRequest) {

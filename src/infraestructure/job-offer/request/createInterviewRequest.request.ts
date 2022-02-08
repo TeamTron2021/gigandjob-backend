@@ -11,7 +11,6 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-
 export default class CreateInterviewRequest {
   @IsNotEmpty()
   @IsString()
@@ -33,5 +32,4 @@ export default class CreateInterviewRequest {
   @IsNotEmpty()
   @Type(() => Date)
   date: Date;
-  
 }

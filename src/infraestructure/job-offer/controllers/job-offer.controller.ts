@@ -1,5 +1,4 @@
 import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse } from '@nestjs/swagger';
 import { GetUser } from 'src/infraestructure/auth/users/decorators/get-user.decorator';
 import { JwtAuthGuard } from 'src/infraestructure/auth/users/guards/jwt-auth.guard';

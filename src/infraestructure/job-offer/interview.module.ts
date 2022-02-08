@@ -8,13 +8,12 @@ import { InterviewRepository } from './repositories/InterviewRepository.reposito
 import { InterviewService } from './services/interview.service';
 
 @Module({
-    imports: [CqrsModule, 
-        TypeOrmModule.forFeature([InterviewRepository])],
-    controllers: [InterviewController],
-    providers:[
-        InterviewService, 
-        CreateInterviewHandler,
-        findInterviewByIdHandler
-    ]
+  imports: [CqrsModule, TypeOrmModule.forFeature([InterviewRepository])],
+  controllers: [InterviewController],
+  providers: [
+    InterviewService,
+    CreateInterviewHandler,
+    findInterviewByIdHandler,
+  ],
 })
 export class InterviewModule {}

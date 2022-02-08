@@ -14,22 +14,18 @@ export class PostulationController {
     @Body() postulation: CreatePostulationRequest,
     @Param() jobOffer: FindJobOfferByIdRequest,
   ) {
-    return await this.postulationService.createPostulation(
-      postulation,
-      jobOffer,
-    );
+    return await this.postulationService.createPostulation(postulation);
   }
 
-  //endpoint para buscar un empleador por su id
-  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({ status: 200, description: ResponseDescription.CREATED })
   @ApiResponse({
     status: 404,
-    description: 'No encontramos ningun empleador con ese id',
+    description: 'No se encontro ninguna postulacion',
   })
-  @Get('/:id')
-  async findPostulation(@Param() postulationId: FindPostulationByIdRequest) {
-    return await this.postulationService.findPostulationById(postulationId);
-  }
+  // @Get('/:id')
+  // async findPostulation(@Param() postulationId: FindPostulationByIdRequest) {
+  //   return await this.postulationService.findPostulationById(postulationId);
+  // }
   @Get()
   async findPostulations() {
     return await this.postulationService.findPostulations();
