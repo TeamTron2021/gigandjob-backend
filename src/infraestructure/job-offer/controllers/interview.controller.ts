@@ -1,11 +1,13 @@
-import { Body, Controller, Param, Post, Get } from '@nestjs/common';
+import { Body, Controller, Param, Post, Get,  HttpStatus } from '@nestjs/common';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { InterviewService } from '../services/interview.service';
 import { ApiResponse } from '@nestjs/swagger';
 import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
+import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
 
+import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 
 @Controller('interview')
 export class InterviewController {
@@ -35,4 +37,15 @@ export class InterviewController {
   async findInterview(@Param() interviewId: FindInterviewByIdRequest) {
     return await this.interviewService.findInterviewById(interviewId);
   }
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @Get('/postulation/:postulationId')
+  async findInterviewForPostualtion(@Param() postulationId: FindInterviewByPostulationRequest) {
+    return buildResponse(
+      HttpStatus.OK,
+      await this.interviewService.findInterviewByPostulation(postulationId),
+      );
+  }
+
+ 
 }
