@@ -12,7 +12,7 @@ export class PostulationController {
   @Post()
   async createPostulation(
     @Body() postulation: CreatePostulationRequest,
-    @Param() jobOffer: FindJobOfferByIdRequest,
+    //@Param() jobOffer: FindJobOfferByIdRequest,
   ) {
     return await this.postulationService.createPostulation(postulation);
   }
