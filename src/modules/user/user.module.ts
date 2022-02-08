@@ -13,17 +13,18 @@ import { UserRepository } from './user.repository';
 @Module({
   imports: [
     CqrsModule,
-    TypeOrmModule.forFeature([UserCommandDao, UserQueryDao]),
+    TypeOrmModule.forFeature([UserCommandDao, UserQueryDao, UserRepository]),
   ],
   providers: [
-    UserRepository,
     UserPublisher,
     UserRegisteredHandler,
     UserQueryListener,
     {
       provide: UserService,
-      useFactory: (publisher: UserPublisher, repository: UserRepository) =>
-        new UserService(repository, publisher),
+      useFactory: (publisher: UserPublisher, repository: UserRepository) => {
+        return new UserService(repository, publisher);
+      },
+
       inject: [UserPublisher, UserRepository],
     },
   ],
