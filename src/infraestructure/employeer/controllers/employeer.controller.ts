@@ -1,6 +1,15 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import EmployeerDto from 'src/application/employeer/ports/employeer.dto';
+import { JwtAdminAuthGuard } from 'src/infraestructure/auth/admin/guards/jwt-admin.guard';
 import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
@@ -36,6 +45,7 @@ export class EmployeerController {
       await this.employeerService.findEmployeerById(employeerId),
     );
   }
+  @UseGuards(JwtAdminAuthGuard)
   @Get()
   async findEmployeers() {
     return buildResponse(
