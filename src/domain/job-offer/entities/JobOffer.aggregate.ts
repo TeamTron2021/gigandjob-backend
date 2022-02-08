@@ -243,8 +243,8 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     JobOfferRevokedNotification.sendPublishedOffer();
     return OfferRevoked;
   }
-
-  protected createAndSendInterviewAcceptedNotification(
+  
+  private createAndSendInterviewAcceptedNotification(
     interview: InterviewId,
   ): void {
     const interviewAcceptedNotification: InterviewAcceptedNotification =
@@ -270,9 +270,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
   public acceptInterview(
     interviewId: InterviewId,
     interviewStatus: InterviewStatus,
-  ): void {
+  ) {
     try {
-      const interview = new Interview(
+      const interview = new Interview<InterviewStatus>(
         interviewId,
         interviewStatus,
       );
@@ -290,6 +290,11 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.createAndSendInterviewAcceptedNotification(
         interview.getInterviewId(),
       );
+      
+      return {
+        id: interview.getInterviewId(),
+        status: interview.getStatus()
+      };
     } catch (e) {
       // console.log(e);
       throw e;
