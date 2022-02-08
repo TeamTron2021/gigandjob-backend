@@ -10,6 +10,7 @@ import { InterviewMapper } from '../mappers/interview.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import PostulationOrm from '../orm/postulation.orm';
 import { NotFoundException } from '@nestjs/common';
+import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
 
 @EntityRepository(InterviewORM)
 export class InterviewRepository
@@ -48,4 +49,17 @@ export class InterviewRepository
     }
     throw new NotFoundException('No encontramos ninguna oferta con ese id');
   }
+	
+	/**
+	 * Actualiza el estado de la entrevista aceptada.
+	 *
+	 * @param acceptedInterview Entrevista aceptada.
+	 * */
+	async acceptInterview(
+		acceptedInterview: AcceptInterviewDto
+	) {
+		await this.update(acceptedInterview.id, {
+			status: acceptedInterview.status
+		});
+	}
 }
