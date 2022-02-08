@@ -35,6 +35,7 @@ import { InterviewRejected } from '../domain-events/interview/interview/Intervie
 import InterviewAcceptedNotification from './InterviewAcceptedNotification';
 import { InterviewNotificationSubject } from '../value-objects/Interview/InterviewNotificationSubject';
 import { InterviewNotificationContent } from '../value-objects/Interview/InterviewNotificationContent';
+import Interview from "./Interview";
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
   private eventRecorder: IDomainEvent[] = [];
@@ -258,6 +259,44 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
   }
 
   /**
+   * Actualiza el estado de una entrevista a "accepted", generando un evento de dominio si el cambio fue
+   * exitoso.
+   *
+   * @param interviewId Identificador de la entrevista.
+   * @param interviewStatus Estado actual de la entrevista.
+   *
+   * @throws InterviewCurrentlyDisabledException
+   * */
+  public acceptInterview(
+    interviewId: InterviewId,
+    interviewStatus: InterviewStatus,
+  ): void {
+    try {
+      const interview = new Interview(
+        interviewId,
+        interviewStatus,
+      );
+
+      interview.acceptInterview(); // Cambiar el estado de la entrevista.
+
+      // Generación del evento de dominio.
+      const interviewAcceptedEvent: IDomainEvent = new InterviewAccepted(
+        interview.getInterviewId(),
+        interview.getStatus(),
+      );
+      this.eventRecorder.push(interviewAcceptedEvent);
+
+      // Creación de notificación de entrevista aceptada.
+      this.createAndSendInterviewAcceptedNotification(
+        interview.getInterviewId(),
+      );
+    } catch (e) {
+      // console.log(e);
+      throw e;
+    }
+  }
+
+  /**
    * Actualiza el estado de una entrevista presencial a "accepted", generando un evento de dominio si el cambio fue
    * exitoso.
    *
@@ -301,7 +340,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interview.getInterviewId(),
       );
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -349,7 +388,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interview.getInterviewId(),
       );
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -378,7 +417,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -407,7 +446,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }

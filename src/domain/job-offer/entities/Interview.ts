@@ -20,23 +20,27 @@ import ChangeInterviewStatusToAccepted from '../domain-service/interview/ChangeI
 import disabledInterviewE from '../domain-events/interview/interview/disabledInterview/disabledInterview.Event';
 import { ChangeInterviewStatusToDisable } from '../domain-service/interview/ChangeInterviewStatusToDisable';
 
-export default class Interview<S extends InterviewStatus>
-  implements IInterview
-{
+export default class Interview<S extends InterviewStatus> implements IInterview {
+  
   private eventRecorder: IDomainEvent[] = [];
   public status: S;
+  
   constructor(
-    public title: InterviewTitle,
-    public description: InterviewDescription,
-    public date: InterviewDate,
-    status: S,
     public Id: InterviewId,
+    status: S,
+    public title?: InterviewTitle,
+    public description?: InterviewDescription,
+    public date?: InterviewDate,
   ) {
     this.status = status;
   }
 
   public getInterviewId() {
     return this.Id;
+  }
+  
+  getStatus() {
+    return this.status;
   }
   
   
@@ -55,11 +59,11 @@ export default class Interview<S extends InterviewStatus>
     Id: InterviewId,
   ) {
     const interview = new Interview(
+      Id,
+      InterviewStatus.created,
       title,
       description,
       date,
-      InterviewStatus.created,
-      Id,
     );
 
     interview.eventRecorder.push(
@@ -96,11 +100,11 @@ export default class Interview<S extends InterviewStatus>
     const interviewNewStatus = interviewStatusChanger.changeStatus(this.status);
 
     const interview = new Interview(
+      this.Id,
+      interviewNewStatus,
       this.title,
       this.description,
       this.date,
-      interviewNewStatus,
-      this.Id,
     );
     interview.eventRecorder = this.eventRecorder.slice(0);
 
@@ -152,7 +156,7 @@ export default class Interview<S extends InterviewStatus>
         new ChangeInterviewStatusToRejected();
       this.status = interviewStatus.changeStatus(this.status);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -163,7 +167,7 @@ export default class Interview<S extends InterviewStatus>
         new ChangeInterviewStatusToDisable();
       this.status = interviewStatus.changeStatus(this.status);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
