@@ -33,7 +33,7 @@ export default class InterviewAcceptedNotification /*extends InterviewNotificati
     try {
       return new InterviewAcceptedNotification(subject, content, interview, id);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
