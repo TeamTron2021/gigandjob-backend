@@ -8,6 +8,7 @@ import { AuthModule } from '../auth/auth.module';
 import { JobOfferController } from './controllers/job-offer.controller';
 import CreateGigHandler from './handlers/createGig.handler';
 import { CreateJobOfferHandler } from './handlers/createJobOffer.handler';
+import { FindJobOffersHandler } from './handlers/findJobOffers.handler';
 import { GigORM } from './orm/gig.orm';
 import { SkillsORM } from './orm/skills.orm';
 import GigRepository from './repositories/gigRepository.repository';
@@ -33,6 +34,7 @@ import { JobOfferService } from './services/job-offer.service';
     CreateGigHandler,
     CreateJobOfferService,
     CreateGigService,
+    FindJobOffersHandler,
   ],
 })
 export class JobOfferModule {}

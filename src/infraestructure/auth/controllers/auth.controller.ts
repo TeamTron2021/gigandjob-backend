@@ -10,8 +10,4 @@ export class AuthController {
   async test(@Body() authDto: AuthDto) {
     return await this.authService.login(authDto);
   }
-  @Get()
-  async test2() {
-    return 'hola';
-  }
 }
