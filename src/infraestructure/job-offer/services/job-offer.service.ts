@@ -6,6 +6,8 @@ import CreateGigCommand from 'src/application/job-offer/commands/createGig.comma
 import { CreateJobOfferCommand } from 'src/application/job-offer/commands/createJobOffer.command';
 import CreateGigDto from 'src/application/job-offer/ports/createGig.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
+import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
+import JobOffersQuery from 'src/application/job-offer/queries/findJobOffers.query';
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
 import UniqueId from 'src/shared/domain/UniqueUUID';
 import createGigRequest from '../request/createGigRequest.request';
@@ -48,5 +50,9 @@ export class JobOfferService {
 
   async findEmployeer(id: string): Promise<EmployeerFound> {
     return await await this.queryBus.execute(new FindEmployeerById(id));
+  }
+
+  async findJobOffers(): Promise<JobOfferFound[]> {
+    return await this.queryBus.execute(new JobOffersQuery());
   }
 }

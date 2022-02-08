@@ -1,10 +1,19 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse } from '@nestjs/swagger';
 import { GetUser } from 'src/infraestructure/auth/users/decorators/get-user.decorator';
 import { JwtAuthGuard } from 'src/infraestructure/auth/users/guards/jwt-auth.guard';
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
 import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
+import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 import CreateGigRequest from '../request/createGigRequest.request';
 import CreateJobOfferRequest from '../request/createJobOfferRequest.request';
 import { JobOfferService } from '../services/job-offer.service';
@@ -29,7 +38,7 @@ export class JobOfferController {
 
   //endpoint para crear un gig
   //@UseGuards(JwtAuthGuard) se debe usar este decorador para implementar la autenticacion de usuario
-  @ApiResponse({ status: 201, description: ResponseDescription.CREATED })
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
   @ApiResponse({
     status: 404,
     description: 'No encontramos ningun empleador con ese id',
@@ -41,5 +50,13 @@ export class JobOfferController {
     //@GetUser() userInfo este decorador permite obtener la informacion del usuario que entra al endpoint,
   ) {
     return await this.jobOfferService.createGig(offer, employeer);
+  }
+  @ApiResponse({ status: 201, description: ResponseDescription.OK })
+  @Get()
+  async findJobOffers() {
+    return buildResponse(
+      HttpStatus.OK,
+      await this.jobOfferService.findJobOffers(),
+    );
   }
 }
