@@ -41,13 +41,16 @@ export class InterviewController {
     status: 404,
     description: 'No hemos encontrado ninguna entrevista con ese ID.',
   })
-  @Put('/:id')
+  @Put('/:id') // ID de la entrevista.
   /**
    * Endpoint que permite aceptar una entrevista.
    *
-   * Obtiene, de la solicitud, la entrevista a aceptar y le pide, al servicio de entrevista, actualizarla.
+   * Obtiene, de la solicitud, el ID de la entrevista a aceptar para, luego, delegar su actualización de estado
+   * al servicio de entrevista (en infraestructura),
    *
-   * @
+   * @param interviewId ID de la entrevista a aceptar.
+   *
+   * @return Entrevista aceptada.
    * */
   async acceptInterview(
       @Param() interviewId: FindInterviewByIdRequest

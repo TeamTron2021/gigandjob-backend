@@ -10,7 +10,7 @@ import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
 import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
-import AcceptOnlineInterviewDto from "../../../application/job-offer/ports/acceptOnlineInterview.dto";
+import AcceptInterviewCommand from "../../../application/job-offer/commands/acceptInterview.command";
 
 @Injectable()
 export class InterviewService {
@@ -45,15 +45,24 @@ export class InterviewService {
     return interview;
   }
 	
+	/**
+	 * Maneja la lógica de aceptar una entrevista, desde la capa de infraestructura.
+	 *
+	 * Busca la entrevista a aceptar para convertirla en un DTO y, así, ejecutarla junto con el comando
+	 * de aceptar una entrevista.
+	 *
+	 * @param interviewId ID de la entrevista a aceptar.
+	 *
+	 * @return
+	 * */
   async acceptInterview(interviewId: FindInterviewByIdRequest) {
-    const interviewToAccept: AcceptInterviewDto = new AcceptOnlineInterviewDto();
-	/*await this.findInterviewById(interviewId).then(() => {
-		interviewToAccept.status = this.
-	})*/
+    const interviewToAccept: AcceptInterviewDto = await this.findInterviewById(interviewId)
+	    .then((interview: AcceptInterviewDto) => {
+			return interview
+		});
 	
-	const interviewDto: AcceptInterviewDto = new AcceptOnlineInterviewDto();
-	interviewDto.id = interviewToAccept.id;
-    
-    return Promise.resolve(undefined);
+	  return await this.commandBus.execute(
+		  new AcceptInterviewCommand(interviewToAccept)
+	  );
   }
 }
