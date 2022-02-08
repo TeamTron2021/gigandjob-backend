@@ -3,7 +3,7 @@ import CVAcademicFormation from '../../../domain/user/value_objects/CVAcademicFo
 
 describe('Testing value object AcademicFormation', () => {
   it('Should thrown empty academic formation error', () => {
-    expect(() => CVAcademicFormation.create([])).toThrow(
+    expect(() => CVAcademicFormation.create('')).toThrow(
       new CVAcademicFormationEmpty(),
     );
   });
@@ -13,8 +13,8 @@ describe('Testing value object AcademicFormation', () => {
       new CVAcademicFormationEmpty(),
     );
   });
-  it('Should return an instance of CVAcademicFormation', () => {
-    const academic = ['Academic'];
+  it('Should return an instance of CVSkill', () => {
+    const academic = 'Academic';
     const cvAcademicFormation = CVAcademicFormation.create(academic);
     const isAcademicFormation =
       cvAcademicFormation instanceof CVAcademicFormation;

@@ -11,8 +11,6 @@ import { PostulationModule } from './infraestructure/job-offer/postulation.modul
 import { InterviewRepository } from './infraestructure/job-offer/repositories/InterviewRepository.repository';
 import { JobOfferRepository } from './infraestructure/job-offer/repositories/JobOfferRepository.repository';
 import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
-import { CVModule } from './modules/user/cv.module';
-import { CVRepository } from './modules/user/cv.repository';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './infraestructure/auth/auth.module';
 
@@ -53,7 +51,6 @@ import { AuthModule } from './infraestructure/auth/auth.module';
     PostulationModule,
     InterviewModule,
     UserModule,
-    CVModule,
     AuthModule,
   ],
   controllers: [],

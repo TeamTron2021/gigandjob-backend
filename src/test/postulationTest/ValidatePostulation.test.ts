@@ -27,23 +27,23 @@ import UniqueId from '../../shared/domain/UniqueUUID';
 describe('Validate User can Apply to JobOffer', () => {
   test('User can apply to the job offer', () => {
     //Create a valid CV
-    const skillsCV: CVSkills = CVSkills.create([
-      'SQL',
-      'Mongo',
-      'Inteligencia emocional',
-    ]);
+    const skillsCV: CVSkills[] = [
+      CVSkills.create('SQL'),
+      CVSkills.create('Mongo'),
+      CVSkills.create('Inteligencia emocional'),
+    ];
 
-    const courses: CVCourses = CVCourses.create([
-      'Curso HTML',
-      'Curso Platzi Inteligencia Artificial',
-      'Manejo de Big Data',
-    ]);
+    const courses: CVCourses[] = [
+      CVCourses.create('Curso HTML'),
+      CVCourses.create('Curso Platzi Inteligencia Artificial'),
+      CVCourses.create('Manejo de Big Data'),
+    ];
 
-    const academics: CVAcademicFormation = CVAcademicFormation.create([
-      'Primaria',
-      'Bachiller',
-      'Universitario',
-    ]);
+    const academics: CVAcademicFormation[] = [
+      CVAcademicFormation.create('Primaria'),
+      CVAcademicFormation.create('Bachiller'),
+      CVAcademicFormation.create('Universitario'),
+    ];
 
     //Create a valid user
     const user = User.register(
@@ -103,23 +103,23 @@ describe('Validate User can Apply to JobOffer', () => {
   });
   test('User cannot apply to the job offer, user status are suspended or unconfirmed ', () => {
     //Create a valid CV
-    const skillsCV: CVSkills = CVSkills.create([
-      'SQL',
-      'Mongo',
-      'Inteligencia emocional',
-    ]);
+    const skillsCV: CVSkills[] = [
+      CVSkills.create('SQL'),
+      CVSkills.create('Mongo'),
+      CVSkills.create('Inteligencia emocional'),
+    ];
 
-    const courses: CVCourses = CVCourses.create([
-      'Curso HTML',
-      'Curso Platzi Inteligencia Artificial',
-      'Manejo de Big Data',
-    ]);
+    const courses: CVCourses[] = [
+      CVCourses.create('Curso HTML'),
+      CVCourses.create('Curso Platzi Inteligencia Artificial'),
+      CVCourses.create('Manejo de Big Data'),
+    ];
 
-    const academics: CVAcademicFormation = CVAcademicFormation.create([
-      'Primaria',
-      'Bachiller',
-      'Universitario',
-    ]);
+    const academics: CVAcademicFormation[] = [
+      CVAcademicFormation.create('Primaria'),
+      CVAcademicFormation.create('Bachiller'),
+      CVAcademicFormation.create('Universitario'),
+    ];
 
     //Create a valid user
     const user = User.register(
@@ -175,23 +175,23 @@ describe('Validate User can Apply to JobOffer', () => {
   });
   test('User cannot apply to the job offer, user cv are not aproved ', () => {
     //Create a valid CV
-    const skillsCV: CVSkills = CVSkills.create([
-      'SQL',
-      'Mongo',
-      'Inteligencia emocional',
-    ]);
+    const skillsCV: CVSkills[] = [
+      CVSkills.create('SQL'),
+      CVSkills.create('Mongo'),
+      CVSkills.create('Inteligencia emocional'),
+    ];
 
-    const courses: CVCourses = CVCourses.create([
-      'Curso HTML',
-      'Curso Platzi Inteligencia Artificial',
-      'Manejo de Big Data',
-    ]);
+    const courses: CVCourses[] = [
+      CVCourses.create('Curso HTML'),
+      CVCourses.create('Curso Platzi Inteligencia Artificial'),
+      CVCourses.create('Manejo de Big Data'),
+    ];
 
-    const academics: CVAcademicFormation = CVAcademicFormation.create([
-      'Primaria',
-      'Bachiller',
-      'Universitario',
-    ]);
+    const academics: CVAcademicFormation[] = [
+      CVAcademicFormation.create('Primaria'),
+      CVAcademicFormation.create('Bachiller'),
+      CVAcademicFormation.create('Universitario'),
+    ];
 
     //Create a valid user
     const user = User.register(

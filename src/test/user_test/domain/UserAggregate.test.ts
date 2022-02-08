@@ -131,9 +131,9 @@ describe('User Aggregate', () => {
     );
 
     user.uploadCV(
-      new CVAcademicFormation(['Primaria', 'Bachiller', 'Universitario']),
-      new CVSkills(['SQL', 'Mongo', 'Inteligencia emocional']),
-      new CVCourses(['Excel', 'Word', 'Powerpoint']),
+      [new CVAcademicFormation('Speedwagon Foundtation')],
+      [new CVSkills('hamon')],
+      [new CVCourses('Zeppeli Hamon Classes')],
     );
 
     const userActivated = user.approveCV();
@@ -158,9 +158,9 @@ describe('User Aggregate', () => {
     );
 
     user.uploadCV(
-      new CVAcademicFormation(['Primaria', 'Bachiller', 'Universitario']),
-      new CVSkills(['SQL', 'Mongo', 'Inteligencia emocional']),
-      new CVCourses(['Excel', 'Word', 'Powerpoint']),
+      [new CVAcademicFormation('Speedwagon Foundtation')],
+      [new CVSkills('hamon')],
+      [new CVCourses('Zeppeli Hamon Classes')],
     );
 
     user.rejectCV();

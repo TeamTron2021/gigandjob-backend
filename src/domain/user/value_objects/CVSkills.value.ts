@@ -1,9 +1,9 @@
 import { CVSkillsEmpty } from '../errors/CVSkillsEmpty.error';
 
 export default class CVSkills {
-  public readonly value: string[];
+  public readonly value: string;
 
-  constructor(value: string[]) {
+  constructor(value: string) {
     this.value = value;
   }
 
@@ -11,8 +11,8 @@ export default class CVSkills {
     return this.value;
   }
 
-  public static create(skill: string[]) {
-    if (skill == undefined || skill == null || skill.length == 0) {
+  public static create(skill: string) {
+    if (skill === '' || skill === ' ' || skill == undefined || skill == null) {
       throw new CVSkillsEmpty();
     }
 

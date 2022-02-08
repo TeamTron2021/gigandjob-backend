@@ -7,17 +7,20 @@ import { CVService } from '../CV.service';
 
 export class LoadCV implements CVCommand {
   constructor(
-    public readonly academicFormation: string[],
-    public readonly skills: string[],
-    public readonly courses: string[],
+    public readonly academicFormation: string,
+    public readonly skills: string,
+    public readonly courses: string,
   ) {}
+  academics: CVAcademicFormation[] = [
+    CVAcademicFormation.create(this.academicFormation),
+  ];
+
+  course: CVCourses[] = [CVCourses.create(this.courses)];
+
+  skill: CVSkills[] = [CVSkills.create(this.skills)];
 
   execute(service: CVService) {
-    const cv = CV.load(
-      new CVAcademicFormation(this.academicFormation),
-      new CVSkills(this.skills),
-      new CVCourses(this.courses),
-    );
+    const cv = CV.load(this.academics, this.skill, this.course);
 
     service.publish(cv.getEvents());
   }

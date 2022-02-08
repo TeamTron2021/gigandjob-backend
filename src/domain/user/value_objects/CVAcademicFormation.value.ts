@@ -1,9 +1,9 @@
 import { CVAcademicFormationEmpty } from '../errors/CVAcademicFormationEmpty.error';
 
 export default class CVAcademicFormation {
-  public readonly value: string[];
+  public readonly value: string;
 
-  constructor(value: string[]) {
+  constructor(value: string) {
     this.value = value;
   }
 
@@ -11,8 +11,13 @@ export default class CVAcademicFormation {
     return this.value;
   }
 
-  public static create(academic: string[]) {
-    if (academic == undefined || academic == null || academic.length == 0) {
+  public static create(academic: string) {
+    if (
+      academic === '' ||
+      academic === ' ' ||
+      academic == undefined ||
+      academic == null
+    ) {
       throw new CVAcademicFormationEmpty();
     }
 

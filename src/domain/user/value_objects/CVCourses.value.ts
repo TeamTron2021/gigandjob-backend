@@ -1,9 +1,9 @@
 import { CVCoursesEmpty } from '../errors/CVCoursesEmpty.error';
 
 export default class CVCourses {
-  public readonly value: string[];
+  public readonly value: string;
 
-  constructor(value: string[]) {
+  constructor(value: string) {
     this.value = value;
   }
 
@@ -11,8 +11,13 @@ export default class CVCourses {
     return this.value;
   }
 
-  public static create(course: string[]) {
-    if (course == undefined || course == null || course.length == 0) {
+  public static create(course: string) {
+    if (
+      course === '' ||
+      course === ' ' ||
+      course == undefined ||
+      course == null
+    ) {
       throw new CVCoursesEmpty();
     }
 
