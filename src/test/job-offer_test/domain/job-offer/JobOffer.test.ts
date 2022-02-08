@@ -27,11 +27,8 @@ import InPersonInterviewDirection from '../../../../domain/job-offer/value-objec
 
 // Valores para crear una entrevista online:
 const interviewInitialDate = new Date();
-const interviewFinalDate = new Date();
-interviewInitialDate.setDate(interviewFinalDate.getDate() - 1);
 const interviewDate = InterviewDate.create(
-  interviewInitialDate,
-  interviewFinalDate,
+  interviewInitialDate
 );
 const interviewId = InterviewId.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(

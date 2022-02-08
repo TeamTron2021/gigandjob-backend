@@ -3,15 +3,14 @@ import InterviewInvalidDateException from '../../../exceptions/Interview/Intervi
 import InterviewMissingDateException from '../../../exceptions/Interview/Interview/InterviewMissingDateException';
 
 export default class InterviewDate implements IValueObject {
+  
   private constructor(
     private readonly startDate: Date,
-    private readonly finalDate: Date,
   ) {}
 
   equals(valueObject: InterviewDate): boolean {
     return (
-      this.startDate === valueObject.getStartDate() &&
-      this.finalDate === valueObject.getFinalDate()
+      this.startDate === valueObject.getStartDate()
     );
   }
 
@@ -19,20 +18,15 @@ export default class InterviewDate implements IValueObject {
     return this.startDate;
   }
 
-  public getFinalDate() {
-    return this.finalDate;
-  }
+  
 
-  public static create(startDate: Date, finalDate: Date) {
+  public static create(startDate: Date) {
+
+    var dateNow = new Date();
+
     if (!startDate) {
       throw new InterviewMissingDateException(
         'La fecha de inicio no puede estar vacia ',
-      );
-    }
-
-    if (!finalDate) {
-      throw new InterviewMissingDateException(
-        'La fecha final no puede estar vacia ',
       );
     }
 
@@ -40,16 +34,12 @@ export default class InterviewDate implements IValueObject {
       throw new InterviewInvalidDateException('La fecha de inicio es invalida');
     }
 
-    if (!(finalDate instanceof Date)) {
-      throw new InterviewInvalidDateException('La fecha final es invalida');
-    }
-
-    if (startDate > finalDate) {
+    if (startDate < dateNow) {
       throw new InterviewInvalidDateException(
-        'La fecha de inicio no puede ser mayor a la fecha final',
+        'La fecha de inicio no puede ser menor a la fecha actual',
       );
     }
 
-    return new InterviewDate(startDate, finalDate);
+    return new InterviewDate(startDate);
   }
 }
