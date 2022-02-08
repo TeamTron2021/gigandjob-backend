@@ -9,13 +9,26 @@ import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { InterviewMapper } from '../mappers/interview.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import PostulationOrm from '../orm/postulation.orm';
-import { NotFoundException } from '@nestjs/common';
+import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import RegisterInterviewMapper from '../mappers/registerInterview.mapper';
 
 @EntityRepository(InterviewORM)
 export class InterviewRepository
   extends Repository<InterviewORM>
   implements IInterviewRepository
 {
+  async findInterviews(): Promise<InterviewFound[]> {
+    try {
+      const interviews = await this.find();
+      const result: InterviewFound[] =
+        RegisterInterviewMapper.convertManyInterviewsToFound(interviews);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException();
+    }
+  }
+ 
   async createInterview(
     interviewDto: CreateInterviewDto,
     postulation: PostulationFound,

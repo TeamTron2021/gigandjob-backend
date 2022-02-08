@@ -1,1 +1,1 @@
-export default class FindInterviewsQuery {}
+export default class InterviewsQuery {}

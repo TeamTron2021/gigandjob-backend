@@ -5,41 +5,41 @@ import InterviewMissingDateException from '../../../exceptions/Interview/Intervi
 export default class InterviewDate implements IValueObject {
   
   private constructor(
-    private readonly startDate: Date,
+    private readonly date: Date,
   ) {}
 
   equals(valueObject: InterviewDate): boolean {
     return (
-      this.startDate === valueObject.getStartDate()
+      this.date === valueObject.getDate()
     );
   }
 
-  public getStartDate() {
-    return this.startDate;
+  public getDate() {
+    return this.date;
   }
 
   
 
-  public static create(startDate: Date) {
+  public static create(date: Date) {
 
     var dateNow = new Date();
 
-    if (!startDate) {
+    if (!date) {
       throw new InterviewMissingDateException(
         'La fecha de inicio no puede estar vacia ',
       );
     }
 
-    if (!(startDate instanceof Date)) {
+    if (!(date instanceof Date)) {
       throw new InterviewInvalidDateException('La fecha de inicio es invalida');
     }
 
-    if (startDate < dateNow) {
+    if (date < dateNow) {
       throw new InterviewInvalidDateException(
         'La fecha de inicio no puede ser menor a la fecha actual',
       );
     }
 
-    return new InterviewDate(startDate);
+    return new InterviewDate(date);
   }
 }
