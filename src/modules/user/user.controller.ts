@@ -15,6 +15,11 @@ type UserRegistrationForm = {
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
+  @Get()
+  async getUsers(): Promise<UserDto[]> {
+    return await this._userService.getAll();
+  }
+
   @Get(':id')
   async getUser(@Param('id') id: string): Promise<UserDto> {
     return await this._userService.get(id);
