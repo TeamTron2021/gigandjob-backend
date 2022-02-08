@@ -11,23 +11,23 @@ import CVSkills from '../../../domain/user/value_objects/CVSkills.value';
 
 describe('Testing CV entity', () => {
   test('Should return a instance of CV and the CV is Loaded', () => {
-    const skills: CVSkills[] = [
-      CVSkills.create('SQL'),
-      CVSkills.create('Mongo'),
-      CVSkills.create('Inteligencia emocional'),
-    ];
+    const skills: CVSkills = CVSkills.create([
+      'SQL',
+      'Mongo',
+      'Inteligencia emocional',
+    ]);
 
-    const courses: CVCourses[] = [
-      CVCourses.create('Excel'),
-      CVCourses.create('Word'),
-      CVCourses.create('Powerpoint'),
-    ];
+    const courses: CVCourses = CVCourses.create([
+      'Excel',
+      'Word',
+      'Powerpoint',
+    ]);
 
-    const academics: CVAcademicFormation[] = [
-      CVAcademicFormation.create('Primaria'),
-      CVAcademicFormation.create('Bachiller'),
-      CVAcademicFormation.create('Universitario'),
-    ];
+    const academics: CVAcademicFormation = CVAcademicFormation.create([
+      'Primaria',
+      'Bachiller',
+      'Universitario',
+    ]);
 
     const cv = CV.load(academics, skills, courses);
     expect(cv).toBeInstanceOf(CV);
@@ -42,47 +42,47 @@ describe('Testing CV entity', () => {
   });
 
   test('Should update the CV', () => {
-    const skills: CVSkills[] = [
-      CVSkills.create('SQL'),
-      CVSkills.create('Mongo'),
-      CVSkills.create('Inteligencia emocional'),
-    ];
+    const skills: CVSkills = CVSkills.create([
+      'SQL',
+      'Mongo',
+      'Inteligencia emocional',
+    ]);
 
-    const courses: CVCourses[] = [
-      CVCourses.create('Excel'),
-      CVCourses.create('Word'),
-      CVCourses.create('Powerpoint'),
-    ];
+    const courses: CVCourses = CVCourses.create([
+      'Excel',
+      'Word',
+      'Powerpoint',
+    ]);
 
-    const academics: CVAcademicFormation[] = [
-      CVAcademicFormation.create('Primaria'),
-      CVAcademicFormation.create('Bachiller'),
-      CVAcademicFormation.create('Universitario'),
-    ];
+    const academics: CVAcademicFormation = CVAcademicFormation.create([
+      'Primaria',
+      'Bachiller',
+      'Universitario',
+    ]);
 
     const id = CVID.create(randomUUID());
     const cv = CV.load(academics, skills, courses);
 
-    const newAcademics: CVAcademicFormation[] = [
-      CVAcademicFormation.create('Primaria'),
-      CVAcademicFormation.create('Bachiller'),
-      CVAcademicFormation.create('Universitario'),
-      CVAcademicFormation.create('Maestria'),
-    ];
+    const newSkills: CVSkills = CVSkills.create([
+      'SQL',
+      'Mongo',
+      'Inteligencia emocional',
+      'PowerBI',
+    ]);
 
-    const newCourses: CVCourses[] = [
-      CVCourses.create('Excel'),
-      CVCourses.create('Word'),
-      CVCourses.create('Powerpoint'),
-      CVCourses.create('Trello'),
-    ];
+    const newCourses: CVCourses = CVCourses.create([
+      'Excel',
+      'Word',
+      'Powerpoint',
+      'Trello',
+    ]);
 
-    const newSkills: CVSkills[] = [
-      CVSkills.create('SQL'),
-      CVSkills.create('Mongo'),
-      CVSkills.create('Inteligencia emocional'),
-      CVSkills.create('Flutter'),
-    ];
+    const newAcademics: CVAcademicFormation = CVAcademicFormation.create([
+      'Primaria',
+      'Bachiller',
+      'Universitario',
+      'Maestria',
+    ]);
 
     cv.update(id, newSkills, newCourses, newAcademics);
     const event = new CVUpdated(
@@ -98,23 +98,23 @@ describe('Testing CV entity', () => {
   });
 
   test('Should approve the CV', () => {
-    const skills: CVSkills[] = [
-      CVSkills.create('SQL'),
-      CVSkills.create('Mongo'),
-      CVSkills.create('Inteligencia emocional'),
-    ];
+    const skills: CVSkills = CVSkills.create([
+      'SQL',
+      'Mongo',
+      'Inteligencia emocional',
+    ]);
 
-    const courses: CVCourses[] = [
-      CVCourses.create('Excel'),
-      CVCourses.create('Word'),
-      CVCourses.create('Powerpoint'),
-    ];
+    const courses: CVCourses = CVCourses.create([
+      'Excel',
+      'Word',
+      'Powerpoint',
+    ]);
 
-    const academics: CVAcademicFormation[] = [
-      CVAcademicFormation.create('Primaria'),
-      CVAcademicFormation.create('Bachiller'),
-      CVAcademicFormation.create('Universitario'),
-    ];
+    const academics: CVAcademicFormation = CVAcademicFormation.create([
+      'Primaria',
+      'Bachiller',
+      'Universitario',
+    ]);
     const cv = CV.load(academics, skills, courses);
     const cvAproved = cv.approve();
     const event = new CVAproved(cv.getID(), cvAproved.status);
@@ -123,23 +123,23 @@ describe('Testing CV entity', () => {
   });
 
   test('Should reject the CV', () => {
-    const skills: CVSkills[] = [
-      CVSkills.create('SQL'),
-      CVSkills.create('Mongo'),
-      CVSkills.create('Inteligencia emocional'),
-    ];
+    const skills: CVSkills = CVSkills.create([
+      'SQL',
+      'Mongo',
+      'Inteligencia emocional',
+    ]);
 
-    const courses: CVCourses[] = [
-      CVCourses.create('Excel'),
-      CVCourses.create('Word'),
-      CVCourses.create('Powerpoint'),
-    ];
+    const courses: CVCourses = CVCourses.create([
+      'Excel',
+      'Word',
+      'Powerpoint',
+    ]);
 
-    const academics: CVAcademicFormation[] = [
-      CVAcademicFormation.create('Primaria'),
-      CVAcademicFormation.create('Bachiller'),
-      CVAcademicFormation.create('Universitario'),
-    ];
+    const academics: CVAcademicFormation = CVAcademicFormation.create([
+      'Primaria',
+      'Bachiller',
+      'Universitario',
+    ]);
     const cv = CV.load(academics, skills, courses);
     const cvRejected = cv.reject();
     const event = new CVRejected(cv.getID(), cvRejected.status);

@@ -165,9 +165,9 @@ export class User<S extends UserStatus> {
 
   uploadCV(
     this: User<UserStatus.Unconfirmed>,
-    academicFormation: CVAcademicFormation[],
-    skills: CVSkills[],
-    courses: CVCourses[],
+    academicFormation: CVAcademicFormation,
+    skills: CVSkills,
+    courses: CVCourses,
   ) {
     this.cv = CV.load(academicFormation, skills, courses);
     this.eventRecorder = [...this.eventRecorder, ...this.cv.getEvents()];
@@ -175,9 +175,9 @@ export class User<S extends UserStatus> {
 
   updateCV(
     this: User<UserStatus>,
-    academicFormation: CVAcademicFormation[],
-    skills: CVSkills[],
-    courses: CVCourses[],
+    academicFormation: CVAcademicFormation,
+    skills: CVSkills,
+    courses: CVCourses,
   ) {
     if (this.cv) {
       this.cv.update(this.cv.getID(), skills, courses, academicFormation);

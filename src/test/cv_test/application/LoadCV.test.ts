@@ -13,7 +13,11 @@ describe('Load User', () => {
   const service: CVService = new CVService(repository, publisher);
 
   test('Should load cv', () => {
-    const command: LoadCV = new LoadCV('UCAB', 'SQL', 'Word');
+    const command: LoadCV = new LoadCV(
+      ['SQL', 'Mongo', 'Inteligencia emocional'],
+      ['Excel', 'Word', 'Powerpoint'],
+      ['Primaria', 'Bachiller', 'Universitario'],
+    );
 
     command.execute(service);
     expect(mockPublishFn.mock.calls[0][0][0]).toBeInstanceOf(CVLoaded);
