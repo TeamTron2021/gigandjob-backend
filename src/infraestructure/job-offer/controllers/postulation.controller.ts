@@ -9,7 +9,7 @@ import { FindPostulationByIdRequest } from '../request/findPostulationById.reque
 @Controller('postulation')
 export class PostulationController {
   constructor(private readonly postulationService: PostulationService) {}
-  @Post('/:id')
+  @Post()
   async createPostulation(
     @Body() postulation: CreatePostulationRequest,
     @Param() jobOffer: FindJobOfferByIdRequest,
