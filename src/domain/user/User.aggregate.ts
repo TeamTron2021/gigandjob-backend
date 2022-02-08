@@ -32,12 +32,12 @@ type CVType<S> = S extends UserStatus.Unconfirmed
   ? CV<CVStatus.Aproved>
   : CV<CVStatus>;
 
-export class User<S extends UserStatus> {
-  private _ID: UserID;
+export class User<S extends UserStatus = UserStatus> {
+  public ID: UserID;
   public status: S;
   private eventRecorder: UserEvent[] = [];
 
-  private constructor(
+  public constructor(
     public firstname: UserFirstName,
     public lastname: UserLastName,
     public birthday: UserBirthday,
@@ -48,12 +48,9 @@ export class User<S extends UserStatus> {
     public cv?: CVType<S>,
   ) {
     this.status = status;
-    this._ID = id || new UserID(randomUUID());
+    this.ID = id || new UserID(randomUUID());
   }
 
-  get ID(): UserID {
-    return this._ID;
-  }
   getEvents(): UserEvent[] {
     return this.eventRecorder;
   }
@@ -197,7 +194,7 @@ export class User<S extends UserStatus> {
         this.email,
         this.password,
         UserStatus.Active,
-        this._ID,
+        this.ID,
         cvApproved,
       );
       userActivated.eventRecorder = this.eventRecorder.slice(0);
@@ -215,6 +212,10 @@ export class User<S extends UserStatus> {
       this.cv = this.cv.reject();
       this.eventRecorder = [...this.eventRecorder, ...this.cv.getEvents()];
     }
+  }
+
+  is<T extends UserStatus>(status: T): this is User<T> {
+    return (this.status as unknown) == (status as unknown);
   }
 
   protected invariants() {}
