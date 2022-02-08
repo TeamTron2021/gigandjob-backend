@@ -3,9 +3,11 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Logger,
   Param,
   Post,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse } from '@nestjs/swagger';
@@ -14,6 +16,7 @@ import { JwtAuthGuard } from 'src/infraestructure/auth/users/guards/jwt-auth.gua
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
 import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { buildResponse } from 'src/infraestructure/shared/buildResponse';
+import { LoggingInterceptor } from 'src/log/interceptors/loggin.intercerptor';
 import CreateGigRequest from '../request/createGigRequest.request';
 import CreateJobOfferRequest from '../request/createJobOfferRequest.request';
 import { JobOfferService } from '../services/job-offer.service';
