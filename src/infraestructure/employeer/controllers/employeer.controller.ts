@@ -45,7 +45,6 @@ export class EmployeerController {
       await this.employeerService.findEmployeerById(employeerId),
     );
   }
-  @UseGuards(JwtAdminAuthGuard)
   @Get()
   async findEmployeers() {
     return buildResponse(
