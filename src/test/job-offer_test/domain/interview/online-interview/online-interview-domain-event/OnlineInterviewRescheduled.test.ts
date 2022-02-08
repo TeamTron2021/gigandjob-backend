@@ -12,7 +12,7 @@ describe('Testing Interview creation', () => {
     const initialDate = new Date();
     const finalDate = new Date();
     initialDate.setDate(finalDate.getDate() - 1);
-    const date = InterviewDate.create(initialDate, finalDate);
+    const date = InterviewDate.create(initialDate);
     const id = InterviewId.create(new UniqueId().getId());
     const interview = OnlineInterview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
@@ -29,7 +29,7 @@ describe('Testing Interview creation', () => {
     const initialDate = new Date();
     const finalDate = new Date();
     initialDate.setDate(finalDate.getDate() - 1);
-    const date = InterviewDate.create(initialDate, finalDate);
+    const date = InterviewDate.create(initialDate);
     const id = InterviewId.create(new UniqueId().getId());
     const interview = OnlineInterview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),

@@ -8,4 +8,8 @@ export default interface IInterviewRepository {
     interviewDto: CreateInterviewDto,
     postulation: PostulationFound,
   ): Promise<InterviewFound>;
+
+  findById(id: string): Promise<InterviewFound>;
+
+  findInterviews(): Promise<InterviewFound[]>;
 }

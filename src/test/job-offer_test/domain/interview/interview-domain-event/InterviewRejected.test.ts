@@ -13,7 +13,7 @@ import UniqueId from '../../../../../shared/domain/UniqueUUID';
 const initialDate = new Date();
 const finalDate = new Date();
 initialDate.setDate(finalDate.getDate() - 1);
-const date = InterviewDate.create(initialDate, finalDate);
+const date = InterviewDate.create(initialDate);
 const id = InterviewId.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(
   'Titulo generico de una entrevista',

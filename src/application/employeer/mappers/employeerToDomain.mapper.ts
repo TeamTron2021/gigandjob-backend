@@ -10,6 +10,8 @@ import EmployeerDto from '../ports/employeer.dto';
 
 export default class EmployeerDtoToDomainMapper {
   constructor(private readonly employeerDto: EmployeerDto) {}
+
+  
   public convertDTOToDomain(): Employeer<EmployeerStatus> {
     const { id, companyName, companyMail, rif, latitude, longitude, industry } =
       this.employeerDto;

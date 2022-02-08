@@ -31,7 +31,6 @@ const interviewFinalDate = new Date();
 interviewInitialDate.setDate(interviewFinalDate.getDate() - 1);
 const interviewDate = InterviewDate.create(
   interviewInitialDate,
-  interviewFinalDate,
 );
 const interviewId = InterviewId.create(new UniqueId().getId());
 const interviewTitle = InterviewTitle.create(

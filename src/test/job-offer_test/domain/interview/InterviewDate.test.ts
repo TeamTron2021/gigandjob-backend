@@ -6,7 +6,7 @@ describe('Testing value object InterviewDate', () => {
   it('Should throw an missing date error', () => {
     const initialDate = new Date();
     const finalDate: any = undefined;
-    expect(() => InterviewDate.create(initialDate, finalDate)).toThrow(
+    expect(() => InterviewDate.create(initialDate)).toThrow(
       new InterviewMissingDateException('La fecha final no puede estar vacia '),
     );
   });
@@ -15,7 +15,7 @@ describe('Testing value object InterviewDate', () => {
     const initialDate = new Date();
     const finalDate = new Date();
     initialDate.setDate(finalDate.getDate() + 1);
-    expect(() => InterviewDate.create(initialDate, finalDate)).toThrow(
+    expect(() => InterviewDate.create(initialDate)).toThrow(
       new InterviewInvalidDateException(
         'La fecha de inicio no puede ser mayor a la fecha final',
       ),
@@ -26,7 +26,7 @@ describe('Testing value object InterviewDate', () => {
     const initialDate = new Date();
     const finalDate = new Date();
     initialDate.setDate(finalDate.getDate() - 1);
-    const date = InterviewDate.create(initialDate, finalDate);
+    const date = InterviewDate.create(initialDate);
     const isDate = date instanceof InterviewDate;
     expect(isDate).toBe(true);
   });
