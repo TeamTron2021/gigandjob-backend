@@ -10,9 +10,7 @@ import UniqueId from '../../../../../shared/domain/UniqueUUID';
 describe('Testing Interview creation', () => {
   it('Should return a Interview instance', () => {
     const initialDate = new Date();
-    const finalDate = new Date();
-    initialDate.setDate(finalDate.getDate() - 1);
-    const date = InterviewDate.create(initialDate, finalDate);
+    const date = InterviewDate.create(initialDate);
     const id = InterviewId.create(new UniqueId().getId());
     const interview = Interview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
@@ -26,9 +24,7 @@ describe('Testing Interview creation', () => {
   });
   it('Should update the interview status to rescheduled', () => {
     const initialDate = new Date();
-    const finalDate = new Date();
-    initialDate.setDate(finalDate.getDate() - 1);
-    const date = InterviewDate.create(initialDate, finalDate);
+    const date = InterviewDate.create(initialDate);
     const id = InterviewId.create(new UniqueId().getId());
     const interview = Interview.create(
       InterviewTitle.create('Titulo generico de una entrevista'),
