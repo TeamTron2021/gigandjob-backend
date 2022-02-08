@@ -7,7 +7,7 @@ import {
   IsString,
   Min,
   MinLength,
-  ValidateNested,
+  ValidateNested
 } from 'class-validator';
 import { Time } from 'src/domain/job-offer/shared/Time.enum';
 import { SkillRequest } from './createSkills.request';
