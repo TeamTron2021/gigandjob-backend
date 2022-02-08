@@ -26,8 +26,8 @@ export class AdminService {
     }
     throw new UnauthorizedException();
   }
-  async create(admin: AuthDto) {
-    const id = new UniqueId().getId();
-    return await this.adminRepository.createAdmin(admin, id);
-  }
+  //   async create(admin: AuthDto) {
+  //     const id = new UniqueId().getId();
+  //     return await this.adminRepository.createAdmin(admin, id);
+  //   }
 }

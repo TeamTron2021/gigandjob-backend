@@ -31,11 +31,11 @@ export default class AdminRepository extends Repository<AdminORM> {
     };
     return adminToSend;
   }
-  async createAdmin(admin: AuthDto, id: string) {
-    const newAdmin: AdminORM = {
-      ...admin,
-      id: id,
-    };
-    return await this.save(newAdmin);
-  }
+  // async createAdmin(admin: AuthDto, id: string) {
+  //   const newAdmin: AdminORM = {
+  //     ...admin,
+  //     id: id,
+  //   };
+  //   return await this.save(newAdmin);
+  // }
 }
