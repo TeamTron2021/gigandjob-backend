@@ -9,6 +9,8 @@ import UniqueId from 'src/shared/domain/UniqueUUID';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
+import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
+import FindInterviewByPostulation from 'src/application/job-offer/queries/findInterviewByPostulation.query';
 
 @Injectable()
 export class InterviewService {
@@ -42,4 +44,11 @@ export class InterviewService {
     );
     return interview;
   }
+  async findInterviewByPostulation(postulationId: FindInterviewByPostulationRequest) {
+    const interview = await this.queryBus.execute(
+      new FindInterviewByPostulation(postulationId.postulationId),
+    );
+    return interview;
+  }
+  
 }

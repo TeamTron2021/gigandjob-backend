@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { InterviewController } from './controllers/interview.controller';
 import { CreateInterviewHandler } from './handlers/createInterview.handler';
 import { findInterviewByIdHandler } from './handlers/findInterviewById.handler';
+import { findInterviewByPostulationHandler } from './handlers/findInterviewByPostulation.handler';
 import { InterviewRepository } from './repositories/InterviewRepository.repository';
 import { InterviewService } from './services/interview.service';
 
@@ -14,6 +15,7 @@ import { InterviewService } from './services/interview.service';
     InterviewService,
     CreateInterviewHandler,
     findInterviewByIdHandler,
+    findInterviewByPostulationHandler,
   ],
 })
 export class InterviewModule {}
