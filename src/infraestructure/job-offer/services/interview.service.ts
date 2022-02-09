@@ -11,6 +11,7 @@ import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
 import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
 import AcceptInterviewCommand from "../../../application/job-offer/commands/acceptInterview.command";
+import {InterviewORM} from "../orm/interview.orm";
 
 @Injectable()
 export class InterviewService {
@@ -53,12 +54,16 @@ export class InterviewService {
 	 *
 	 * @param interviewId ID de la entrevista a aceptar.
 	 *
-	 * @return
+	 * @return Entrevista Aceptada.
 	 * */
   async acceptInterview(interviewId: FindInterviewByIdRequest) {
     const interviewToAccept: AcceptInterviewDto = await this.findInterviewById(interviewId)
-	    .then((interview: AcceptInterviewDto) => {
-			return interview
+	    .then((interviewFound: InterviewORM) => {
+			return {
+				id: interviewFound.id,
+				status: interviewFound.status,
+				postulation: interviewFound.postulation
+			}
 		});
 	
 	  return await this.commandBus.execute(
