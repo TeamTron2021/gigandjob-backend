@@ -1,3 +1,3 @@
 export default class FindJobOfferById {
-  constructor(readonly id: string) {}
+  constructor(readonly jobOffer: string) {}
 }

@@ -32,9 +32,6 @@ export default class PostulationRepository
 
   async createPostulation(postulationDTO: PostulationToSave): Promise<void> {
     const newPostulationSave = new PostulationOrm();
-    // const addInterview: InterviewOrm = {
-
-    // }
     newPostulationSave.id = postulationDTO.id;
     newPostulationSave.date = postulationDTO.date;
     newPostulationSave.status = PostulationStatus.isSend;
@@ -45,6 +42,7 @@ export default class PostulationRepository
       if (e.code == '23505') {
         throw new ConflictException('');
       }
+      throw new InternalServerErrorException();
     }
   }
 

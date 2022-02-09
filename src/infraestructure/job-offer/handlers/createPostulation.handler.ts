@@ -22,6 +22,10 @@ export class CreatePostulationHandler
     const postulation: PostulationToSave = this.postulationService.execute(
       command.postulation,
     );
-    return this.postulationRepository.createPostulation(postulation);
+    return this.postulationRepository.createPostulation(
+      postulation,
+      command.jobOffer,
+      command.user,
+    );
   }
 }

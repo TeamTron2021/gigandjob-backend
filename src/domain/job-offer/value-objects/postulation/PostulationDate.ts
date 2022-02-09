@@ -5,7 +5,7 @@ export class PostulationDate {
 
   constructor(date: Date) {
     if (!date) throw new PostulationDateEmpty();
-    this.postulationDate = this.date;
+    this.postulationDate = date;
   }
 
   get date(): Date {

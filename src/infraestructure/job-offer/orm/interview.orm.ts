@@ -1,4 +1,3 @@
-
 import {
   Column,
   Entity,
@@ -20,7 +19,10 @@ export class InterviewORM {
   description: string;
   @Column()
   date: Date;
-  @ManyToOne(() => PostulationOrm, (PostulationOrm) => PostulationOrm.interviews)
+  @ManyToOne(
+    () => PostulationOrm,
+    (PostulationOrm) => PostulationOrm.interviews,
+  )
   postulation: PostulationOrm;
   @Column()
   status: string;
