@@ -244,7 +244,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     return OfferRevoked;
   }
   
-  private createAndSendInterviewAcceptedNotification(
+  protected createAndSendInterviewAcceptedNotification(
     interview: InterviewId,
   ): void {
     const interviewAcceptedNotification: InterviewAcceptedNotification =
@@ -287,9 +287,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.eventRecorder.push(interviewAcceptedEvent);
 
       // Creación de notificación de entrevista aceptada.
-      this.createAndSendInterviewAcceptedNotification(
-        interview.getInterviewId(),
-      );
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
       
       return {
         id: interview.getInterviewId(),
@@ -341,9 +339,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.eventRecorder.push(interviewAcceptedEvent);
 
       // Creación de notificación de entrevista aceptada.
-      this.createAndSendInterviewAcceptedNotification(
-        interview.getInterviewId(),
-      );
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
     } catch (e) {
       // console.log(e);
       throw e;
@@ -389,9 +385,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.eventRecorder.push(interviewAcceptedEvent);
 
       // Creación de notificación de entrevista aceptada.
-      this.createAndSendInterviewAcceptedNotification(
-        interview.getInterviewId(),
-      );
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
     } catch (e) {
       // console.log(e);
       throw e;
