@@ -10,6 +10,7 @@ import { InterviewMapper } from '../mappers/interview.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import PostulationOrm from '../orm/postulation.orm';
 import { NotFoundException } from '@nestjs/common';
+import RegisterInterviewMapper from '../mappers/registerInterview.mapper';
 
 @EntityRepository(InterviewORM)
 export class InterviewRepository
@@ -52,9 +53,8 @@ export class InterviewRepository
   async findByPostulation(postulationId: string): Promise<InterviewFound[]> {
     const interview: InterviewORM[] = await this.find({ where: { postulation: postulationId } });
     if (interview != null) {
-      const result: InterviewFound[] = {
-        ...interview,
-      };
+      const result: InterviewFound[] = RegisterInterviewMapper.convertManyInterviewsToFound(interview);
+     
       return result;
     }
     throw new NotFoundException('No encontramos ninguna entrevista para su postulacion');
