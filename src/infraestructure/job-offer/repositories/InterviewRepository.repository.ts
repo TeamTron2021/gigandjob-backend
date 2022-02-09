@@ -1,4 +1,3 @@
-
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateInterviewDto from 'src/application/job-offer/ports/createInterview.dto';
 import InterviewFound from 'src/application/job-offer/ports/interviewFound.dto';
@@ -10,6 +9,7 @@ import { InterviewMapper } from '../mappers/interview.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import PostulationOrm from '../orm/postulation.orm';
 import { NotFoundException } from '@nestjs/common';
+import { JobOfferORM } from '../orm/job-offer.orm';
 
 @EntityRepository(InterviewORM)
 export class InterviewRepository
@@ -24,8 +24,10 @@ export class InterviewRepository
     const postulationToAdd: PostulationOrm = {
       ...postulation,
       interviews: [],
+      user: '',
+      jobOffer: new JobOfferORM(),
     };
-    
+
     interviewSave.id = interviewDto.id;
     interviewSave.title = interviewDto.title;
     interviewSave.description = interviewDto.description;
@@ -34,7 +36,7 @@ export class InterviewRepository
     interviewSave.status = InterviewStatus.created;
 
     await this.save(interviewSave);
-   
+
     return InterviewMapper.convertToInterviewFound(interviewSave);
   }
 
