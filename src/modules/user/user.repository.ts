@@ -1,8 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { using } from 'rxjs';
 import { UserStatus } from 'src/domain/user/enums/UserStatus.enum';
+import { User } from 'src/domain/user/User.aggregate';
+import { UserBirthday } from 'src/domain/user/value_objects/UserBirthday.value';
+import { UserEmail } from 'src/domain/user/value_objects/UserEmail.value';
+import { UserFirstName } from 'src/domain/user/value_objects/UserFirstName.value';
+import { UserID } from 'src/domain/user/value_objects/UserID.value';
+import { UserLastName } from 'src/domain/user/value_objects/UserLastName.value';
+import { UserPassword } from 'src/domain/user/value_objects/UserPassword.value';
 import { EntityRepository, Repository } from 'typeorm';
 import { UserDto as UserDto } from '../../application/user/User.dto';
-import { UserRepository as IUserRepository } from '../../application/user/User.repository';
+import {
+  UserRepository as IUserRepository,
+  UserStatusOrDefault,
+} from '../../application/user/User.repository';
 import { UserQueryEntity as UserQuery } from './user-query.entity';
 
 @EntityRepository(UserQuery)
@@ -36,5 +47,41 @@ export class UserRepository
       };
     });
     return usersDto;
+  }
+
+  async getUser(uuid: string): Promise<User<UserStatus>> {
+    const userQuery: UserQuery = await this.findOne(uuid);
+    let user: User = new User(
+      new UserFirstName(userQuery.data.firstname),
+      new UserLastName(userQuery.data.lastname),
+      new UserBirthday(userQuery.data.birthday),
+      new UserEmail(userQuery.data.email),
+      new UserPassword(userQuery.data.password),
+      userQuery.status,
+      new UserID(userQuery.id),
+    );
+    return user;
+  }
+
+  async getUserWithStatus<T extends UserStatus>(
+    uuid: string,
+    status: T,
+  ): Promise<User<T>> {
+    const userQuery: UserQuery = await this.findOne(uuid, {
+      where: { status: status },
+    });
+    if (userQuery) {
+      let user: User<T> = new User<T>(
+        new UserFirstName(userQuery.data.firstname),
+        new UserLastName(userQuery.data.lastname),
+        new UserBirthday(userQuery.data.birthday),
+        new UserEmail(userQuery.data.email),
+        new UserPassword(userQuery.data.password),
+        status,
+        new UserID(userQuery.id),
+      );
+      return user;
+    }
+    return null;
   }
 }
