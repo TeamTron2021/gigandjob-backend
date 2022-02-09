@@ -32,11 +32,11 @@ describe('Testing Interview creation', () => {
 
   test('Should throws an interview currently disabled error', () => {
     const interview = new Interview(
+      id,
+      InterviewStatus.disabled,
       interviewTitle,
       interviewDescription,
       date,
-      InterviewStatus.disabled,
-      id,
     );
 
     expect(() => {
