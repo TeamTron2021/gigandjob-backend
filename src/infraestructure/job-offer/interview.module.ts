@@ -8,6 +8,7 @@ import { findInterviewByPostulationHandler } from './handlers/findInterviewByPos
 import { InterviewRepository } from './repositories/InterviewRepository.repository';
 import { InterviewService } from './services/interview.service';
 import {AcceptInterviewHandler} from "./handlers/acceptInterview.handler";
+import AcceptInterviewService from "../../application/job-offer/services/acceptInterview.service";
 
 @Module({
     imports: [CqrsModule, 
@@ -18,7 +19,8 @@ import {AcceptInterviewHandler} from "./handlers/acceptInterview.handler";
         CreateInterviewHandler,
         findInterviewByIdHandler,
         findInterviewByPostulationHandler,
-        AcceptInterviewHandler
+        AcceptInterviewHandler,
+        AcceptInterviewService
     ]
 })
 export class InterviewModule {}
