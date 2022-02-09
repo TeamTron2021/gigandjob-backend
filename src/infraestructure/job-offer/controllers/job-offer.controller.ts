@@ -36,7 +36,10 @@ export class JobOfferController {
     @Body() offer: CreateJobOfferRequest,
     @Param() employeer: FindEmployeerByIdRequest,
   ) {
-    return await this.jobOfferService.createJobOffer(offer, employeer);
+    return buildResponse(
+      HttpStatus.CREATED,
+      await this.jobOfferService.createJobOffer(offer, employeer),
+    );
   }
 
   //endpoint para crear un gig
