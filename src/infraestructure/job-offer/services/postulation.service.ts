@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import FindJobOfferById from 'src/application/employeer/queries/findJobOfferByID.query';
-import FindUserById from 'src/application/employeer/queries/findUserById.query';
 import CreatePostulationCommand from 'src/application/job-offer/commands/createPostulation.command';
+import CreatePostulationDTO from 'src/application/job-offer/ports/createPostulation.dto';
 import FindPostulationsQuery from 'src/application/job-offer/queries/findPostulation.query';
 import FindPostulationById from 'src/application/job-offer/queries/findPostulationById.query';
-import { UserRepository } from 'src/modules/user/user.repository';
+import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import UniqueId from 'src/shared/domain/UniqueUUID';
 import CreatePostulationRequest from '../request/createPostulationRequies.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
@@ -15,17 +15,9 @@ export class PostulationService {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-    private readonly userRepository: UserRepository,
   ) {}
 
-  async createPostulation(
-    postulation: CreatePostulationRequest,
-    _jobOffer: FindJobOfferById,
-    _userId: FindUserById,
-  ) {
-    const id: string = _userId.userId;
-    const jobOffer = await this.findJobOffer(_jobOffer.jobOffer);
-    const user = await this.userRepository.get(id);
+  async createPostulation(postulation: CreatePostulationRequest) {
     const postulationId: string = new UniqueId().getId();
     const newPostulation = {
       ...postulation,
@@ -33,7 +25,7 @@ export class PostulationService {
     };
 
     return await this.commandBus.execute(
-      new CreatePostulationCommand(newPostulation, jobOffer, user),
+      new CreatePostulationCommand(newPostulation),
     );
   }
   async findPostulationById(postulationId: FindPostulationByIdRequest) {
@@ -44,9 +36,5 @@ export class PostulationService {
   }
   async findPostulations() {
     return await this.queryBus.execute(new FindPostulationsQuery());
-  }
-
-  async findJobOffer(id: string) {
-    return await this.queryBus.execute(new FindJobOfferById(id));
   }
 }
