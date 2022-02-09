@@ -7,6 +7,7 @@ import { LoggingInterceptor } from './log/interceptors/loggin.intercerptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   const config = new DocumentBuilder()
     .setTitle('Gig and Job Backend')
     .setDescription('API para la aplicacion de Gig and Job')

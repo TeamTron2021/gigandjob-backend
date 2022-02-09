@@ -12,6 +12,8 @@ import { FindPostulationByIdRequest } from '../request/findPostulationById.reque
 import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
 import AcceptInterviewCommand from "../../../application/job-offer/commands/acceptInterview.command";
 import {InterviewORM} from "../orm/interview.orm";
+import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
+import FindInterviewByPostulation from 'src/application/job-offer/queries/findInterviewByPostulation.query';
 
 @Injectable()
 export class InterviewService {
@@ -70,4 +72,11 @@ export class InterviewService {
 		  new AcceptInterviewCommand(interviewToAccept)
 	  );
   }
+  async findInterviewByPostulation(postulationId: FindInterviewByPostulationRequest) {
+    const interview = await this.queryBus.execute(
+      new FindInterviewByPostulation(postulationId.postulationId),
+    );
+    return interview;
+  }
+  
 }

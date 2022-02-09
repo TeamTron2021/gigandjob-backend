@@ -1,5 +1,5 @@
 export enum UserStatus {
-  Unconfirmed,
-  Active,
-  Supended,
+  Unconfirmed = 0,
+  Active = 1,
+  Supended = 2,
 }

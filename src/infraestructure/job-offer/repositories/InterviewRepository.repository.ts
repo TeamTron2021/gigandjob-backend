@@ -60,4 +60,16 @@ export class InterviewRepository
 		
 		return this.findById(acceptedInterview.id);
 	}
+
+  async findByPostulation(postulationId: string): Promise<InterviewFound[]> {
+    const interview: InterviewORM[] = await this.find({ where: { postulation: postulationId } });
+    if (interview != null) {
+      const result: InterviewFound[] = {
+        ...interview,
+      };
+      return result;
+    }
+    throw new NotFoundException('No encontramos ninguna entrevista para su postulacion');
+  }
+  
 }
