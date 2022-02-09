@@ -10,7 +10,6 @@ export class UserSuspendedHandler implements IEventHandler<UserSuspended> {
     private bus: EventBus<UserIntegrationEvent>,
   ) {}
   async handle(event: UserSuspended) {
-    console.log('suspend');
     await this.dao.suspend(event);
     this.bus.publish(new UserIntegrationEvent(event));
   }

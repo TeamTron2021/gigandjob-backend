@@ -7,7 +7,7 @@ export class ReactiveUser implements UserCommand {
   constructor(private readonly ID: string) {}
 
   async execute(service: UserService) {
-    const user: User<UserStatus.Supended> = await service.getUser(
+    const user: User<UserStatus.Supended> = await service.getUserWithStatus(
       this.ID,
       UserStatus.Supended,
     );

@@ -7,11 +7,27 @@ export class SuspendUser implements UserCommand {
   constructor(private readonly ID: string) {}
 
   async execute(service: UserService) {
-    const user: User<UserStatus.Unconfirmed> = await service.getUser(
-      this.ID,
-      UserStatus.Unconfirmed,
-    );
-    const userSuspended: User<UserStatus.Supended> = user.suspend();
-    service.publish(userSuspended.getEvents());
+    const userUnconfirmated: User<UserStatus.Unconfirmed> =
+      await service.getUserWithStatus<UserStatus.Unconfirmed>(
+        this.ID,
+        UserStatus.Unconfirmed,
+      );
+    if (userUnconfirmated) {
+      const userSuspended: User<UserStatus.Supended> =
+        userUnconfirmated.suspend();
+      service.publish(userSuspended.getEvents());
+    } else {
+      const userActivated: User<UserStatus.Active> =
+        await service.getUserWithStatus<UserStatus.Active>(
+          this.ID,
+          UserStatus.Active,
+        );
+
+      if (userActivated) {
+        const userSuspended: User<UserStatus.Supended> =
+          userActivated.suspend();
+        service.publish(userSuspended.getEvents());
+      }
+    }
   }
 }

@@ -1,9 +1,8 @@
 import { UserStatus } from 'src/domain/user/enums/UserStatus.enum';
-import { UserSuspendedHandler } from 'src/modules/user/handlers/user-suspended.handler';
 import { User, UserEvent } from '../../domain/user/User.aggregate';
 import { UserDto } from './User.dto';
 import { UserPublisher } from './User.publisher';
-import { UserRepository, UserStatusOrDefault } from './User.repository';
+import { UserRepository } from './User.repository';
 
 export class UserService {
   constructor(
@@ -19,16 +18,16 @@ export class UserService {
     return await this.repository.getAll();
   }
 
-  async getUser<T extends UserStatus>(
+  async getUser(uuid: string): Promise<User<UserStatus>> {
+    return this.repository.getUser(uuid);
+  }
+
+  async getUserWithStatus<T extends UserStatus>(
     uuid: string,
     options: T,
   ): Promise<User<T>> {
-    if (options) return this.repository.getUser(uuid, options);
-    return this.repository.getUser(uuid, options);
-  }
-
-  async getUserWithoutOptions(uuid: string): Promise<User<UserStatus>> {
-    return this.repository.getUserWithoutOptions(uuid);
+    if (options) return this.repository.getUserWithStatus(uuid, options);
+    return this.repository.getUserWithStatus(uuid, options);
   }
 
   publish(events: UserEvent[]) {

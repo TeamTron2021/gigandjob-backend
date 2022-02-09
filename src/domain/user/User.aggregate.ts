@@ -60,10 +60,10 @@ export class User<S extends UserStatus = UserStatus> {
     return new User(
 		user.firstname,
 		user.lastname,
-		user.bir
-;
+		user.birthday,
+		user.
   }
-  */
+		*/
 
   static register(
     firstname: UserFirstName,

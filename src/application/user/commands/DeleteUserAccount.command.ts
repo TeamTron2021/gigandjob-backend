@@ -7,7 +7,7 @@ export class DeleteUserAccount implements UserCommand {
   constructor(private readonly ID: string) {}
 
   async execute(service: UserService) {
-    const user: User<UserStatus> = await service.getUserWithoutOptions(this.ID);
+    const user: User<UserStatus> = await service.getUser(this.ID);
     user.deleteAccount();
     service.publish(user.getEvents());
   }

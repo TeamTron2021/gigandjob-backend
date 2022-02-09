@@ -11,6 +11,9 @@ export type UserStatusOrDefault<T> = [T] extends [null]
 export interface UserRepository {
   get(uuid: string): Promise<UserDto>;
   getAll(): Promise<UserDto[]>;
-  getUser<T extends UserStatus>(uuid: string, options: T): Promise<User<T>>;
-  getUserWithoutOptions(uuid: string): Promise<User<UserStatus>>;
+  getUser(uuid: string): Promise<User<UserStatus>>;
+  getUserWithStatus<T extends UserStatus>(
+    uuid: string,
+    options: T,
+  ): Promise<User<T>>;
 }

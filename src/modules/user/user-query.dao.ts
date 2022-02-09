@@ -53,7 +53,7 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
     user.data.status = event.status;
     await this.manager.save(UserQuery, {
       id: event.ID.value,
-      data: user,
+      data: user.data,
       status: event.status,
     });
   }
@@ -66,7 +66,7 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
     user.data.status = event.status;
     await this.manager.save(UserQuery, {
       id: event.ID.value,
-      data: user,
+      data: user.data,
       status: event.status,
     });
   }
