@@ -10,7 +10,6 @@ export class UserDataUpdatedHandler implements IEventHandler<UserDataUpdated> {
     private bus: EventBus<UserIntegrationEvent>,
   ) {}
   async handle(event: UserDataUpdated) {
-    console.log('update');
     await this.dao.update(event);
     this.bus.publish(new UserIntegrationEvent(event));
   }

@@ -9,7 +9,10 @@ import { UserLastName } from 'src/domain/user/value_objects/UserLastName.value';
 import { UserPassword } from 'src/domain/user/value_objects/UserPassword.value';
 import { EntityRepository, Repository } from 'typeorm';
 import { UserDto as UserDto } from '../../application/user/User.dto';
-import { UserRepository as IUserRepository } from '../../application/user/User.repository';
+import {
+  UserRepository as IUserRepository,
+  UserStatusOrDefault,
+} from '../../application/user/User.repository';
 import { UserQueryEntity as UserQuery } from './user-query.entity';
 
 @EntityRepository(UserQuery)
@@ -47,21 +50,34 @@ export class UserRepository
 
   async getUser<T extends UserStatus>(
     uuid: string,
-    options: { status: T },
+    status: T,
   ): Promise<User<T>> {
     const userQuery: UserQuery = await this.findOne(uuid, {
-      where: { status: options.status },
+      where: { status: status },
     });
-    let user: User<UserStatus> = new User(
+    let user: User<T> = new User<T>(
       new UserFirstName(userQuery.data.firstname),
       new UserLastName(userQuery.data.lastname),
       new UserBirthday(userQuery.data.birthday),
       new UserEmail(userQuery.data.email),
       new UserPassword(userQuery.data.password),
-      userQuery.data.status,
+      status,
       new UserID(userQuery.id),
     );
-    if (user.is(options.status)) return user;
-    else return null;
+    return user;
+  }
+
+  async getUserWithoutOptions(uuid: string): Promise<User<UserStatus>> {
+    const userQuery: UserQuery = await this.findOne(uuid);
+    let user: User = new User(
+      new UserFirstName(userQuery.data.firstname),
+      new UserLastName(userQuery.data.lastname),
+      new UserBirthday(userQuery.data.birthday),
+      new UserEmail(userQuery.data.email),
+      new UserPassword(userQuery.data.password),
+      userQuery.status,
+      new UserID(userQuery.id),
+    );
+    return user;
   }
 }

@@ -55,6 +55,16 @@ export class User<S extends UserStatus = UserStatus> {
     return this.eventRecorder;
   }
 
+  /*
+  static withStatus<T extends UserStatus>(user: User, status: T): User<T> {
+    return new User(
+		user.firstname,
+		user.lastname,
+		user.bir
+;
+  }
+  */
+
   static register(
     firstname: UserFirstName,
     lastname: UserLastName,
@@ -212,10 +222,6 @@ export class User<S extends UserStatus = UserStatus> {
       this.cv = this.cv.reject();
       this.eventRecorder = [...this.eventRecorder, ...this.cv.getEvents()];
     }
-  }
-
-  is<T extends UserStatus>(status: T): this is User<T> {
-    return (this.status as unknown) == (status as unknown);
   }
 
   protected invariants() {}

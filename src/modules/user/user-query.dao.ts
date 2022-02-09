@@ -19,11 +19,14 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
         password: event.password.value,
         status: event.status,
       },
+      status: event.status,
     });
   }
   async update(event: UserDataUpdated) {
-    const user: UserQuery = await this.manager.findOne(event.ID.value);
-    console.log(event);
+    const user: UserQuery = await this.manager.findOne(
+      UserQuery,
+      event.ID.value,
+    );
     await this.manager.save(UserQuery, {
       id: event.ID.value,
       data: {
@@ -34,6 +37,7 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
         password: event.password.value,
         status: user.data.status,
       },
+      status: user.data.status,
     });
   }
 
@@ -42,15 +46,27 @@ export class UserQueryDao extends AbstractRepository<UserQuery> {
   }
 
   async suspend(event: UserSuspended) {
+    const user: UserQuery = await this.manager.findOne(
+      UserQuery,
+      event.ID.value,
+    );
+    user.data.status = event.status;
     await this.manager.save(UserQuery, {
       id: event.ID.value,
+      data: user,
       status: event.status,
     });
   }
 
   async reactive(event: UserReactivated) {
+    const user: UserQuery = await this.manager.findOne(
+      UserQuery,
+      event.ID.value,
+    );
+    user.data.status = event.status;
     await this.manager.save(UserQuery, {
       id: event.ID.value,
+      data: user,
       status: event.status,
     });
   }

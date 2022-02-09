@@ -12,7 +12,6 @@ export class UserAccountDeletedHandler
     private bus: EventBus<UserIntegrationEvent>,
   ) {}
   async handle(event: UserAccountDeleted) {
-    console.log('delete');
     await this.dao.delete(event);
     this.bus.publish(new UserIntegrationEvent(event));
   }

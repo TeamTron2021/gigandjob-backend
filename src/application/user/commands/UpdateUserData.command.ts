@@ -19,7 +19,7 @@ export class UpdateUserData implements UserCommand {
   ) {}
 
   async execute(service: UserService) {
-    const user: User<UserStatus> = await service.getUser(this.ID);
+    const user: User<UserStatus> = await service.getUserWithoutOptions(this.ID);
     const newPassword: UserPassword = this.password
       ? new UserPassword(this.password)
       : user.password;

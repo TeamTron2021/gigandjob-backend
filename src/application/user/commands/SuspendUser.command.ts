@@ -7,10 +7,10 @@ export class SuspendUser implements UserCommand {
   constructor(private readonly ID: string) {}
 
   async execute(service: UserService) {
-    const user: User<UserStatus.Unconfirmed | UserStatus.Active> =
-      await service.getUser(this.ID, {
-        status: UserStatus.Unconfirmed | UserStatus.Active,
-      });
+    const user: User<UserStatus.Unconfirmed> = await service.getUser(
+      this.ID,
+      UserStatus.Unconfirmed,
+    );
     const userSuspended: User<UserStatus.Supended> = user.suspend();
     service.publish(userSuspended.getEvents());
   }

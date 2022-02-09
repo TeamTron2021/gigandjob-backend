@@ -3,7 +3,7 @@ import { UserSuspendedHandler } from 'src/modules/user/handlers/user-suspended.h
 import { User, UserEvent } from '../../domain/user/User.aggregate';
 import { UserDto } from './User.dto';
 import { UserPublisher } from './User.publisher';
-import { UserRepository } from './User.repository';
+import { UserRepository, UserStatusOrDefault } from './User.repository';
 
 export class UserService {
   constructor(
@@ -21,9 +21,14 @@ export class UserService {
 
   async getUser<T extends UserStatus>(
     uuid: string,
-    { status: T },
+    options: T,
   ): Promise<User<T>> {
-    return await this.repository.getUser(uuid, { status });
+    if (options) return this.repository.getUser(uuid, options);
+    return this.repository.getUser(uuid, options);
+  }
+
+  async getUserWithoutOptions(uuid: string): Promise<User<UserStatus>> {
+    return this.repository.getUserWithoutOptions(uuid);
   }
 
   publish(events: UserEvent[]) {
