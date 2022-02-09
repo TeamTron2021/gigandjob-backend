@@ -44,4 +44,10 @@ export class PostulationService {
   async findPostulations() {
     return await this.queryBus.execute(new FindPostulationsQuery());
   }
+  async acceptPostulation(postulationId: FindPostulationByIdRequest) {
+    //return await this.queryBus.execute(new FindPostulationsQuery());
+  }
+  async rejectPostulation(postulationId: FindPostulationByIdRequest) {
+    //return await this.queryBus.execute(new FindPostulationsQuery());
+  }
 }

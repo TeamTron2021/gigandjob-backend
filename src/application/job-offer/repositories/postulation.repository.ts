@@ -1,6 +1,6 @@
 import CreatePostulationDTO from '../ports/createPostulation.dto';
 import PostulationFound from '../ports/findPostulationResult.dto';
-import UpdatePostulationStatus from '../ports/updatePostulationStatus.dto';
+import UpdatePostulationStatus from '../ports/AcceptPostulationStatus.dto';
 
 export default interface IPostulationRepository {
   createPostulation(
@@ -8,6 +8,8 @@ export default interface IPostulationRepository {
   ): Promise<PostulationFound>;
 
   findById(id: string): Promise<PostulationFound>;
+  findPostulation(): Promise<PostulationFound[]>;
   
-  updatePostulation(id: string): Promise<UpdatePostulationStatus>;
+  //updatePostulation(id: string): Promise<UpdatePostulationStatus>;
+  
 }

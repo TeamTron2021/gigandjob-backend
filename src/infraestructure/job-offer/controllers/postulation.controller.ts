@@ -1,5 +1,5 @@
 import { ApiResponse } from '@nestjs/swagger';
-import { Body, Controller, Param, Get, Post } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, Put } from '@nestjs/common';
 import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import CreatePostulationRequest from '../request/createPostulationRequies.request';
 import { PostulationService } from '../services/postulation.service';
@@ -33,5 +33,22 @@ export class PostulationController {
   @Get()
   async findPostulations() {
     return await this.postulationService.findPostulations();
+  }
+
+//Cambia el estado de la postulación a aceptada
+  @Put('/:id') // ID de la postulación.
+   
+  async acceptPostulation(
+      @Param() postulationId: FindPostulationByIdRequest
+  ) {
+    return await this.postulationService.acceptPostulation(postulationId);
+  }
+  //Cambia el estado de la postulación a Rechazada
+  @Put('/:id') // ID de la postulación.
+   
+  async rejectPostulation(
+      @Param() postulationId: FindPostulationByIdRequest
+  ) {
+    return await this.postulationService.rejectPostulation(postulationId);
   }
 }

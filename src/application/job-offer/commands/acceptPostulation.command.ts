@@ -1,5 +1,6 @@
-import UpdatePostulationStatus from "../ports/updatePostulationStatus.dto";
+import AcceptPostulationStatus from "../ports/AcceptPostulationStatus.dto";
+
 
 export class AcceptPostulationCommand {
-    constructor(public readonly PostulationStatus: UpdatePostulationStatus) {}
+    constructor(public readonly PostulationStatus: AcceptPostulationStatus) {}
 }
