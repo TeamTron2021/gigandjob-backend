@@ -55,16 +55,6 @@ export class User<S extends UserStatus = UserStatus> {
     return this.eventRecorder;
   }
 
-  /*
-  static withStatus<T extends UserStatus>(user: User, status: T): User<T> {
-    return new User(
-		user.firstname,
-		user.lastname,
-		user.birthday,
-		user.
-  }
-		*/
-
   static register(
     firstname: UserFirstName,
     lastname: UserLastName,
