@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import InterviewFound from 'src/application/job-offer/ports/interviewFound.dto';
-import FindInterviewByPostulation from 'src/application/job-offer/queries/findInterviewByPostulation.query';
 import { InterviewRepository } from '../repositories/InterviewRepository.repository';
+import InterviewFound from "../../../application/job-offer/ports/interviewFound.dto";
+import FindInterviewByPostulation from "../../../application/job-offer/queries/findInterviewByPostulation.query";
 
 @QueryHandler(FindInterviewByPostulation)
 export class findInterviewByPostulationHandler

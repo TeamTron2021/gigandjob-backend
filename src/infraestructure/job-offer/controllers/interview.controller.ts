@@ -1,13 +1,12 @@
-import { Body, Controller, Param, Post, Get, Put,  HttpStatus } from '@nestjs/common';
+import {Body, Controller, Param, Post, Get, HttpStatus, Patch} from '@nestjs/common';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { InterviewService } from '../services/interview.service';
 import { ApiResponse } from '@nestjs/swagger';
-import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
-
-import { buildResponse } from 'src/infraestructure/shared/buildResponse';
+import {ResponseDescription} from "../../employeer/shared/enums/response-description.enum";
+import {buildResponse} from "../../shared/buildResponse";
 
 @Controller('interview')
 export class InterviewController {
@@ -43,7 +42,7 @@ export class InterviewController {
     status: 404,
     description: 'No hemos encontrado ninguna entrevista con ese ID.',
   })
-  @Put('/:id/accept') // ID de la entrevista.
+  @Patch('/:id/accept') // ID de la entrevista.
   /**
    * Endpoint que permite aceptar una entrevista.
    *

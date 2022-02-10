@@ -1,11 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { CreateInterviewCommand } from 'src/application/job-offer/commands/createInterview.command';
-import CreateInterviewDto from 'src/application/job-offer/ports/createInterview.dto';
-import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
-import FindInterviewById from 'src/application/job-offer/queries/findInterviewById.query';
-import FindPostulationById from 'src/application/job-offer/queries/findPostulationById.query';
-import UniqueId from 'src/shared/domain/UniqueUUID';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
@@ -13,7 +7,13 @@ import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInter
 import AcceptInterviewCommand from "../../../application/job-offer/commands/acceptInterview.command";
 import {InterviewORM} from "../orm/interview.orm";
 import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
-import FindInterviewByPostulation from 'src/application/job-offer/queries/findInterviewByPostulation.query';
+import {CreateInterviewCommand} from "../../../application/job-offer/commands/createInterview.command";
+import FindInterviewById from "../../../application/job-offer/queries/findInterviewById.query";
+import UniqueId from "../../../shared/domain/UniqueUUID";
+import FindInterviewByPostulation from "../../../application/job-offer/queries/findInterviewByPostulation.query";
+import PostulationFound from "../../../application/job-offer/ports/findPostulationResult.dto";
+import CreateInterviewDto from "../../../application/job-offer/ports/createInterview.dto";
+import FindPostulationById from "../../../application/job-offer/queries/findPostulationById.query";
 
 @Injectable()
 export class InterviewService {
@@ -72,6 +72,7 @@ export class InterviewService {
 		  new AcceptInterviewCommand(interviewToAccept)
 	  );
   }
+	
   async findInterviewByPostulation(postulationId: FindInterviewByPostulationRequest) {
     const interview = await this.queryBus.execute(
       new FindInterviewByPostulation(postulationId.postulationId),
