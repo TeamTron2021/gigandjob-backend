@@ -11,4 +11,11 @@ export class PostulationUUID {
   get idPostulation(): string {
     return this.value;
   }
+
+  
+  public static create(id: string) {
+    
+
+    return new PostulationUUID(id);
+  }
 }

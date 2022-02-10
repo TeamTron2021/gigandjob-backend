@@ -15,6 +15,7 @@ import { JwtAdminAuthGuard } from 'src/infraestructure/auth/admin/guards/jwt-adm
 import { GetUser } from 'src/infraestructure/auth/users/decorators/get-user.decorator';
 import { JwtAuthGuard } from 'src/infraestructure/auth/users/guards/jwt-auth.guard';
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
+import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 import { LoggingInterceptor } from 'src/log/interceptors/loggin.intercerptor';
@@ -64,5 +65,16 @@ export class JobOfferController {
       HttpStatus.OK,
       await this.jobOfferService.findJobOffers(),
     );
+  }
+
+  //endpoint para buscar un empleador por su id
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ninguna oferta con ese id',
+  })
+  @Get('/:id')
+  async findJobOffer(@Param() jobOfferId: FindJobOfferByIdRequest) {
+    return await this.jobOfferService.findJobOfferById(jobOfferId);
   }
 }
