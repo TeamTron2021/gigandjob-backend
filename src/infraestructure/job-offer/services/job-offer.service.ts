@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
+import FindJobOfferById from 'src/application/employeer/queries/findJobOfferByID.query';
 import CreateGigCommand from 'src/application/job-offer/commands/createGig.command';
 import { CreateJobOfferCommand } from 'src/application/job-offer/commands/createJobOffer.command';
 import CreateGigDto from 'src/application/job-offer/ports/createGig.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
 import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
+import FindOfferByIdQuery from 'src/application/job-offer/queries/findJobOfferById.query';
 import JobOffersQuery from 'src/application/job-offer/queries/findJobOffers.query';
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
 import UniqueId from 'src/shared/domain/UniqueUUID';
@@ -54,5 +56,8 @@ export class JobOfferService {
 
   async findJobOffers(): Promise<JobOfferFound[]> {
     return await this.queryBus.execute(new JobOffersQuery());
+  }
+  async findJobOfferById(id: FindEmployeerByIdRequest): Promise<JobOfferFound> {
+    return await this.queryBus.execute(new FindOfferByIdQuery(id.id));
   }
 }
