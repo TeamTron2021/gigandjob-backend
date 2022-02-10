@@ -14,6 +14,10 @@ export class PostulationDate {
     return this.postulationDate;
   }
 
+  getDate(): Date {
+    return this.postulationDate;
+  }
+
   public static create(startDate: Date) {
     if (!startDate) {
       throw new InterviewMissingDateException(
@@ -27,3 +31,6 @@ export class PostulationDate {
     return new  PostulationDate(startDate);
   }
 }
+
+
+

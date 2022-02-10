@@ -25,6 +25,7 @@ export class InterviewRepository
     const postulationToAdd: PostulationOrm = {
       ...postulation,
       interviews: [],
+      jobOffer: null,
     };
     
     interviewSave.id = interviewDto.id;
