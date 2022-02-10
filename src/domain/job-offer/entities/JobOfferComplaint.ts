@@ -66,47 +66,45 @@ export class JobOfferComplaint {
 
   static acceptedComplaint(
     id: JobOfferComplaintId,
-    object: JobOfferComplaint[],
+    object: JobOfferComplaint,
   ) {
-    for (let x = 0; x <= object.length - 1; x++) {
-      const compare = object[x].getId();
+
+      const compare = object.getId();
 
       if (id.getId() === compare.getId()) {
-        if (object[x].getAcceptedOrRejected() === null) {
-          object[x].setAcceptedOrRejected(true);
-          object[x].eventRecorder.push(
-            new JobOfferAceptedandRejectedComplaint(object[x].id, true),
+        if (object.getAcceptedOrRejected() === null) {
+          object.setAcceptedOrRejected(true);
+          object.eventRecorder.push(
+            new JobOfferAceptedandRejectedComplaint(object.id, true),
           );
-          return object[x];
+          return object;
         }
-        if (object[x].getAcceptedOrRejected() === true) {
+        if (object.getAcceptedOrRejected() === true) {
           throw new JobOfferAceptedComplaintIdException(
             'Ya fue Aceptada la denuncia',
           );
         }
       }
-    }
   }
+
 
   static rejectedComplaint(
     id: JobOfferComplaintId,
-    object: JobOfferComplaint[],
+    object: JobOfferComplaint,
   ) {
-    for (let x = 0; x <= object.length - 1; x++) {
-      const compare = object[x].getId();
+      const compare = object.getId();
 
       if (id.getId() === compare.getId()) {
-        object[x].setAcceptedOrRejected(false);
-        object[x].eventRecorder.push(
-          new JobOfferAceptedandRejectedComplaint(object[x].id, false),
+        object.setAcceptedOrRejected(false);
+        object.eventRecorder.push(
+          new JobOfferAceptedandRejectedComplaint(object.id, false),
         );
-        return object[x];
+        return object;
       }
-      if (object[x].getAcceptedOrRejected() === true) {
+      if (object.getAcceptedOrRejected() === true) {
         throw new JobOfferRejectedComplaintIdException(
           'Ya fue Rechazada la denuncia',
         );
       }
     }
-  }
 }

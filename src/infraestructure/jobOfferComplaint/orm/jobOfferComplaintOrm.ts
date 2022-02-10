@@ -1,5 +1,6 @@
 
-import { Entity, Column, PrimaryGeneratedColumn} from 'typeorm'; 
+import { JobOfferORM } from '../../../infraestructure/job-offer/orm/job-offer.orm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne} from 'typeorm'; 
 
 
 @Entity('joboffercomplaint')
@@ -16,5 +17,8 @@ export class joboffercomplaintSchema {
      
     @Column({ default: false, nullable: true })
     acceptedorrejected: boolean;
+
+    @ManyToOne(() => JobOfferORM, (JobOfferORM) => JobOfferORM.complaint, {nullable: true})
+    JobOffer: JobOfferORM;
 
 }

@@ -1,4 +1,5 @@
 import { EmployeerORM } from 'src/infraestructure/employeer/orm/employeer.orm';
+import { joboffercomplaintSchema } from 'src/infraestructure/jobOfferComplaint/orm/jobOfferComplaintOrm';
 import {
   Column,
   Entity,
@@ -32,4 +33,6 @@ export class JobOfferORM {
   status: string;
   @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
   employeer: EmployeerORM;
+  @OneToMany(() => joboffercomplaintSchema,(ComplaintORM) => ComplaintORM.JobOffer, {nullable: true} )
+  complaint: joboffercomplaintSchema;
 }

@@ -4,7 +4,8 @@ export class CreateJobOfferComplaintDtoOut{
         public readonly Idcomplaint: string,
         public readonly issue: string,
         public readonly dateComplaint: Date,
-        public readonly acceptedOrRejected: boolean
+        public readonly acceptedOrRejected: boolean,
+
       ){}
 
 }
