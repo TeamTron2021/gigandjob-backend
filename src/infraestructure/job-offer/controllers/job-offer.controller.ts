@@ -65,4 +65,12 @@ export class JobOfferController {
       await this.jobOfferService.findJobOffers(),
     );
   }
+
+  @Get('/:id')
+  async findOfferById(@Param() id: FindEmployeerByIdRequest) {
+    return buildResponse(
+      HttpStatus.OK,
+      await this.jobOfferService.findJobOfferById(id),
+    );
+  }
 }
