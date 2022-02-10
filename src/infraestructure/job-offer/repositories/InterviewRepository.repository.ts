@@ -9,6 +9,7 @@ import {InterviewStatus} from "../../../domain/job-offer/shared/InterviewStatus.
 import PostulationFound from "../../../application/job-offer/ports/findPostulationResult.dto";
 import CreateInterviewDto from "../../../application/job-offer/ports/createInterview.dto";
 import IInterviewRepository from "../../../application/job-offer/repositories/interview.repository";
+import RegisterInterviewMapper from '../mappers/registerInterview.mapper';
 
 @EntityRepository(InterviewORM)
 export class InterviewRepository
@@ -64,9 +65,8 @@ export class InterviewRepository
   async findByPostulation(postulationId: string): Promise<InterviewFound[]> {
     const interview: InterviewORM[] = await this.find({ where: { postulation: postulationId } });
     if (interview != null) {
-      const result: InterviewFound[] = {
-        ...interview,
-      };
+      const result: InterviewFound[] = RegisterInterviewMapper.convertManyInterviewsToFound(interview);
+     
       return result;
     }
     throw new NotFoundException('No encontramos ninguna entrevista para su postulacion');
