@@ -50,26 +50,9 @@ export default class PostulationRepository
     user: UserDto,
   ): Promise<void> {
     const newPostulationSave = new PostulationOrm();
-    const employeerorm: EmployeerORM = {
-      ...new EmployeerDto(),
-      jobOffers: [],
-      gigs: [],
-      status: '',
-    };
-    const skillsorm: SkillsORM[] = {
-      ...new CreateSkillsDto(),
-      ...jobOffer,
-    };
- 
+    // const addInterview: InterviewOrm = {
 
-    const jobOfferReturnORM: JobOfferORM = {
-      ...jobOffer,
-      vacants: 0,
-      postulations: [],
-      employeer: employeerorm,
-      skills: skillsorm,
-    };
-
+    // }
     newPostulationSave.id = postulationDTO.id;
     newPostulationSave.date = postulationDTO.date;
     newPostulationSave.status = PostulationStatus.isSend;
@@ -82,7 +65,6 @@ export default class PostulationRepository
       if (e.code == '23505') {
         throw new ConflictException('');
       }
-      throw new InternalServerErrorException();
     }
   }
 

@@ -1,7 +1,4 @@
-import {
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
 import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
@@ -24,16 +21,6 @@ export class JobOfferRepository
   extends Repository<JobOfferORM>
   implements IJobOfferRepository
 {
-  async findJobOfferById(id: string): Promise<JobOfferFound> {
-    const jobOffer: JobOfferORM = await this.findOne(id);
-    if (jobOffer != null) {
-      const result: JobOfferFound =
-        JobOfferMapper.convertToJobOfferFound(jobOffer);
-      return result;
-    } else {
-      throw new NotFoundException('No se encontro la oferta de trabajo');
-    }
-  }
   async findJobOffers(): Promise<JobOfferFound[]> {
     try {
       const query = this.createQueryBuilder('joboffers');
@@ -80,7 +67,6 @@ export class JobOfferRepository
       status,
       skills: skillsToSave,
       employeer: employeerOrm,
-      postulations: [],
     };
     await this.save(newJobOffer);
     const skillsORM = getRepository(SkillsORM);
