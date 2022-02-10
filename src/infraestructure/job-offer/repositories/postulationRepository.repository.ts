@@ -1,4 +1,5 @@
 import { NotFoundException } from '@nestjs/common';
+import AcceptPostulationStatusDto from 'src/application/job-offer/ports/AcceptPostulationStatus.dto';
 import createPostulationDto from 'src/application/job-offer/ports/createPostulation.dto';
 import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
 import postulationFoundDto from 'src/application/job-offer/ports/findPostulationResult.dto';
@@ -13,6 +14,9 @@ export default class PostulationRepository
   extends Repository<PostulationOrm>
   implements IPostulationRepository
 {
+  acceptpostulation(postulationUpdate: AcceptPostulationStatusDto): Promise<any> {
+      throw new Error("Method not implemented.");
+  }
   async createPostulation(
     postulationDTO: createPostulationDto,
   ): Promise<postulationFoundDto> {

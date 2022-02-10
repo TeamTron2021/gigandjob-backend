@@ -2,8 +2,7 @@ import { Postulation } from "src/domain/job-offer/entities/postulation";
 import { PostulationStatus } from "src/domain/job-offer/value-objects/postulation/PostulationStatus";
 import UpdatepostulationStatusMapper from "./IUpdatePostulationStatus.mapper";
 
-export default class AcceptpostulationMapper extends UpdatepostulationStatusMapper {
-	
+export default class RejectpostulationMapper extends UpdatepostulationStatusMapper {
 	map(): Postulation<PostulationStatus> {
 		let postulation: Postulation<PostulationStatus>;
 		
@@ -18,4 +17,5 @@ export default class AcceptpostulationMapper extends UpdatepostulationStatusMapp
 		
 		return postulation;
 	}
+
 }

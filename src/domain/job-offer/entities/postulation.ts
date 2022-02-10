@@ -23,7 +23,7 @@ type postulationEvents =
 
 export class Postulation<S extends PostulationStatus> {
   public status: S;
-  private readonly ID: PostulationUUID;
+  public readonly ID: PostulationUUID;
   private eventHandle: postulationEvents[] = [];
   private interviews: Interview<InterviewStatus>[] = [];
 
@@ -49,7 +49,7 @@ export class Postulation<S extends PostulationStatus> {
     this.interviews.push(interview);
   }
 
-  static create(date: PostulationDate): Postulation<PostulationStatus.isSend> {
+ public static create(date: PostulationDate): Postulation<PostulationStatus.isSend> {
     //se crea la postulacion del usuario
     const postulation = new Postulation(date, PostulationStatus.isSend);
 
