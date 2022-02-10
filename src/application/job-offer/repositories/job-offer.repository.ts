@@ -8,6 +8,4 @@ export default interface IJobOfferRepository {
     employeer: EmployeerFound,
   ): Promise<void>;
   findJobOffers(): Promise<JobOfferFound[]>;
-
-  findById(id: string): Promise<JobOfferFound>;
 }

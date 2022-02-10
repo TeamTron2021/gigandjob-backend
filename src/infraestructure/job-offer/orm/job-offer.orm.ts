@@ -8,7 +8,6 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
-import PostulationOrm from './postulation.orm';
 import { SkillsORM } from './skills.orm';
 
 @Entity('joboffers')
@@ -33,7 +32,4 @@ export class JobOfferORM {
   status: string;
   @ManyToOne(() => EmployeerORM, (EmployeerORM) => EmployeerORM.jobOffers)
   employeer: EmployeerORM;
-
-  @OneToMany(() => PostulationOrm, (PostulationOrm) => PostulationOrm.jobOffer)
-  postulations: PostulationOrm[];
 }

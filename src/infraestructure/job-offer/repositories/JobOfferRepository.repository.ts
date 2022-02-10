@@ -1,4 +1,4 @@
-import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { InternalServerErrorException } from '@nestjs/common';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import CreateJobOfferDto from 'src/application/job-offer/ports/createJobOffer.dto';
 import JobOfferFound from 'src/application/job-offer/ports/jobOfferFound.dto';
@@ -67,7 +67,6 @@ export class JobOfferRepository
       status,
       skills: skillsToSave,
       employeer: employeerOrm,
-      postulations: null
     };
     await this.save(newJobOffer);
     const skillsORM = getRepository(SkillsORM);
@@ -76,17 +75,5 @@ export class JobOfferRepository
       await skillsORM.save(element);
     });
     return;
-  }
-
-  async findById(id: string): Promise<JobOfferFound> {
-    const jobOffer: JobOfferORM = await this.findOne(id);
-    if (jobOffer != null) {
-      const result: JobOfferFound = {
-        ...jobOffer,
-        vacant: jobOffer.vacants
-      };
-      return result;
-    }
-    throw new NotFoundException('No encontramos ninguna oferta con ese id');
   }
 }

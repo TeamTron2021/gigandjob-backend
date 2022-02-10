@@ -30,7 +30,7 @@ export class InterviewController {
   @ApiResponse({ status: 200, description: ResponseDescription.OK })
   @ApiResponse({
     status: 404,
-    description: 'No encontramos ninguna entrevista con ese id',
+    description: 'No encontramos ningun empleador con ese id',
   })
   @Get('/:id')
   async findInterview(@Param() interviewId: FindInterviewByIdRequest) {
