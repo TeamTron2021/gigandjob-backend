@@ -1,10 +1,13 @@
 import { ApiResponse } from '@nestjs/swagger';
-import { Body, Controller, Param, Get, Post } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, HttpStatus } from '@nestjs/common';
 import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import CreatePostulationRequest from '../request/createPostulationRequies.request';
 import { PostulationService } from '../services/postulation.service';
 import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
+
+
+import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 
 @Controller('postulation')
 export class PostulationController {
@@ -32,6 +35,9 @@ export class PostulationController {
   }
   @Get()
   async findPostulations() {
-    return await this.postulationService.findPostulations();
+    return buildResponse(
+      HttpStatus.OK,
+      await this.postulationService.findPostulations(),
+      );
   }
 }
