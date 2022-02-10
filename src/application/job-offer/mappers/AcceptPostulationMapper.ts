@@ -1,6 +1,6 @@
 import { Postulation } from "src/domain/job-offer/entities/postulation";
 import { PostulationStatus } from "src/domain/job-offer/value-objects/postulation/PostulationStatus";
-import UpdatepostulationStatusMapper from "./IUpdatePostulationStatus.mapper";
+import UpdatepostulationStatusMapper from "./UpdatePostulationStatus.mapper";
 
 export default class AcceptpostulationMapper extends UpdatepostulationStatusMapper {
 	

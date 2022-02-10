@@ -3,7 +3,7 @@ import IDto from "src/application/shared/interfaces/IDto";
 import { Postulation } from "src/domain/job-offer/entities/postulation";
 import { PostulationStatus } from "src/domain/job-offer/value-objects/postulation/PostulationStatus";
 import AcceptPostulationMapper from "../mappers/AcceptPostulationMapper";
-import IUpdatePostulationStatusMapper from "../mappers/IUpdatePostulationStatus.mapper";
+import IUpdatePostulationStatusMapper from "../mappers/UpdatePostulationStatus.mapper";
 import AcceptPostulationDto from "../ports/AcceptPostulationStatus.dto";
 import RejectPostulationDto from "../ports/RejectPostulationStatus.dto";
 
