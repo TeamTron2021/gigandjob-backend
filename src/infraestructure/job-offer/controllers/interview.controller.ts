@@ -43,7 +43,7 @@ export class InterviewController {
     status: 404,
     description: 'No hemos encontrado ninguna entrevista con ese ID.',
   })
-  @Put('/:id') // ID de la entrevista.
+  @Put('/:id/accept') // ID de la entrevista.
   /**
    * Endpoint que permite aceptar una entrevista.
    *
