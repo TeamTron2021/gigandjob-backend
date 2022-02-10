@@ -1,15 +1,14 @@
-
-import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
-import CreateInterviewDto from 'src/application/job-offer/ports/createInterview.dto';
-import InterviewFound from 'src/application/job-offer/ports/interviewFound.dto';
-import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
-import IInterviewRepository from 'src/application/job-offer/repositories/interview.repository';
-import { InterviewStatus } from 'src/domain/job-offer/shared/InterviewStatus.enum';
-import { EntityRepository, getRepository, Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { InterviewMapper } from '../mappers/interview.mapper';
 import { InterviewORM } from '../orm/interview.orm';
 import PostulationOrm from '../orm/postulation.orm';
 import { NotFoundException } from '@nestjs/common';
+import AcceptInterviewDto from "../../../application/job-offer/ports/acceptInterview.dto";
+import InterviewFound from "../../../application/job-offer/ports/interviewFound.dto";
+import {InterviewStatus} from "../../../domain/job-offer/shared/InterviewStatus.enum";
+import PostulationFound from "../../../application/job-offer/ports/findPostulationResult.dto";
+import CreateInterviewDto from "../../../application/job-offer/ports/createInterview.dto";
+import IInterviewRepository from "../../../application/job-offer/repositories/interview.repository";
 import RegisterInterviewMapper from '../mappers/registerInterview.mapper';
 
 @EntityRepository(InterviewORM)
@@ -49,6 +48,19 @@ export class InterviewRepository
     }
     throw new NotFoundException('No encontramos ninguna oferta con ese id');
   }
+	
+	/**
+	 * Actualiza el estado de la entrevista aceptada.
+	 *
+	 * @param acceptedInterview Entrevista aceptada.
+	 * */
+	async acceptInterview(acceptedInterview: AcceptInterviewDto): Promise<InterviewFound> {
+		await this.update(acceptedInterview.id, {
+			status: acceptedInterview.status
+		});
+		
+		return this.findById(acceptedInterview.id);
+	}
 
   async findByPostulation(postulationId: string): Promise<InterviewFound[]> {
     const interview: InterviewORM[] = await this.find({ where: { postulation: postulationId } });

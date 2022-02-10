@@ -1,8 +1,8 @@
 import { ConflictException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CreateInterviewCommand } from 'src/application/job-offer/commands/createInterview.command';
-import { PostulationStatus } from 'src/domain/job-offer/value-objects/postulation/PostulationStatus';
 import { InterviewRepository } from '../repositories/InterviewRepository.repository';
+import {CreateInterviewCommand} from "../../../application/job-offer/commands/createInterview.command";
+import {PostulationStatus} from "../../../domain/job-offer/value-objects/postulation/PostulationStatus";
 
 @CommandHandler(CreateInterviewCommand)
 export class CreateInterviewHandler
