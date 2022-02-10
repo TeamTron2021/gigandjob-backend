@@ -2,8 +2,7 @@ import { IValueObject } from '../../../../shared/domain/IValueObject';
 import EmployeerEmptyLocalizationException from '../../exceptions/employeer/EmployeerEmptyLocalizationException';
 import EmployeerInvalidLocalizationException from '../../exceptions/employeer/EmployeerInvalidLocalizationException';
 
-const REGEX =
-  /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/;
+const REGEX = /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/;
 
 export default class EmployeerLocalization implements IValueObject {
   constructor(

@@ -1,6 +1,16 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 import EmployeerDto from 'src/application/employeer/ports/employeer.dto';
+import { JwtAdminAuthGuard } from 'src/infraestructure/auth/admin/guards/jwt-admin.guard';
+import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 import { FindEmployeerByIdRequest } from '../request/findEmployeerById.request';
 import RegisterEmployeerRequest from '../request/registerEmployeer.request';
 import { EmployeerService } from '../services/employeer.service';
@@ -12,6 +22,7 @@ export class EmployeerController {
   constructor(private readonly employeerService: EmployeerService) {}
 
   //endpoint para registrar un empleador
+  @UseGuards(JwtAdminAuthGuard)
   @ApiResponse({ status: 201, description: ResponseDescription.CREATED })
   @ApiResponse({
     status: 409,
@@ -30,10 +41,16 @@ export class EmployeerController {
   })
   @Get('/:id')
   async findEmployeer(@Param() employeerId: FindEmployeerByIdRequest) {
-    return await this.employeerService.findEmployeerById(employeerId);
+    return buildResponse(
+      HttpStatus.OK,
+      await this.employeerService.findEmployeerById(employeerId),
+    );
   }
   @Get()
   async findEmployeers() {
-    return await this.employeerService.findEmployeers();
+    return buildResponse(
+      HttpStatus.OK,
+      await this.employeerService.findEmployeers(),
+    );
   }
 }

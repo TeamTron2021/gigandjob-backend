@@ -1,10 +1,11 @@
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
-import CreateJobOfferDto from '../ports/createJobOffer.dto';
 import JobOfferFound from '../ports/jobOfferFound.dto';
+import JobOfferToSave from '../ports/jobOfferToSave.dto';
 
 export default interface IJobOfferRepository {
   createJobOffer(
-    jobOfferDto: CreateJobOfferDto,
+    jobOfferDto: JobOfferToSave,
     employeer: EmployeerFound,
-  ): Promise<JobOfferFound>;
+  ): Promise<void>;
+  findJobOffers(): Promise<JobOfferFound[]>;
 }

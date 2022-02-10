@@ -135,4 +135,6 @@ export class Postulation<S extends PostulationStatus> {
       );
     });
   }
+
+  protected invariants() {}
 }
