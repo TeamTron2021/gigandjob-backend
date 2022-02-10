@@ -20,7 +20,8 @@ export default class AcceptPostulationService implements IAplicationService {
 			acceptedPostulationDto = { 
 				id: postulationToAccept.ID.idPostulation,
 				status: postulationToAccept.status,
-			};
+				date:postulationToAccept.getDate().date
+			 };
 		} catch (e) {
 			throw e;
 		}

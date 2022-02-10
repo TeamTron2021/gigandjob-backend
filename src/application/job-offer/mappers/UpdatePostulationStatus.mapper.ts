@@ -7,7 +7,7 @@ import IPostulationwMapper from "./Ipostulation.mapper";
 
 export default abstract class UpdatepostulationStatusMapper implements IPostulationwMapper {
 	constructor(
-        private readonly postulationDto: AcceptPostulationDto
+        public  postulationDto: AcceptPostulationDto
 	) {}
 
 	public abstract map(): Postulation<PostulationStatus>;

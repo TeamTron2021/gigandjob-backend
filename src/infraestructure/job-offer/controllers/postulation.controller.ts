@@ -35,20 +35,34 @@ export class PostulationController {
     return await this.postulationService.findPostulations();
   }
 
+// endpoint de Aceptar postulación
 //Cambia el estado de la postulación a aceptada
-  @Put('/:id') // ID de la postulación.
+
+@ApiResponse({ status: 200, description: ResponseDescription.OK })
+@ApiResponse({
+  status: 404,
+  description: 'No encontramos ninguna postulación con ese id',
+})
+  @Put('accept/:id') // ID de la postulación.
    
   async acceptPostulation(
-      @Param() postulationId: FindPostulationByIdRequest
+      @Param() acceptPostulation: FindPostulationByIdRequest
   ) {
-    return await this.postulationService.acceptPostulation(postulationId);
+    return await this.postulationService.acceptPostulation(acceptPostulation);
   }
-  //Cambia el estado de la postulación a Rechazada
-  @Put('/:id') // ID de la postulación.
+  
+// endpoint de rechazar postulación
+//Cambia el estado de la postulación a Rechazada
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+@ApiResponse({
+  status: 404,
+  description: 'No encontramos ninguna postulación con ese id',
+})
+  @Put('reject/:id') // ID de la postulación.
    
   async rejectPostulation(
-      @Param() postulationId: FindPostulationByIdRequest
+      @Param() RejectPostulation: FindPostulationByIdRequest
   ) {
-    return await this.postulationService.rejectPostulation(postulationId);
+    return await this.postulationService.RejectPostulation(RejectPostulation);
   }
 }

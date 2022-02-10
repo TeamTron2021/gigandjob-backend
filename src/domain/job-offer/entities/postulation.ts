@@ -23,7 +23,7 @@ type postulationEvents =
 
 export class Postulation<S extends PostulationStatus> {
   public status: S;
-  public readonly ID: PostulationUUID;
+  public  ID: PostulationUUID;
   private eventHandle: postulationEvents[] = [];
   private interviews: Interview<InterviewStatus>[] = [];
 
@@ -34,6 +34,9 @@ export class Postulation<S extends PostulationStatus> {
 
   getId(): PostulationUUID {
     return this.ID;
+  }
+  setId(id:PostulationUUID){
+    this.ID = id
   }
   getDate(): PostulationDate {
     return this.date;

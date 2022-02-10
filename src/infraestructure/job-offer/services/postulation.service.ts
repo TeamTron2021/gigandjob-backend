@@ -57,6 +57,7 @@ export class PostulationService {
 			return {
 				id: postulationFound.id,
 				status: postulationFound.status,
+        date: postulationFound.date
 			}
 		});
 	
@@ -71,6 +72,7 @@ export class PostulationService {
 			return {
 				id: postulationFound.id,
 				status: postulationFound.status,
+        date: postulationFound.date,
 			}
 		});
 	

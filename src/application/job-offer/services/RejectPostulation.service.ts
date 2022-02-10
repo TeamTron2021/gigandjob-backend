@@ -22,6 +22,7 @@ export default class RejectedPostulationService implements IAplicationService {
 			RejectedPostulationDto = { 
 				id: postulationToReject.ID.idPostulation,
 				status: postulationToReject.status,
+				date:postulationToReject.getDate().date
 			};
 		} catch (e) {
 			throw e;
