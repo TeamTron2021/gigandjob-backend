@@ -11,6 +11,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiResponse } from '@nestjs/swagger';
+import { JwtAdminAuthGuard } from 'src/infraestructure/auth/admin/guards/jwt-admin.guard';
 import { GetUser } from 'src/infraestructure/auth/users/decorators/get-user.decorator';
 import { JwtAuthGuard } from 'src/infraestructure/auth/users/guards/jwt-auth.guard';
 import { FindEmployeerByIdRequest } from 'src/infraestructure/employeer/request/findEmployeerById.request';
@@ -31,6 +32,7 @@ export class JobOfferController {
     description: 'No encontramos ningun empleador con ese id',
   })
   //endpoint para crear una oferta de trabajo
+  @UseGuards(JwtAdminAuthGuard)
   @Post('/:id')
   async createJobOffer(
     @Body() offer: CreateJobOfferRequest,
@@ -41,6 +43,7 @@ export class JobOfferController {
 
   //endpoint para crear un gig
   //@UseGuards(JwtAuthGuard) se debe usar este decorador para implementar la autenticacion de usuario
+  @UseGuards(JwtAdminAuthGuard)
   @ApiResponse({ status: 200, description: ResponseDescription.OK })
   @ApiResponse({
     status: 404,
