@@ -25,7 +25,7 @@ export class createJobOffercompalintController {
    }
 
 
-   @Put('/acept/:id')
+   @Put('/accept/:id')
    async AceptReporte(
     @Param() complaintId: ComplaintIdDtoInOut,
     @Body() complaint: UpdateJobOfferComplaintDtoIn,
