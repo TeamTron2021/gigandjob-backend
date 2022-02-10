@@ -43,10 +43,6 @@ export default abstract class UpdatepostulationStatusMapper implements IPostulat
 				
 			
 				
-			/*
-            default:
-				throw new UnknownPostulationStatusException('El Estado de la postulación no existe: ' + this.PostulationStatus.status);
-            */
 		}
 	}
 }
