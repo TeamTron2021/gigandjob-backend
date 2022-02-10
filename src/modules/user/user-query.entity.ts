@@ -15,4 +15,6 @@ export class UserQueryEntity extends BaseEntity {
   id: string;
   @Column({ type: 'json' })
   data: UserQueryData;
+  @Column()
+  status: number;
 }
