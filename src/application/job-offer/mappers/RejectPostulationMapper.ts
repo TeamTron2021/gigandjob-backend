@@ -7,10 +7,10 @@ export default class RejectpostulationMapper extends UpdatepostulationStatusMapp
 		let postulation: Postulation<PostulationStatus>;
 		
 		try {
-			// postulation = new Postulation<PostulationStatus>(
-			// 	//this.convertToPostulationUUID(),
-			// 	//this.convertpostulationStatus()
-			// );
+			  postulation = new Postulation<PostulationStatus>(
+			  	this.convertToPostulationUUID(),
+			  	this.convertpostulationStatus()
+			  );
 		} catch (e) {
 			throw e;
 		}

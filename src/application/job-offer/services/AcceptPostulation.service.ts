@@ -7,7 +7,7 @@ import IUpdatePostulationStatusMapper from "../mappers/UpdatePostulationStatus.m
 import AcceptPostulationDto from "../ports/AcceptPostulationStatus.dto";
 
 export default class AcceptPostulationService implements IAplicationService {
-	execute(postulationDto: AcceptPostulationDto): IDto {
+	execute(postulationDto: AcceptPostulationDto): AcceptPostulationDto {
 		let acceptedPostulationDto: AcceptPostulationDto;
 
 		try {

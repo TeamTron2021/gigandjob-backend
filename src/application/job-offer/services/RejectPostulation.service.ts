@@ -9,19 +9,19 @@ import RejectPostulationDto from "../ports/RejectPostulationStatus.dto";
 
 
 export default class RejectedPostulationService implements IAplicationService {
-	execute(postulationDto: RejectPostulationDto): IDto {
+	execute(postulationDto: RejectPostulationDto): RejectPostulationDto {
 		let RejectedPostulationDto: RejectPostulationDto;
 
 		try {
 			
 			const mapper: IUpdatePostulationStatusMapper = new AcceptPostulationMapper(postulationDto);
-			const postulationToAccept: Postulation<PostulationStatus> = mapper.map();
+			const postulationToReject: Postulation<PostulationStatus> = mapper.map();
 			
-			postulationToAccept.acceptPostulation(); 
+			postulationToReject.rejectPostulation(); 
 			
 			RejectedPostulationDto = { 
-				id: postulationToAccept.ID.idPostulation,
-				status: postulationToAccept.status,
+				id: postulationToReject.ID.idPostulation,
+				status: postulationToReject.status,
 			};
 		} catch (e) {
 			throw e;
