@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import createPostulationDto from 'src/application/job-offer/ports/createPostulation.dto';
 import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
 import postulationFoundDto from 'src/application/job-offer/ports/findPostulationResult.dto';
@@ -6,6 +6,7 @@ import IPostulationRepository from 'src/application/job-offer/repositories/postu
 import { PostulationStatus } from 'src/domain/job-offer/value-objects/postulation/PostulationStatus';
 import { EntityRepository, Repository } from 'typeorm';
 import PostulationMapper from '../mappers/postulation.mapper';
+import RegisterPostulationMapper from '../mappers/registerPostulation.mapper';
 import PostulationOrm from '../orm/postulation.orm';
 
 @EntityRepository(PostulationOrm)
@@ -36,5 +37,16 @@ export default class PostulationRepository
       return result;
     }
     throw new NotFoundException('No encontramos ninguna oferta con ese id');
+  }
+
+  async findPostulations(): Promise<PostulationFound[]> {
+    try {
+      const postulations = await this.find();
+      const result: PostulationFound[] =
+        RegisterPostulationMapper.convertManyPostulationsToFound(postulations);
+      return result;
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
   }
 }
