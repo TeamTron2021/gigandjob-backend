@@ -17,11 +17,11 @@ export default class RejectedPostulationService implements IAplicationService {
 			const mapper: IUpdatePostulationStatusMapper = new AcceptPostulationMapper(postulationDto);
 			const postulationToReject: Postulation<PostulationStatus> = mapper.map();
 			
-			postulationToReject.rejectPostulation(); 
+			//postulationToReject.rejectPostulation(); 
 			
 			RejectedPostulationDto = { 
 				id: postulationToReject.ID.idPostulation,
-				status: postulationToReject.status,
+				status: postulationToReject.rejectPostulation().status,
 				date:postulationToReject.getDate().date
 			};
 		} catch (e) {

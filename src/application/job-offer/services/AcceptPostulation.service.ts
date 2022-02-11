@@ -15,11 +15,11 @@ export default class AcceptPostulationService implements IAplicationService {
 			const mapper: IUpdatePostulationStatusMapper = new AcceptPostulationMapper(postulationDto);
 			const postulationToAccept: Postulation<PostulationStatus> = mapper.map();
 			
-			postulationToAccept.acceptPostulation(); 
+			//postulationToAccept.acceptPostulation(); 
 			
 			acceptedPostulationDto = { 
 				id: postulationToAccept.ID.idPostulation,
-				status: postulationToAccept.status,
+				status: postulationToAccept.acceptPostulation().status,
 				date:postulationToAccept.getDate().date
 			 };
 		} catch (e) {
