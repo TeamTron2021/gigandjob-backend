@@ -9,8 +9,8 @@ export class AuthAdminController {
   async login(@Body() authDto: AuthDto) {
     return await this.adminService.login(authDto);
   }
-  //   @Post('/create')
-  //   async createAdmin(@Body() authDto: AuthDto) {
-  //     return await this.adminService.create(authDto);
-  //   }
+  @Post('/create')
+  async createAdmin(@Body() authDto: AuthDto) {
+    return await this.adminService.create(authDto);
+  }
 }
