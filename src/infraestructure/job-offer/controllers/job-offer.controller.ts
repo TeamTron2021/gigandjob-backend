@@ -57,7 +57,13 @@ export class JobOfferController {
   ) {
     return await this.jobOfferService.createGig(offer, employeer);
   }
-  @ApiResponse({ status: 201, description: ResponseDescription.OK })
+
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos las ofertas de trabajo',
+  })
   @Get()
   async findJobOffers() {
     return buildResponse(
@@ -66,6 +72,11 @@ export class JobOfferController {
     );
   }
 
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ninguna oferta con ese id',
+  })
   @Get('/:id')
   async findOfferById(@Param() id: FindEmployeerByIdRequest) {
     return buildResponse(

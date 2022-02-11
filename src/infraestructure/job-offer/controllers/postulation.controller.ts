@@ -12,6 +12,12 @@ import { buildResponse } from 'src/infraestructure/shared/buildResponse';
 @Controller('postulation')
 export class PostulationController {
   constructor(private readonly postulationService: PostulationService) {}
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ninguna oferta con ese id',
+  })
   @Post('/:id')
   async createPostulation(
     @Body() postulation: CreatePostulationRequest,
@@ -27,12 +33,18 @@ export class PostulationController {
   @ApiResponse({ status: 200, description: ResponseDescription.OK })
   @ApiResponse({
     status: 404,
-    description: 'No encontramos ningun empleador con ese id',
+    description: 'No encontramos ninguna postulacion con ese id',
   })
   @Get('/:id')
   async findPostulation(@Param() postulationId: FindPostulationByIdRequest) {
     return await this.postulationService.findPostulationById(postulationId);
   }
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos postulaciones',
+  })
   @Get()
   async findPostulations() {
     return buildResponse(

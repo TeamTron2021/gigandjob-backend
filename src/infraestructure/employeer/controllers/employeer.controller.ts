@@ -46,6 +46,12 @@ export class EmployeerController {
       await this.employeerService.findEmployeerById(employeerId),
     );
   }
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ningun empleador',
+  })
   @Get()
   async findEmployeers() {
     return buildResponse(

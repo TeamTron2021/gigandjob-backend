@@ -21,20 +21,19 @@ export default class PostulationRepository
     postulationDto: PostulationToSave,
     jobOffer: JobOfferFound,
   ): Promise<void> {
-   
-    const {
-      id,
-      date,
-      status,
-    } = postulationDto;
-
     const jobOfferOrm: JobOfferORM = {
       ...jobOffer,
       skills: [],
       employeer: null,
       vacants : 0
     };
-    
+
+    const {
+      id,
+      date,
+      status,
+    } = postulationDto;
+
     const newPostulation: PostulationOrm = {
       id,
       date,

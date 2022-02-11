@@ -25,12 +25,8 @@ export default class CreatePostulationMapper {
   private convertToPostulationUUID(id: string): PostulationUUID {
     return PostulationUUID.create(id);
   }
-  private convertToPostulationDate(
-    startDate: Date,
-  ): PostulationDate {
-    return PostulationDate.create(
-      new Date(Date.parse(startDate.toString()))
-    );
+  private convertToPostulationDate(date: Date): PostulationDate {
+    return PostulationDate.create(new Date(Date.parse(date.toString())));
   }
  
 }

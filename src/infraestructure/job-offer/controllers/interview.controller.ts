@@ -30,7 +30,7 @@ export class InterviewController {
   @ApiResponse({ status: 200, description: ResponseDescription.OK })
   @ApiResponse({
     status: 404,
-    description: 'No encontramos ningun empleador con ese id',
+    description: 'No encontramos ninguna entrevista con ese id',
   })
   @Get('/:id')
   async findInterview(@Param() interviewId: FindInterviewByIdRequest) {
@@ -53,6 +53,11 @@ export class InterviewController {
    *
    * @return Entrevista aceptada.
    * */
+   @ApiResponse({ status: 200, description: ResponseDescription.OK })
+   @ApiResponse({
+     status: 404,
+     description: 'No encontramos la entrevista',
+   })
   async acceptInterview(
       @Param() interviewId: FindInterviewByIdRequest
   ) {
@@ -60,6 +65,10 @@ export class InterviewController {
   }
 
   @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No encontramos ninguna entrevista con esa postulacion',
+  })
   @Get('/postulation/:postulationId')
   async findInterviewForPostualtion(@Param() postulationId: FindInterviewByPostulationRequest) {
     return buildResponse(
