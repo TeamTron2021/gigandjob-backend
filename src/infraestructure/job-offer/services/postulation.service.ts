@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import FindJobOfferById from 'src/application/employeer/queries/findJobOfferByID.query';
 import { AcceptPostulationCommand } from 'src/application/job-offer/commands/acceptPostulation.command';
 import CreatePostulationCommand from 'src/application/job-offer/commands/createPostulation.command';
 import { RejectPostulationCommand } from 'src/application/job-offer/commands/RejectPostulation.Command';
 import AcceptPostulationDto from 'src/application/job-offer/ports/AcceptPostulationStatus.dto';
 import CreatePostulationDTO from 'src/application/job-offer/ports/createPostulation.dto';
 import RejectPostulationDto from 'src/application/job-offer/ports/RejectPostulationStatus.dto';
+import FindOfferByIdQuery from 'src/application/job-offer/queries/findJobOfferById.query';
 import FindPostulationsQuery from 'src/application/job-offer/queries/findPostulation.query';
 import FindPostulationById from 'src/application/job-offer/queries/findPostulationById.query';
 import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
@@ -33,7 +33,7 @@ export class PostulationService {
     };
 
     const jobOffer = await this.queryBus.execute(
-      new FindJobOfferById(offer.id),
+      new FindOfferByIdQuery(offer.id),
     );
 
     return await this.commandBus.execute(
