@@ -15,19 +15,34 @@ export default class PostulationRepository
   extends Repository<PostulationOrm>
   implements IPostulationRepository
 {
-  
-  
-  async acceptpostulation(postulationUpdate: AcceptPostulationStatusDto): Promise<void> {
-    console.log(postulationUpdate.status);
-    await this.update(postulationUpdate.id, {
-			status: postulationUpdate.status
-		});
+  async findPostulations(): Promise<PostulationFound[]> {
+    const postulations = await this.find();
+    const postulationsToSend: PostulationFound[] = postulations.map(
+      (postulation) => {
+        const sendPostulation: PostulationFound = {
+          ...postulation,
+        };
+        return sendPostulation;
+      },
+    );
+    return postulationsToSend;
   }
-  async Rejectpostulation(postulationUpdate: RejectPostulationStatusDto): Promise<void> {
+
+  async acceptpostulation(
+    postulationUpdate: AcceptPostulationStatusDto,
+  ): Promise<void> {
     console.log(postulationUpdate.status);
     await this.update(postulationUpdate.id, {
-			status: postulationUpdate.status
-		});
+      status: postulationUpdate.status,
+    });
+  }
+  async Rejectpostulation(
+    postulationUpdate: RejectPostulationStatusDto,
+  ): Promise<void> {
+    console.log(postulationUpdate.status);
+    await this.update(postulationUpdate.id, {
+      status: postulationUpdate.status,
+    });
   }
   async createPostulation(
     postulationDTO: createPostulationDto,
