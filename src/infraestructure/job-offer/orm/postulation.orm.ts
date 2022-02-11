@@ -11,4 +11,6 @@ export default class PostulationOrm {
   status: string;
   @OneToMany(() => InterviewORM, (InterviewORM) => InterviewORM.postulation)
   interviews: InterviewORM[];
+  @Column()
+  jobOfferId: string;
 }
