@@ -15,7 +15,7 @@ export default class JobOfferId implements IValueObject {
   public static create(id: string) {
     if (id === '' || id === ' ' || id == undefined || id == null) {
       throw new EmptyJobOfferIdException(
-        'El id de la oferta no puede estar vacio',
+        'El id del empleador no puede estar vacio',
       );
     }
 
