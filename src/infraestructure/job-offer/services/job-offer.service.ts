@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import EmployeerFound from 'src/application/employeer/ports/findEmployeerResult.dto';
 import FindEmployeerById from 'src/application/employeer/queries/findEmployeerById.query';
-import FindJobOfferById from 'src/application/employeer/queries/findJobOfferByID.query';
 import CreateGigCommand from 'src/application/job-offer/commands/createGig.command';
 import { CreateJobOfferCommand } from 'src/application/job-offer/commands/createJobOffer.command';
 import CreateGigDto from 'src/application/job-offer/ports/createGig.dto';

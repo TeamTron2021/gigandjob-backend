@@ -1,5 +1,5 @@
 import { ApiResponse } from '@nestjs/swagger';
-import { Body, Controller, Param, Get, Post } from '@nestjs/common';
+import { Body, Controller, Param, Get, Post, Put } from '@nestjs/common';
 import { FindJobOfferByIdRequest } from 'src/infraestructure/employeer/request/findJobOfferByID.request';
 import CreatePostulationRequest from '../request/createPostulationRequies.request';
 import { PostulationService } from '../services/postulation.service';
@@ -33,5 +33,36 @@ export class PostulationController {
   @Get()
   async findPostulations() {
     return await this.postulationService.findPostulations();
+  }
+
+// endpoint de Aceptar postulación
+//Cambia el estado de la postulación a aceptada
+
+@ApiResponse({ status: 200, description: ResponseDescription.OK })
+@ApiResponse({
+  status: 404,
+  description: 'No encontramos ninguna postulación con ese id',
+})
+  @Put('accept/:id') // ID de la postulación.
+   
+  async acceptPostulation(
+      @Param() acceptPostulation: FindPostulationByIdRequest
+  ) {
+    return await this.postulationService.acceptPostulation(acceptPostulation);
+  }
+  
+// endpoint de rechazar postulación
+//Cambia el estado de la postulación a Rechazada
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+@ApiResponse({
+  status: 404,
+  description: 'No encontramos ninguna postulación con ese id',
+})
+  @Put('reject/:id') // ID de la postulación.
+   
+  async rejectPostulation(
+      @Param() RejectPostulation: FindPostulationByIdRequest
+  ) {
+    return await this.postulationService.RejectPostulation(RejectPostulation);
   }
 }
