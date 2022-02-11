@@ -13,6 +13,7 @@ export class CreatePostulationHandler
     return await this.postulationRepostory.createPostulation(
       command.postulation,
       command.jobOffer.id,
+      command.userId,
     );
   }
 }

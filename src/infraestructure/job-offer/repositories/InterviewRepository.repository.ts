@@ -25,6 +25,7 @@ export class InterviewRepository
       ...postulation,
       interviews: [],
       jobOfferId: '',
+      userId: '',
     };
 
     interviewSave.id = interviewDto.id;
