@@ -1,6 +1,3 @@
-export class JobOfferIdDtoInOut{
-    constructor(
-      public readonly id: string,
-    ){}
-
+export class JobOfferIdDtoInOut {
+  constructor(public readonly id: string) {}
 }

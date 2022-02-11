@@ -1,7 +1,3 @@
-
-export class CreateJobOfferComplaintDtoIn{
-    constructor(
-      public readonly issueDto: string,
-    ){}
-
+export class CreateJobOfferComplaintDtoIn {
+  constructor(public readonly issueDto: string) {}
 }

@@ -1,6 +1,3 @@
-export class ComplaintIdDtoInOut{
-    constructor(
-      public readonly id: string,
-    ){}
-
+export class ComplaintIdDtoInOut {
+  constructor(public readonly id: string) {}
 }
