@@ -81,6 +81,7 @@ export class JobOfferRepository
       status,
       skills: skillsToSave,
       employeer: employeerOrm,
+      complaint: null
     };
     await this.save(newJobOffer);
     const skillsORM = getRepository(SkillsORM);

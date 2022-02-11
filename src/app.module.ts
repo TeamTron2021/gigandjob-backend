@@ -13,6 +13,8 @@ import { JobOfferRepository } from './infraestructure/job-offer/repositories/Job
 import PostulationRepository from './infraestructure/job-offer/repositories/postulationRepository.repository';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './infraestructure/auth/auth.module';
+import { createjobOfferComplaintRepository } from './infraestructure/jobOfferComplaint/repository/jobOfferComplaintRepository';
+import { createjobofferComplaintModule } from './infraestructure/jobOfferComplaint/jobOfferComplaint.module';
 
 @Module({
   imports: [
@@ -25,6 +27,7 @@ import { AuthModule } from './infraestructure/auth/auth.module';
     TypeOrmModule.forFeature([JobOfferRepository]),
     TypeOrmModule.forFeature([PostulationRepository]),
     TypeOrmModule.forFeature([InterviewRepository]),
+    TypeOrmModule.forFeature([createjobOfferComplaintRepository]),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -52,6 +55,7 @@ import { AuthModule } from './infraestructure/auth/auth.module';
     InterviewModule,
     UserModule,
     AuthModule,
+    createjobofferComplaintModule,
   ],
   controllers: [],
   providers: [],
