@@ -15,6 +15,7 @@ export default class PostulationRepository
 {
   async createPostulation(
     postulationDTO: createPostulationDto,
+    jobOffer: string,
   ): Promise<postulationFoundDto> {
     const newPostulationSave = new PostulationOrm();
     // const addInterview: InterviewOrm = {
@@ -23,6 +24,7 @@ export default class PostulationRepository
     newPostulationSave.id = postulationDTO.id;
     newPostulationSave.date = postulationDTO.date;
     newPostulationSave.status = PostulationStatus.isSend;
+    newPostulationSave.jobOfferId = jobOffer;
     await this.save(newPostulationSave);
     return PostulationMapper.toPostulationFound(newPostulationSave);
   }
