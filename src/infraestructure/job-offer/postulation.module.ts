@@ -8,6 +8,7 @@ import { PostulationController } from './controllers/postulation.controller';
 import { AcceptpostulationHandler } from './handlers/acceptPostulation.handler';
 import { CreatePostulationHandler } from './handlers/createPostulation.handler';
 import { findPostulationByIdHandler } from './handlers/findPostulationById.handler';
+import { FindPostulationsHandler } from './handlers/findPostulations.handler';
 import { RejectpostulationHandler } from './handlers/RejectPostulation.handler';
 import PostulationRepository from './repositories/postulationRepository.repository';
 import { PostulationService } from './services/postulation.service';
@@ -22,7 +23,8 @@ import { PostulationService } from './services/postulation.service';
     AcceptpostulationHandler,
     RejectpostulationHandler,
     AcceptPostulationService,
-    RejectPostulationService
+    RejectPostulationService,
+    FindPostulationsHandler,
   ],
 })
 export class PostulationModule {}
