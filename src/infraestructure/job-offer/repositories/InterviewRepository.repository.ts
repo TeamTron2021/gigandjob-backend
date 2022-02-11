@@ -49,21 +49,19 @@ export class InterviewRepository
     }
     throw new NotFoundException('No encontramos ninguna oferta con ese id');
   }
-
-  /**
-   * Actualiza el estado de la entrevista aceptada.
-   *
-   * @param acceptedInterview Entrevista aceptada.
-   * */
-  async acceptInterview(
-    acceptedInterview: AcceptInterviewDto,
-  ): Promise<InterviewFound> {
-    await this.update(acceptedInterview.id, {
-      status: acceptedInterview.status,
-    });
-
-    return this.findById(acceptedInterview.id);
-  }
+	
+	/**
+	 * Actualiza el estado de la entrevista aceptada.
+	 *
+	 * @param acceptedInterview Entrevista aceptada.
+	 * */
+	async acceptInterview(acceptedInterview: AcceptInterviewDto): Promise<InterviewFound> {
+		await this.update(acceptedInterview.id, {
+			status: acceptedInterview.status
+		});
+		
+		return this.findById(acceptedInterview.id);
+	}
 
   async findByPostulation(postulationId: string): Promise<InterviewFound[]> {
     const interview: InterviewORM[] = await this.find({
@@ -79,4 +77,19 @@ export class InterviewRepository
       'No encontramos ninguna entrevista para su postulacion',
     );
   }
+	
+	/**
+	 * Obtiene todas las entrevistas del modelo de persistencia.
+	 *
+	 * @return Todas las entrevistas.
+	 * */
+	async findInterviews(): Promise<InterviewFound[]> {
+		const interviews: InterviewORM[] = await this.find();
+		let interviewsFound: InterviewFound[] = [];
+		
+		for (const interview of interviews) {
+			interviewsFound.push(InterviewMapper.convertToInterviewFound(interview));
+		}
+		return interviewsFound;
+	}
 }

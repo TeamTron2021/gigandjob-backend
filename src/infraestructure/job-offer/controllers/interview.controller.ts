@@ -67,6 +67,22 @@ export class InterviewController {
       await this.interviewService.findInterviewByPostulation(postulationId),
       );
   }
-
- 
+	
+	@ApiResponse({ status: 200, description: ResponseDescription.OK })
+	@ApiResponse({
+		status: 404,
+		description: 'No encontramos ninguna entrevista',
+	})
+	@Get('/interviews')
+	/**
+	 * Endpoint que retorna todas las entrevistas registradas.
+	 *
+	 * Delega, al servicio de entrevista, la búsqueda de todas las entrevistas.
+	 *
+	 * @return Todas las entrevistas.
+	 * */
+	async findInterviews(@Body() request: any) {
+		return await this.interviewService.findInterviews()
+		
+	}
 }

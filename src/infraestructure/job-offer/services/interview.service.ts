@@ -14,6 +14,7 @@ import FindInterviewByPostulation from "../../../application/job-offer/queries/f
 import PostulationFound from "../../../application/job-offer/ports/findPostulationResult.dto";
 import CreateInterviewDto from "../../../application/job-offer/ports/createInterview.dto";
 import FindPostulationById from "../../../application/job-offer/queries/findPostulationById.query";
+import FindInterviewsQuery from "../../../application/job-offer/queries/findInterviews.query";
 
 @Injectable()
 export class InterviewService {
@@ -79,5 +80,10 @@ export class InterviewService {
     );
     return interview;
   }
-  
+	
+	async findInterviews() {
+		return await this.queryBus.execute(
+			new FindInterviewsQuery(),
+		);
+	}
 }
