@@ -5,5 +5,6 @@ export default class CreatePostulationCommand {
   constructor(
     public readonly postulation: CreatePostulationDTO,
     public readonly jobOffer: JobOfferFound,
+    public readonly userId: string,
   ) {}
 }
