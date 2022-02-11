@@ -9,7 +9,7 @@ import { Postulation } from "src/domain/job-offer/entities/postulation";
 import { PostulationDate } from "src/domain/job-offer/value-objects/postulation/PostulationDate";
 import { PostulationStatus } from "src/domain/job-offer/value-objects/postulation/PostulationStatus";
 import { PostulationUUID } from "src/domain/job-offer/value-objects/postulation/PostulationUUID";
-import IUpdatePostulationStatusMapper from "src\application\job-offer\mappers\UpdatePostulationStatus.mapper.ts";
+import IUpdatePostulationStatusMapper from "../../../application/job-offer/mappers/UpdatePostulationStatus.mapper";
 
 describe('Accept postulation test', () => {
     const mockPublishFn = jest.fn().mockImplementation();
