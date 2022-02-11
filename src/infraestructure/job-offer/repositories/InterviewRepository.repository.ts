@@ -71,5 +71,19 @@ export class InterviewRepository
     }
     throw new NotFoundException('No encontramos ninguna entrevista para su postulacion');
   }
-  
+	
+	/**
+	 * Obtiene todas las entrevistas del modelo de persistencia.
+	 *
+	 * @return Todas las entrevistas.
+	 * */
+	async findInterviews(): Promise<InterviewFound[]> {
+		const interviews: InterviewORM[] = await this.find();
+		let interviewsFound: InterviewFound[] = [];
+		
+		for (const interview of interviews) {
+			interviewsFound.push(InterviewMapper.convertToInterviewFound(interview));
+		}
+		return interviewsFound;
+	}
 }
