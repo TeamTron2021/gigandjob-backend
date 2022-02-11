@@ -3,6 +3,7 @@ import AcceptPostulationStatusDto from 'src/application/job-offer/ports/AcceptPo
 import createPostulationDto from 'src/application/job-offer/ports/createPostulation.dto';
 import PostulationFound from 'src/application/job-offer/ports/findPostulationResult.dto';
 import postulationFoundDto from 'src/application/job-offer/ports/findPostulationResult.dto';
+import RejectPostulationStatusDto from 'src/application/job-offer/ports/RejectPostulationStatus.dto';
 import IPostulationRepository from 'src/application/job-offer/repositories/postulation.repository';
 import { PostulationStatus } from 'src/domain/job-offer/value-objects/postulation/PostulationStatus';
 import { EntityRepository, Repository } from 'typeorm';
@@ -14,8 +15,19 @@ export default class PostulationRepository
   extends Repository<PostulationOrm>
   implements IPostulationRepository
 {
-  acceptpostulation(postulationUpdate: AcceptPostulationStatusDto): Promise<any> {
-      throw new Error("Method not implemented.");
+  
+  
+  async acceptpostulation(postulationUpdate: AcceptPostulationStatusDto): Promise<void> {
+    console.log(postulationUpdate.status);
+    await this.update(postulationUpdate.id, {
+			status: postulationUpdate.status
+		});
+  }
+  async Rejectpostulation(postulationUpdate: RejectPostulationStatusDto): Promise<void> {
+    console.log(postulationUpdate.status);
+    await this.update(postulationUpdate.id, {
+			status: postulationUpdate.status
+		});
   }
   async createPostulation(
     postulationDTO: createPostulationDto,
