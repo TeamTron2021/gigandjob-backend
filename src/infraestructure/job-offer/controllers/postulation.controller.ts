@@ -17,6 +17,7 @@ export class PostulationController {
     return await this.postulationService.createPostulation(
       postulation,
       jobOffer,
+      postulation.userId,
     );
   }
 

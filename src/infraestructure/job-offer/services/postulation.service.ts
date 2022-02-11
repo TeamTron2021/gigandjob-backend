@@ -25,6 +25,7 @@ export class PostulationService {
   async createPostulation(
     postulation: CreatePostulationRequest,
     offer: FindJobOfferByIdRequest,
+    userId: string,
   ) {
     const postulationId: string = new UniqueId().getId();
     const newPostulation: CreatePostulationDTO = {
@@ -37,7 +38,7 @@ export class PostulationService {
     );
 
     return await this.commandBus.execute(
-      new CreatePostulationCommand(newPostulation, jobOffer),
+      new CreatePostulationCommand(newPostulation, jobOffer, userId),
     );
   }
   async findPostulationById(postulationId: FindPostulationByIdRequest) {

@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export default class CreatePostulationRequest {
   @IsNotEmpty()
@@ -9,4 +9,7 @@ export default class CreatePostulationRequest {
   @IsNotEmpty()
   @IsString()
   status: string;
+  @IsUUID()
+  @IsNotEmpty()
+  userId: string;
 }

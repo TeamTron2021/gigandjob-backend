@@ -13,4 +13,6 @@ export default class PostulationOrm {
   interviews: InterviewORM[];
   @Column()
   jobOfferId: string;
+  @Column({ nullable: true })
+  userId: string;
 }

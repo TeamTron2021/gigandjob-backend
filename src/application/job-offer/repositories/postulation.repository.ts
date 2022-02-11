@@ -6,8 +6,8 @@ export default interface IPostulationRepository {
   createPostulation(
     postulationDTO: CreatePostulationDTO,
     jobOffer: string,
+    userId: string,
   ): Promise<PostulationFound>;
 
   findById(id: string): Promise<PostulationFound>;
-  
 }
