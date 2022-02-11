@@ -1,13 +1,12 @@
-import { Body, Controller, Param, Post, Get,  HttpStatus } from '@nestjs/common';
+import {Body, Controller, Param, Post, Get, HttpStatus, Patch} from '@nestjs/common';
 import CreateInterviewRequest from '../request/createInterviewRequest.request';
 import { InterviewService } from '../services/interview.service';
 import { ApiResponse } from '@nestjs/swagger';
-import { ResponseDescription } from 'src/infraestructure/employeer/shared/enums/response-description.enum';
 import { FindPostulationByIdRequest } from '../request/findPostulationById.request';
 import { FindInterviewByIdRequest } from '../request/findInterviewById.request';
 import { FindInterviewByPostulationRequest } from '../request/findInterviewByPostulation.request';
-
-import { buildResponse } from 'src/infraestructure/shared/buildResponse';
+import {ResponseDescription} from "../../employeer/shared/enums/response-description.enum";
+import {buildResponse} from "../../shared/buildResponse";
 
 @Controller('interview')
 export class InterviewController {
@@ -36,6 +35,28 @@ export class InterviewController {
   @Get('/:id')
   async findInterview(@Param() interviewId: FindInterviewByIdRequest) {
     return await this.interviewService.findInterviewById(interviewId);
+  }
+
+  @ApiResponse({ status: 200, description: ResponseDescription.OK })
+  @ApiResponse({
+    status: 404,
+    description: 'No hemos encontrado ninguna entrevista con ese ID.',
+  })
+  @Patch('/:id/accept') // ID de la entrevista.
+  /**
+   * Endpoint que permite aceptar una entrevista.
+   *
+   * Obtiene, de la solicitud, el ID de la entrevista a aceptar para, luego, delegar su actualización de estado
+   * al servicio de entrevista (en infraestructura),
+   *
+   * @param interviewId ID de la entrevista a aceptar.
+   *
+   * @return Entrevista aceptada.
+   * */
+  async acceptInterview(
+      @Param() interviewId: FindInterviewByIdRequest
+  ) {
+    return await this.interviewService.acceptInterview(interviewId);
   }
 
   @ApiResponse({ status: 200, description: ResponseDescription.OK })

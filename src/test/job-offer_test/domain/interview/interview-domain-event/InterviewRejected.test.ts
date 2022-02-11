@@ -1,7 +1,4 @@
-import InterviewCreated from '../../../../../domain/job-offer/domain-events/interview/interview/interviewCreated/InterviewCreated.Event';
-import { InterviewRejected } from '../../../../../domain/job-offer/domain-events/interview/interview/InterviewRejected.Event';
 import Interview from '../../../../../domain/job-offer/entities/Interview';
-import InterviewCurrentlyDisabledException from '../../../../../domain/job-offer/exceptions/Interview/ChangeInterviewStatus/InterviewCurrentlyDisabledException';
 import { InterviewStatus } from '../../../../../domain/job-offer/shared/InterviewStatus.enum';
 import InterviewDate from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDate';
 import InterviewDescription from '../../../../../domain/job-offer/value-objects/Interview/interview/InterviewDescription';
@@ -39,11 +36,11 @@ describe('Testing Interview reject', () => {
 
   test('Should throws an interview currently disabled error', () => {
     const interview = new Interview(
+	    id,
+	    InterviewStatus.disabled,
       interviewTitle,
       interviewDescription,
       date,
-      InterviewStatus.disabled,
-      id,
     );
 
     expect(() => {

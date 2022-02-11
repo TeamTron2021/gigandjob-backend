@@ -35,6 +35,7 @@ import { InterviewRejected } from '../domain-events/interview/interview/Intervie
 import InterviewAcceptedNotification from './InterviewAcceptedNotification';
 import { InterviewNotificationSubject } from '../value-objects/Interview/InterviewNotificationSubject';
 import { InterviewNotificationContent } from '../value-objects/Interview/InterviewNotificationContent';
+import Interview from "./Interview";
 
 export default class JobOffer<S extends OfferStatus> implements IJobOffer {
   private eventRecorder: IDomainEvent[] = [];
@@ -242,7 +243,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
     JobOfferRevokedNotification.sendPublishedOffer();
     return OfferRevoked;
   }
-
+  
   protected createAndSendInterviewAcceptedNotification(
     interview: InterviewId,
   ): void {
@@ -255,6 +256,47 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
         interview,
       );
     interviewAcceptedNotification.sendNotification();
+  }
+
+  /**
+   * Actualiza el estado de una entrevista a "accepted", generando un evento de dominio si el cambio fue
+   * exitoso.
+   *
+   * @param interviewId Identificador de la entrevista.
+   * @param interviewStatus Estado actual de la entrevista.
+   *
+   * @throws InterviewCurrentlyDisabledException
+   * */
+  public acceptInterview(
+    interviewId: InterviewId,
+    interviewStatus: InterviewStatus,
+  ) {
+    try {
+      const interview = new Interview<InterviewStatus>(
+        interviewId,
+        interviewStatus,
+      );
+
+      interview.acceptInterview(); // Cambiar el estado de la entrevista.
+
+      // Generación del evento de dominio.
+      const interviewAcceptedEvent: IDomainEvent = new InterviewAccepted(
+        interview.getInterviewId(),
+        interview.getStatus(),
+      );
+      this.eventRecorder.push(interviewAcceptedEvent);
+
+      // Creación de notificación de entrevista aceptada.
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
+      
+      return {
+        id: interview.getInterviewId(),
+        status: interview.getStatus()
+      };
+    } catch (e) {
+      // console.log(e);
+      throw e;
+    }
   }
 
   /**
@@ -297,11 +339,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.eventRecorder.push(interviewAcceptedEvent);
 
       // Creación de notificación de entrevista aceptada.
-      this.createAndSendInterviewAcceptedNotification(
-        interview.getInterviewId(),
-      );
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -345,11 +385,9 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       this.eventRecorder.push(interviewAcceptedEvent);
 
       // Creación de notificación de entrevista aceptada.
-      this.createAndSendInterviewAcceptedNotification(
-        interview.getInterviewId(),
-      );
+      this.createAndSendInterviewAcceptedNotification(interview.getInterviewId());
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -378,7 +416,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }
@@ -407,7 +445,7 @@ export default class JobOffer<S extends OfferStatus> implements IJobOffer {
       );
       this.eventRecorder.push(interviewEventReject);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       throw e;
     }
   }

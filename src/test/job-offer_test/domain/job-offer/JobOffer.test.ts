@@ -589,4 +589,6 @@ describe('Testing JobOffer creation', () => {
     expect(test2.status).toBe(OfferStatus.suspended);
     expect(test2.ReactivatedOffer().status).toBe(OfferStatus.published);
   });
+  
+  // TODO: agregar pruebas para acceptInterview.
 });

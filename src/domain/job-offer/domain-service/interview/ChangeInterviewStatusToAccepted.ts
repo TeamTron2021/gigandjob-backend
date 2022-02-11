@@ -6,6 +6,7 @@ import InterviewCurrentlyDisabledException from '../../exceptions/Interview/Chan
  * Servicio de dominio que devuelve el estado de "aceptada" para asignar a la entrevista.
  * */
 export default class ChangeInterviewStatusToAccepted extends IChangeInterviewStatus {
+  
   /**
    * Verifica el estado actual de la entrevista y devuelve el estado deseado a asignar, solo si todas las
    * verificaciones han pasado exitosamente.

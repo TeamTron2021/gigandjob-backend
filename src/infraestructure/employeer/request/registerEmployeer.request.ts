@@ -27,19 +27,17 @@ export default class RegisterEmployeerRequest {
 
   @IsNotEmpty()
   @IsString()
-  @Matches(
-    /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/,
-    { message: 'La latitud tiene que ser valida' },
-  )
+  @Matches(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/, {
+    message: 'La latitud tiene que ser valida',
+  })
   @ApiProperty({ example: '+90.0, -127.554334' })
   readonly latitude: string;
 
   @IsNotEmpty()
   @IsString()
-  @Matches(
-    /^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?),\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/,
-    { message: 'La longitud tiene que ser valida' },
-  )
+  @Matches(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)/, {
+    message: 'La longitud tiene que ser valida',
+  })
   @ApiProperty({ example: '47.1231231, 179.99999999' })
   readonly longitude: string;
 

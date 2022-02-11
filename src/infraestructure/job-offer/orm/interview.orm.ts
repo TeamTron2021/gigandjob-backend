@@ -19,7 +19,7 @@ export class InterviewORM {
   @Column()
   description: string;
   @Column()
-  date: Date;
+  date: Date; // FIXME: agregar fecha de inicio y fecha final.
   @ManyToOne(() => PostulationOrm, (PostulationOrm) => PostulationOrm.interviews)
   postulation: PostulationOrm;
   @Column()

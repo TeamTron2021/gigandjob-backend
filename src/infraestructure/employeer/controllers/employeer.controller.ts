@@ -22,6 +22,7 @@ export class EmployeerController {
   constructor(private readonly employeerService: EmployeerService) {}
 
   //endpoint para registrar un empleador
+  @UseGuards(JwtAdminAuthGuard)
   @ApiResponse({ status: 201, description: ResponseDescription.CREATED })
   @ApiResponse({
     status: 409,
